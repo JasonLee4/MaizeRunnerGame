@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj72oa0j0cfj6"]
+
+[ext_resource type="Script" path="res://scenes/characters/Pig.gd" id="1_q5ee1"]
+[ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/pigwithhat.png" id="2_rsdmw"]
+
+[node name="Pig" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_q5ee1")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_rsdmw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
