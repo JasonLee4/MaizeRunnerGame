@@ -1,17 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=4 format=3 uid="uid://cj72oa0j0cfj6"]
 
-[ext_resource type="Script" path="res://scenes/characters/Pig.gd" id="1_q5ee1"]
+[ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/spritesheets/pigwithhat.png" id="2_rsdmw"]
 
-[node name="Pig" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
+radius = 8.0
+height = 26.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-script = ExtResource("1_q5ee1")
+[node name="Pig" type="CharacterBody2D"]
+collision_mask = 30
+script = ExtResource("1_hx4hr")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
 texture = ExtResource("2_rsdmw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-zoom = Vector2(3, 3)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a3r7q")
