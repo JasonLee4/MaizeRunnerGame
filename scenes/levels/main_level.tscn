@@ -1,11 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://bmr5pc0estma1"]
 
+[ext_resource type="Script" path="res://scenes/levels/main_level.gd" id="1_haied"]
 [ext_resource type="Texture2D" uid="uid://biy6q2grrbrec" path="res://assets/tilesets/TX Tileset Grass.png" id="1_nebb2"]
 [ext_resource type="PackedScene" uid="uid://cj72oa0j0cfj6" path="res://scenes/characters/pig.tscn" id="1_u1kou"]
 [ext_resource type="Texture2D" uid="uid://cgi1v6psm40ow" path="res://assets/tilesets/testTiles.png" id="2_woull"]
 [ext_resource type="Texture2D" uid="uid://dfi1i4ca0lpgk" path="res://assets/tilesets/TX Tileset Wall.png" id="3_xc6mv"]
 [ext_resource type="PackedScene" uid="uid://glrhtxg4gl54" path="res://scenes/characters/cow.tscn" id="5_72f2b"]
-
+[ext_resource type="PackedScene" uid="uid://cu6fbl27cj8ni" path="res://scenes/characters/enemy.tscn" id="6_a3uyv"]
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k4stf"]
 texture = ExtResource("1_nebb2")
 0:0/0 = 0
@@ -1553,6 +1554,7 @@ sources/1 = SubResource("TileSetAtlasSource_aiaml")
 sources/2 = SubResource("TileSetAtlasSource_17t8g")
 
 [node name="MainLevel" type="Node2D"]
+script = ExtResource("1_haied")
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -1569,3 +1571,7 @@ position = Vector2(108, 100)
 
 [node name="Cow" parent="." instance=ExtResource("5_72f2b")]
 position = Vector2(158, 102)
+
+[node name="enemy" parent="." instance=ExtResource("6_a3uyv")]
+position = Vector2(251, 175)
+
