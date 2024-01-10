@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed = 100
 var pig_position
 var target_position
-@onready var pig = get_parent().get_node("Pig").get_node("CharacterBody2D")
+@onready var pig = get_parent().get_node("Pig")
 
 func _physics_process(delta):
 	pig_position = pig.global_position
