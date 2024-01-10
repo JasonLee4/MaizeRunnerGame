@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/Pig.gd" id="1_q5ee1"]
-[ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/pigwithhat.png" id="2_rsdmw"]
+[ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/spritesheets/pigwithhat.png" id="2_rsdmw"]
 
 [node name="Pig" type="Node2D"]
 
@@ -12,3 +12,6 @@ script = ExtResource("1_q5ee1")
 texture = ExtResource("2_rsdmw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(3, 3)
