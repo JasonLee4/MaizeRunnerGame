@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmr5pc0estma1"]
+[gd_scene load_steps=13 format=3 uid="uid://bmr5pc0estma1"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_level.gd" id="1_haied"]
 [ext_resource type="Texture2D" uid="uid://biy6q2grrbrec" path="res://assets/tilesets/TX Tileset Grass.png" id="1_nebb2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dfi1i4ca0lpgk" path="res://assets/tilesets/TX Tileset Wall.png" id="3_xc6mv"]
 [ext_resource type="PackedScene" uid="uid://glrhtxg4gl54" path="res://scenes/characters/cow.tscn" id="5_72f2b"]
 [ext_resource type="PackedScene" uid="uid://cu6fbl27cj8ni" path="res://scenes/enemies/enemy.tscn" id="6_a3uyv"]
+[ext_resource type="PackedScene" uid="uid://cx0pvdscatwe5" path="res://scenes/ui/ui.tscn" id="8_5v54e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k4stf"]
 texture = ExtResource("1_nebb2")
@@ -1575,3 +1576,5 @@ position = Vector2(158, 102)
 
 [node name="Enemy" parent="." instance=ExtResource("6_a3uyv")]
 position = Vector2(251, 175)
+
+[node name="UI" parent="." instance=ExtResource("8_5v54e")]
