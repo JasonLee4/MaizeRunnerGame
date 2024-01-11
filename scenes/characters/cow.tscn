@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://glrhtxg4gl54"]
+[gd_scene load_steps=5 format=3 uid="uid://glrhtxg4gl54"]
 
 [ext_resource type="Texture2D" uid="uid://c6quqmbnl4y3m" path="res://assets/spritesheets/cow.png" id="1_7ur7d"]
+[ext_resource type="Script" path="res://scenes/characters/cow.gd" id="1_s36mx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cptoj"]
+size = Vector2(66, 22)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_chy1d"]
 radius = 9.0
@@ -8,6 +12,15 @@ radius = 9.0
 [node name="Cow" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 13
+script = ExtResource("1_s36mx")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-14, 5)
+shape = SubResource("RectangleShape2D_cptoj")
+debug_color = Color(0.596078, 0.372549, 1, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)

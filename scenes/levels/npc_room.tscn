@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg30n3dhay5yw"]
+
+[ext_resource type="PackedScene" uid="uid://cj72oa0j0cfj6" path="res://scenes/characters/pig.tscn" id="1_uvwll"]
+[ext_resource type="PackedScene" uid="uid://glrhtxg4gl54" path="res://scenes/characters/cow.tscn" id="2_pk7e7"]
+
+[sub_resource type="TileSet" id="TileSet_vmpfc"]
+
+[node name="NPC Room" type="Node2D"]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Environment"]
+tile_set = SubResource("TileSet_vmpfc")
+format = 2
+
+[node name="Pig" parent="." instance=ExtResource("1_uvwll")]
+position = Vector2(215, 124)
+
+[node name="Cow" parent="." instance=ExtResource("2_pk7e7")]
+position = Vector2(330, 125)
