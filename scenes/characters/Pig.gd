@@ -5,7 +5,6 @@ var dashDirection = Vector2(1,0)
 
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
-var health = 5
 var pig_alive = true
 
 @export var pig_current_attack = false
@@ -22,7 +21,7 @@ func _physics_process(delta):
 	get_input()
 	move_and_slide()
 	
-	if health <= 0:
+	if Globals.health <= 0:
 		pig_alive = false
 		#Add end screen/respawn screen
 		print("Pig is dead")
@@ -45,7 +44,7 @@ func _on_pig_hitbox_body_exited(body):
 
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
-		health = health - 1
+		Globals.health = Globals.health - 1
 		enemy_attack_cooldown = false
 		$enemy_attack_cooldown.start()
 		print("player took damage")
