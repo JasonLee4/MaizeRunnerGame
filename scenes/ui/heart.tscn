@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwmjw5fc844nv"]
+
+[ext_resource type="Texture2D" uid="uid://cwko1y7wi7eu0" path="res://assets/ui/mc-heart.png" id="1_8v4f8"]
+
+[node name="Heart" type="TextureRect"]
+texture = ExtResource("1_8v4f8")
+expand_mode = 2

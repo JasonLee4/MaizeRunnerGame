@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx0pvdscatwe5"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
+[ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_y4067")
+
+[node name="HealthCounter" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.01
+anchor_top = 0.02
+anchor_right = 0.01
+anchor_bottom = 0.02
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HealthCounter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Heart" parent="HealthCounter/HBoxContainer" instance=ExtResource("2_vnf4r")]
+layout_mode = 2

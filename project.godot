@@ -14,6 +14,10 @@ config/name="MaizeRunner"
 run/main_scene="res://scenes/levels/main_level.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 
+[autoload]
+
+Globals="*res://globals/globals.gd"
+
 [display]
 
 window/size/viewport_width=1270
