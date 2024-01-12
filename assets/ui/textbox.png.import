@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceudmsnmo5pq1"
-path="res://.godot/imported/cow.png-f3d69da9bb33d48f8398600a1d4938b7.ctex"
+uid="uid://cc736k2f32axr"
+path="res://.godot/imported/textbox.png-6cab512418d315d86a38e47eb6144660.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cow.png"
-dest_files=["res://.godot/imported/cow.png-f3d69da9bb33d48f8398600a1d4938b7.ctex"]
+source_file="res://assets/ui/textbox.png"
+dest_files=["res://.godot/imported/textbox.png-6cab512418d315d86a38e47eb6144660.ctex"]
 
 [params]
 
