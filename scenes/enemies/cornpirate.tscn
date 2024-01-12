@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8lkbswqs3it"]
+[gd_scene load_steps=7 format=3 uid="uid://cmkg6swofcroi"]
 
 [ext_resource type="Texture2D" uid="uid://dqw2yfwl0cgi3" path="res://assets/spritesheets/evilcorn.png" id="1_atanc"]
 [ext_resource type="Script" path="res://scenes/enemies/cornpirate.gd" id="1_iwva1"]
@@ -10,6 +10,10 @@ height = 34.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4rq2u"]
 radius = 89.0056
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njfvj"]
+radius = 7.0
+height = 34.0
 
 [node name="cornpirate" type="CharacterBody2D"]
 script = ExtResource("1_iwva1")
@@ -45,8 +49,16 @@ script = ExtResource("3_7pkod")
 
 [node name="dmg_cooldown" type="Timer" parent="."]
 
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="hitboxshape" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_njfvj")
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="range" to="." method="_on_range_area_entered"]
 [connection signal="body_entered" from="range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="range" to="." method="_on_range_body_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="dmg_cooldown" to="." method="_on_dmg_cooldown_timeout"]
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

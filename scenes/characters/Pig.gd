@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 #Dash variable
 var dashDirection = Vector2(1,0)
 
@@ -20,6 +21,7 @@ func _physics_process(delta):
 	attack()
 	get_input()
 	move_and_slide()
+	shoot()
 	
 	if Globals.health <= 0:
 		pig_alive = false
@@ -44,7 +46,7 @@ func _on_pig_hitbox_body_exited(body):
 
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
-		Globals.health = Globals.health - 1
+		#Globals.health = Globals.health - 1
 		enemy_attack_cooldown = false
 		$enemy_attack_cooldown.start()
 		print("player took damage")
@@ -61,3 +63,14 @@ func attack():
 	if Input.is_action_just_pressed("space"):
 		$basic_attack_cooldown.start()
 		pig_current_attack = true
+
+func shoot():
+	if Input.is_action_just_pressed("shoot"):
+		var pb = pigbullet_scene.instantiate()
+		get_parent().get_node("spawnedobjects").add_child(pb)
+		print("Pig shoot")		
+		pb.global_position = $Marker2D.global_position
+		var dir = (get_global_mouse_position() - pb.global_position).normalized()
+		print("shooting pig's bullet")
+		pb.global_rotation = dir.angle() + PI / 2.0
+		pb.direction = dir

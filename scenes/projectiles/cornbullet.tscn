@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfca610osism"]
+[gd_scene load_steps=4 format=3 uid="uid://c0r3sjr8vlrsc"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/cornbullet.gd" id="1_h5qca"]
 [ext_resource type="Texture2D" uid="uid://b1iyx2h03hwfv" path="res://assets/spritesheets/kernel.png" id="2_hpxen"]
@@ -16,7 +16,6 @@ texture = ExtResource("2_hpxen")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.84217e-14, 0)
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_numt3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
