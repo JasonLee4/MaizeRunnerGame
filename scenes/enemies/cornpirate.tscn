@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmkg6swofcroi"]
+[gd_scene load_steps=15 format=3 uid="uid://cmkg6swofcroi"]
 
 [ext_resource type="Texture2D" uid="uid://dqw2yfwl0cgi3" path="res://assets/spritesheets/evilcorn.png" id="1_atanc"]
 [ext_resource type="Script" path="res://scenes/enemies/cornpirate.gd" id="1_iwva1"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="3_7pkod"]
+[ext_resource type="Texture2D" uid="uid://jsc51a6x2svc" path="res://assets/spritesheets/evilcornmoving.png" id="4_7e73o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fw1yx"]
 radius = 7.0
@@ -15,7 +16,59 @@ radius = 89.0056
 radius = 7.0
 height = 34.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0atr"]
+atlas = ExtResource("4_7e73o")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3tei"]
+atlas = ExtResource("4_7e73o")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hhtu"]
+atlas = ExtResource("4_7e73o")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcqax"]
+atlas = ExtResource("4_7e73o")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tffu"]
+atlas = ExtResource("4_7e73o")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7k5w"]
+atlas = ExtResource("4_7e73o")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5bik7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0atr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3tei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hhtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcqax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tffu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7k5w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [node name="cornpirate" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_iwva1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -50,10 +103,16 @@ script = ExtResource("3_7pkod")
 [node name="dmg_cooldown" type="Timer" parent="."]
 
 [node name="hitbox" type="Area2D" parent="."]
+collision_layer = 9
+collision_mask = 8
 
 [node name="hitboxshape" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_njfvj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5bik7")
+animation = &"idle"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="area_entered" from="range" to="." method="_on_range_area_entered"]
