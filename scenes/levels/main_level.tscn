@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cj72oa0j0cfj6" path="res://scenes/characters/pig.tscn" id="1_u1kou"]
 [ext_resource type="Texture2D" uid="uid://cgi1v6psm40ow" path="res://assets/tilesets/testTiles.png" id="2_woull"]
 [ext_resource type="Texture2D" uid="uid://dfi1i4ca0lpgk" path="res://assets/tilesets/TX Tileset Wall.png" id="3_xc6mv"]
-[ext_resource type="PackedScene" path="res://scenes/characters/cow.tscn" id="5_72f2b"]
+[ext_resource type="PackedScene" uid="uid://glrhtxg4gl54" path="res://scenes/characters/cow.tscn" id="5_72f2b"]
 [ext_resource type="PackedScene" uid="uid://cu6fbl27cj8ni" path="res://scenes/enemies/enemy.tscn" id="6_a3uyv"]
 [ext_resource type="PackedScene" uid="uid://cx0pvdscatwe5" path="res://scenes/ui/ui.tscn" id="8_5v54e"]
 
@@ -1575,7 +1575,6 @@ position = Vector2(158, 102)
 position = Vector2(108, 100)
 
 [node name="Enemy" parent="." instance=ExtResource("6_a3uyv")]
-visible = false
 position = Vector2(251, 175)
 
 [node name="UI" parent="." instance=ExtResource("8_5v54e")]
