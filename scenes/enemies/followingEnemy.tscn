@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8ms30qxgl6mh"]
+[gd_scene load_steps=12 format=3 uid="uid://cu6fbl27cj8ni"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_ojurb"]
+[ext_resource type="Script" path="res://scenes/enemies/followingEnemy.gd" id="1_dfq2f"]
 [ext_resource type="Texture2D" uid="uid://825vqg53eb4y" path="res://assets/enemyFlyingAlt_1.png" id="2_o6mjj"]
 [ext_resource type="Texture2D" uid="uid://emfpb4u68gqe" path="res://assets/enemyFlyingAlt_2.png" id="3_x7ygf"]
 [ext_resource type="Texture2D" uid="uid://cwu076qg8x6r6" path="res://assets/enemySwimming_1.png" id="4_66qlc"]
@@ -50,8 +50,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ed3k4"]
 size = Vector2(40, 29)
 
-[node name="enemy" type="CharacterBody2D"]
-script = ExtResource("1_ojurb")
+[node name="FollowingEnemy" type="CharacterBody2D"]
+script = ExtResource("1_dfq2f")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -81,10 +81,7 @@ step = 1.0
 show_percentage = false
 script = ExtResource("8_quany")
 
-[node name="attack_cooldown" type="Timer" parent="."]
-
 [connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
 [connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_pig_damage_cooldown_timeout"]
-[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
