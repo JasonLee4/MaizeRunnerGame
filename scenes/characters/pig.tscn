@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=5 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/spritesheets/pigwithhat.png" id="2_rsdmw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
 height = 28.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ik2p"]
+size = Vector2(39, 32)
 
 [node name="Pig" type="CharacterBody2D"]
 collision_mask = 30
@@ -20,3 +23,18 @@ texture = ExtResource("2_rsdmw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="pig_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pig_hitbox"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_0ik2p")
+
+[node name="enemy_attack_cooldown" type="Timer" parent="."]
+
+[node name="basic_attack_cooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
+[connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
+[connection signal="timeout" from="enemy_attack_cooldown" to="." method="_on_enemy_attack_cooldown_timeout"]
+[connection signal="timeout" from="basic_attack_cooldown" to="." method="_on_basic_attack_cooldown_timeout"]
