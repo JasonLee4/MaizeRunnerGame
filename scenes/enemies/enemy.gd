@@ -7,10 +7,11 @@ var pig_position
 var target_position
 @onready var pig = get_parent().get_node("Pig")
 
-var health = 100
+var MAX_HEALTH = 100
+var health = MAX_HEALTH
 var player_inattack_zone = false
 var player
-
+var damaged = false
 var can_take_damage = true
 
 func _physics_process(delta):
@@ -29,7 +30,12 @@ func _physics_process(delta):
 func _ready():
 	var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
+	$Healthbar.max_value = MAX_HEALTH
+	set_health()
 
+func set_health():
+	$Healthbar.value = health
+	
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
@@ -55,6 +61,7 @@ func _on_enemy_hitbox_body_exited(body):
 func deal_with_damage():
 	if player_inattack_zone and player.pig_current_attack == true and can_take_damage == true:
 		health = health - 20
+		set_health()
 		can_take_damage = false
 		$pig_damage_cooldown.start()
 		print("Slime health = ", health)

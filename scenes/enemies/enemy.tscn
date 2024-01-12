@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cu6fbl27cj8ni"]
+[gd_scene load_steps=12 format=3 uid="uid://cu6fbl27cj8ni"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_ojurb"]
 [ext_resource type="Texture2D" uid="uid://825vqg53eb4y" path="res://assets/enemyFlyingAlt_1.png" id="2_o6mjj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cf6jsrwuehpnh" path="res://assets/enemySwimming_2.png" id="5_86ush"]
 [ext_resource type="Texture2D" uid="uid://dal1l060e2lks" path="res://assets/enemyWalking_1.png" id="6_jb3bn"]
 [ext_resource type="Texture2D" uid="uid://b3vtti24til65" path="res://assets/enemyWalking_2.png" id="7_o4sbv"]
+[ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="8_quany"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kwn2n"]
 animations = [{
@@ -71,6 +72,16 @@ shape = SubResource("RectangleShape2D_ed3k4")
 
 [node name="pig_damage_cooldown" type="Timer" parent="."]
 
+[node name="Healthbar" type="ProgressBar" parent="."]
+offset_left = -13.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = -15.0
+step = 1.0
+show_percentage = false
+script = ExtResource("8_quany")
+
+[connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
 [connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
 [connection signal="timeout" from="pig_damage_cooldown" to="." method="_on_pig_damage_cooldown_timeout"]
