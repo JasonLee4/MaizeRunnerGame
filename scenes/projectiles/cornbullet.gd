@@ -23,4 +23,8 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_body_entered(body):
 	if body.name != "cornpirate":
+		if body.has_method("player"):
+			Globals.health -= 1
 		queue_free()
+	
+
