@@ -28,8 +28,8 @@ func _ready():
 func set_health():
 	$Healthbar.value = health
 	
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
+#func _on_visible_on_screen_notifier_2d_screen_exited():
+	#queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -56,7 +56,7 @@ func move():
 func deal_damage():
 	if can_attack_player and can_attack:
 		can_attack = false
-		$attack_cooldown.start()
+		#$attack_cooldown.start()
 		player.recieve_damage(damage)
 	pass
 

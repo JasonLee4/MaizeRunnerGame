@@ -10,16 +10,36 @@ var invulnerable = false
 var pig_alive = true
  
 var can_basic_attack = true
-@export var speed = 400
+@export var speed = 100
 
 var basic_damage = 50
 
 func get_input():
 	var input_direction = Input.get_vector("left","right" , "up", "down")
 	velocity = input_direction * speed
+	
+		
 	dash(input_direction)
 	
 func _physics_process(delta):
+	
+	if velocity != Vector2(0,0):
+		$AnimationPlayer.play("pigwalk")
+		if velocity.x < 0:
+			$Sprite2D.flip_h = true
+			$weapon_sprite.flip_h = true
+			$Marker2D.position.x = -1 * abs($Marker2D.position.x)
+		else:
+			$Sprite2D.flip_h = false
+			$weapon_sprite.flip_h = false
+			$Marker2D.position.x = abs($Marker2D.position.x)
+			
+			
+	else:
+		$AnimationPlayer.stop()
+	
+		
+		
 	get_input()
 	move_and_slide()
 	attack()
@@ -33,7 +53,7 @@ func _physics_process(delta):
 
 func dash(dashDirection) :
 	if Input.is_action_pressed("space"):
-		velocity = dashDirection.normalized()*2000
+		velocity = dashDirection.normalized()*200
 
 func player():
 	pass
@@ -50,9 +70,15 @@ func _on_pig_hitbox_body_exited(body):
 
 func recieve_damage(damage):
 	if not invulnerable:
-		#Globals.health = Globals.health - damage
+		Globals.health = Globals.health - damage
 		invulnerable = true
+		$Sprite2D.modulate = Color.RED
+		await get_tree().create_timer(0.1).timeout
+		$Sprite2D.modulate = Color.WHITE
+		
 		$dmg_iframe_cooldown.start()
+		
+		
 		print("player took ",damage," damage")
 	pass
 
@@ -67,15 +93,14 @@ func attack():
 		for enemy in enemies_pig_can_attack:
 			enemy.recieve_damage(basic_damage)
 
+#ranged ability
 func shoot():
 	if Input.is_action_just_pressed("shoot"):
 		var pb = pigbullet_scene.instantiate()
 		get_parent().add_child(pb)
-		print("Pig shoot")		
 		pb.global_position = $Marker2D.global_position
 		var dir = (get_global_mouse_position() - pb.global_position).normalized()
-		print("shooting pig's bullet")
-		pb.global_rotation = dir.angle() + PI / 2.0
+		#pb.global_rotation = dir.angle() + PI / 2.0
 		pb.direction = dir
 
 

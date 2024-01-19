@@ -17,6 +17,7 @@ func _process(delta):
 func _ready():
 	$Healthbar.max_value = MAX_HEALTH
 	set_health()
+	$AnimatedSprite2D.play("idle")
 	
 func enemy():
 	pass
