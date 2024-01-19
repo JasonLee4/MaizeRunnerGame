@@ -9,6 +9,7 @@ var damage = 1
 
 var can_attack = true
 var can_attack_player = true
+var ranged = false
 var player
 
 var invulnerable = false
@@ -16,7 +17,7 @@ var invulnerable = false
 func _physics_process(delta):
 	move()
 	if player != null:
-		deal_damage()
+		deal_damage(ranged)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,14 +54,16 @@ func _on_enemy_hitbox_body_exited(body):
 func move():
 	pass
 
-func deal_damage():
+func deal_damage(ranged):
 	if can_attack_player and can_attack:
 		can_attack = false
-		#$attack_cooldown.start()
-		player.recieve_damage(damage)
+		$attack_cooldown.start()
+		if not ranged:
+			player.recieve_damage(damage)
 	pass
 
 func recieve_damage(damage_value):
+	print("damaged hit")
 	if not invulnerable:
 		health = health - damage_value
 		set_health()
@@ -70,8 +73,13 @@ func recieve_damage(damage_value):
 		if health <= 0:
 			self.queue_free() 
 
-func _on_pig_damage_cooldown_timeout():
-	invulnerable = false
-
 func _on_attack_cooldown_timeout():
 	can_attack = true
+
+func _on_dmg_iframe_cooldown_timeout():
+	invulnerable = false
+	
+func _on_enemy_hitbox_area_entered(area):
+	if area.has_method("pigbullet"):
+		recieve_damage(area.damage)
+		area.queue_free()
