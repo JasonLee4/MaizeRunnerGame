@@ -53,7 +53,7 @@ func recieve_damage(damage):
 		#Globals.health = Globals.health - damage
 		invulnerable = true
 		$dmg_iframe_cooldown.start()
-		print("player took damage")
+		print("player took ",damage," damage")
 	pass
 
 func _on_basic_attack_cooldown_timeout():

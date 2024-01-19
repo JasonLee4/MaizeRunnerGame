@@ -81,7 +81,10 @@ step = 1.0
 show_percentage = false
 script = ExtResource("8_quany")
 
+[node name="attack_cooldown" type="Timer" parent="."]
+
 [connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
 [connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_pig_damage_cooldown_timeout"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

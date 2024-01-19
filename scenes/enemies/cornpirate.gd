@@ -1,18 +1,15 @@
-extends CharacterBody2D
+extends enemy
 @onready var pigbullet_node = get_parent().get
 var cornbullet_scene = preload("res://scenes/projectiles/cornbullet.tscn")
 var enemy_attack_cooldown = true
 
 var player_inrange = false
 var can_take_damage = true
-var MAX_HEALTH = 100
-var health = MAX_HEALTH
 var damaged = false
 
 @onready var pig = get_parent().get_node("Pig")
 var pig_position
 var target_position
-var player
 
 func _process(delta):
 	deal_with_damage()
