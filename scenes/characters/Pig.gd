@@ -3,7 +3,7 @@ extends CharacterBody2D
 var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 #Dash variable
 var dashDirection = Vector2(1,0)
-
+var dashready = true
 #var enemy_inattack_range = false
 @export var enemies_pig_can_attack = []
 var invulnerable = false
@@ -52,8 +52,10 @@ func _physics_process(delta):
 		self.queue_free()
 
 func dash(dashDirection) :
-	if Input.is_action_pressed("space"):
-		velocity = dashDirection.normalized()*200
+	if Input.is_action_pressed("space") and dashready:
+		velocity = dashDirection.normalized()*1200
+		dashready = false
+		$dash_cooldown.start()
 
 func player():
 	pass
@@ -106,3 +108,8 @@ func shoot():
 
 func _on_dmg_iframe_cooldown_timeout():
 	invulnerable = false
+
+
+func _on_dash_cooldown_timeout():
+	print("dash is ready")
+	dashready = true
