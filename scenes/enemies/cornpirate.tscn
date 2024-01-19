@@ -13,8 +13,8 @@ height = 34.0
 radius = 89.0056
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njfvj"]
-radius = 7.0
-height = 34.0
+radius = 20.0
+height = 46.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t0atr"]
 atlas = ExtResource("4_7e73o")
@@ -67,8 +67,7 @@ animations = [{
 }]
 
 [node name="cornpirate" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 15
+collision_mask = 5
 script = ExtResource("1_iwva1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -88,7 +87,7 @@ shape = SubResource("CircleShape2D_4rq2u")
 [node name="gunmarker" type="Marker2D" parent="."]
 position = Vector2(-12, 0)
 
-[node name="ShootTimer" type="Timer" parent="."]
+[node name="attack_cooldown" type="Timer" parent="."]
 wait_time = 2.0
 
 [node name="Healthbar" type="ProgressBar" parent="."]
@@ -100,13 +99,13 @@ step = 1.0
 show_percentage = false
 script = ExtResource("3_7pkod")
 
-[node name="dmg_cooldown" type="Timer" parent="."]
+[node name="dmg_iframe_cooldown" type="Timer" parent="."]
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="enemy_hitbox" type="Area2D" parent="."]
 collision_layer = 9
 collision_mask = 8
 
-[node name="hitboxshape" type="CollisionShape2D" parent="hitbox"]
+[node name="hitboxshape" type="CollisionShape2D" parent="enemy_hitbox"]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_njfvj")
 
@@ -118,6 +117,6 @@ animation = &"idle"
 [connection signal="area_entered" from="range" to="." method="_on_range_area_entered"]
 [connection signal="body_entered" from="range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="range" to="." method="_on_range_body_exited"]
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
-[connection signal="timeout" from="dmg_cooldown" to="." method="_on_dmg_cooldown_timeout"]
-[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
+[connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
