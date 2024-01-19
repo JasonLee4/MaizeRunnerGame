@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4njdjot1gbxv"]
+
+[ext_resource type="PackedScene" uid="uid://dnwyn0r1ujnst" path="res://room1.tscn" id="1_grxgj"]
+[ext_resource type="PackedScene" uid="uid://0b3ns5w08di8" path="res://room2.tscn" id="2_wvyob"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_grxgj")]
+visible = false
+
+[node name="TileMap2" parent="." instance=ExtResource("2_wvyob")]
