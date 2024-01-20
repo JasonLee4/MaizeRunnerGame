@@ -18,7 +18,7 @@ func _process(delta):
 		var treasure0 = apple.instantiate()
 		get_parent().add_child(treasure0)
 		treasure0.global_position = $Marker2D.global_position
-		#jump?
+		#hop out
 		treasure0.hop()
 	
 		

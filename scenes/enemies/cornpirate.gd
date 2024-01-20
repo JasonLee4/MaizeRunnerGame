@@ -1,11 +1,9 @@
 extends enemy
+
 @onready var pigbullet_node = get_parent().get
 var cornbullet_scene = preload("res://scenes/projectiles/cornbullet.tscn")
-#var enemy_attack_cooldown = true
 
-#var player_inrange = false
-#var can_take_damage = true
-#var damaged = false
+
 
 @onready var pig = get_parent().get_node("Pig")
 var pig_position
@@ -23,8 +21,7 @@ func _ready():
 func enemy():
 	pass
 
-func set_health():
-	$Healthbar.value = health
+
 	
 #func deal_with_damage():
 	#if damaged and can_take_damage == true:
