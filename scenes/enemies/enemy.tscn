@@ -66,6 +66,8 @@ shape = SubResource("CircleShape2D_l23aq")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="enemy_hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
 position = Vector2(0, -0.5)

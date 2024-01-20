@@ -4,7 +4,11 @@ var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 #Dash variable
 var dashDirection = Vector2(1,0)
 var dashready = true
-#var enemy_inattack_range = false
+
+var shootready = true
+
+var punchready = true
+
 @export var enemies_pig_can_attack = []
 var invulnerable = false
 var pig_alive = true
@@ -35,6 +39,7 @@ func _physics_process(delta):
 			$Marker2D.position.x = abs($Marker2D.position.x)
 			
 			
+			
 	else:
 		$AnimationPlayer.stop()
 	
@@ -42,7 +47,6 @@ func _physics_process(delta):
 		
 	get_input()
 	move_and_slide()
-	attack()
 	shoot()
 	
 	if Globals.health <= 0:
@@ -52,10 +56,49 @@ func _physics_process(delta):
 		self.queue_free()
 
 func dash(dashDirection) :
-	if Input.is_action_just_pressed("space") and dashready:
+	if Input.is_action_just_pressed("dash") and dashready:
 		velocity = dashDirection.normalized()*1200
 		dashready = false
 		$dash_cooldown.start()
+
+func _on_dash_cooldown_timeout():
+	print("dash is ready")
+	dashready = true
+
+
+#ranged ability
+func shoot():
+	if Input.is_action_just_pressed("shoot") and shootready:
+		shootready = false
+		var pb = pigbullet_scene.instantiate()
+		get_parent().add_child(pb)
+		pb.global_position = $Marker2D.global_position
+		var dir = (get_global_mouse_position() - pb.global_position).normalized()
+		#pb.global_rotation = dir.angle() + PI / 2.0
+		pb.direction = dir
+		
+		$shoot_cooldown.start()
+
+
+func _on_shoot_cooldown_timeout():
+	shootready = true
+
+
+
+func _on_punch_hurtbox_area_entered(area):
+	#print("punching area " + area.name)
+	#if area.get_parent().has_method("enemy"):
+		#print("testing punch...")
+		#
+		#area.get_parent().take_damage(basic_damage)
+	pass
+
+		
+
+
+func _on_punch_cooldown_timeout():
+	punchready = true
+
 
 func player():
 	pass
@@ -70,7 +113,7 @@ func _on_pig_hitbox_body_exited(body):
 		body.can_attack_player = false
 		#enemy_inattack_range = false
 
-func recieve_damage(damage):
+func receive_damage(damage):
 	if not invulnerable:
 		Globals.health = Globals.health - damage
 		invulnerable = true
@@ -83,33 +126,18 @@ func recieve_damage(damage):
 		
 		print("player took ",damage," damage")
 	pass
-
-func _on_basic_attack_cooldown_timeout():
-	$basic_attack_cooldown.stop()
-	can_basic_attack = true
 	
-func attack():
-	if Input.is_action_just_pressed("space"):
-		$basic_attack_cooldown.start()
-		can_basic_attack = false
-		for enemy in enemies_pig_can_attack:
-			enemy.recieve_damage(basic_damage)
 
-#ranged ability
-func shoot():
-	if Input.is_action_just_pressed("shoot"):
-		var pb = pigbullet_scene.instantiate()
-		get_parent().add_child(pb)
-		pb.global_position = $Marker2D.global_position
-		var dir = (get_global_mouse_position() - pb.global_position).normalized()
-		#pb.global_rotation = dir.angle() + PI / 2.0
-		pb.direction = dir
 
 
 func _on_dmg_iframe_cooldown_timeout():
 	invulnerable = false
 
 
-func _on_dash_cooldown_timeout():
-	print("dash is ready")
-	dashready = true
+
+
+
+
+
+
+

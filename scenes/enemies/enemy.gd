@@ -21,16 +21,12 @@ func _physics_process(delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
-	$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
-	$Healthbar.max_value = MAX_HEALTH
 	set_health()
 
 func set_health():
+	$Healthbar.max_value = MAX_HEALTH	
 	$Healthbar.value = health
 	
-#func _on_visible_on_screen_notifier_2d_screen_exited():
-	#queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -59,19 +55,23 @@ func deal_damage(ranged):
 		can_attack = false
 		$attack_cooldown.start()
 		if not ranged:
-			player.recieve_damage(damage)
-	pass
+			player.receive_damage(damage)
+	
 
-func recieve_damage(damage_value):
-	print("damaged hit")
-	if not invulnerable:
-		health = health - damage_value
-		set_health()
-		invulnerable = true
-		$dmg_iframe_cooldown.start()
-		print("Slime health = ", health)
-		if health <= 0:
-			self.queue_free() 
+func take_damage(damage_value):
+	#print("damaged hit")
+	#if not invulnerable:
+	$AnimatedSprite2D.modulate = Color(2,2,2,2)
+	await get_tree().create_timer(0.1).timeout
+	$AnimatedSprite2D.modulate = Color.WHITE
+	
+	health = health - damage_value
+	set_health()
+		#invulnerable = true
+		#$dmg_iframe_cooldown.start()
+	print("Slime health = ", health)
+	if health <= 0:
+		self.queue_free() 
 
 func _on_attack_cooldown_timeout():
 	can_attack = true
@@ -81,5 +81,5 @@ func _on_dmg_iframe_cooldown_timeout():
 	
 func _on_enemy_hitbox_area_entered(area):
 	if area.has_method("pigbullet"):
-		recieve_damage(area.damage)
+		take_damage(area.damage)
 		area.queue_free()
