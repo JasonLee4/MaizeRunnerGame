@@ -105,6 +105,9 @@ shape = SubResource("RectangleShape2D_0ik2p")
 
 [node name="ranged_attack_cooldown" type="Timer" parent="."]
 
+[node name="dash_cooldown" type="Timer" parent="."]
+wait_time = 4.0
+
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(16, -15)
 
@@ -113,3 +116,4 @@ position = Vector2(16, -15)
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="basic_attack_cooldown" to="." method="_on_basic_attack_cooldown_timeout"]
 [connection signal="timeout" from="ranged_attack_cooldown" to="." method="_on_ranged_attack_cooldown_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

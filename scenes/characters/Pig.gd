@@ -10,7 +10,7 @@ var invulnerable = false
 var pig_alive = true
  
 var can_basic_attack = true
-@export var speed = 100
+@export var speed = 150
 
 var basic_damage = 50
 
@@ -52,7 +52,7 @@ func _physics_process(delta):
 		self.queue_free()
 
 func dash(dashDirection) :
-	if Input.is_action_pressed("space") and dashready:
+	if Input.is_action_just_pressed("space") and dashready:
 		velocity = dashDirection.normalized()*1200
 		dashready = false
 		$dash_cooldown.start()
