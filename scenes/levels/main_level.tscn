@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmr5pc0estma1"]
+[gd_scene load_steps=17 format=3 uid="uid://bmr5pc0estma1"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_level.gd" id="1_haied"]
 [ext_resource type="Texture2D" uid="uid://biy6q2grrbrec" path="res://assets/tilesets/TX Tileset Grass.png" id="1_nebb2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cmkg6swofcroi" path="res://scenes/enemies/cornpirate.tscn" id="9_mfwi1"]
 [ext_resource type="PackedScene" uid="uid://bk38y6qrxf7ab" path="res://scenes/items/consumables/apple.tscn" id="10_w7piv"]
 [ext_resource type="PackedScene" uid="uid://brr1wrgpu1otg" path="res://scenes/items/weapons/cannon.tscn" id="11_8e02o"]
+[ext_resource type="PackedScene" uid="uid://cyjp1plfm3sc2" path="res://scenes/bosses/boss.tscn" id="12_3166n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k4stf"]
 texture = ExtResource("1_nebb2")
@@ -1590,3 +1591,6 @@ position = Vector2(121, 253)
 
 [node name="cannon" parent="." instance=ExtResource("11_8e02o")]
 position = Vector2(199, 277)
+
+[node name="Boss" parent="." instance=ExtResource("12_3166n")]
+position = Vector2(248, 78)

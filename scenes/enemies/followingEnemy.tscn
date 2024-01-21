@@ -55,7 +55,7 @@ size = Vector2(25, 14.25)
 
 [node name="FollowingEnemy" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 15
 script = ExtResource("1_dfq2f")
 speed = 60
 
