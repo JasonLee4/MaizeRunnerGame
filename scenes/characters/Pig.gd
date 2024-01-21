@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
+
+@onready var state_machine = get_node("player_state_machine")
+
 #Dash variable
 var dashDirection = Vector2(1,0)
 var dashready = true
@@ -14,18 +17,20 @@ var invulnerable = false
 var pig_alive = true
  
 var can_basic_attack = true
-@export var speed = 150
+#@export var speed = 150
 
 var basic_damage = 50
 
-func get_input():
-	var input_direction = Input.get_vector("left","right" , "up", "down")
-	velocity = input_direction * speed
-	
-		
-	dash(input_direction)
+#func get_input():
+	#var input_direction = Input.get_vector("left","right" , "up", "down")
+	#velocity = input_direction * speed
+	#
+		#
+	#dash(input_direction)
 	
 func _physics_process(delta):
+	# run through states
+	state_machine.process_states(delta)
 	
 	if velocity != Vector2(0,0):
 		$AnimationPlayer.play("pigwalk")
@@ -45,7 +50,8 @@ func _physics_process(delta):
 	
 		
 		
-	get_input()
+	#get_input()
+	
 	move_and_slide()
 	shoot()
 	
@@ -55,11 +61,11 @@ func _physics_process(delta):
 		print("Pig is dead")
 		self.queue_free()
 
-func dash(dashDirection) :
-	if Input.is_action_just_pressed("dash") and dashready:
-		velocity = dashDirection.normalized()*1200
-		dashready = false
-		$dash_cooldown.start()
+#func dash(dashDirection) :
+	#if Input.is_action_just_pressed("dash") and dashready:
+		#velocity = dashDirection.normalized()*1200
+		#dashready = false
+		#$dash_cooldown.start()
 
 func _on_dash_cooldown_timeout():
 	print("dash is ready")
@@ -125,8 +131,14 @@ func receive_damage(damage):
 		
 		
 		print("player took ",damage," damage")
-	pass
 	
+	
+
+func set_invincible(time):
+	$dmg_iframe_cooldown.wait_time = time
+	$dmg_iframe_cooldown.start()
+	
+	invulnerable = true
 
 
 
