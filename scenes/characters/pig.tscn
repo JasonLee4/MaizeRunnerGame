@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=12 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://ddkcgxfupj33n" path="res://assets/spritesheets/pigmoving.png" id="3_5iu3b"]
+[ext_resource type="Script" path="res://scenes/states/Player_State_Machine.gd" id="3_e2ml4"]
+[ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
+[ext_resource type="Script" path="res://scenes/states/state_rolling.gd" id="4_a3gfp"]
 
 [sub_resource type="Animation" id="Animation_kn2r4"]
 length = 0.001
@@ -123,6 +126,23 @@ position = Vector2(16, -15)
 position = Vector2(27, 0)
 shape = SubResource("RectangleShape2D_2t8br")
 
+[node name="player_state_machine" type="Node" parent="."]
+script = ExtResource("3_e2ml4")
+
+[node name="state_rolling" type="Node" parent="player_state_machine"]
+script = ExtResource("4_a3gfp")
+
+[node name="RollTime" type="Timer" parent="player_state_machine/state_rolling"]
+one_shot = true
+
+[node name="state_moving" type="Node" parent="player_state_machine"]
+script = ExtResource("4_75rr4")
+
+[node name="RollCooldown" type="Timer" parent="player_state_machine/state_moving"]
+one_shot = true
+
+[node name="state_dead" type="Node" parent="player_state_machine"]
+
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
@@ -131,3 +151,5 @@ shape = SubResource("RectangleShape2D_2t8br")
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="area_entered" from="punch_hurtbox" to="." method="_on_punch_hurtbox_area_entered"]
 [connection signal="body_entered" from="punch_hurtbox" to="." method="_on_punch_hurtbox_body_entered"]
+[connection signal="timeout" from="player_state_machine/state_rolling/RollTime" to="player_state_machine/state_rolling" method="_on_roll_time_timeout"]
+[connection signal="timeout" from="player_state_machine/state_moving/RollCooldown" to="player_state_machine/state_moving" method="_on_roll_cooldown_timeout"]
