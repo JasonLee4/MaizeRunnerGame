@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://cyjp1plfm3sc2"]
+
+[ext_resource type="Script" path="res://scenes/bosses/boss.gd" id="1_0dwle"]
+[ext_resource type="Texture2D" uid="uid://825vqg53eb4y" path="res://assets/enemyFlyingAlt_1.png" id="1_lornf"]
+[ext_resource type="Texture2D" uid="uid://emfpb4u68gqe" path="res://assets/enemyFlyingAlt_2.png" id="2_t7gqp"]
+[ext_resource type="Texture2D" uid="uid://cwu076qg8x6r6" path="res://assets/enemySwimming_1.png" id="3_7mv4u"]
+[ext_resource type="Texture2D" uid="uid://cf6jsrwuehpnh" path="res://assets/enemySwimming_2.png" id="4_3hmwn"]
+[ext_resource type="Texture2D" uid="uid://dal1l060e2lks" path="res://assets/enemyWalking_1.png" id="5_bkc5s"]
+[ext_resource type="Texture2D" uid="uid://b3vtti24til65" path="res://assets/enemyWalking_2.png" id="6_ijbou"]
+[ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="7_qons8"]
+[ext_resource type="Script" path="res://scripts/States/State Machine.gd" id="8_afv7l"]
+[ext_resource type="Script" path="res://scripts/States/BossSpawnMinions.gd" id="9_t82vn"]
+[ext_resource type="Script" path="res://scripts/States/BossFollowing.gd" id="11_u0yoo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b3y7r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lornf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_t7gqp")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7mv4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3hmwn")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bkc5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ijbou")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eo23n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ls7dl"]
+size = Vector2(40, 29)
+
+[node name="Boss" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_0dwle")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_b3y7r")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eo23n")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="enemy_hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ls7dl")
+
+[node name="dmg_iframe_cooldown" type="Timer" parent="."]
+
+[node name="Healthbar" type="ProgressBar" parent="."]
+offset_left = -13.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = -15.0
+step = 1.0
+show_percentage = false
+script = ExtResource("7_qons8")
+
+[node name="attack_cooldown" type="Timer" parent="."]
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_afv7l")
+initial_state = NodePath("follow")
+
+[node name="minions" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
+script = ExtResource("9_t82vn")
+boss = NodePath("../..")
+
+[node name="follow" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
+script = ExtResource("11_u0yoo")
+boss = NodePath("../..")
