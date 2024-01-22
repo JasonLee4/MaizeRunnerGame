@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx0pvdscatwe5"]
+[gd_scene load_steps=7 format=3 uid="uid://cx0pvdscatwe5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
+[ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_g5b3g"]
+[ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exthu"]
+texture = ExtResource("4_etjpm")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ve6ca"]
+sources/0 = SubResource("TileSetAtlasSource_exthu")
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_y4067")
@@ -23,3 +35,25 @@ offset_bottom = 40.0
 
 [node name="Heart" parent="HealthCounter/HBoxContainer" instance=ExtResource("2_vnf4r")]
 layout_mode = 2
+
+[node name="MinimapContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -227.0
+offset_top = 22.0
+offset_right = -27.0
+offset_bottom = 222.0
+grow_horizontal = 0
+
+[node name="Minimap" type="SubViewport" parent="MinimapContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+script = ExtResource("3_g5b3g")
+
+[node name="TileMap" type="TileMap" parent="MinimapContainer/Minimap"]
+tile_set = SubResource("TileSet_ve6ca")
+format = 2

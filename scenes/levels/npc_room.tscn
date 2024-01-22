@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg30n3dhay5yw"]
+[gd_scene load_steps=7 format=3 uid="uid://bg30n3dhay5yw"]
 
 [ext_resource type="Texture2D" uid="uid://crg5dq7teflsk" path="res://assets/tilesets/maize.png" id="1_albyf"]
 [ext_resource type="PackedScene" uid="uid://cj72oa0j0cfj6" path="res://scenes/characters/pig.tscn" id="1_uvwll"]
 [ext_resource type="PackedScene" uid="uid://glrhtxg4gl54" path="res://scenes/characters/cow.tscn" id="2_pk7e7"]
-[ext_resource type="Texture2D" uid="uid://csdb0xc3jkbr" path="res://assets/spritesheets/pigwithoutline.png" id="4_tj1ee"]
-[ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/spritesheets/pigwithhat.png" id="5_sejwm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebkew"]
 texture = ExtResource("1_albyf")
@@ -933,12 +931,3 @@ debug_color = Color(0.909804, 0, 0.733333, 0.419608)
 
 [node name="Pigwithoutline" type="Sprite2D" parent="."]
 position = Vector2(312, 266)
-texture = ExtResource("4_tj1ee")
-
-[node name="Pigwithhat" type="Sprite2D" parent="."]
-position = Vector2(272, 307)
-texture = ExtResource("5_sejwm")
-
-[node name="Pigwithoutline2" type="Sprite2D" parent="."]
-position = Vector2(313, 303)
-texture = ExtResource("4_tj1ee")

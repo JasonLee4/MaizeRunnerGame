@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv3brv7an5tm0"]
+
+[ext_resource type="Script" path="res://scenes/dungeon_gen/dungeon_gen.gd" id="1_7plxx"]
+[ext_resource type="PackedScene" uid="uid://cx0pvdscatwe5" path="res://scenes/ui/ui.tscn" id="3_vy65d"]
+[ext_resource type="Script" path="res://scenes/dungeon_gen/Camera2D.gd" id="3_wiv7k"]
+
+[node name="DungeonGen" type="Node2D"]
+script = ExtResource("1_7plxx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.4, 2.4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("3_wiv7k")
+
+[node name="UI" parent="." instance=ExtResource("3_vy65d")]

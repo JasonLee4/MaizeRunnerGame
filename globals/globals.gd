@@ -8,3 +8,7 @@ var health = 5:
 	set(value):
 		health = value
 		health_change.emit()
+
+signal room_entered(room)
+
+signal dungeon_created(borders, grid)
