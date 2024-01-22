@@ -4,6 +4,7 @@ var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 
 @onready var state_machine = get_node("player_state_machine")
 
+
 #Dash variable
 var dashDirection = Vector2(1,0)
 var dashready = true
@@ -21,6 +22,12 @@ var can_basic_attack = true
 
 var basic_damage = 50
 
+var equipped = false
+var curr_bullet_sprite
+
+#var all_weapons = {"cannon": preload("res://scenes/items/weapons/cannon.tscn")}
+#var curr_weapon
+#var cannon_instance
 #func get_input():
 	#var input_direction = Input.get_vector("left","right" , "up", "down")
 	#velocity = input_direction * speed
@@ -28,22 +35,39 @@ var basic_damage = 50
 		#
 	#dash(input_direction)
 	
+#func _ready():
+	#
+	#cannon_instance = all_weapons["cannon"].instantiate()
+	#cannon_instance.connect("equipweapon",equip_weapon)
+	
+
 func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	
 	if velocity != Vector2(0,0):
-		$AnimationPlayer.play("pigwalk")
+		if state_machine.selected_state.name == "state_rolling":
+			$Sprite2D.visible = false
+			$Roll.visible = true
+			
+			$AnimationPlayer.play("pigroll")
+			
+		elif state_machine.selected_state.name == "state_moving":
+			$Sprite2D.visible = true
+			$Roll.visible = false
+			$AnimationPlayer.play("pigwalk")
 		if velocity.x < 0:
 			$Sprite2D.flip_h = true
 			$weapon_sprite.flip_h = true
+			$Roll.flip_h = true
 			$Marker2D.position.x = -1 * abs($Marker2D.position.x)
 		else:
 			$Sprite2D.flip_h = false
 			$weapon_sprite.flip_h = false
+			$Roll.flip_h = false			
 			$Marker2D.position.x = abs($Marker2D.position.x)
 			
-			
+		
 			
 	else:
 		$AnimationPlayer.stop()
@@ -71,12 +95,21 @@ func _on_dash_cooldown_timeout():
 	print("dash is ready")
 	dashready = true
 
-
+func equip_weapon(weaponsprite, bulletsprite):
+	#add_child(cannon_instance)	
+	equipped = true
+	$weapon_sprite.texture = load(weaponsprite)
+	curr_bullet_sprite = load(bulletsprite)
+	pass
+	
+	
+	
 #ranged ability
 func shoot():
-	if Input.is_action_just_pressed("shoot") and shootready:
+	if Input.is_action_just_pressed("shoot") and shootready and equipped:
 		shootready = false
 		var pb = pigbullet_scene.instantiate()
+		pb.get_node("Sprite2D").texture = curr_bullet_sprite
 		get_parent().add_child(pb)
 		pb.global_position = $Marker2D.global_position
 		var dir = (get_global_mouse_position() - pb.global_position).normalized()
