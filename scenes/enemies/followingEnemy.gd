@@ -3,12 +3,12 @@ extends enemy
 #Variables for enemy movement
 var pig_position
 var target_position
-@onready var pig = get_parent().get_node("Pig")
+@onready var pig = owner.get_node("Pig")
 	
 func move():
-	if(pig != null):
-		pig_position  = pig.global_position
-		target_position = (pig_position-position).normalized()
+	assert(pig != null)
+	pig_position  = pig.global_position
+	target_position = (pig_position-position).normalized()
 	
 	if pig_position.x < position.x:
 		$Sprite2D.flip_v = true
