@@ -3,6 +3,7 @@ class_name PlayerState
 
 
 @onready var machine = get_parent() # the parent state machine manager
+
 @onready var player = machine.get_parent()
 
 # runs whenever this state is entered
