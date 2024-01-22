@@ -5,8 +5,9 @@ extends StaticBody2D
 const lines: Array[String] = [
 	"Hey!",
 	"Wow, you're trying to escape the farm?",
-	"That's crazy...",
-	"Press space to dash!",
+	"You got some chops, for sure.",
+	"I heard there's some baddies ahead...",
+	"Press space to dash, F to pickup items, and LMB to attack!",
 ]
 
 func _unhandled_input(event):

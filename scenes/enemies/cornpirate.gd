@@ -5,7 +5,7 @@ var cornbullet_scene = preload("res://scenes/projectiles/cornbullet.tscn")
 
 
 
-@onready var pig = get_parent().get_node("Pig")
+@onready var pig = owner.get_node("Pig")
 var pig_position
 var target_position
 

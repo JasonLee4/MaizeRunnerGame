@@ -137,5 +137,5 @@ flip_h = true
 position = Vector2(-3, -1)
 sprite_frames = SubResource("SpriteFrames_suti5")
 animation = &"cowidle"
-frame_progress = 0.164514
+frame_progress = 0.382368
 flip_h = true

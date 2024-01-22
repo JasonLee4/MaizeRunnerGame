@@ -10,7 +10,8 @@ var followingTime : float
 
 func enter():
 	followingTime = 0
-	player = boss.get_parent().get_node("Pig")
+	player = owner.get_node("Pig")
+	assert(player != null)
 
 func update(delta: float):
 	if followingTime < followingTotalTime:
