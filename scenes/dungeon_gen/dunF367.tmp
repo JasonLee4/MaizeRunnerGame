@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv3brv7an5tm0"]
+
+[ext_resource type="Script" path="res://scenes/dungeon_gen/dungeon_gen.gd" id="1_7plxx"]
+[ext_resource type="PackedScene" uid="uid://b34nik2lhbab0" path="res://scenes/dungeon_gen/rooms/rect_room.tscn" id="2_l5ucq"]
+[ext_resource type="Script" path="res://scenes/dungeon_gen/Camera2D.gd" id="3_wiv7k"]
+[ext_resource type="PackedScene" uid="uid://cj72oa0j0cfj6" path="res://scenes/characters/pig.tscn" id="4_2dpyg"]
+
+[node name="DungeonGen" type="Node2D"]
+script = ExtResource("1_7plxx")
+
+[node name="RectRoom" parent="." instance=ExtResource("2_l5ucq")]
+
+[node name="RectRoom2" parent="." instance=ExtResource("2_l5ucq")]
+position = Vector2(558, 0)
+
+[node name="RectRoom3" parent="." instance=ExtResource("2_l5ucq")]
+position = Vector2(558, 440)
+
+[node name="Pig" parent="." instance=ExtResource("4_2dpyg")]
+position = Vector2(-125, 2)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.4, 2.4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("3_wiv7k")

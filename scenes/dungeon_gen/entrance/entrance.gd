@@ -1,6 +1,6 @@
 extends Area2D
 
-signal player_moved_rooms
+@onready var tp_location = $Marker2D
 
 func _on_body_entered(body):
-	player_moved_rooms.emit()
+	body.global_position = tp_location.global_position
