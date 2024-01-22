@@ -16,3 +16,6 @@ func _unhandled_input(event):
 			print("overlap detected")
 			DialogueManager.start_dialogue(global_position, lines)
 			
+
+func _process(delta):
+	$AnimatedSprite2D.play("cowidle")
