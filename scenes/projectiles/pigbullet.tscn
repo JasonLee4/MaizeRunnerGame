@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpto2l2cldhfa"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/pigbullet.gd" id="1_0067b"]
-[ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/spritesheets/pigwithhat.png" id="2_33iyh"]
+[ext_resource type="Texture2D" uid="uid://64q1k3cxok2a" path="res://assets/spritesheets/pigcannonball.png" id="2_yr731"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yt7yq"]
 radius = 8.0
@@ -12,14 +12,14 @@ collision_mask = 6
 script = ExtResource("1_0067b")
 speed = 150
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_33iyh")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yt7yq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 2)
+texture = ExtResource("2_yr731")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

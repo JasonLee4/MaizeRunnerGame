@@ -25,7 +25,6 @@ func _ready():
 
 	# get all possible states
 	for child in get_children():
-		print("state child : " + child.name)
 		possible_states.append(child.get_name())
 
 	# start initial state
