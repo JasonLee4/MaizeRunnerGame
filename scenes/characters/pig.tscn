@@ -1,7 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=12 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://ddkcgxfupj33n" path="res://assets/spritesheets/pigmoving.png" id="3_5iu3b"]
+[ext_resource type="Script" path="res://scenes/states/Player_State_Machine.gd" id="3_e2ml4"]
+[ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
+[ext_resource type="Script" path="res://scenes/states/state_rolling.gd" id="4_a3gfp"]
+
+[sub_resource type="Animation" id="Animation_kn2r4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("weapon_sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_utpj3"]
 resource_name = "pigwalk"
@@ -31,33 +61,6 @@ tracks/1/keys = {
 "values": [0, 0, 0, 0, 0, 0, 0, 0, 0]
 }
 
-[sub_resource type="Animation" id="Animation_kn2r4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("weapon_sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_07awo"]
 _data = {
 "RESET": SubResource("Animation_kn2r4"),
@@ -67,12 +70,16 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
 height = 28.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ik2p"]
-size = Vector2(39, 32)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w6u8y"]
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t8br"]
 
 [node name="Pig" type="CharacterBody2D"]
-collision_mask = 30
+collision_mask = 4
 script = ExtResource("1_hx4hr")
+
+[node name="weapon" type="Node2D" parent="."]
 
 [node name="weapon_sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
@@ -97,19 +104,52 @@ zoom = Vector2(3, 3)
 [node name="pig_hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pig_hitbox"]
-shape = SubResource("RectangleShape2D_0ik2p")
+shape = SubResource("CapsuleShape2D_w6u8y")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
 
-[node name="basic_attack_cooldown" type="Timer" parent="."]
+[node name="punch_cooldown" type="Timer" parent="."]
+wait_time = 5.0
 
-[node name="ranged_attack_cooldown" type="Timer" parent="."]
+[node name="shoot_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="dash_cooldown" type="Timer" parent="."]
+wait_time = 4.0
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(16, -15)
 
+[node name="punch_hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="punch_hurtbox"]
+position = Vector2(27, 0)
+shape = SubResource("RectangleShape2D_2t8br")
+
+[node name="player_state_machine" type="Node" parent="."]
+script = ExtResource("3_e2ml4")
+
+[node name="state_rolling" type="Node" parent="player_state_machine"]
+script = ExtResource("4_a3gfp")
+
+[node name="RollTime" type="Timer" parent="player_state_machine/state_rolling"]
+one_shot = true
+
+[node name="state_moving" type="Node" parent="player_state_machine"]
+script = ExtResource("4_75rr4")
+
+[node name="RollCooldown" type="Timer" parent="player_state_machine/state_moving"]
+one_shot = true
+
+[node name="state_dead" type="Node" parent="player_state_machine"]
+
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
-[connection signal="timeout" from="basic_attack_cooldown" to="." method="_on_basic_attack_cooldown_timeout"]
-[connection signal="timeout" from="ranged_attack_cooldown" to="." method="_on_ranged_attack_cooldown_timeout"]
+[connection signal="timeout" from="punch_cooldown" to="." method="_on_punch_cooldown_timeout"]
+[connection signal="timeout" from="shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="area_entered" from="punch_hurtbox" to="." method="_on_punch_hurtbox_area_entered"]
+[connection signal="body_entered" from="punch_hurtbox" to="." method="_on_punch_hurtbox_body_entered"]
+[connection signal="timeout" from="player_state_machine/state_rolling/RollTime" to="player_state_machine/state_rolling" method="_on_roll_time_timeout"]
+[connection signal="timeout" from="player_state_machine/state_moving/RollCooldown" to="player_state_machine/state_moving" method="_on_roll_cooldown_timeout"]

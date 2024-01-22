@@ -10,6 +10,12 @@ func move():
 		pig_position  = pig.global_position
 		target_position = (pig_position-position).normalized()
 	
+	if pig_position.x < position.x:
+		$Sprite2D.flip_v = true
+	else:
+		$Sprite2D.flip_v = false
+		
+	
 	if (position.distance_to(pig_position) > 3):
 		velocity = Vector2(target_position * speed) 
 		move_and_slide()
@@ -21,20 +27,14 @@ func _ready():
 	health = 50
 	damage = 0
 	
-	var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
-	$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
+	#var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
+	#$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
 	$Healthbar.max_value = MAX_HEALTH
 	set_health()
 
-func set_health():
-	$Healthbar.value = health
-	
 #func _on_visible_on_screen_notifier_2d_screen_exited():
 	#queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-	
-func enemy():
 	pass

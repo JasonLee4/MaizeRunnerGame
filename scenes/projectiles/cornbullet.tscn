@@ -7,11 +7,13 @@
 radius = 2.0
 
 [node name="cornbullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 21
 script = ExtResource("1_h5qca")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4.76837e-07, 2)
-scale = Vector2(1.875, 1.8125)
+scale = Vector2(2, 1.934)
 texture = ExtResource("2_hpxen")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu6fbl27cj8ni"]
+[gd_scene load_steps=13 format=3 uid="uid://cu6fbl27cj8ni"]
 
 [ext_resource type="Script" path="res://scenes/enemies/followingEnemy.gd" id="1_dfq2f"]
+[ext_resource type="Texture2D" uid="uid://dr0ojxowr51kt" path="res://assets/spritesheets/leechfat.png" id="2_ifx37"]
 [ext_resource type="Texture2D" uid="uid://825vqg53eb4y" path="res://assets/enemyFlyingAlt_1.png" id="2_o6mjj"]
 [ext_resource type="Texture2D" uid="uid://emfpb4u68gqe" path="res://assets/enemyFlyingAlt_2.png" id="3_x7ygf"]
 [ext_resource type="Texture2D" uid="uid://cwu076qg8x6r6" path="res://assets/enemySwimming_1.png" id="4_66qlc"]
@@ -45,38 +46,51 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_l23aq"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64y88"]
+radius = 3.98938
+height = 15.9988
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ed3k4"]
-size = Vector2(40, 29)
+size = Vector2(25, 14.25)
 
 [node name="FollowingEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_dfq2f")
-metadata/_edit_group_ = true
+speed = 60
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ifx37")
+flip_h = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_kwn2n")
-animation = &"walk"
+animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_l23aq")
+position = Vector2(1, -0.999999)
+rotation = -1.55867
+shape = SubResource("CapsuleShape2D_64y88")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1)
 
 [node name="enemy_hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_ed3k4")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
 
 [node name="Healthbar" type="ProgressBar" parent="."]
-offset_left = -13.0
-offset_top = -20.0
-offset_right = 16.0
-offset_bottom = -15.0
+offset_left = -7.0
+offset_top = -10.0
+offset_right = 22.0
+offset_bottom = -5.0
+scale = Vector2(0.5, 0.5)
 step = 1.0
 show_percentage = false
 script = ExtResource("8_quany")
@@ -86,5 +100,5 @@ script = ExtResource("8_quany")
 [connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
 [connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
-[connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_pig_damage_cooldown_timeout"]
+[connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -1,23 +1,36 @@
 extends StaticBody2D
 
-var open = false
+var canopen = false
+var opened = false
+var apple = preload("res://scenes/items/consumables/apple.tscn")
 
-
-func __process(delta):
-	if Input.is_action_pressed("interact") and open:
+func _process(delta):
+	if !opened:
+		$AnimatedSprite2D.stop()
+		
+	
+	if Input.is_action_pressed("interact") and canopen and !opened:
 		print("opened chest")
-		#$Sprite2D.texture = load()
+		$AnimatedSprite2D.play("chestanimation")
+		
+		opened = true
+		await get_tree().create_timer(0.5).timeout
+		var treasure0 = apple.instantiate()
+		get_parent().add_child(treasure0)
+		treasure0.global_position = $Marker2D.global_position
+		#hop out
+		treasure0.hop()
+	
+		
 		
 
 func _on_area_2d_area_entered(area):
 	print(area.name)
 	if area.name == "pig_hitbox":
-		open = true	
-	
-	
+		canopen = true	
 
 
 
 func _on_area_2d_area_exited(area):
 	if area.name == "pig_hitbox":
-		open = false
+		canopen = false

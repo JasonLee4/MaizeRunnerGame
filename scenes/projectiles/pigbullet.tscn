@@ -4,20 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://brsp0i4ocxk73" path="res://assets/spritesheets/pigwithhat.png" id="2_33iyh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yt7yq"]
-radius = 7.0
+radius = 8.0
 
 [node name="Pigbullet" type="Area2D"]
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_0067b")
+speed = 150
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_33iyh")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yt7yq")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

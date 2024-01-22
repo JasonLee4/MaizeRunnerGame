@@ -21,7 +21,8 @@ func _on_area_2d_area_entered(area):
 	print(area.name)
 	if area.name == "pig_hitbox":
 		player = area.get_parent()
-		pickup = true	
+		pickup = true
+		
 	
 	
 
