@@ -6,6 +6,8 @@ var target_position
 @onready var pig = owner.get_node("Pig")
 	
 func move():
+	if freeze:
+		speed = 0
 	assert(pig != null)
 	pig_position  = pig.global_position
 	target_position = (pig_position-position).normalized()
@@ -26,7 +28,7 @@ func _ready():
 	MAX_HEALTH = 50
 	health = 50
 	damage = 0
-	
+	visible = false
 	#var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	#$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
 	$Healthbar.max_value = MAX_HEALTH

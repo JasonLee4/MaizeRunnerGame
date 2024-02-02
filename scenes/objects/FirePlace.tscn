@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvxtel4kt8t1d"]
+
+[ext_resource type="Texture2D" uid="uid://c64m8bioy63m1" path="res://assets/spritesheets/apple.png" id="1_dq3mn"]
+[ext_resource type="Script" path="res://scenes/objects/FirePlace.gd" id="1_m0kst"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ybjv"]
+size = Vector2(76, 59)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7c7er"]
+radius = 31.0161
+
+[node name="FirePlace" type="StaticBody2D"]
+script = ExtResource("1_m0kst")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(2.125, 2.20833)
+texture = ExtResource("1_dq3mn")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 12.5)
+shape = SubResource("RectangleShape2D_5ybjv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_7c7er")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

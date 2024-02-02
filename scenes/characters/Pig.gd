@@ -3,7 +3,7 @@ extends CharacterBody2D
 var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 
 @onready var state_machine = get_node("player_state_machine")
-
+@onready var fire_place = get_tree().current_scene.get_node("FirePlace")
 
 #Dash variable
 var dashDirection = Vector2(1,0)
@@ -25,25 +25,27 @@ var basic_damage = 50
 var equipped = false
 var curr_bullet_sprite
 
-#var all_weapons = {"cannon": preload("res://scenes/items/weapons/cannon.tscn")}
-#var curr_weapon
-#var cannon_instance
-#func get_input():
-	#var input_direction = Input.get_vector("left","right" , "up", "down")
-	#velocity = input_direction * speed
-	#
-		#
-	#dash(input_direction)
+@export var inv: Inventory
+
+#func on_item_picked_up(item_name: String):
+	#inventory.add_item(item_name)
+	#print(inventory.get_items())
+#
+func _ready():
+	fire_place.craft_torch.connect(craft)
 	
-#func _ready():
-	#
-	#cannon_instance = all_weapons["cannon"].instantiate()
-	#cannon_instance.connect("equipweapon",equip_weapon)
-	
+func craft():
+	if inv.slots[0].amount >= 2:	
+		print("crafting... using wood...")
+		inv.remove_item(inv.slots[0].item, 2)	
+		print(inv.slots[0].amount)
+		pass
+
 
 func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
+	$piglight.look_at(get_global_mouse_position())
 	
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
@@ -61,12 +63,12 @@ func _physics_process(delta):
 			$weapon_sprite.flip_h = true
 			$Roll.flip_h = true
 			$Marker2D.position.x = -1 * abs($Marker2D.position.x)
+			
 		else:
 			$Sprite2D.flip_h = false
 			$weapon_sprite.flip_h = false
 			$Roll.flip_h = false			
 			$Marker2D.position.x = abs($Marker2D.position.x)
-			
 		
 			
 	else:
@@ -163,7 +165,7 @@ func receive_damage(damage):
 		$dmg_iframe_cooldown.start()
 		
 		
-		print("player took ",damage," damage")
+		#print("player took ",damage," damage")
 	
 	
 
@@ -180,9 +182,16 @@ func _on_dmg_iframe_cooldown_timeout():
 
 
 
+func _on_piglightarea_body_entered(body):
+	# weeping angel /freeze in place behavior
+	if body.has_method("enemy"):
+		body.freeze = true
+	
 
+func collect(item):
+	print("collected ", item.name)
+	inv.insert(item)
+	print(inv.slots[0].item.name, inv.slots[0].amount)
+	
 
-
-
-
-
+	
