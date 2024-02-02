@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx0pvdscatwe5"]
+[gd_scene load_steps=8 format=3 uid="uid://cx0pvdscatwe5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
 [ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_g5b3g"]
 [ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
+[ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hot_bar.tscn" id="5_hlh8u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exthu"]
 texture = ExtResource("4_etjpm")
@@ -57,3 +58,9 @@ script = ExtResource("3_g5b3g")
 [node name="TileMap" type="TileMap" parent="MinimapContainer/Minimap"]
 tile_set = SubResource("TileSet_ve6ca")
 format = 2
+
+[node name="HotBar" parent="." instance=ExtResource("5_hlh8u")]
+offset_left = 24.0
+offset_top = 560.0
+offset_right = -1040.0
+offset_bottom = 22.0

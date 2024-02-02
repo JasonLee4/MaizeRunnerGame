@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name enemy
 
 @export var speed = 100
-
+@export var freeze = false
 var MAX_HEALTH = 100
 var health = MAX_HEALTH
 var damage = 1
@@ -37,13 +37,13 @@ func enemy():
 
 func _on_enemy_hitbox_body_entered(body):
 	if body.has_method("player"):
-		body.enemies_pig_can_attack.append(self)
+		#body.enemies_pig_can_attack.append(self)
 		#player_in_hitbox = true
 		player = body
 
 func _on_enemy_hitbox_body_exited(body):
 	if body.has_method("player"):
-		body.enemies_pig_can_attack.erase(self)
+		#body.enemies_pig_can_attack.erase(self)
 		#player_in_hitbox = false
 		player = null
  
