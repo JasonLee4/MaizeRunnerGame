@@ -1,6 +1,86 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfnha2uh4r7lt"]
+[gd_scene load_steps=15 format=3 uid="uid://cfnha2uh4r7lt"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_menu.gd" id="1_r22ps"]
+[ext_resource type="Texture2D" uid="uid://d5n5unmbmv76" path="res://assets/ui/slidepic.png" id="2_wd1v4"]
+[ext_resource type="Texture2D" uid="uid://dhq72de8exge2" path="res://assets/ui/title-Sheet.png" id="3_4vohq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ekd5"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(0, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57344"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(640, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld2st"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(1280, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5413h"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(1920, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3hbs"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(2560, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr6cx"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(3200, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6g3f"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(3840, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl587"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(4480, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbcls"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(5120, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qk7o"]
+atlas = ExtResource("3_4vohq")
+region = Rect2(5760, 0, 640, 640)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mxikb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ekd5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57344")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld2st")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5413h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3hbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mr6cx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6g3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl587")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbcls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qk7o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,33 +91,80 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r22ps")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Background" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_top = 3.0
+offset_right = 1149.0
+offset_bottom = 645.0
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 2
+texture = ExtResource("2_wd1v4")
+expand_mode = 1
+
+[node name="Buttons" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -101.0
-offset_right = 70.0
-grow_vertical = 0
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_bottom = 40
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -26.0
+offset_right = 239.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
 layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="StartButton" type="Button" parent="Buttons/VBoxContainer"]
 layout_mode = 2
-focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_top = NodePath("../HBoxContainer/QuitButton")
+theme_override_font_sizes/font_size = 30
 text = "Start"
 
-[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="OptionsButton" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
 text = "Options"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../StartButton")
+size_flags_horizontal = 3
+focus_neighbor_bottom = NodePath("../../StartButton")
+theme_override_font_sizes/font_size = 30
 text = "Quit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="Sign" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sign"]
+position = Vector2(29, -88)
+sprite_frames = SubResource("SpriteFrames_mxikb")
+autoplay = "default"
+frame_progress = 0.368695
+
+[connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
