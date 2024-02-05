@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://f8a7c50dvi25"]
+
+[ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
+[ext_resource type="Texture2D" uid="uid://blxneorurmxe" path="res://assets/spritesheets/rat.png" id="1_y6qvw"]
+[ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="2_m7wqm"]
+[ext_resource type="Script" path="res://scripts/States/State Machine.gd" id="4_uy7fj"]
+[ext_resource type="Script" path="res://scripts/States/EnemyIdle.gd" id="5_elybv"]
+[ext_resource type="Script" path="res://scripts/States/EnemyFreeze.gd" id="6_0hfgx"]
+[ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_djy2a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g2nd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y6qvw")
+}],
+"loop": true,
+"name": &"RAT",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moawb"]
+size = Vector2(24, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gae2i"]
+size = Vector2(28, 28)
+
+[node name="Rat" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_tq7uu")
+detectionRadius = 125.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.03, 0.03)
+sprite_frames = SubResource("SpriteFrames_g2nd4")
+animation = &"RAT"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, -0.5)
+shape = SubResource("RectangleShape2D_moawb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+
+[node name="enemy_hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_gae2i")
+
+[node name="dmg_iframe_cooldown" type="Timer" parent="."]
+
+[node name="Healthbar" type="ProgressBar" parent="."]
+offset_left = -13.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = -15.0
+step = 1.0
+show_percentage = false
+script = ExtResource("2_m7wqm")
+
+[node name="attack_cooldown" type="Timer" parent="."]
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_uy7fj")
+initial_state = NodePath("EnemyIdle")
+
+[node name="EnemyIdle" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_elybv")
+enemy = NodePath("../..")
+
+[node name="EnemyFreeze" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_0hfgx")
+enemy = NodePath("../..")
+
+[node name="EnemyFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_djy2a")
+enemy = NodePath("../..")

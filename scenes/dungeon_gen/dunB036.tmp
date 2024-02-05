@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx3kt1flbreh8"]
+[gd_scene load_steps=3 format=3 uid="uid://dx3kt1flbreh8"]
 
 [ext_resource type="Script" path="res://scenes/dungeon_gen/dungeon_gen.gd" id="1_7plxx"]
 [ext_resource type="TileSet" uid="uid://bnik0x0gnd41" path="res://assets/tilesets/corn_ground_tileset.tres" id="2_0cbpq"]
-[ext_resource type="PackedScene" uid="uid://cx0pvdscatwe5" path="res://scenes/ui/ui.tscn" id="3_7t5bt"]
 
 [node name="DungeonGen" type="Node2D"]
 script = ExtResource("1_7plxx")
@@ -10,7 +9,7 @@ script = ExtResource("1_7plxx")
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.1, 0.1)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_0cbpq")
@@ -19,7 +18,3 @@ format = 2
 layer_0/name = "ground"
 layer_1/name = "walls"
 layer_1/tile_data = PackedInt32Array()
-layer_2/name = "objects"
-layer_2/tile_data = PackedInt32Array()
-
-[node name="UI" parent="." instance=ExtResource("3_7t5bt")]

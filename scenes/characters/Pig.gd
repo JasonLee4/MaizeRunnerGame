@@ -39,9 +39,15 @@ var torch_speed = 0
 	#print(inventory.get_items())
 #
 func _ready():
-	fire_place.craft_torch.connect(craft)
+
 	inv.update.connect(hotbar.update_slots)
-	
+
+	Globals.pig = $"."
+
+	print("pig inst")
+	if fire_place:
+		fire_place.craft_torch.connect(craft)
+
 	
 func craft():
 	if inv.slots[0].amount >= 2:	
@@ -99,8 +105,11 @@ func _physics_process(delta):
 		pig_alive = false
 		#Add end screen/respawn screen
 		print("Pig is dead")
+		get_tree().change_scene_to_file("res://scenes/levels/end_screen.tscn")
 		self.queue_free()
+
 	tool_scroll()
+	Globals.health = 5
 
 	toggle_flashlight()
 	
@@ -204,15 +213,17 @@ func _on_dmg_iframe_cooldown_timeout():
 
 
 
-#func _on_piglightarea_body_entered(body):
-	## weeping angel /freeze in place behavior
-	#if body.has_method("enemy") and flashlight:
-		#body.freeze = true
-	#
+
+func _on_piglightarea_body_entered(body):
+	# weeping angel /freeze in place behavior
+	#print("in light area: ",body)
+	if body.has_method("light_freeze"):
+		body.light_freeze()
+
 func _on_piglightarea_body_exited(body):
-	if body.has_method("enemy"):
-		body.freeze = false
-	
+	if body.has_method("light_unfreeze"):
+		body.light_unfreeze()
+
 
 func collect(item):
 	#print("collected ", item.name)
