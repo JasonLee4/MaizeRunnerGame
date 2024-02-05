@@ -2,6 +2,7 @@ extends StaticBody2D
 
 class_name FirePlace
 
+@export var inv_item: Inv_Item
 var crafting_available
 signal craft_torch
 

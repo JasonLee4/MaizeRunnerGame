@@ -2,7 +2,7 @@ extends SubViewport
 
 @onready var tilemap = $TileMap
 
-@onready var health_counter: HBoxContainer = $HealthCounter/HBoxContainer
+#@onready var health_counter: HBoxContainer = $HealthCounter/HBoxContainer
 
 func _ready():
 	Globals.dungeon_created.connect(
