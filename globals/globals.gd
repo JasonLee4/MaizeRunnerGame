@@ -9,6 +9,6 @@ var health = 5:
 		health = value
 		health_change.emit()
 
-signal room_entered(room)
+var pig
 
-signal dungeon_created(borders, grid)
+signal dungeon_created

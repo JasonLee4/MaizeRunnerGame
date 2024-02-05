@@ -1,32 +1,248 @@
 extends Node2D
+var Room = preload("res://scenes/dungeon_gen/rooms/rect_room.tscn")
+var player_scene = preload("res://scenes/characters/pig.tscn")
+var rat_enemy = preload("res://scenes/enemies/followingEnemy.tscn")
+@onready var map = $TileMap
+@onready var camera = $Camera2D
 
-enum RoomType {Start, End, Combat}
-
-var rect_room = preload("res://scenes/dungeon_gen/rooms/rect_room.tscn")
-var player = preload("res://scenes/characters/pig.tscn").instantiate()
-
-const grid_size = Vector2(5, 5)
-const top_left_pos = Vector2(-2, -2)
-const borders = Rect2(top_left_pos, grid_size)
-const starting_pos = Vector2(0, 0)
-const num_steps = 8
+var tile_size = 32
+var num_rooms = 100
+var min_size = 4
+var max_size = 7
+var h_spread = 100
+var cull_pct = .6
+var start_room = null
+var end_room = null
+var play_mode = false
+var player = null
+var path # AStar pathfinder to hold MST
+var enemy_spawns = []
 
 func _ready():
-	generate_level()
-	add_child(player)
-
-func add_room(position: Vector2):
-	var scaled_pos = Vector2(position.x*560, position.y*432)
-	var new_room = rect_room.instantiate()
-	new_room.global_position = scaled_pos
-	add_child(new_room)
-		
-func generate_level():
-	var walker = Walker.new(starting_pos, borders)
-	var grid = walker.walk(num_steps)
-	walker.queue_free()
-	print(grid)
-	for pos in grid:
-		add_room(pos)
-	Globals.dungeon_created.emit(borders, grid)
+	seed("maizerun".hash())
+	#seed("maizerunner".hash())
+	make_rooms()
 	
+func make_rooms():
+	for i in range(num_rooms):
+		var pos = Vector2(randi_range(-h_spread, h_spread),0)
+		var r = Room.instantiate()
+		var w = min_size + randi() % (max_size - min_size)
+		var h = min_size + randi() % (max_size - min_size)
+		r.make_room(pos, Vector2(w, h) * tile_size)
+		$Rooms.add_child(r)
+		
+	# create center room
+	var r = Room.instantiate()
+	r.freeze = true
+	r.set_text("Start Room")
+	r.make_room(Vector2(0,0), Vector2(10, 10) * tile_size)
+	$Rooms.add_child(r)
+	start_room = r
+	
+	# wait for rooms to stop moving
+	await(get_tree().create_timer(1.1).timeout)
+	
+	# cull rooms
+	var room_positions = []
+	for room in $Rooms.get_children():
+		if check_overlap(room, r) and room != r:
+			room.queue_free()
+		elif randf() < cull_pct and room != r:
+			room.queue_free()
+		else:
+			room.freeze = true
+			room_positions.append(room.position)
+	#print(room_positions)
+	# idle frame to make sure all rooms freeze
+	await(get_tree().create_timer(.5).timeout)
+	# generate MST
+	path = find_mst(room_positions)
+	
+	# generate enemy spawns
+	for room in $Rooms.get_children():
+		# don't spawn enemies in the start room
+		if room == start_room:
+			continue
+		for i in range(4):
+			var rand_pt = room.get_rand_pt() + room.global_position
+			enemy_spawns.append(rand_pt)
+			
+		
+func _draw():
+	var color = Color.YELLOW
+	for room in $Rooms.get_children():
+		if room == start_room:
+			color = Color.LIGHT_GREEN
+		draw_rect(Rect2(room.position - room.size + room.size / 2, room.size ), color, false)
+			
+	if path:
+		for p in path.get_point_ids():
+			for c in path.get_point_connections(p):
+				var pp = path.get_point_position(p)
+				var cc = path.get_point_position(c)
+				draw_line(pp, cc, Color(1, 0, 1), 10, true)
+	
+	for spawn in enemy_spawns:
+		draw_rect(Rect2(spawn, Vector2(10,10)), Color.RED)
+		
+	
+
+func _process(delta):
+	queue_redraw()
+
+func _input(event):
+	if event.is_action_pressed("reload"):
+		for n in $Rooms.get_children():
+			n.queue_free()
+		path = null
+		make_rooms()
+		map.clear()
+		if player:
+			player.queue_free()
+	if event.is_action_pressed("ui_focus_next"):
+		make_map()
+		print("making map")
+	if event.is_action_pressed("ui_cancel"):
+		player = player_scene.instantiate()
+		add_child(player)
+		Globals.pig = player
+		player.position = start_room.position
+		play_mode = true
+		camera.queue_free()
+		camera = Camera2D.new()
+		camera.zoom = Vector2(2.5,2.5)
+		player.add_child(camera)
+	if event.is_action_pressed("scroll_down"):
+		camera.zoom = camera.zoom - Vector2(0.1, 0.1)
+	if event.is_action_pressed("scroll_up"):
+		camera.zoom = camera.zoom + Vector2(0.1, 0.1)
+
+func find_mst(nodes):
+	# Prim's algorithm
+	var path = AStar2D.new()
+	path.add_point(path.get_available_point_id(), nodes.pop_front())
+	
+	while nodes:
+		var min_dist = INF
+		var min_pos = null
+		var pos = null
+		
+		for p in path.get_point_ids():
+			var p1 = path.get_point_position(p)
+			
+			for p2 in nodes:
+				if p1.distance_to(p2) < min_dist:
+					min_dist = p1.distance_to(p2)
+					min_pos = p2
+					pos = p1
+			
+		var n = path.get_available_point_id()
+		path.add_point(n, min_pos)
+		path.connect_points(path.get_closest_point(pos), n)
+		nodes.erase(min_pos)
+	return path
+
+func make_map():
+	map.clear()
+	find_end_room()
+	
+	var full_rect = Rect2()
+	for room in $Rooms.get_children():
+		var r = Rect2(room.position-room.size, room.get_node("CollisionShape2D").shape.extents*2)
+		full_rect = full_rect.merge(r)
+		#print("merging room")
+		#print(full_rect.size)
+		
+	var topleft = map.local_to_map(full_rect.position)
+	var bottomright = map.local_to_map(full_rect.end)
+	#print(topleft)
+	#print(bottomright)
+	const offset = 5
+	for x in range(topleft.x-offset, bottomright.x+offset):
+		for y in range(topleft.y-offset, bottomright.y+offset):
+			# set background to grass
+			# layer, coords, source_id, atlas_coords, alt_tile
+			map.set_cell(0, Vector2i(x, y), 0, Vector2i(8,4), 0)
+	
+	# carve rooms and corridors
+	var corridors = []
+	for room in $Rooms.get_children():
+		var s = (room.size / tile_size).floor()
+		var pos = map.local_to_map(room.position)
+		var ul = (room.position / tile_size).floor() - s
+		# carve rooms
+		for x in range(2, s.x * 2 - 1):
+			for y in range(2, s.y * 2 - 1):
+				#map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 0, Vector2i(6,4), 0)
+				map.set_cells_terrain_connect(0, [Vector2i(ul.x + x, ul.y + y)], 0, 0)
+
+		# carve connection
+		var p = path.get_closest_point(room.position)
+		for conn in path.get_point_connections(p):
+			if not conn in corridors:
+				var start = map.local_to_map(path.get_point_position(p))
+				var end = map.local_to_map(path.get_point_position(conn))
+				carve_path(start, end)
+		corridors.append(p)
+	# add corn
+	var grass_tiles: Array[Vector2i] = map.get_used_cells_by_id(0, 0, Vector2i(8, 4), 0)
+	for tile in grass_tiles:
+		map.set_cell(1, tile, 0, Vector2i(2,0), 0)
+	# add rocks / bones
+	var dirt_tiles: Array[Vector2i] = map.get_used_cells_by_id(0, 0, Vector2i(6, 4), 0)
+	for tile in dirt_tiles:
+		var roll = randf()
+		if roll < .05:
+			#map.set_cells_terrain_connect(2, [tile], 1, 0)
+			var rock = Vector2i(randi_range(0, 1), randi_range(0, 2))
+			map.set_cell(2, tile, 1, rock, 0)
+		elif roll < .1:
+			var bones = Vector2i(randi_range(0, 1)*2, randi_range(0, 2))
+			map.set_cell(2, tile, 2, bones, 0)
+	spawn_enemies()
+	
+
+func carve_path(start, end):
+	var difference_x = sign(end.x - start.x)
+	var difference_y = sign(end.y - start.y)
+	
+	if difference_x == 0:
+		difference_x = pow(-1.0, randi() % 2)
+	if difference_y == 0:
+		difference_y = pow(-1.0, randi() % 2)
+		
+	var x_over_y = start
+	var y_over_x = end
+	
+	if randi() % 2 > 0:
+		x_over_y = end
+		y_over_x = start
+
+	for x in range(start.x, end.x, difference_x):
+		#map.set_cell(0, Vector2i(x, y_over_x.y), 0, Vector2i(6,4), 0)
+		map.set_cells_terrain_connect(0, [Vector2i(x, y_over_x.y)], 0, 0)
+	for y in range(start.y, end.y, difference_y):
+		#map.set_cell(0, Vector2i(x_over_y.x, y), 0, Vector2i(6,4), 0)
+		map.set_cells_terrain_connect(0, [Vector2i(x_over_y.x, y)], 0, 0)
+			
+
+func find_end_room():
+	var max_x = -INF
+	for room in $Rooms.get_children():
+		if room.position.x > max_x:
+			end_room = room
+			max_x = room.position.x
+
+func check_overlap(room1, room2):
+	var room1_rect = Rect2(room1.position, room1.size + Vector2(20,20))
+	var room2_rect = Rect2(room2.position, room2.size + Vector2(20,20))
+	return room1_rect.intersects(room2_rect)
+	
+func spawn_enemies():
+	for spawn_pos in enemy_spawns:
+		var rat = rat_enemy.instantiate()
+		rat.global_position = spawn_pos
+		add_child(rat)
+		
+			
