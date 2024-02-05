@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvxtel4kt8t1d"]
+[gd_scene load_steps=6 format=3 uid="uid://bvxtel4kt8t1d"]
 
 [ext_resource type="Texture2D" uid="uid://c64m8bioy63m1" path="res://assets/spritesheets/apple.png" id="1_dq3mn"]
 [ext_resource type="Script" path="res://scenes/objects/FirePlace.gd" id="1_m0kst"]
+[ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_ll4gk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ybjv"]
 size = Vector2(76, 59)
@@ -11,6 +12,7 @@ radius = 31.0161
 
 [node name="FirePlace" type="StaticBody2D"]
 script = ExtResource("1_m0kst")
+inv_item = ExtResource("2_ll4gk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -9.53674e-07)

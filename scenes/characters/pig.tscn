@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=22 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Script" path="res://scenes/items/inventory/Inventory.gd" id="2_jhtvh"]
@@ -8,9 +8,10 @@
 [ext_resource type="Script" path="res://scenes/items/inventory/inventory_slot.gd" id="3_ktmmp"]
 [ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
 [ext_resource type="Script" path="res://scenes/states/state_rolling.gd" id="4_a3gfp"]
-[ext_resource type="Texture2D" uid="uid://b711vhrqolfi1" path="res://assets/spritesheets/CONE.png" id="7_yasg0"]
+[ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="4_ws5bl"]
+[ext_resource type="Texture2D" uid="uid://rgvj1vn7og2p" path="res://assets/spritesheets/light.png" id="9_vx3vr"]
 
-[sub_resource type="Resource" id="Resource_wtysd"]
+[sub_resource type="Resource" id="Resource_8qubf"]
 script = ExtResource("3_ktmmp")
 amount = 0
 
@@ -24,7 +25,7 @@ amount = 0
 
 [sub_resource type="Resource" id="Resource_i6e05"]
 script = ExtResource("2_jhtvh")
-slots = Array[ExtResource("3_ktmmp")]([SubResource("Resource_wtysd"), SubResource("Resource_iygki"), SubResource("Resource_lksnn")])
+slots = Array[ExtResource("3_ktmmp")]([SubResource("Resource_8qubf"), SubResource("Resource_iygki"), SubResource("Resource_lksnn")])
 
 [sub_resource type="Animation" id="Animation_kn2r4"]
 length = 0.001
@@ -124,6 +125,7 @@ height = 28.0
 radius = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t8br"]
+size = Vector2(97.4889, 105.837)
 
 [node name="Pig" type="CharacterBody2D"]
 collision_mask = 14
@@ -133,8 +135,14 @@ inv = SubResource("Resource_i6e05")
 [node name="weapon" type="Node2D" parent="."]
 
 [node name="weapon_sprite" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -13)
 scale = Vector2(0.864583, 0.958333)
+
+[node name="PointLight2D" type="PointLight2D" parent="weapon_sprite"]
+position = Vector2(1.52588e-05, 14.6087)
+scale = Vector2(3.485, 2.5)
+texture = ExtResource("4_ws5bl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_5iu3b")
@@ -173,9 +181,10 @@ wait_time = 4.0
 position = Vector2(16, -15)
 
 [node name="punch_hurtbox" type="Area2D" parent="."]
+position = Vector2(-163, 130)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="punch_hurtbox"]
-position = Vector2(27, 0)
+position = Vector2(210.256, -127)
 shape = SubResource("RectangleShape2D_2t8br")
 
 [node name="player_state_machine" type="Node" parent="."]
@@ -196,17 +205,19 @@ one_shot = true
 [node name="state_dead" type="Node" parent="player_state_machine"]
 
 [node name="piglight" type="PointLight2D" parent="."]
-color = Color(1, 0.831373, 0.717647, 1)
+position = Vector2(1, 0)
 shadow_enabled = true
-texture = ExtResource("7_yasg0")
+texture = ExtResource("9_vx3vr")
 offset = Vector2(40, 0)
 
 [node name="piglightarea" type="Area2D" parent="piglight"]
 collision_mask = 14
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piglight/piglightarea"]
-position = Vector2(-93, -3)
-polygon = PackedVector2Array(172, -24, 113, 3, 172, 27)
+position = Vector2(-118, -1)
+polygon = PackedVector2Array(181, -30, 113, 3, 182, 35)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
 
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
