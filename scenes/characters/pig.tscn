@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=21 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Script" path="res://scenes/items/inventory/Inventory.gd" id="2_jhtvh"]
@@ -124,9 +124,6 @@ height = 28.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w6u8y"]
 radius = 15.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t8br"]
-size = Vector2(97.4889, 105.837)
-
 [node name="Pig" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_hx4hr")
@@ -149,6 +146,7 @@ texture = ExtResource("3_5iu3b")
 hframes = 8
 
 [node name="Roll" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_6qboe")
 hframes = 10
 
@@ -168,9 +166,6 @@ shape = SubResource("CapsuleShape2D_w6u8y")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
 
-[node name="punch_cooldown" type="Timer" parent="."]
-wait_time = 5.0
-
 [node name="shoot_cooldown" type="Timer" parent="."]
 wait_time = 0.5
 
@@ -179,13 +174,6 @@ wait_time = 4.0
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(16, -15)
-
-[node name="punch_hurtbox" type="Area2D" parent="."]
-position = Vector2(-163, 130)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="punch_hurtbox"]
-position = Vector2(210.256, -127)
-shape = SubResource("RectangleShape2D_2t8br")
 
 [node name="player_state_machine" type="Node" parent="."]
 script = ExtResource("3_e2ml4")
@@ -222,11 +210,8 @@ polygon = PackedVector2Array(181, -30, 113, 3, 182, 35)
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
-[connection signal="timeout" from="punch_cooldown" to="." method="_on_punch_cooldown_timeout"]
 [connection signal="timeout" from="shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
-[connection signal="area_entered" from="punch_hurtbox" to="." method="_on_punch_hurtbox_area_entered"]
-[connection signal="body_entered" from="punch_hurtbox" to="." method="_on_punch_hurtbox_body_entered"]
 [connection signal="timeout" from="player_state_machine/state_rolling/RollTime" to="player_state_machine/state_rolling" method="_on_roll_time_timeout"]
 [connection signal="timeout" from="player_state_machine/state_moving/RollCooldown" to="player_state_machine/state_moving" method="_on_roll_cooldown_timeout"]
 [connection signal="body_entered" from="piglight/piglightarea" to="." method="_on_piglightarea_body_entered"]
