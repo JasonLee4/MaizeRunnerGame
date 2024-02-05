@@ -6,8 +6,8 @@ var target_position
 @onready var pig = Globals.pig
 	
 func move():
-	if freeze:
-		speed = 0
+	#if freeze:
+		#speed = 0
 	assert(pig != null)
 	pig_position  = pig.global_position
 	target_position = (pig_position-position).normalized()
@@ -18,7 +18,7 @@ func move():
 		$Sprite2D.flip_v = false
 		
 	
-	if (position.distance_to(pig_position) > 3):
+	if (global_position.distance_to(pig_position) > 10):
 		velocity = Vector2(target_position * speed) 
 		move_and_slide()
 		look_at(pig_position)

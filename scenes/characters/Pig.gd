@@ -32,6 +32,9 @@ var curr_bullet_sprite
 	#print(inventory.get_items())
 #
 func _ready():
+	Globals.pig = $"."
+
+	print("pig inst")
 	if fire_place:
 		fire_place.craft_torch.connect(craft)
 	
@@ -86,7 +89,9 @@ func _physics_process(delta):
 		pig_alive = false
 		#Add end screen/respawn screen
 		print("Pig is dead")
+		get_tree().change_scene_to_file("res://scenes/levels/end_screen.tscn")
 		self.queue_free()
+		Globals.health = 5
 
 #func dash(dashDirection) :
 	#if Input.is_action_just_pressed("dash") and dashready:
@@ -185,9 +190,13 @@ func _on_dmg_iframe_cooldown_timeout():
 
 func _on_piglightarea_body_entered(body):
 	# weeping angel /freeze in place behavior
-	if body.has_method("enemy"):
-		body.freeze = true
-	
+	#print("in light area: ",body)
+	if body.has_method("light_freeze"):
+		body.light_freeze()
+
+func _on_piglightarea_body_exited(body):
+	if body.has_method("light_unfreeze"):
+		body.light_unfreeze()
 
 func collect(item):
 	print("collected ", item.name)
