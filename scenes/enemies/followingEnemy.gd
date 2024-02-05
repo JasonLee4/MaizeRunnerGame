@@ -3,7 +3,7 @@ extends enemy
 #Variables for enemy movement
 var pig_position
 var target_position
-@onready var pig = owner.get_node("Pig")
+@onready var pig = Globals.pig
 	
 func move():
 	if freeze:
@@ -28,7 +28,7 @@ func _ready():
 	MAX_HEALTH = 50
 	health = 50
 	damage = 0
-	visible = false
+	visible = true
 	#var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	#$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
 	$Healthbar.max_value = MAX_HEALTH

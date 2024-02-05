@@ -32,7 +32,8 @@ var curr_bullet_sprite
 	#print(inventory.get_items())
 #
 func _ready():
-	fire_place.craft_torch.connect(craft)
+	if fire_place:
+		fire_place.craft_torch.connect(craft)
 	
 func craft():
 	if inv.slots[0].amount >= 2:	
