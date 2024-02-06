@@ -6,7 +6,7 @@ var torch_scene = preload("res://scenes/items/torch.tscn")
 
 @onready var state_machine = get_node("player_state_machine")
 @onready var fire_place = get_tree().current_scene.get_node("FirePlace")
-@onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
+#@onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
 
 var dashDirection = Vector2(1,0)
 var dashready = true
@@ -30,26 +30,26 @@ var flashlight = true
 var torch_hold_time = 2.0
 var torch_speed = 0
 
-@export var inv: Inventory
+#@export var inv: Inventory
 
 
 func _ready():
 
-	inv.update.connect(hotbar.update_slots)
+	#inv.update.connect(hotbar.update_slots)
 
 	Globals.pig = $"."
-
+	
 	print("pig inst")
-	if fire_place:
-		fire_place.craft_torch.connect(craft)
+	#if fire_place:
+		#fire_place.craft_torch.connect(craft)
 
 	
-func craft():
-	if inv.slots[0].amount >= 2:	
-		print("crafting... using wood...")
-		inv.remove_item(inv.slots[0].item, 2)	
-		print(inv.slots[0].amount)
-		collect(fire_place.inv_item)
+#func craft():
+	#if inv.slots[0].amount >= 2:	
+		#print("crafting... using wood...")
+		#inv.remove_item(inv.slots[0].item, 2)	
+		#print(inv.slots[0].amount)
+		#collect(fire_place.inv_item)
 		
 	#print("crafting... using coal and wood...")
 	#inv.remove_item2(["Wood", "Coal"], [2,1])	
@@ -198,17 +198,18 @@ func _on_piglightarea_body_exited(body):
 		body.light_unfreeze()
 
 
-func collect(item):
-	inv.insert(item)
+#func collect(item):
+	#inv.insert(item)
 	
 func throw_torch(delta):
-	if inv.slots[1].amount > 0:
+	
+	if Globals.inv.slots[1].amount > 0:
 		if Input.is_action_pressed("punch"):
 			if torch_hold_time > 0.5 and torch_speed < 100:
 				torch_speed += 5
 			torch_hold_time += delta
 		elif Input.is_action_just_released("punch"):
-			inv.remove_item(inv.slots[1].item, 1)
+			Globals.inv.remove_item(Globals.inv.slots[1].item, 1)
 			torch_hold_time = 0.0
 			var tr = torch_scene.instantiate()
 			tr.global_position = $Marker2D2.global_position
