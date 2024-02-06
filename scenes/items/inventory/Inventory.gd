@@ -4,9 +4,10 @@ class_name Inventory
 
 signal update
 
-@export var slots: Array[Inventory_Slot]
+var slots: Array[Inventory_Slot] = []
 
 func insert(item: Inv_Item):
+	print(slots.size())
 	var itemslots = slots.filter(func(slot): return slot.item == item)
 	if !itemslots.is_empty():
 		print("stacking item")
