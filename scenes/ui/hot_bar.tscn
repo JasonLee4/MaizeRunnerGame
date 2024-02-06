@@ -16,8 +16,8 @@ script = ExtResource("1_sdpi3")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_right = 88.0
-offset_bottom = 53.0
+offset_right = 180.0
+offset_bottom = 60.0
 theme_override_constants/h_separation = 1
 columns = 10
 

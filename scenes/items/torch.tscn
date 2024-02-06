@@ -1,13 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://efwdnoirj55t"]
+[gd_scene load_steps=10 format=3 uid="uid://efwdnoirj55t"]
 
 [ext_resource type="Script" path="res://scenes/items/torch.gd" id="1_kfmpc"]
-[ext_resource type="Texture2D" uid="uid://dr5q6e11x23s5" path="res://assets/spritesheets/headcannon.png" id="2_e8rop"]
 [ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_o4iw7"]
+[ext_resource type="Texture2D" uid="uid://beee3j71psqn4" path="res://assets/spritesheets/torchgif.png" id="3_cy505"]
 [ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="3_y1bx2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbb71"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ydk86"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oeekn"]
+atlas = ExtResource("3_cy505")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ina8w"]
+atlas = ExtResource("3_cy505")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_noiea"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oeekn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ina8w")
+}],
+"loop": true,
+"name": &"torchflame",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbb71"]
+size = Vector2(9.89895, 28.2827)
 
 [node name="Torch" type="RigidBody2D"]
 collision_mask = 6
@@ -16,21 +39,13 @@ linear_damp = 0.5
 script = ExtResource("1_kfmpc")
 item = ExtResource("2_o4iw7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.473003, 0.315337)
-rotation = -0.774926
-scale = Vector2(0.680963, 0.414256)
-texture = ExtResource("2_e8rop")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 0.774926
-shape = SubResource("RectangleShape2D_rbb71")
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 2
 rotation = -0.774926
 scale = Vector2(2, 2)
-color = Color(0.87451, 0.458824, 0, 1)
-energy = 3.0
+color = Color(1, 0.792157, 0.635294, 1)
+blend_mode = 2
+shadow_enabled = true
 texture = ExtResource("3_y1bx2")
 
 [node name="Area2D" type="Area2D" parent="PointLight2D"]
@@ -38,3 +53,16 @@ rotation = 0.774926
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
 shape = SubResource("CircleShape2D_ydk86")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 3
+position = Vector2(-0.0262772, 0.0262772)
+rotation = 0.785398
+scale = Vector2(0.578, 0.75)
+sprite_frames = SubResource("SpriteFrames_noiea")
+animation = &"torchflame"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.50518, 1.50529)
+rotation = 0.774926
+shape = SubResource("RectangleShape2D_rbb71")
