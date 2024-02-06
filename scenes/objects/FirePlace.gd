@@ -6,6 +6,9 @@ class_name FirePlace
 var crafting_available
 #signal craft_torch
 
+func _ready():
+	$AnimatedSprite2D.play("default")
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("interact") and crafting_available:
 		# get crafting ready

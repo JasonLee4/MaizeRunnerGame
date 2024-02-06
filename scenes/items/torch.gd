@@ -5,9 +5,9 @@ extends RigidBody2D
 #@export var damage = 20
 #var direction = Vector2.LEFT
 	
-#func _ready():
+func _ready():
 	#$SelfdestructTimer.start()
-	
+	$AnimatedSprite2D.play("default")
 	
 #
 func _physics_process(delta):

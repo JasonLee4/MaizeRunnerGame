@@ -1,34 +1,69 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvxtel4kt8t1d"]
+[gd_scene load_steps=9 format=3 uid="uid://bvxtel4kt8t1d"]
 
-[ext_resource type="Texture2D" uid="uid://c64m8bioy63m1" path="res://assets/spritesheets/apple.png" id="1_dq3mn"]
-[ext_resource type="Script" path="res://scenes/objects/FirePlace.gd" id="1_m0kst"]
+[ext_resource type="Script" path="res://scenes/objects/fireplace.gd" id="1_m0kst"]
 [ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_ll4gk"]
+[ext_resource type="Texture2D" uid="uid://bjc8u6x3yhoqt" path="res://assets/spritesheets/campfire.png" id="3_jc558"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhqc1"]
+atlas = ExtResource("3_jc558")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw05j"]
+atlas = ExtResource("3_jc558")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qxy5"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_lhqc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw05j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhqc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw05j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ybjv"]
 size = Vector2(76, 59)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7c7er"]
-radius = 31.0161
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5fo1h"]
+radius = 16.0
+height = 46.0
 
 [node name="FirePlace" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
 script = ExtResource("1_m0kst")
 inv_item = ExtResource("2_ll4gk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -9.53674e-07)
-scale = Vector2(2.125, 2.20833)
-texture = ExtResource("1_dq3mn")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_0qxy5")
+frame_progress = 0.0459256
+
+[node name="Camera2D" type="Camera2D" parent="AnimatedSprite2D"]
+zoom = Vector2(2, 2)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 12.5)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_5ybjv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
-shape = SubResource("CircleShape2D_7c7er")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5fo1h")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

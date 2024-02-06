@@ -3,6 +3,9 @@ var Room = preload("res://scenes/dungeon_gen/rooms/rect_room.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
 var rat_enemy = preload("res://scenes/enemies/rat.tscn")
 var ui = preload("res://scenes/ui/ui.tscn")
+var fireplace_scene = preload("res://scenes/objects/fireplace.tscn")
+var wood_scene = preload("res://scenes/items/wood.tscn")
+
 @onready var map = $TileMap
 @onready var camera = $Camera2D
 
@@ -27,6 +30,10 @@ func _ready():
 	load_player()
 	print("Creating map...")
 	make_map()
+	print("Spawning enemies...")
+	spawn_enemies(4)
+	print("Spawn items...")
+	spawn_items()
 
 func _process(_delta):
 	queue_redraw()
@@ -66,17 +73,7 @@ func make_rooms():
 	await(get_tree().create_timer(.5).timeout)
 	# generate MST
 	path = find_mst(room_positions)
-	
-	# generate enemy spawns
-	for room in $Rooms.get_children():
-		# don't spawn enemies in the start room
-		if room == start_room:
-			continue
-		for i in range(4):
-			var rand_pt = room.get_rand_pt() + room.global_position
-			enemy_spawns.append(rand_pt)
-			
-		
+
 func load_player():
 	player = player_scene.instantiate()
 	add_child(player)
@@ -144,15 +141,38 @@ func make_map():
 		elif roll < .1:
 			var bones = Vector2i(randi_range(0, 1)*2, randi_range(0, 2))
 			map.set_cell(2, tile, 2, bones, 0)
-	spawn_enemies()
 
-func spawn_enemies():
+func spawn_enemies(enemies_per_rm):
+	# generate enemy spawns
+	for room in $Rooms.get_children():
+		# don't spawn enemies in the start room
+		if room == start_room:
+			continue
+		for i in range(enemies_per_rm):
+			var rand_pt = room.get_rand_pt() + room.global_position
+			enemy_spawns.append(rand_pt)
+	# spawn just rats for now
 	for spawn_pos in enemy_spawns:
 		var rat = rat_enemy.instantiate()
 		rat.global_position = spawn_pos
-		add_child(rat)
+		$Enemies.add_child(rat)
+
+func spawn_items():
+	for room in $Rooms.get_children():
+		var spawn_pos = room.get_rand_pt() + room.global_position
+		if room == start_room:
+			# spawn campfire in start room
+			var fireplace = fireplace_scene.instantiate()
+			fireplace.global_position = spawn_pos
+			$Objects.add_child(fireplace)
+		else:
+			# spawn wood
+			var wood = wood_scene.instantiate()
+			wood.global_position = spawn_pos
+			$Objects.add_child(wood)
 
 
+### Helper functions ###
 func carve_path(start, end):
 	var difference_x = sign(end.x - start.x)
 	var difference_y = sign(end.y - start.y)
