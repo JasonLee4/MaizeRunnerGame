@@ -7,6 +7,7 @@ var crafting_available
 #signal craft_torch
 
 func _physics_process(delta):
+	$AnimatedSprite2D.play()
 	if Input.is_action_just_pressed("interact") and crafting_available:
 		# get crafting ready
 		#craft_torch.emit()
