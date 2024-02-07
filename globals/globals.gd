@@ -1,5 +1,8 @@
 extends Node
 
+var pig
+
+### Health ###
 signal health_change
 
 var health = 5:
@@ -9,9 +12,14 @@ var health = 5:
 		health = value
 		health_change.emit()
 
-var pig
 
+
+### Dungeon ###
 signal dungeon_created
+
+
+### Inventory ###
+signal inv_update
 
 var inv_size = 3
 var inv:
@@ -25,4 +33,35 @@ var inv:
 		
 		inv = value
 
-signal inv_update
+
+### Game/Level Stats ###
+signal lvl_start
+signal lvl_end
+
+var lvl_start_time = null
+var lvl_end_time = null
+var lvl_time:
+	get:
+		var cur_time = Time.get_ticks_msec()
+		if not lvl_start_time:
+			return "00:00"
+		if lvl_end_time:
+			return format_ts_to_str(cur_time - lvl_end_time)
+		return format_ts_to_str(cur_time - lvl_start_time)
+
+func format_ts_to_str(timestamp):
+	# probably a better way to do this but wtv
+	var time_str = ""
+	var mins = timestamp / 1000 / 60
+	var secs = timestamp / 1000 % 60
+	if mins >= 10:
+		time_str += str(mins)
+	else:
+		time_str += "0" + str(mins)
+	time_str += ":"
+	if secs >= 10:
+		time_str += str(secs)
+	else:
+		time_str += "0" + str(secs)
+	
+	return time_str
