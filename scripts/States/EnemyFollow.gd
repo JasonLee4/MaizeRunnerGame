@@ -9,12 +9,13 @@ class_name EnemyFollow
 var move_direction : Vector2
 	
 func enter():
-	print("enemy following")
+	#print("enemy following")
 	#pig = get_tree().get_current_scene().get_node("Pig")
 	assert(pig != null)
 
 func update(delta: float):
 	if enemy.can_attack and enemy.can_attack_player:
+		print("follow -> attack")
 		transitioned.emit(self, "EnemyAttack")
 	elif "detectionRadius" in enemy and enemy.global_position.distance_to(pig.global_position) > enemy.detectionRadius:
 		transitioned.emit(self, "EnemyIdle")

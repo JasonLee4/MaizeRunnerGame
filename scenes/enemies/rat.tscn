@@ -266,3 +266,6 @@ enemy = NodePath("../..")
 [node name="EnemyAttack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("8_drdnq")
 enemy = NodePath("../..")
+
+[connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -12,7 +12,7 @@ func _process(delta):
 
 
 func _on_restart_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/main_level.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/main_level.tscn")
 
 
 func _on_quit_button_pressed():
@@ -21,4 +21,4 @@ func _on_quit_button_pressed():
 
 
 func _on_main_menu_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/levels/main_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")

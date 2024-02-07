@@ -9,11 +9,10 @@ func _ready():
 
 func enter():
 	print("enemy attacking")
-	enemy.deal_damage()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if enemy.can_attack:
+func update(delta):
+	if enemy.can_attack and enemy.can_attack_player:
 		enemy.deal_damage()
-	elif not enemy.can_attack_player and enemy.can_attack:
+	elif enemy.can_attack and !enemy.can_attack_player:
+		print("attack -> idle")
 		transitioned.emit(self, "EnemyIdle")

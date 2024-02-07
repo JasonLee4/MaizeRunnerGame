@@ -19,12 +19,12 @@ func choose_animation():
 	
 
 func light_unfreeze():
-	print("Rat can move")
+	#print("Rat can move")
 	var currentState = stateMachine.get_current_state()
 	currentState.transitioned.emit(currentState, "EnemyIdle")
 
 func light_freeze():
-	print("Rat shined on")
+	#print("Rat shined on")
 	var currentState = stateMachine.get_current_state()
 	currentState.transitioned.emit(currentState, "EnemyFreeze")
 		
