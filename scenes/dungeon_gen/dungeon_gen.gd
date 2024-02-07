@@ -1,9 +1,13 @@
 extends Node2D
 var Room = preload("res://scenes/dungeon_gen/rooms/rect_room.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
-var rat_enemy = preload("res://scenes/enemies/followingEnemy.tscn")
+var rat_enemy = preload("res://scenes/enemies/rat.tscn")
+var ui_scene = preload("res://scenes/ui/ui.tscn")
+var fireplace_scene = preload("res://scenes/objects/FirePlace.tscn")
+var wood_scene = preload("res://scenes/items/wood.tscn")
+
 @onready var map = $TileMap
-@onready var camera = $Camera2D
+@onready var camera
 
 var tile_size = 32
 var num_rooms = 100
@@ -20,8 +24,22 @@ var enemy_spawns = []
 
 func _ready():
 	seed("maizerun".hash())
-	#seed("maizerunner".hash())
-	make_rooms()
+	print("Making rooms...")
+	await make_rooms()
+	print("Loading UI...")
+	add_child(ui_scene.instantiate())
+	print("Loading player...")
+	load_player()
+	print("Creating map...")
+	make_map()
+	print("Spawning enemies...")
+	spawn_enemies(4)
+	print("Spawn items...")
+	spawn_items()
+	
+
+func _process(_delta):
+	queue_redraw()
 	
 func make_rooms():
 	for i in range(num_rooms):
@@ -35,7 +53,7 @@ func make_rooms():
 	# create center room
 	var r = Room.instantiate()
 	r.freeze = true
-	r.set_text("Start Room")
+	#r.set_text("Start Room")
 	r.make_room(Vector2(0,0), Vector2(10, 10) * tile_size)
 	$Rooms.add_child(r)
 	start_room = r
@@ -58,90 +76,16 @@ func make_rooms():
 	await(get_tree().create_timer(.5).timeout)
 	# generate MST
 	path = find_mst(room_positions)
-	
-	# generate enemy spawns
-	for room in $Rooms.get_children():
-		# don't spawn enemies in the start room
-		if room == start_room:
-			continue
-		for i in range(4):
-			var rand_pt = room.get_rand_pt() + room.global_position
-			enemy_spawns.append(rand_pt)
-			
-		
-func _draw():
-	var color = Color.YELLOW
-	for room in $Rooms.get_children():
-		if room == start_room:
-			color = Color.LIGHT_GREEN
-		draw_rect(Rect2(room.position - room.size + room.size / 2, room.size ), color, false)
-			
-	if path:
-		for p in path.get_point_ids():
-			for c in path.get_point_connections(p):
-				var pp = path.get_point_position(p)
-				var cc = path.get_point_position(c)
-				draw_line(pp, cc, Color(1, 0, 1), 10, true)
-	
-	for spawn in enemy_spawns:
-		draw_rect(Rect2(spawn, Vector2(10,10)), Color.RED)
-		
-	
 
-func _process(delta):
-	queue_redraw()
-
-func _input(event):
-	if event.is_action_pressed("reload"):
-		for n in $Rooms.get_children():
-			n.queue_free()
-		path = null
-		make_rooms()
-		map.clear()
-		if player:
-			player.queue_free()
-	if event.is_action_pressed("ui_focus_next"):
-		make_map()
-		print("making map")
-	if event.is_action_pressed("ui_cancel"):
-		player = player_scene.instantiate()
-		add_child(player)
-		Globals.pig = player
-		player.position = start_room.position
-		play_mode = true
-		camera.queue_free()
-		camera = Camera2D.new()
-		camera.zoom = Vector2(2.5,2.5)
-		player.add_child(camera)
-	if event.is_action_pressed("scroll_down"):
-		camera.zoom = camera.zoom - Vector2(0.1, 0.1)
-	if event.is_action_pressed("scroll_up"):
-		camera.zoom = camera.zoom + Vector2(0.1, 0.1)
-
-func find_mst(nodes):
-	# Prim's algorithm
-	var path = AStar2D.new()
-	path.add_point(path.get_available_point_id(), nodes.pop_front())
-	
-	while nodes:
-		var min_dist = INF
-		var min_pos = null
-		var pos = null
-		
-		for p in path.get_point_ids():
-			var p1 = path.get_point_position(p)
-			
-			for p2 in nodes:
-				if p1.distance_to(p2) < min_dist:
-					min_dist = p1.distance_to(p2)
-					min_pos = p2
-					pos = p1
-			
-		var n = path.get_available_point_id()
-		path.add_point(n, min_pos)
-		path.connect_points(path.get_closest_point(pos), n)
-		nodes.erase(min_pos)
-	return path
+func load_player():
+	player = player_scene.instantiate()
+	add_child(player)
+	Globals.pig = player
+	player.position = start_room.position
+	play_mode = true
+	camera = Camera2D.new()
+	camera.zoom = Vector2(2.5,2.5)
+	player.add_child(camera)
 
 func make_map():
 	map.clear()
@@ -200,9 +144,38 @@ func make_map():
 		elif roll < .1:
 			var bones = Vector2i(randi_range(0, 1)*2, randi_range(0, 2))
 			map.set_cell(2, tile, 2, bones, 0)
-	spawn_enemies()
-	
 
+func spawn_enemies(enemies_per_rm):
+	# generate enemy spawns
+	for room in $Rooms.get_children():
+		# don't spawn enemies in the start room
+		if room == start_room:
+			continue
+		for i in range(enemies_per_rm):
+			var rand_pt = room.get_rand_pt() + room.global_position
+			enemy_spawns.append(rand_pt)
+	# spawn just rats for now
+	for spawn_pos in enemy_spawns:
+		var rat = rat_enemy.instantiate()
+		rat.global_position = spawn_pos
+		$Enemies.add_child(rat)
+
+func spawn_items():
+	for room in $Rooms.get_children():
+		var spawn_pos = room.get_rand_pt() + room.global_position
+		if room == start_room:
+			# spawn campfire in start room
+			var fireplace = fireplace_scene.instantiate()
+			fireplace.global_position = spawn_pos
+			$Objects.add_child(fireplace)
+		else:
+			# spawn wood
+			var wood = wood_scene.instantiate()
+			wood.global_position = spawn_pos
+			$Objects.add_child(wood)
+
+
+### Helper functions ###
 func carve_path(start, end):
 	var difference_x = sign(end.x - start.x)
 	var difference_y = sign(end.y - start.y)
@@ -225,7 +198,6 @@ func carve_path(start, end):
 	for y in range(start.y, end.y, difference_y):
 		#map.set_cell(0, Vector2i(x_over_y.x, y), 0, Vector2i(6,4), 0)
 		map.set_cells_terrain_connect(0, [Vector2i(x_over_y.x, y)], 0, 0)
-			
 
 func find_end_room():
 	var max_x = -INF
@@ -234,15 +206,70 @@ func find_end_room():
 			end_room = room
 			max_x = room.position.x
 
-func check_overlap(room1, room2):
-	var room1_rect = Rect2(room1.position, room1.size + Vector2(20,20))
-	var room2_rect = Rect2(room2.position, room2.size + Vector2(20,20))
-	return room1_rect.intersects(room2_rect)
+func find_mst(nodes):
+	# Prim's algorithm
+	var path = AStar2D.new()
+	path.add_point(path.get_available_point_id(), nodes.pop_front())
 	
-func spawn_enemies():
-	for spawn_pos in enemy_spawns:
-		var rat = rat_enemy.instantiate()
-		rat.global_position = spawn_pos
-		add_child(rat)
+	while nodes:
+		var min_dist = INF
+		var min_pos = null
+		var pos = null
 		
+		for p in path.get_point_ids():
+			var p1 = path.get_point_position(p)
 			
+			for p2 in nodes:
+				if p1.distance_to(p2) < min_dist:
+					min_dist = p1.distance_to(p2)
+					min_pos = p2
+					pos = p1
+			
+		var n = path.get_available_point_id()
+		path.add_point(n, min_pos)
+		path.connect_points(path.get_closest_point(pos), n)
+		nodes.erase(min_pos)
+	return path
+
+func check_overlap(room1, room2):
+	var room1_rect = Rect2(room1.global_position, room1.size + Vector2(20,20))
+	var room2_rect = Rect2(room2.global_position, room2.size + Vector2(20,20))
+	return room1_rect.intersects(room2_rect)
+
+func _input(event):
+	pass
+	#if event.is_action_pressed("reload"):
+		#for n in $Rooms.get_children():
+			#n.queue_free()
+		#path = null
+		#make_rooms()
+		#map.clear()
+		#if player:
+			#player.queue_free()
+	#if event.is_action_pressed("ui_focus_next"):
+		#make_map()
+		#print("making map")
+	#if event.is_action_pressed("ui_cancel"):
+		#camera.queue_free()
+		#load_player()
+	#if event.is_action_pressed("scroll_down"):
+		#camera.zoom = camera.zoom - Vector2(0.1, 0.1)
+	#if event.is_action_pressed("scroll_up"):
+		#camera.zoom = camera.zoom + Vector2(0.1, 0.1)
+
+#func _draw():
+	#var color = Color.YELLOW
+	#for room in $Rooms.get_children():
+		#if room == start_room:
+			#color = Color.LIGHT_GREEN
+		#draw_rect(Rect2(room.position - room.size + room.size / 2, room.size ), color, false)
+
+	#if path:
+		#for p in path.get_point_ids():
+			#for c in path.get_point_connections(p):
+				#var pp = path.get_point_position(p)
+				#var cc = path.get_point_position(c)
+				#draw_line(pp, cc, Color(1, 0, 1), 10, true)
+
+	#for spawn in enemy_spawns:
+		#draw_rect(Rect2(spawn, Vector2(10,10)), Color.RED)

@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvxtel4kt8t1d"]
+[gd_scene load_steps=11 format=3 uid="uid://bvxtel4kt8t1d"]
 
-[ext_resource type="Texture2D" uid="uid://c64m8bioy63m1" path="res://assets/spritesheets/apple.png" id="1_dq3mn"]
 [ext_resource type="Script" path="res://scenes/objects/FirePlace.gd" id="1_m0kst"]
 [ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_ll4gk"]
 [ext_resource type="Texture2D" uid="uid://p2ae71l8x3qr" path="res://assets/spritesheets/campfire.png" id="3_ak5db"]
+[ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="4_bpyxi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mt8ow"]
 atlas = ExtResource("3_ak5db")
@@ -28,36 +28,49 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ybjv"]
-size = Vector2(76, 59)
+size = Vector2(120, 102.5)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7c7er"]
-radius = 31.0161
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6mst"]
+radius = 23.0
+height = 76.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_erl4n"]
 
 [node name="FirePlace" type="StaticBody2D"]
 script = ExtResource("1_m0kst")
 inv_item = ExtResource("2_ll4gk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -21)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_i7yiu")
 animation = &"Flicker"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -9.53674e-07)
-scale = Vector2(2.125, 2.20833)
-texture = ExtResource("1_dq3mn")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 12.5)
 shape = SubResource("RectangleShape2D_5ybjv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
-shape = SubResource("CircleShape2D_7c7er")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_v6mst")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 2
+rotation = -0.774926
+scale = Vector2(12.4577, 12.4492)
+color = Color(1, 0.792157, 0.635294, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("4_bpyxi")
+
+[node name="Area2D" type="Area2D" parent="PointLight2D"]
+rotation = 0.774926
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
+shape = SubResource("CircleShape2D_erl4n")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
