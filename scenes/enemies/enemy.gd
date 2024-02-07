@@ -14,10 +14,29 @@ var can_attack_player = false
 
 var invulnerable = false
 
-#func _physics_process(delta):
+func _physics_process(delta):
+	choose_animation()
+	#pass
 	#move()
 	#if player != null:
 		#deal_damage(ranged)
+
+func choose_animation():
+	var animationNames = $AnimatedSprite2D.sprite_frames.get_animation_names()
+	var walkRatio = abs(velocity.x/velocity.y)
+	if walkRatio >= 1 and "walk_side" in animationNames:
+		if velocity.x > 0 :
+			$AnimatedSprite2D.flip_h = false
+		else:
+			$AnimatedSprite2D.flip_h = true
+		#print("playing walk side")
+		$AnimatedSprite2D.play("walk_side")
+	elif 0 < walkRatio and walkRatio < 1:	
+		if velocity.y > 0 and "walk_down" in animationNames:
+			$AnimatedSprite2D.play("walk_down")
+		elif velocity.y < 0 and "walk_up" in animationNames:
+			#print("up")
+			$AnimatedSprite2D.play("walk_up")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,6 +74,7 @@ func deal_damage():
 		can_attack = false
 		$attack_cooldown.start()
 		if not ranged and player:
+			print(damage)
 			player.receive_damage(damage)
 	
 
@@ -69,7 +89,7 @@ func take_damage(damage_value):
 	set_health()
 		#invulnerable = true
 		#$dmg_iframe_cooldown.start()
-	print("Slime health = ", health)
+	#print("Slime health = ", health)
 	if health <= 0:
 		self.queue_free() 
 
