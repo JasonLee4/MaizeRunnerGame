@@ -23,4 +23,5 @@ layer_2/tile_data = PackedInt32Array()
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.00392157, 0.0235294, 0.141176, 0.92549)
