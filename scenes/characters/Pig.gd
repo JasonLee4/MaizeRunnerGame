@@ -155,6 +155,7 @@ func _on_pig_hitbox_body_entered(body):
 	if body.has_method("enemy"):
 		body.can_attack_player = true
 		
+		
 
 func _on_pig_hitbox_body_exited(body):
 	if body.has_method("enemy"):
@@ -189,9 +190,9 @@ func _on_dmg_iframe_cooldown_timeout():
 
 
 
-func _on_piglightarea_body_entered(body):
-	if body.has_method("light_freeze"):
-		body.light_freeze()
+#func _on_piglightarea_body_entered(body):
+	#if body.has_method("light_freeze"):
+		#body.light_freeze()
 
 func _on_piglightarea_body_exited(body):
 	if body.has_method("light_unfreeze"):
@@ -231,9 +232,16 @@ func toggle_flashlight():
 func flash():
 	$piglight.visible = flashlight
 	if flashlight:
+		$piglight/piglightarea/CollisionPolygon2D.disabled = false
+		
 		for body in $piglight/piglightarea.get_overlapping_bodies():
 			if body.has_method("light_freeze"):
 				body.light_freeze()
+	else:
+		$piglight/piglightarea/CollisionPolygon2D.disabled = true
+		for body in $piglight/piglightarea.get_overlapping_bodies():
+			if body.has_method("light_unfreeze"):
+				body.light_unfreeze()
 
 	
 func tool_scroll():

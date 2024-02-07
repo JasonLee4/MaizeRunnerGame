@@ -104,7 +104,8 @@ _data = {
 height = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w6u8y"]
-radius = 15.0
+radius = 16.0
+height = 32.0
 
 [node name="Pig" type="CharacterBody2D"]
 collision_mask = 14
@@ -141,6 +142,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_a3r7q")
 
 [node name="pig_hitbox" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pig_hitbox"]
 shape = SubResource("CapsuleShape2D_w6u8y")
@@ -180,7 +182,7 @@ texture = ExtResource("9_vx3vr")
 offset = Vector2(40, 0)
 
 [node name="piglightarea" type="Area2D" parent="piglight"]
-collision_mask = 14
+collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piglight/piglightarea"]
 position = Vector2(-118, -1)

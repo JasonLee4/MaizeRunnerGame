@@ -21,3 +21,18 @@ func _physics_process(delta):
 		linear_velocity = linear_velocity.bounce(collision_info.get_normal())
 		linear_velocity.x *= 0
 		linear_velocity.y *= 0
+	
+	torch()
+	
+func torch():
+	for body in $PointLight2D/Torch_Light_Area.get_overlapping_bodies():
+		if body.has_method("light_freeze"):
+			
+			body.light_freeze()
+	
+
+
+func _on_torch_light_area_body_exited(body):
+	if body.has_method("light_unfreeze"):
+		print(body.name, " left torch light area")
+		body.light_unfreeze()
