@@ -98,11 +98,10 @@ func _physics_process(delta):
 	if Globals.health <= 0:
 		pig_alive = false
 		print("Pig is dead")
-		get_tree().change_scene_to_file("res://scenes/levels/end_screen.tscn")
+		get_tree().change_scene_to_file("res://scenes/menus/end_screen.tscn")
 		self.queue_free()
 
 	tool_scroll()
-	Globals.health = 5
 
 	toggle_flashlight()
 	
