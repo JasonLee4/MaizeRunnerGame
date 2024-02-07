@@ -1,7 +1,7 @@
 extends enemy
 
 @onready var stateMachine = get_node("State Machine")
-@onready var pigLight = owner.get_node("Pig/piglight/piglightarea")
+@onready var pigLight = Globals.pig.get_node("piglight/piglightarea")
 
 @export var detectionRadius : float
 
