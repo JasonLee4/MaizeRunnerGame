@@ -36,6 +36,8 @@ func _ready():
 	spawn_enemies(4)
 	print("Spawn items...")
 	spawn_items()
+	# start game timer
+	Globals.lvl_start.emit()
 	
 
 func _process(_delta):

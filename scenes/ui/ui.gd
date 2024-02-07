@@ -3,12 +3,20 @@ extends CanvasLayer
 var heart: PackedScene = preload("res://scenes/ui/heart.tscn")
 @onready var hotbar = $HotBar
 @onready var health_counter: HBoxContainer = $HealthCounter/HBoxContainer
+@onready var timer_label: Label = $GameTimer/TimerText
 
 func _ready():
+	# health
 	Globals.connect("health_change", update_health)
-	Globals.inv.connect("update", update_inventory)
-	#print(Globals.inv.slots.size)s
 	update_health()
+	# inventory
+	Globals.inv.connect("update", update_inventory)
+	# level stats
+	Globals.connect("lvl_start", start_timer)
+
+func _process(delta):
+	if Globals.lvl_time:
+		timer_label.text = Globals.lvl_time
 
 func update_health():
 	# clear all hearts
@@ -20,3 +28,6 @@ func update_health():
 		
 func update_inventory():
 	hotbar.update_slots()
+
+func start_timer():
+	Globals.lvl_start_time = Time.get_ticks_msec()
