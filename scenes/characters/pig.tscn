@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=16 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://ddkcgxfupj33n" path="res://assets/spritesheets/pigmoving.png" id="3_5iu3b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/states/Player_State_Machine.gd" id="3_e2ml4"]
 [ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
 [ext_resource type="Script" path="res://scenes/states/state_rolling.gd" id="4_a3gfp"]
+[ext_resource type="Texture2D" uid="uid://beee3j71psqn4" path="res://assets/spritesheets/torchgif.png" id="4_ca7rt"]
 [ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="4_ws5bl"]
 [ext_resource type="Texture2D" uid="uid://rgvj1vn7og2p" path="res://assets/spritesheets/light.png" id="9_vx3vr"]
 
@@ -47,6 +48,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Tool_Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_87a35"]
 resource_name = "pigroll"
@@ -78,7 +91,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 0, 1, 2, 3, 4, 5, 6, 0]
+"values": [0, 5, 1, 2, 3, 4, 5, 6, 3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -91,6 +104,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tool_Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_07awo"]
@@ -126,6 +151,21 @@ texture = ExtResource("4_ws5bl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_5iu3b")
 hframes = 8
+
+[node name="Tool_Sprite" type="Sprite2D" parent="."]
+visible = false
+rotation = -0.483456
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_ca7rt")
+hframes = 2
+frame = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="Tool_Sprite"]
+position = Vector2(2.52331, 8.10142)
+scale = Vector2(4, 4)
+color = Color(0.998583, 0.791911, 0.644379, 1)
+blend_mode = 2
+texture = ExtResource("4_ws5bl")
 
 [node name="Roll" type="Sprite2D" parent="."]
 visible = false

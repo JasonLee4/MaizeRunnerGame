@@ -76,12 +76,15 @@ func _physics_process(delta):
 		if velocity.x < 0:
 			$Sprite2D.flip_h = true
 			$weapon_sprite.flip_h = true
+			$Tool_Sprite.rotation = abs($Tool_Sprite.rotation)
+			
 			$Roll.flip_h = true
-			$Marker2D.position.x = -1 * abs($Marker2D.position.x)
+			$Marker2D.position.x = abs($Marker2D.position.x)
 			
 		else:
 			$Sprite2D.flip_h = false
 			$weapon_sprite.flip_h = false
+			$Tool_Sprite.rotation = -1*abs($Tool_Sprite.rotation)
 			$Roll.flip_h = false			
 			$Marker2D.position.x = abs($Marker2D.position.x)
 		
@@ -102,7 +105,6 @@ func _physics_process(delta):
 		self.queue_free()
 
 	tool_scroll()
-	Globals.health = 5
 
 	toggle_flashlight()
 	
@@ -153,6 +155,7 @@ func player():
 
 func _on_pig_hitbox_body_entered(body):
 	if body.has_method("enemy"):
+		print(body)
 		body.can_attack_player = true
 		
 		
@@ -190,29 +193,27 @@ func _on_dmg_iframe_cooldown_timeout():
 
 
 
-#func _on_piglightarea_body_entered(body):
-	#if body.has_method("light_freeze"):
-		#body.light_freeze()
-
 func _on_piglightarea_body_exited(body):
 	if body.has_method("light_unfreeze"):
 		body.light_unfreeze()
 
-
-#func collect(item):
-	#inv.insert(item)
 	
 func throw_torch(delta):
 	
 	if Globals.inv.slots[1].amount > 0:
 		if Input.is_action_pressed("punch"):
-			if torch_hold_time > 0.5 and torch_speed < 100:
+			if torch_hold_time > 1 and torch_speed < 100:
 				torch_speed += 5
 			torch_hold_time += delta
 		elif Input.is_action_just_released("punch"):
 			Globals.inv.remove_item(Globals.inv.slots[1].item, 1)
+			var tr = torch_scene.instantiate()			
+			#hold button for at least x=3 seconds
+			if torch_hold_time < 3:
+				torch_speed = 0
+				tr.placed = true		
 			torch_hold_time = 0.0
-			var tr = torch_scene.instantiate()
+			
 			tr.global_position = $Marker2D2.global_position
 			var dir = (get_global_mouse_position() - tr.global_position).normalized()
 			tr.linear_velocity.x = dir.x*torch_speed
@@ -221,7 +222,8 @@ func throw_torch(delta):
 			get_tree().current_scene.add_child(tr)
 			
 			torch_speed = 0
-		
+	else:
+		$Tool_Sprite.visible = false
 		
 func toggle_flashlight():
 	if Input.is_action_just_pressed("shoot"):
@@ -250,10 +252,14 @@ func tool_scroll():
 		if Input.is_action_just_pressed("scroll_up"):
 			flashlight = true
 			print("toggle flash")
+			$Tool_Sprite.visible = false
+			
 	else:	
 		if Input.is_action_just_pressed("scroll_down"):
 			flashlight = false
 			print("toggle torch")
+			$Tool_Sprite.visible = true
+			
 		
 
 
