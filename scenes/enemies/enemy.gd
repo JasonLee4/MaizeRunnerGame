@@ -3,21 +3,21 @@ class_name enemy
 
 @export var speed = 100
 #@export var freeze = false
-var MAX_HEALTH = 100
+@export var MAX_HEALTH = 100
 var health = MAX_HEALTH
-var damage = 1
+@export var damage = 1
 
 var can_attack = true
-var can_attack_player = true
-var ranged = false
-var player
+var can_attack_player = false
+@export var ranged = false
+@onready var player = Globals.pig
 
 var invulnerable = false
 
-func _physics_process(delta):
-	move()
-	if player != null:
-		deal_damage(ranged)
+#func _physics_process(delta):
+	#move()
+	#if player != null:
+		#deal_damage(ranged)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,26 +35,26 @@ func _process(delta):
 func enemy():
 	pass
 
-func _on_enemy_hitbox_body_entered(body):
-	if body.has_method("player"):
-		#body.enemies_pig_can_attack.append(self)
-		#player_in_hitbox = true
-		player = body
-
-func _on_enemy_hitbox_body_exited(body):
-	if body.has_method("player"):
-		#body.enemies_pig_can_attack.erase(self)
-		#player_in_hitbox = false
-		player = null
+#func _on_enemy_hitbox_body_entered(body):
+	#if body.has_method("player"):
+		##body.enemies_pig_can_attack.append(self)
+		##player_in_hitbox = true
+		#player = body
+#
+#func _on_enemy_hitbox_body_exited(body):
+	#if body.has_method("player"):
+		##body.enemies_pig_can_attack.erase(self)
+		##player_in_hitbox = false
+		#player = null
  
 func move():
 	pass
 
-func deal_damage(ranged):
-	if can_attack_player and can_attack:
+func deal_damage():
+	#if can_attack_player and can_attack:
 		can_attack = false
 		$attack_cooldown.start()
-		if not ranged:
+		if not ranged and player:
 			player.receive_damage(damage)
 	
 
