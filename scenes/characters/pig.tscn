@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=17 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://ddkcgxfupj33n" path="res://assets/spritesheets/pigmoving.png" id="3_5iu3b"]
