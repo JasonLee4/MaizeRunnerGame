@@ -22,7 +22,7 @@ signal dungeon_created
 signal inv_update
 
 var inv_size = 3
-var inv:
+var inv = Inventory.new():
 	get:
 		return inv
 	set(value):
@@ -49,6 +49,13 @@ var lvl_time:
 			return format_ts_to_str(lvl_end_time - lvl_start_time)
 		return format_ts_to_str(cur_time - lvl_start_time)
 
+func restart_game():
+	health = 5
+	inv = Inventory.new()
+	lvl_start_time = null
+	lvl_end_time = null
+	
+	
 
 ### Helper functions ###
 func format_ts_to_str(timestamp):
