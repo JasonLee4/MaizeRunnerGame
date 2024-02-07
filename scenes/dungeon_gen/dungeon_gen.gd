@@ -2,7 +2,7 @@ extends Node2D
 var Room = preload("res://scenes/dungeon_gen/rooms/rect_room.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
 var rat_enemy = preload("res://scenes/enemies/rat.tscn")
-var ui = preload("res://scenes/ui/ui.tscn")
+var ui_scene = preload("res://scenes/ui/ui.tscn")
 var fireplace_scene = preload("res://scenes/objects/FirePlace.tscn")
 var wood_scene = preload("res://scenes/items/wood.tscn")
 
@@ -26,6 +26,8 @@ func _ready():
 	seed("maizerun".hash())
 	print("Making rooms...")
 	await make_rooms()
+	print("Loading UI...")
+	add_child(ui_scene.instantiate())
 	print("Loading player...")
 	load_player()
 	print("Creating map...")
@@ -34,6 +36,7 @@ func _ready():
 	spawn_enemies(4)
 	print("Spawn items...")
 	spawn_items()
+	
 
 func _process(_delta):
 	queue_redraw()
