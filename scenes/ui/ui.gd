@@ -13,6 +13,7 @@ func _ready():
 	Globals.inv.connect("update", update_inventory)
 	# level stats
 	Globals.connect("lvl_start", start_timer)
+	Globals.connect("lvl_end", stop_timer)
 
 func _process(delta):
 	if Globals.lvl_time:
@@ -31,3 +32,6 @@ func update_inventory():
 
 func start_timer():
 	Globals.lvl_start_time = Time.get_ticks_msec()
+	
+func stop_timer():
+	Globals.lvl_end_time = Time.get_ticks_msec()

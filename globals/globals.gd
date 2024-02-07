@@ -46,9 +46,11 @@ var lvl_time:
 		if not lvl_start_time:
 			return "00:00"
 		if lvl_end_time:
-			return format_ts_to_str(cur_time - lvl_end_time)
+			return format_ts_to_str(lvl_end_time - lvl_start_time)
 		return format_ts_to_str(cur_time - lvl_start_time)
 
+
+### Helper functions ###
 func format_ts_to_str(timestamp):
 	# probably a better way to do this but wtv
 	var time_str = ""

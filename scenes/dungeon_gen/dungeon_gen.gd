@@ -5,6 +5,7 @@ var rat_enemy = preload("res://scenes/enemies/rat.tscn")
 var ui_scene = preload("res://scenes/ui/ui.tscn")
 var fireplace_scene = preload("res://scenes/objects/FirePlace.tscn")
 var wood_scene = preload("res://scenes/items/wood.tscn")
+var key_scene = preload("res://scenes/items/key.tscn")
 
 @onready var map = $TileMap
 @onready var camera
@@ -170,6 +171,11 @@ func spawn_items():
 			var fireplace = fireplace_scene.instantiate()
 			fireplace.global_position = spawn_pos
 			$Objects.add_child(fireplace)
+		elif room == end_room:
+			# spawn key in end room
+			var key = key_scene.instantiate()
+			key.global_position = spawn_pos
+			$Objects.add_child(key)
 		else:
 			# spawn wood
 			var wood = wood_scene.instantiate()
