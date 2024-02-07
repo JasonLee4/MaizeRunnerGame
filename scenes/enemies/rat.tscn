@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://f8a7c50dvi25"]
+[gd_scene load_steps=12 format=3 uid="uid://f8a7c50dvi25"]
 
 [ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
 [ext_resource type="Texture2D" uid="uid://blxneorurmxe" path="res://assets/spritesheets/rat.png" id="1_y6qvw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyIdle.gd" id="5_elybv"]
 [ext_resource type="Script" path="res://scripts/States/EnemyFreeze.gd" id="6_0hfgx"]
 [ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_djy2a"]
+[ext_resource type="Script" path="res://scripts/States/EnemyAttack.gd" id="8_drdnq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2nd4"]
 animations = [{
@@ -23,11 +24,11 @@ animations = [{
 size = Vector2(24, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gae2i"]
-size = Vector2(28, 28)
+size = Vector2(34, 28)
 
 [node name="Rat" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 15
+collision_mask = 13
 script = ExtResource("1_tq7uu")
 detectionRadius = 125.0
 
@@ -48,7 +49,7 @@ collision_layer = 2
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
-position = Vector2(5, 0)
+position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_gae2i")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
@@ -78,4 +79,8 @@ enemy = NodePath("../..")
 
 [node name="EnemyFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_djy2a")
+enemy = NodePath("../..")
+
+[node name="EnemyAttack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_drdnq")
 enemy = NodePath("../..")

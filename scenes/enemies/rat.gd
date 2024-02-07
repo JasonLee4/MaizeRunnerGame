@@ -6,14 +6,9 @@ extends enemy
 @export var detectionRadius : float
 
 func _ready():
-	MAX_HEALTH = 100
-	health = 100
-	damage = 1
-	
 	#var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	#$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
-	$Healthbar.max_value = MAX_HEALTH
-	set_health()
+	pass
 
 func light_unfreeze():
 	print("Rat can move")

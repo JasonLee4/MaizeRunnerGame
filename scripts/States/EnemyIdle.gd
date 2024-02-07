@@ -1,7 +1,7 @@
 extends State
 class_name EnemyIdle
 
-var pig : CharacterBody2D
+@onready var pig = Globals.pig
 
 @export var enemy: CharacterBody2D
 @export var move_speed := 20
@@ -16,10 +16,10 @@ func randomize_wander():
 	wander_time = randf_range(min_wander_time, max_wander_time)
 	
 func enter():
-	print("enemy wandering")
-	if get_tree() != null:
-		pig = get_tree().get_current_scene().get_node("Pig")
-		assert(pig != null)
+	#print("enemy wandering")
+	#if get_tree() != null:
+		#pig = get_tree().get_current_scene().get_node("Pig")
+	assert(pig != null)
 	randomize_wander()
 
 func update(delta: float):
