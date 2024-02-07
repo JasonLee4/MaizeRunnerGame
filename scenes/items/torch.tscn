@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="3_y1bx2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ydk86"]
+radius = 18.0278
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oeekn"]
 atlas = ExtResource("3_cy505")
@@ -33,7 +34,8 @@ animations = [{
 size = Vector2(9.89895, 28.2827)
 
 [node name="Torch" type="RigidBody2D"]
-collision_mask = 6
+collision_layer = 8
+collision_mask = 2
 gravity_scale = 0.0
 linear_damp = 0.5
 script = ExtResource("1_kfmpc")
@@ -48,10 +50,12 @@ blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("3_y1bx2")
 
-[node name="Area2D" type="Area2D" parent="PointLight2D"]
+[node name="Torch_Light_Area" type="Area2D" parent="PointLight2D"]
 rotation = 0.774926
+collision_layer = 4
+collision_mask = 26
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Torch_Light_Area"]
 shape = SubResource("CircleShape2D_ydk86")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -66,3 +70,12 @@ animation = &"torchflame"
 position = Vector2(-1.50518, 1.50529)
 rotation = 0.774926
 shape = SubResource("RectangleShape2D_rbb71")
+
+[node name="Torch_Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Torch_Hitbox"]
+position = Vector2(-1.50518, 1.50529)
+rotation = 0.774926
+shape = SubResource("RectangleShape2D_rbb71")
+
+[connection signal="body_exited" from="PointLight2D/Torch_Light_Area" to="." method="_on_torch_light_area_body_exited"]
