@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxiee2xqjnk0w"]
+[gd_scene load_steps=2 format=3 uid="uid://e6604hbwsqdn"]
 
-[ext_resource type="Script" path="res://scenes/levels/mainmenu.gd" id="1_hw46s"]
+[sub_resource type="GDScript" id="GDScript_3i7so"]
+script/source = "extends Control
+
+func _ready():
+	$VBoxContainer/StartButton.grab_focus()
+
+func _on_start_button_pressed():
+	get_tree().change_scene_to_file(\"res://scenes/dungeon_gen/dungeon_gen.tscn\")
+
+
+
+func _on_options_button_pressed():
+	pass # Replace with function body.
+
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()
+"
 
 [node name="Mainmenu" type="Control"]
 layout_mode = 3
@@ -9,7 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hw46s")
+script = SubResource("GDScript_3i7so")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
