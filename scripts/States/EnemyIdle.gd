@@ -24,11 +24,15 @@ func enter():
 	#if get_tree() != null:
 		#pig = get_tree().get_current_scene().get_node("Pig")
 	assert(pig != null)
+	#print("enemy idle")
 	randomize_wander()
 
 func update(delta: float):
 	if "detectionRadius" in enemy and enemy.global_position.distance_to(pig.global_position) <= enemy.detectionRadius:
 		transitioned.emit(self, "EnemyFollow")
+	elif enemy.can_attack and enemy.can_attack_player:
+		print("idle -> attack")
+		transitioned.emit(self, "EnemyAttack")
 	elif wander_time > 0:
 		wander_time -= delta
 	elif wait_time > 0:

@@ -94,6 +94,7 @@ func take_damage(damage_value):
 		self.queue_free() 
 
 func _on_attack_cooldown_timeout():
+	print("attack cooldown done")
 	can_attack = true
 
 func _on_dmg_iframe_cooldown_timeout():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cfnha2uh4r7lt"]
+[gd_scene load_steps=16 format=3 uid="uid://cfnha2uh4r7lt"]
 
-[ext_resource type="Script" path="res://scenes/levels/main_menu.gd" id="1_r22ps"]
+[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_r22ps"]
 [ext_resource type="Texture2D" uid="uid://d5n5unmbmv76" path="res://assets/ui/slidepic.png" id="2_wd1v4"]
+[ext_resource type="Texture2D" uid="uid://bq7mxe4k804f7" path="res://assets/ui/quitButton.png" id="3_0gawl"]
 [ext_resource type="Texture2D" uid="uid://dhq72de8exge2" path="res://assets/ui/title-Sheet.png" id="3_4vohq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ekd5"]
@@ -122,6 +123,15 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
+[node name="Sign" type="MarginContainer" parent="Buttons/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Buttons/VBoxContainer/Sign"]
+position = Vector2(225, -75.5)
+sprite_frames = SubResource("SpriteFrames_mxikb")
+autoplay = "default"
+frame_progress = 0.368695
+
 [node name="StartButton" type="Button" parent="Buttons/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../HBoxContainer/QuitButton")
@@ -139,32 +149,11 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Options"
 
-[node name="QuitButton" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+[node name="QuitButton" type="TextureButton" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_bottom = NodePath("../../StartButton")
-theme_override_font_sizes/font_size = 30
-text = "Quit"
-
-[node name="Sign" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sign"]
-position = Vector2(29, -88)
-sprite_frames = SubResource("SpriteFrames_mxikb")
-autoplay = "default"
-frame_progress = 0.368695
+texture_normal = ExtResource("3_0gawl")
 
 [connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
