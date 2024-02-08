@@ -22,7 +22,7 @@ signal dungeon_created
 signal inv_update
 
 var inv_size = 3
-var inv = Inventory.new():
+var inv :
 	get:
 		return inv
 	set(value):
@@ -30,8 +30,9 @@ var inv = Inventory.new():
 		#value.slots.fill(Inventory_Slot.new())
 		for sl in inv_size:
 			value.slots.append(Inventory_Slot.new())
-		
+		print(value)
 		inv = value
+		
 
 
 ### Game/Level Stats ###

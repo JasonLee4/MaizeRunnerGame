@@ -6,7 +6,7 @@ var is_open = true
 func _ready():
 	#print("connection to update")
 	#inventory.update.connect(update_slots)
-	
+	Globals.inv = Inventory.new()
 	update_slots()
 	open()
 
