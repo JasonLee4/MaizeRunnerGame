@@ -30,6 +30,14 @@ var inv :
 		#value.slots.fill(Inventory_Slot.new())
 		for sl in inv_size:
 			value.slots.append(Inventory_Slot.new())
+			
+			###GIVING PLAYER 5 TORCHES INITIALLY
+			if sl == 0:
+				for i in range(0,5):
+					var temp_torch : Inv_Item  = preload("res://scenes/items/inventory/inv_items/Torch.tres")
+					value.insert(temp_torch)
+			###GIVING PLAYER 5 TORCHES INITIALLY
+			
 		print(value)
 		inv = value
 		
