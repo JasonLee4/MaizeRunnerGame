@@ -199,32 +199,35 @@ func _on_piglightarea_body_exited(body):
 
 	
 func throw_torch(delta):
-	
-	if Globals.inv.slots[1].amount > 0:
-		if Input.is_action_pressed("punch"):
-			if torch_hold_time > 1 and torch_speed < 100:
-				torch_speed += 5
-			torch_hold_time += delta
-		elif Input.is_action_just_released("punch"):
-			Globals.inv.remove_item(Globals.inv.slots[1].item, 1)
-			var tr = torch_scene.instantiate()			
-			#hold button for at least x=3 seconds
-			if torch_hold_time < 3:
+	if Globals.inv.contains("Torch"):	
+		#if Globals.inv.slots[1].amount > 0:
+			print("has torch ", Globals.inv.contains("Torch"))
+			if Input.is_action_pressed("punch"):
+				if torch_hold_time > 2 and torch_speed < 100:
+					torch_speed += 5
+				torch_hold_time += delta
+			elif Input.is_action_just_released("punch"):
+				Globals.inv.remove_item("Torch", 1)
+				var tr = torch_scene.instantiate()			
+				#hold button for at least x=3 seconds
+				if torch_hold_time < 2:
+					torch_speed = 0
+					tr.placed = true		
+				torch_hold_time = 0.0
+				
+				tr.global_position = $Marker2D2.global_position
+				var dir = (get_global_mouse_position() - tr.global_position).normalized()
+				tr.linear_velocity.x = dir.x*torch_speed
+				tr.linear_velocity.y = dir.y*torch_speed
+				
+				get_tree().current_scene.add_child(tr)
+				
 				torch_speed = 0
-				tr.placed = true		
-			torch_hold_time = 0.0
-			
-			tr.global_position = $Marker2D2.global_position
-			var dir = (get_global_mouse_position() - tr.global_position).normalized()
-			tr.linear_velocity.x = dir.x*torch_speed
-			tr.linear_velocity.y = dir.y*torch_speed
-			
-			get_tree().current_scene.add_child(tr)
-			
-			torch_speed = 0
+		#else:
+			#$Tool_Sprite.visible = false
 	else:
 		$Tool_Sprite.visible = false
-		
+			
 func toggle_flashlight():
 	if Input.is_action_just_pressed("shoot"):
 		flashlight = !flashlight

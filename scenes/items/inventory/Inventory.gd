@@ -23,12 +23,18 @@ func insert(item: Inv_Item):
 	update.emit()
 	pass
 
-func remove_item(item: Inv_Item, amount):
+func remove_item(item_name, amount):
 	print("removing item...")
-	var itemslots = slots.filter(func(slot): return slot.item == item)
+	var itemslots = slots.filter(func(slot): return slot.item != null and slot.item.name == item_name)
 	if !itemslots.is_empty():
 		itemslots[0].amount -= amount
 		update.emit()
+
+func contains(item_name):
+	for sl in slots.filter(func(slot) : return slot.item != null):
+		if sl.item.name == item_name and sl.amount > 0:
+			return true
+	return false		
 #func add_item(item):
 	#if _content.has(item):
 		#_content[item] += 1
