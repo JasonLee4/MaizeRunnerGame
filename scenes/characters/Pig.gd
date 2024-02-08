@@ -61,6 +61,7 @@ func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	$piglight.look_at(get_global_mouse_position())
+	$piglight_shadows.look_at(get_global_mouse_position())
 	
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":

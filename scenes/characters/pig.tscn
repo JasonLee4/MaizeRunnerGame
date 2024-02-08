@@ -235,18 +235,26 @@ shape = SubResource("CircleShape2D_a2be6")
 
 [node name="piglight" type="PointLight2D" parent="."]
 position = Vector2(1, 0)
-shadow_enabled = true
 texture = ExtResource("9_vx3vr")
-offset = Vector2(40, 0)
+offset = Vector2(46, -3)
 
 [node name="piglightarea" type="Area2D" parent="piglight"]
+position = Vector2(-93.9117, 12.6176)
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piglight/piglightarea"]
-position = Vector2(-118, -1)
+position = Vector2(-20.0883, -15.6176)
 polygon = PackedVector2Array(181, -30, 113, 3, 182, 35)
 
 [node name="Marker2D2" type="Marker2D" parent="."]
+
+[node name="piglight_shadows" type="PointLight2D" parent="."]
+position = Vector2(1, 0)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = ExtResource("9_vx3vr")
+offset = Vector2(46, -3)
 
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
