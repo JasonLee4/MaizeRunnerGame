@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/hotbar_slot.gd" id="1_kkbiw"]
 
-[node name="HotbarSlot" type="Panel"]
+[node name="HotbarSlot" type="Button"]
 custom_minimum_size = Vector2(60, 60)
 offset_right = 52.0
 offset_bottom = 46.0

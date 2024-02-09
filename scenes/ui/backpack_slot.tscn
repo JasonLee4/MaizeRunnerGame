@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgnq3cthow4ok"]
+
+[ext_resource type="Script" path="res://scenes/ui/backpack_slot.gd" id="1_ydx18"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0ddv"]
+font_size = 17
+
+[node name="BackpackSlot" type="Panel"]
+custom_minimum_size = Vector2(30, 30)
+offset_right = 25.0
+offset_bottom = 25.0
+script = ExtResource("1_ydx18")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(20.8452, 22.1504)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Item_Display" type="Sprite2D" parent="CenterContainer/Panel"]
+scale = Vector2(1.65625, 1.57292)
+
+[node name="Label" type="Label" parent="CenterContainer/Panel"]
+layout_mode = 0
+offset_left = -13.0
+offset_top = 4.0
+offset_right = -2.0
+offset_bottom = 27.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_s0ddv")

@@ -4,49 +4,61 @@ class_name Inventory
 
 signal update
 
-var slots: Array[Inventory_Slot] = []
+var hb_slots: Array[Inventory_Slot] = []
+
+var bp_slots: Array[Inventory_Slot] = []
 
 func insert(item: Inv_Item):
-	print(slots.size())
+	
+	var slots
+	if item.tool:
+		slots = hb_slots
+	else: 
+		slots = bp_slots
 	var itemslots = slots.filter(func(slot): return slot.item == item)
 	if !itemslots.is_empty():
-		print("stacking item")
+		print("stacking item : ", item.name)
 		itemslots[0].amount += 1
 	else:
-		var emptyslots = slots.filter(func(slot) : return slot.item ==  null)
+		var emptyslots = slots.filter(func(slot) : return slot.item == null)
 		if !emptyslots.is_empty():
-			print("new item")
-			print(item.name)
+			print("new item : ", item.name)
+			
 			emptyslots[0].item = item
 			emptyslots[0].amount = 1
 			#print(slots[0].item.name)
 	update.emit()
 	pass
 
-func remove_item(item_name, amount):
+func remove_item(item, amount):
 	print("removing item...")
-	var itemslots = slots.filter(func(slot): return slot.item != null and slot.item.name == item_name)
+	var slots
+	if item.tool:
+		slots = hb_slots
+	else: 
+		slots = bp_slots
+	var itemslots = slots.filter(func(slot): return slot.item == item)
 	if !itemslots.is_empty():
 		itemslots[0].amount -= amount
+		if itemslots[0].amount == 0:
+			itemslots[0].item = null
 		update.emit()
 
-func contains(item_name):
-	for sl in slots.filter(func(slot) : return slot.item != null):
-		if sl.item.name == item_name and sl.amount > 0:
+func contains(item):
+	for sl1 in hb_slots.filter(func(hb_slot) : return hb_slot.item == item):
+		if sl1.amount > 0:
+			return true
+	for sl2 in bp_slots.filter(func(bp_slot) : return bp_slot.item == item):
+		if sl2.amount > 0:
 			return true
 	return false		
-#func add_item(item):
-	#if _content.has(item):
-		#_content[item] += 1
-		#
-	#else:
-		#_content[item] = 4
-		#
-#
-#func remove_item(item):
-	#
-	#if _content.has(item) and _content[item] > 0:
-		#_content[item] -= 1
-	#
-#func get_items():
-	#return _content
+	
+func get_amount(item):
+	var total = 0
+	for sl1 in hb_slots.filter(func(hb_slot) : return hb_slot.item == item):
+		total += sl1.amount
+		
+	for sl2 in bp_slots.filter(func(bp_slot) : return bp_slot.item == item):
+		total += sl2.amount
+	
+	return total

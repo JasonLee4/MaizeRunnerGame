@@ -7,3 +7,4 @@
 script = ExtResource("1_y7lyh")
 name = "Torch"
 texture = ExtResource("2_340vb")
+tool = true

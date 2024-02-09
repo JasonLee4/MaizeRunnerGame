@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6jq8xlxnv1r8"]
+
+[ext_resource type="PackedScene" uid="uid://bgnq3cthow4ok" path="res://scenes/ui/backpack_slot.tscn" id="1_js2h8"]
+[ext_resource type="Script" path="res://scenes/ui/backpack_menu.gd" id="1_vu6jp"]
+
+[node name="backpack_menu" type="Control"]
+custom_minimum_size = Vector2(134, 66)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 134.0
+offset_bottom = 66.0
+script = ExtResource("1_vu6jp")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(112, 54)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 4
+
+[node name="BackpackSlot" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
+
+[node name="BackpackSlot2" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
+
+[node name="BackpackSlot3" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
+
+[node name="BackpackSlot4" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
+
+[node name="BackpackSlot5" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
+
+[node name="BackpackSlot6" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
+
+[node name="BackpackSlot7" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
+
+[node name="BackpackSlot8" parent="GridContainer" instance=ExtResource("1_js2h8")]
+layout_mode = 2
