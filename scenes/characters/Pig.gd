@@ -3,10 +3,11 @@ extends CharacterBody2D
 
 var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 var torch_scene = preload("res://scenes/items/torch.tscn")
+var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres")
 
 @onready var state_machine = get_node("player_state_machine")
 @onready var fire_place = get_tree().current_scene.get_node("FirePlace")
-#@onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
+@onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
 
 var dashDirection = Vector2(1,0)
 var dashready = true
@@ -26,8 +27,11 @@ var basic_damage = 50
 var equipped = false
 var curr_bullet_sprite
 
-var flashlight = true
-var torch_hold_time = 2.0
+var flashlight = false
+var flashlight_equipped = false
+
+var torch_equipped = false
+var torch_hold_time = 0.0
 var torch_speed = 0
 
 #@export var inv: Inventory
@@ -38,8 +42,8 @@ func _ready():
 	#inv.update.connect(hotbar.update_slots)
 
 	Globals.pig = $"."
-	
 	print("pig inst")
+	hotbar.connect("hotbar_select", change_tool)
 	#if fire_place:
 		#fire_place.craft_torch.connect(craft)
 
@@ -63,6 +67,8 @@ func _physics_process(delta):
 	$piglight.look_at(get_global_mouse_position())
 	$piglight_shadows.look_at(get_global_mouse_position())
 	
+	
+	
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
 			$Sprite2D.visible = false
@@ -77,7 +83,7 @@ func _physics_process(delta):
 		if velocity.x < 0:
 			$Sprite2D.flip_h = true
 			$weapon_sprite.flip_h = true
-			$Tool_Sprite.rotation = abs($Tool_Sprite.rotation)
+			$Torch_Sprite.rotation = abs($Torch_Sprite.rotation)
 			
 			$Roll.flip_h = true
 			$Marker2D.position.x = abs($Marker2D.position.x)
@@ -85,7 +91,7 @@ func _physics_process(delta):
 		else:
 			$Sprite2D.flip_h = false
 			$weapon_sprite.flip_h = false
-			$Tool_Sprite.rotation = -1*abs($Tool_Sprite.rotation)
+			$Torch_Sprite.rotation = -1*abs($Torch_Sprite.rotation)
 			$Roll.flip_h = false			
 			$Marker2D.position.x = abs($Marker2D.position.x)
 		
@@ -105,13 +111,12 @@ func _physics_process(delta):
 		get_tree().change_scene_to_file("res://scenes/menus/end_screen.tscn")
 		self.queue_free()
 
-	tool_scroll()
+	if flashlight_equipped:	
+		toggle_flashlight()
 
-	toggle_flashlight()
-	
 	flash()
-	if !flashlight:
-		throw_torch(delta)
+	if !flashlight_equipped and torch_equipped:
+		use_torch(delta)
 
 
 
@@ -130,7 +135,7 @@ func equip_weapon(weaponsprite, bulletsprite):
 	
 #ranged ability
 func shoot():
-	if Input.is_action_just_pressed("shoot") and shootready and equipped:
+	if Input.is_action_just_pressed("primary_action") and shootready and equipped:
 		shootready = false
 		var pb = pigbullet_scene.instantiate()
 		pb.get_node("Sprite2D").texture = curr_bullet_sprite
@@ -197,23 +202,33 @@ func _on_dmg_iframe_cooldown_timeout():
 func _on_piglightarea_body_exited(body):
 	if body.has_method("light_unfreeze"):
 		body.light_unfreeze()
-
 	
-func throw_torch(delta):
-	if Globals.inv.contains("Torch"):	
+	
+func use_torch(delta):
+	if Globals.inv.contains(torch_resource):
 		#if Globals.inv.slots[1].amount > 0:
-			print("has torch ", Globals.inv.contains("Torch"))
-			if Input.is_action_pressed("punch"):
-				if torch_hold_time > 2 and torch_speed < 100:
+			if Input.is_action_just_pressed("primary_action"):
+				torch_hold_time = 0.0
+				
+				
+				Globals.inv.remove_item(torch_resource, 1)
+				var tr = torch_scene.instantiate()			
+				tr.placed = true
+				
+				tr.global_position = $Marker2D2.global_position
+				tr.linear_velocity = Vector2(0,0)
+				
+				get_tree().current_scene.add_child(tr)
+				
+				torch_speed = 0
+			elif Input.is_action_pressed("secondary_action"):
+				if torch_hold_time > 1 and torch_speed < 100:
 					torch_speed += 5
 				torch_hold_time += delta
-			elif Input.is_action_just_released("punch"):
-				Globals.inv.remove_item("Torch", 1)
+			elif Input.is_action_just_released("secondary_action"):
+				Globals.inv.remove_item(torch_resource, 1)
 				var tr = torch_scene.instantiate()			
-				#hold button for at least x=3 seconds
-				if torch_hold_time < 2:
-					torch_speed = 0
-					tr.placed = true		
+				
 				torch_hold_time = 0.0
 				
 				tr.global_position = $Marker2D2.global_position
@@ -227,43 +242,53 @@ func throw_torch(delta):
 		#else:
 			#$Tool_Sprite.visible = false
 	else:
-		$Tool_Sprite.visible = false
+		$Torch_Sprite.visible = false
 			
 func toggle_flashlight():
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("primary_action"):
 		flashlight = !flashlight
-		print("toggle flashlight ", flashlight)
+		
+		
 	
 			
 func flash():
 	$piglight.visible = flashlight
+	$piglight_shadows.visible = flashlight
+	$piglight/piglightarea/CollisionPolygon2D.disabled = !flashlight
+	
 	if flashlight:
-		$piglight/piglightarea/CollisionPolygon2D.disabled = false
+		#$piglight/piglightarea/CollisionPolygon2D.disabled = false
 		
 		for body in $piglight/piglightarea.get_overlapping_bodies():
 			if body.has_method("light_freeze"):
 				body.light_freeze()
 	else:
-		$piglight/piglightarea/CollisionPolygon2D.disabled = true
+		#$piglight/piglightarea/CollisionPolygon2D.disabled = true
+		
 		for body in $piglight/piglightarea.get_overlapping_bodies():
 			if body.has_method("light_unfreeze"):
 				body.light_unfreeze()
 
 	
-func tool_scroll():
-	
-	if !flashlight:
-		if Input.is_action_just_pressed("scroll_up"):
-			flashlight = true
-			print("toggle flash")
-			$Tool_Sprite.visible = false
-			
-	else:	
-		if Input.is_action_just_pressed("scroll_down"):
-			flashlight = false
-			print("toggle torch")
-			$Tool_Sprite.visible = true
-			
-		
 
+			
+
+func change_tool(hb_num):
+	
+	var current_tool = Globals.inv.hb_slots[hb_num]
+	if current_tool.item != null:
+		flashlight_equipped = (current_tool.item.name == "Flashlight")
+		flashlight = (current_tool.item.name == "Flashlight")
+		torch_equipped = (current_tool.item.name == "Torch")
+
+	else:
+		torch_equipped = false
+		flashlight_equipped = false
+		flashlight = false
+	return toggle_tool_sprites()
+	
+func toggle_tool_sprites():
+	$Torch_Sprite.visible = torch_equipped
+	$Flashlight_Sprite.visible = flashlight_equipped
+	return 0
 

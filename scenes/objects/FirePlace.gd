@@ -2,20 +2,23 @@ extends StaticBody2D
 
 class_name FirePlace
 
-@export var inv_item: Inv_Item
+@export var torch_item: Inv_Item
 var crafting_available
 #signal craft_torch
+
+#may change how this works for future recipes
+var req_resource : Inv_Item = preload("res://scenes/items/inventory/inv_items/wood.tres")
 
 func _physics_process(delta):
 	$AnimatedSprite2D.play()
 	if Input.is_action_just_pressed("interact") and crafting_available:
 		# get crafting ready
 		#craft_torch.emit()
-		if Globals.inv.contains("wood"):
-			if Globals.inv.slots[0].amount >= 2:	
-				Globals.inv.remove_item("wood", 2)
-				print("crafting... ", inv_item.name)	
-				Globals.inv.insert(inv_item)
+		if Globals.inv.contains(req_resource):
+			if Globals.inv.get_amount(req_resource) >= 2:	
+				Globals.inv.remove_item(req_resource, 2)
+				print("crafting... ", torch_item.name)	
+				Globals.inv.insert(torch_item)
 		
 		await get_tree().create_timer(1).timeout
 

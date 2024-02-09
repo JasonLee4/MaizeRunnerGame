@@ -8,18 +8,17 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1064.0
-offset_bottom = -538.0
+offset_right = -964.0
+offset_bottom = -587.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sdpi3")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_right = 180.0
-offset_bottom = 60.0
-theme_override_constants/h_separation = 1
-columns = 10
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
 
 [node name="HotbarSlot" parent="GridContainer" instance=ExtResource("2_iihtt")]
 layout_mode = 2

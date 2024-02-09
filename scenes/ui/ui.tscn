@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx0pvdscatwe5"]
+[gd_scene load_steps=10 format=3 uid="uid://cx0pvdscatwe5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
 [ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hot_bar.tscn" id="5_hlh8u"]
 [ext_resource type="FontFile" uid="uid://cb6u7h12t2r43" path="res://assets/ui/joystix monospace.otf" id="6_1tqm1"]
+[ext_resource type="PackedScene" uid="uid://c6jq8xlxnv1r8" path="res://scenes/ui/backpack_menu.tscn" id="7_4nqm3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exthu"]
 texture = ExtResource("4_etjpm")
@@ -64,8 +65,8 @@ format = 2
 [node name="HotBar" parent="." instance=ExtResource("5_hlh8u")]
 offset_left = 48.0
 offset_top = 576.0
-offset_right = 48.0
-offset_bottom = 576.0
+offset_right = -920.0
+offset_bottom = -8.0
 
 [node name="GameTimer" type="Control" parent="."]
 layout_mode = 3
@@ -91,3 +92,16 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("6_1tqm1")
 theme_override_font_sizes/font_size = 25
 text = "00:00"
+
+[node name="backpack_menu" parent="." instance=ExtResource("7_4nqm3")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -100.0
+offset_right = 68.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2

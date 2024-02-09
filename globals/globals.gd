@@ -21,24 +21,30 @@ signal dungeon_created
 ### Inventory ###
 signal inv_update
 
-var inv_size = 3
+var hb_size = 3
+var bp_size = 8
 var inv :
 	get:
 		return inv
 	set(value):
 		#value.slots.resize(3)
 		#value.slots.fill(Inventory_Slot.new())
-		for sl in inv_size:
-			value.slots.append(Inventory_Slot.new())
+		for hb in hb_size:
+			value.hb_slots.append(Inventory_Slot.new())
 			
 			###GIVING PLAYER 5 TORCHES INITIALLY
-			if sl == 0:
+			if hb == 0:
 				for i in range(0,5):
 					var temp_torch : Inv_Item  = preload("res://scenes/items/inventory/inv_items/Torch.tres")
 					value.insert(temp_torch)
 			###GIVING PLAYER 5 TORCHES INITIALLY
-			
-		print(value)
+			if hb == 1:
+				var temp_flash : Inv_Item = preload("res://scenes/items/inventory/inv_items/Flashlight.tres")
+				value.insert(temp_flash)
+		for bp in bp_size:
+			value.bp_slots.append(Inventory_Slot.new())
+		
+		
 		inv = value
 		
 

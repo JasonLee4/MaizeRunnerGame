@@ -38,7 +38,7 @@ height = 76.0
 
 [node name="FirePlace" type="StaticBody2D"]
 script = ExtResource("1_m0kst")
-inv_item = ExtResource("2_ll4gk")
+torch_item = ExtResource("2_ll4gk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -21)

@@ -51,7 +51,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Tool_Sprite:frame")
+tracks/3/path = NodePath("Torch_Sprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -108,7 +108,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Tool_Sprite:frame")
+tracks/2/path = NodePath("Torch_Sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -154,7 +154,10 @@ texture = ExtResource("4_ws5bl")
 texture = ExtResource("3_5iu3b")
 hframes = 8
 
-[node name="Tool_Sprite" type="Sprite2D" parent="."]
+[node name="Flashlight_Sprite" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Torch_Sprite" type="Sprite2D" parent="."]
 visible = false
 rotation = -0.483456
 scale = Vector2(0.5, 0.5)
@@ -162,7 +165,7 @@ texture = ExtResource("4_ca7rt")
 hframes = 2
 frame = 1
 
-[node name="PointLight2D" type="PointLight2D" parent="Tool_Sprite"]
+[node name="PointLight2D" type="PointLight2D" parent="Torch_Sprite"]
 position = Vector2(2.52331, 8.10142)
 scale = Vector2(4, 4)
 color = Color(0.998583, 0.791911, 0.644379, 1)
@@ -218,6 +221,7 @@ one_shot = true
 [node name="state_dead" type="Node" parent="player_state_machine"]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 light_mask = 2
 position = Vector2(1, 0)
 rotation = -0.774926

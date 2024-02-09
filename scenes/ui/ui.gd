@@ -4,6 +4,7 @@ var heart: PackedScene = preload("res://scenes/ui/heart.tscn")
 @onready var hotbar = $HotBar
 @onready var health_counter: HBoxContainer = $HealthCounter/HBoxContainer
 @onready var timer_label: Label = $GameTimer/TimerText
+@onready var backpack = $backpack_menu
 
 func _ready():
 	# health
@@ -11,13 +12,21 @@ func _ready():
 	update_health()
 	# inventory
 	Globals.inv.connect("update", update_inventory)
+	backpack.visible = false
+	
 	# level stats
 	Globals.connect("lvl_start", start_timer)
 	Globals.connect("lvl_end", stop_timer)
+	
+	
 
 func _process(delta):
 	if Globals.lvl_time:
 		timer_label.text = Globals.lvl_time
+		
+	if Input.is_action_just_pressed("open_inventory"):
+		$backpack_menu.visible = !$backpack_menu.visible
+
 
 func update_health():
 	# clear all hearts
@@ -29,6 +38,7 @@ func update_health():
 		
 func update_inventory():
 	hotbar.update_slots()
+	backpack.update_slots()
 
 func start_timer():
 	Globals.lvl_start_time = Time.get_ticks_msec()

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Inv_Item" load_steps=3 format=3 uid="uid://di8ab1v84vtn2"]
+
+[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/InvItem.gd" id="1_u5p0r"]
+[ext_resource type="Texture2D" uid="uid://dr0ojxowr51kt" path="res://assets/spritesheets/leechfat.png" id="2_gyiqg"]
+
+[resource]
+script = ExtResource("1_u5p0r")
+name = "Flashlight"
+texture = ExtResource("2_gyiqg")
+tool = true
