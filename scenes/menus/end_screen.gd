@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$Label.text = "Time: " + str(Globals.lvl_time)
 
 
 func _on_restart_button_pressed():

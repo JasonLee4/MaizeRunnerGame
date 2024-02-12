@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://f8a7c50dvi25"]
 
 [ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
-[ext_resource type="Texture2D" uid="uid://blxneorurmxe" path="res://assets/spritesheets/rat.png" id="1_y6qvw"]
+[ext_resource type="Texture2D" uid="uid://b04yg0hexyo6d" path="res://assets/spritesheets/rat.png" id="1_y6qvw"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="2_m7wqm"]
 [ext_resource type="Texture2D" uid="uid://clh28ehnvhiu1" path="res://assets/spritesheets/smallrat-Sheet.png" id="3_51jue"]
 [ext_resource type="Script" path="res://scripts/States/State Machine.gd" id="4_uy7fj"]
@@ -213,7 +213,6 @@ collision_mask = 15
 script = ExtResource("1_tq7uu")
 detectionRadius = 100.0
 speed = 75
-damage = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 3.8147e-06)
