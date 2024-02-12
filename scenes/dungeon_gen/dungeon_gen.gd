@@ -5,6 +5,7 @@ var rat_enemy = preload("res://scenes/enemies/rat.tscn")
 var ui_scene = preload("res://scenes/ui/ui.tscn")
 var fireplace_scene = preload("res://scenes/objects/FirePlace.tscn")
 var wood_scene = preload("res://scenes/items/wood.tscn")
+var apple_scene = preload("res://scenes/items/consumables/apple.tscn")
 var key_scene = preload("res://scenes/items/key.tscn")
 
 @onready var map = $TileMap
@@ -177,10 +178,15 @@ func spawn_items():
 			key.global_position = spawn_pos
 			$Objects.add_child(key)
 		else:
-			# spawn wood
-			var wood = wood_scene.instantiate()
-			wood.global_position = spawn_pos
-			$Objects.add_child(wood)
+			# spawn wood or apple
+			var roll = randf()
+			var item
+			if roll < .7:
+				item = wood_scene.instantiate()
+			else:
+				item = apple_scene.instantiate()
+			item.global_position = spawn_pos
+			$Objects.add_child(item)
 
 
 ### Helper functions ###
