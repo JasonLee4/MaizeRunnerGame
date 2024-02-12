@@ -9,7 +9,13 @@ extends RigidBody2D
 	#$SelfdestructTimer.start()
 	
 var placed = false	
+var out = false
 #
+
+func _ready():
+	print("STarting timer")
+	$Torch_Timer.start()
+	
 func _physics_process(delta):
 	#translate(direction*speed*delta)
 	#linear_velocity.x *= 0.9
@@ -23,7 +29,9 @@ func _physics_process(delta):
 		linear_velocity.y *= 0.01
 	if linear_velocity.length() < 2:
 		placed = true
-	torch()
+		
+	if !out:
+		torch()
 
 
 func torch():
@@ -45,3 +53,8 @@ func _on_torch_hitbox_body_entered(body):
 		body.take_damage(body.MAX_HEALTH/2)
 		#body.queue_free()
 		#queue_free()
+
+
+func _on_torch_timer_timeout():
+	$PointLight2D/Torch_Light_Area/CollisionShape2D.disabled = true
+	queue_free()
