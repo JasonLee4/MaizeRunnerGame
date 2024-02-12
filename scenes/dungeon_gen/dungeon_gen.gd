@@ -6,7 +6,7 @@ var ui_scene = preload("res://scenes/ui/ui.tscn")
 var fireplace_scene = preload("res://scenes/objects/FirePlace.tscn")
 var exit_scene = preload("res://scenes/objects/exit.tscn")
 var wood_scene = preload("res://scenes/items/wood.tscn")
-var apple_scene = preload("res://scenes/items/consumables/apple.tscn")
+var apple_scene = preload("res://scenes/items/apple.tscn")
 var key_scene = preload("res://scenes/items/key.tscn")
 
 @onready var map = $TileMap
