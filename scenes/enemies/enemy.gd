@@ -40,7 +40,8 @@ func choose_animation():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_health()
+	#set_health()
+	pass
 
 func set_health():
 	$Healthbar.max_value = MAX_HEALTH	
@@ -94,7 +95,7 @@ func take_damage(damage_value):
 		self.queue_free() 
 
 func _on_attack_cooldown_timeout():
-	print("attack cooldown done")
+	#print("attack cooldown done")
 	can_attack = true
 
 func _on_dmg_iframe_cooldown_timeout():

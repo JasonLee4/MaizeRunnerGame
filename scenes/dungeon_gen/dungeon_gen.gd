@@ -40,6 +40,7 @@ func _ready():
 	spawn_items()
 	# start game timer
 	Globals.lvl_start.emit()
+	$Ambiance.play()
 	
 
 func _process(_delta):
