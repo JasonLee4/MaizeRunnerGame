@@ -4,20 +4,23 @@ var player_scene = preload("res://scenes/characters/pig.tscn")
 var rat_enemy = preload("res://scenes/enemies/rat.tscn")
 var ui_scene = preload("res://scenes/ui/ui.tscn")
 var fireplace_scene = preload("res://scenes/objects/FirePlace.tscn")
+var exit_scene = preload("res://scenes/objects/exit.tscn")
 var wood_scene = preload("res://scenes/items/wood.tscn")
+var apple_scene = preload("res://scenes/items/consumables/apple.tscn")
 var key_scene = preload("res://scenes/items/key.tscn")
 
 @onready var map = $TileMap
 @onready var camera
 
 var tile_size = 32
-var num_rooms = 100
+var num_rooms = 25
 var min_size = 4
 var max_size = 7
 var h_spread = 100
 var cull_pct = .6
 var start_room = null
-var end_room = null
+var key_room = null
+var exit_room = null
 var play_mode = false
 var player = null
 var path # AStar pathfinder to hold MST
@@ -34,7 +37,7 @@ func _ready():
 	print("Creating map...")
 	make_map()
 	print("Spawning enemies...")
-	spawn_enemies(4)
+	spawn_enemies(2)
 	print("Spawn items...")
 	spawn_items()
 	# start game timer
@@ -93,7 +96,7 @@ func load_player():
 
 func make_map():
 	map.clear()
-	find_end_room()
+	find_key_exit_rooms()
 	
 	var full_rect = Rect2()
 	for room in $Rooms.get_children():
@@ -172,16 +175,26 @@ func spawn_items():
 			var fireplace = fireplace_scene.instantiate()
 			fireplace.global_position = spawn_pos
 			$Objects.add_child(fireplace)
-		elif room == end_room:
-			# spawn key in end room
+		elif room == key_room:
+			# spawn key in rightmost room
 			var key = key_scene.instantiate()
 			key.global_position = spawn_pos
 			$Objects.add_child(key)
+		elif room == exit_room:
+			# spawn exit in leftmost room
+			var exit = exit_scene.instantiate()
+			exit.global_position = spawn_pos
+			$Objects.add_child(exit)
 		else:
-			# spawn wood
-			var wood = wood_scene.instantiate()
-			wood.global_position = spawn_pos
-			$Objects.add_child(wood)
+			# spawn wood or apple
+			var roll = randf()
+			var item
+			if roll < .7:
+				item = wood_scene.instantiate()
+			else:
+				item = apple_scene.instantiate()
+			item.global_position = spawn_pos
+			$Objects.add_child(item)
 
 
 ### Helper functions ###
@@ -208,12 +221,16 @@ func carve_path(start, end):
 		#map.set_cell(0, Vector2i(x_over_y.x, y), 0, Vector2i(6,4), 0)
 		map.set_cells_terrain_connect(0, [Vector2i(x_over_y.x, y)], 0, 0)
 
-func find_end_room():
+func find_key_exit_rooms():
 	var max_x = -INF
+	var min_x = INF
 	for room in $Rooms.get_children():
 		if room.position.x > max_x:
-			end_room = room
+			key_room = room
 			max_x = room.position.x
+		if room.position.x < min_x:
+			exit_room = room
+			min_x = room.position.x
 
 func find_mst(nodes):
 	# Prim's algorithm
