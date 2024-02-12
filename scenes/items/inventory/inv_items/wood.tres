@@ -7,3 +7,5 @@
 script = ExtResource("1_bxbkl")
 name = "wood"
 texture = ExtResource("2_skcmn")
+tool = false
+useScript = ""

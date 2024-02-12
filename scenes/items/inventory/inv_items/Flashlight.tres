@@ -8,3 +8,4 @@ script = ExtResource("1_u5p0r")
 name = "Flashlight"
 texture = ExtResource("2_gyiqg")
 tool = true
+useScript = "res://scenes/items/Flashlight.tscn"
