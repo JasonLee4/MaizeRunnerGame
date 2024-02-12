@@ -82,5 +82,10 @@ position = Vector2(-1, 1)
 rotation = 0.774926
 shape = SubResource("CapsuleShape2D_cwhm8")
 
+[node name="Torch_Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="body_exited" from="PointLight2D/Torch_Light_Area" to="." method="_on_torch_light_area_body_exited"]
 [connection signal="body_entered" from="Torch_Hitbox" to="." method="_on_torch_hitbox_body_entered"]
+[connection signal="timeout" from="Torch_Timer" to="." method="_on_torch_timer_timeout"]
