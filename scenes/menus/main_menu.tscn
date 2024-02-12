@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cfnha2uh4r7lt"]
+[gd_scene load_steps=21 format=3 uid="uid://cfnha2uh4r7lt"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_r22ps"]
 [ext_resource type="Texture2D" uid="uid://d5n5unmbmv76" path="res://assets/ui/slidepic.png" id="2_wd1v4"]
 [ext_resource type="Texture2D" uid="uid://bq7mxe4k804f7" path="res://assets/ui/quitButton.png" id="3_0gawl"]
 [ext_resource type="Texture2D" uid="uid://dhq72de8exge2" path="res://assets/ui/title-Sheet.png" id="3_4vohq"]
+[ext_resource type="Texture2D" uid="uid://bcsbcqbva51hq" path="res://assets/ui/startButton.png" id="4_3cdn6"]
+[ext_resource type="Texture2D" uid="uid://civc1u17i6qsf" path="res://assets/ui/optionsButton.png" id="5_x2ryh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ekd5"]
 atlas = ExtResource("3_4vohq")
@@ -83,6 +85,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_501qu"]
+atlas = ExtResource("4_3cdn6")
+region = Rect2(25, 45, 539, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sdub"]
+atlas = ExtResource("5_x2ryh")
+region = Rect2(9, 16, 255, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jgr1"]
+atlas = ExtResource("3_0gawl")
+region = Rect2(16, 27, 255, 78)
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -125,35 +139,36 @@ alignment = 1
 
 [node name="Sign" type="MarginContainer" parent="Buttons/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Buttons/VBoxContainer/Sign"]
-position = Vector2(225, -75.5)
+position = Vector2(0, -90)
 sprite_frames = SubResource("SpriteFrames_mxikb")
 autoplay = "default"
 frame_progress = 0.368695
 
-[node name="StartButton" type="Button" parent="Buttons/VBoxContainer"]
+[node name="StartButton" type="TextureButton" parent="Buttons/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 focus_neighbor_top = NodePath("../HBoxContainer/QuitButton")
-theme_override_font_sizes/font_size = 30
-text = "Start"
+texture_normal = SubResource("AtlasTexture_501qu")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Buttons/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="OptionsButton" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+[node name="OptionsButton" type="TextureButton" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Options"
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_7sdub")
 
 [node name="QuitButton" type="TextureButton" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 focus_neighbor_bottom = NodePath("../../StartButton")
-texture_normal = ExtResource("3_0gawl")
+texture_normal = SubResource("AtlasTexture_2jgr1")
 
 [connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

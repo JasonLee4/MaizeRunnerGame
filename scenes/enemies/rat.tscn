@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://f8a7c50dvi25"]
+[gd_scene load_steps=36 format=3 uid="uid://f8a7c50dvi25"]
 
 [ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
 [ext_resource type="Texture2D" uid="uid://blxneorurmxe" path="res://assets/spritesheets/rat.png" id="1_y6qvw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyFreeze.gd" id="6_0hfgx"]
 [ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_djy2a"]
 [ext_resource type="Script" path="res://scripts/States/EnemyAttack.gd" id="8_drdnq"]
+[ext_resource type="AudioStream" uid="uid://bqqma6oalrfh7" path="res://assets/audio/sfx/rat_squeak.wav" id="10_005yy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8u6ju"]
 atlas = ExtResource("3_51jue")
@@ -212,6 +213,7 @@ collision_mask = 15
 script = ExtResource("1_tq7uu")
 detectionRadius = 100.0
 speed = 75
+damage = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 3.8147e-06)
@@ -238,6 +240,7 @@ shape = SubResource("RectangleShape2D_gae2i")
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
 
 [node name="Healthbar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -13.0
 offset_top = -20.0
 offset_right = 16.0
@@ -268,5 +271,16 @@ enemy = NodePath("../..")
 script = ExtResource("8_drdnq")
 enemy = NodePath("../..")
 
+[node name="squeak" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_005yy")
+volume_db = -10.0
+pitch_scale = 0.8
+attenuation = 15.0
+panning_strength = 3.0
+
+[node name="squeak_cooldown" type="Timer" parent="."]
+
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="finished" from="squeak" to="." method="_on_audio_stream_player_2d_finished"]
+[connection signal="timeout" from="squeak_cooldown" to="." method="_on_squeak_cooldown_timeout"]
