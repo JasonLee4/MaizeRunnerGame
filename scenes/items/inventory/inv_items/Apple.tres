@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Inv_Item" load_steps=3 format=3 uid="uid://bmmxpybkyqxtu"]
+
+[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/InvItem.gd" id="1_htbmk"]
+[ext_resource type="Texture2D" uid="uid://c64m8bioy63m1" path="res://assets/spritesheets/apple.png" id="2_ef2ee"]
+
+[resource]
+script = ExtResource("1_htbmk")
+name = "Apple"
+texture = ExtResource("2_ef2ee")
+tool = true
+useScript = "res://scenes/items/apple.tscn"

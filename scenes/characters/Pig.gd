@@ -32,8 +32,10 @@ var flashlight_equipped = false
 
 var torch_equipped = false
 var torch_hold_time = 0.0
-var torch_speed = 0
+var torch_speed = 10
 
+var current_tool
+var consumable_equipped = false
 #@export var inv: Inventory
 
 
@@ -88,7 +90,7 @@ func _physics_process(delta):
 			$Roll.flip_h = true
 			$Marker2D.position.x = abs($Marker2D.position.x)
 			
-		else:
+		elif velocity.x > 0:
 			$Sprite2D.flip_h = false
 			$weapon_sprite.flip_h = false
 			$Torch_Sprite.rotation = -1*abs($Torch_Sprite.rotation)
@@ -117,7 +119,9 @@ func _physics_process(delta):
 	flash()
 	if !flashlight_equipped and torch_equipped:
 		use_torch(delta)
-
+	
+	if consumable_equipped:
+		consumable_use()
 
 
 func _on_dash_cooldown_timeout():
@@ -222,7 +226,7 @@ func use_torch(delta):
 				
 				torch_speed = 0
 			elif Input.is_action_pressed("secondary_action"):
-				if torch_hold_time > 1 and torch_speed < 100:
+				if torch_speed < 100:
 					torch_speed += 5
 				torch_hold_time += delta
 			elif Input.is_action_just_released("secondary_action"):
@@ -269,18 +273,15 @@ func flash():
 			if body.has_method("light_unfreeze"):
 				body.light_unfreeze()
 
-	
-
-			
 
 func change_tool(hb_num):
 	
-	var current_tool = Globals.inv.hb_slots[hb_num]
+	current_tool = Globals.inv.hb_slots[hb_num]
 	if current_tool.item != null:
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
 		flashlight = (current_tool.item.name == "Flashlight")
 		torch_equipped = (current_tool.item.name == "Torch")
-
+		consumable_equipped = !(flashlight_equipped or torch_equipped)
 	else:
 		torch_equipped = false
 		flashlight_equipped = false
@@ -292,3 +293,11 @@ func toggle_tool_sprites():
 	$Flashlight_Sprite.visible = flashlight_equipped
 	return 0
 
+func consumable_use():
+	var toolString = current_tool.item.useScript
+	var consScript = ResourceLoader.load(toolString)
+	var cons = consScript.instantiate()
+	cons.effect()
+	if current_tool.amount == 0:		
+		consumable_equipped = false
+	
