@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=19 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://ddkcgxfupj33n" path="res://assets/spritesheets/pigmoving.png" id="3_5iu3b"]
@@ -11,6 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://rgvj1vn7og2p" path="res://assets/spritesheets/light.png" id="9_vx3vr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a2be6"]
+
+[sub_resource type="Gradient" id="Gradient_su8b3"]
+offsets = PackedFloat32Array(0, 0.7173)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w7koc"]
+gradient = SubResource("Gradient_su8b3")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_kn2r4"]
 length = 0.001
@@ -139,6 +148,7 @@ collision_mask = 14
 script = ExtResource("1_hx4hr")
 
 [node name="weapon" type="Node2D" parent="."]
+visible = false
 
 [node name="weapon_sprite" type="Sprite2D" parent="."]
 visible = false
@@ -158,6 +168,7 @@ hframes = 8
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 light_mask = 2
 position = Vector2(1, 0)
 scale = Vector2(3, 3)
@@ -182,10 +193,20 @@ frame = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="Torch_Sprite"]
 position = Vector2(2.52331, 8.10142)
-scale = Vector2(10, 10)
 color = Color(0.998583, 0.791911, 0.644379, 1)
-blend_mode = 2
-texture = ExtResource("4_ws5bl")
+energy = 0.5
+texture = SubResource("GradientTexture2D_w7koc")
+texture_scale = 5.0
+
+[node name="Pig_Torch_light_shadow" type="PointLight2D" parent="Torch_Sprite"]
+position = Vector2(2.52331, 8.10142)
+color = Color(0.998583, 0.791911, 0.644379, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = SubResource("GradientTexture2D_w7koc")
+texture_scale = 5.0
 
 [node name="Roll" type="Sprite2D" parent="."]
 visible = false
