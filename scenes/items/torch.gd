@@ -9,11 +9,9 @@ extends RigidBody2D
 	#$SelfdestructTimer.start()
 	
 var placed = false	
-var out = false
-#
+
 
 func _ready():
-	print("STarting timer")
 	$Torch_Timer.start()
 	
 func _physics_process(delta):
@@ -30,8 +28,7 @@ func _physics_process(delta):
 	if linear_velocity.length() < 2:
 		placed = true
 		
-	if !out:
-		torch()
+	torch()
 
 
 func torch():

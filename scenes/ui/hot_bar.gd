@@ -14,7 +14,7 @@ var curr_idx : int:
 func _ready():
 	#print("connection to update")
 	#inventory.update.connect(update_slots)
-	#curr_idx = 0
+	curr_idx = 0
 	Globals.inv = Inventory.new()
 	update_slots()
 	open()
@@ -25,9 +25,9 @@ func _process(delta):
 			print("hotbar select : ", i)
 			curr_idx = i-1
 			# choose tool send to pig
-			hotbar_select.emit(curr_idx)
+			#hotbar_select.emit(curr_idx)
 			
-	
+	hotbar_select.emit(curr_idx)
 	pass
 
 
