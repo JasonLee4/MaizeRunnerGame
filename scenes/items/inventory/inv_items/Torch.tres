@@ -8,4 +8,4 @@ script = ExtResource("1_y7lyh")
 name = "Torch"
 texture = ExtResource("2_340vb")
 tool = true
-useScript = ""
+useScript = "res://scenes/items/torch.tscn"
