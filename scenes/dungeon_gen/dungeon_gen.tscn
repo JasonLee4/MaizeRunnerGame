@@ -1,14 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dx3kt1flbreh8"]
+[gd_scene load_steps=4 format=3 uid="uid://dx3kt1flbreh8"]
 
 [ext_resource type="Script" path="res://scenes/dungeon_gen/dungeon_gen.gd" id="1_7plxx"]
 [ext_resource type="TileSet" uid="uid://vii48tc24ua7" path="res://assets/tilesets/corn_ground_tileset.tres" id="2_0cbpq"]
-[ext_resource type="PackedScene" uid="uid://csf5xhiq73idu" path="res://scenes/menus/pause_menu.tscn" id="2_jfbaf"]
 [ext_resource type="AudioStream" uid="uid://crs2tawygcvpd" path="res://assets/audio/ambiance/Ambience_Armory.wav" id="3_51tyk"]
 
 [node name="DungeonGen" type="Node2D"]
 script = ExtResource("1_7plxx")
-
-[node name="PauseMenu" parent="." instance=ExtResource("2_jfbaf")]
 
 [node name="Rooms" type="Node2D" parent="."]
 

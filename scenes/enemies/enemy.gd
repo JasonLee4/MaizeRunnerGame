@@ -14,16 +14,17 @@ var can_attack_player = false
 
 var invulnerable = false
 
-@onready var animationNames = $AnimatedSprite2D.sprite_frames.get_animation_names()
-
 func _physics_process(delta):
 	choose_animation()
+	#pass
+	#move()
+	#if player != null:
+		#deal_damage(ranged)
 
 func choose_animation():
+	var animationNames = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	var walkRatio = abs(velocity.x/velocity.y)
-	if $attack_cooldown.time_left > 0 and "attack" in animationNames:
-		$AnimatedSprite2D.play("attack")
-	elif walkRatio >= 1 and "walk_side" in animationNames:
+	if walkRatio >= 1 and "walk_side" in animationNames:
 		if velocity.x > 0 :
 			$AnimatedSprite2D.flip_h = false
 		else:

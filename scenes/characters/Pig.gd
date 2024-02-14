@@ -73,13 +73,9 @@ func _physics_process(delta):
 	$piglight.look_at(get_global_mouse_position())
 	$piglight_shadows.look_at(get_global_mouse_position())
 	
-	if velocity == Vector2(0,0):
-		$footsteps.stop()
-	elif !$footsteps.is_playing():
-		$footsteps.play()
+	
 	
 	if velocity != Vector2(0,0):
-	
 		if state_machine.selected_state.name == "state_rolling":
 			$Sprite2D.visible = false
 			$Roll.visible = true
@@ -338,7 +334,6 @@ func consumable_use(delta):
 		cons.pickup = false
 		
 		Globals.pig.get_tree().current_scene.add_child(cons)
-		$throw.play()
 		temp_speed = 0
 	if current_tool.amount == 0:		
 		consumable_equipped = false
