@@ -31,13 +31,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ybjv"]
 size = Vector2(120, 102.5)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1y3qa"]
-radius = 146.014
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6mst"]
+radius = 23.0
+height = 76.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_erl4n"]
 
 [node name="FirePlace" type="StaticBody2D"]
-collision_mask = 2
 script = ExtResource("1_m0kst")
 torch_item = ExtResource("2_ll4gk")
 
@@ -54,13 +54,17 @@ collision_layer = 4
 shape = SubResource("RectangleShape2D_5ybjv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_1y3qa")
+position = Vector2(1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_v6mst")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-light_mask = 4
+light_mask = 2
 rotation = -0.774926
 scale = Vector2(12.4577, 12.4492)
 color = Color(1, 0.792157, 0.635294, 1)
+blend_mode = 2
+shadow_enabled = true
 texture = ExtResource("4_bpyxi")
 
 [node name="Area2D" type="Area2D" parent="PointLight2D"]
@@ -68,14 +72,6 @@ rotation = 0.774926
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
 shape = SubResource("CircleShape2D_erl4n")
-
-[node name="FirePlace_light_shadow" type="PointLight2D" parent="."]
-rotation = -0.774926
-scale = Vector2(12.458, 12.458)
-energy = 0.5
-shadow_enabled = true
-shadow_filter_smooth = 3.0
-texture = ExtResource("4_bpyxi")
 
 [node name="Crackle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_wpshn")

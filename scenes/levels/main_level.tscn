@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmr5pc0estma1"]
+[gd_scene load_steps=14 format=3 uid="uid://bmr5pc0estma1"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_level.gd" id="1_haied"]
 [ext_resource type="PackedScene" uid="uid://cj72oa0j0cfj6" path="res://scenes/characters/pig.tscn" id="1_u1kou"]
@@ -7,14 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://cu6fbl27cj8ni" path="res://scenes/enemies/followingEnemy.tscn" id="9_j3pv8"]
 [ext_resource type="PackedScene" uid="uid://cmkg6swofcroi" path="res://scenes/enemies/cornpirate.tscn" id="9_mfwi1"]
 [ext_resource type="PackedScene" uid="uid://bvxtel4kt8t1d" path="res://scenes/objects/FirePlace.tscn" id="9_y4roy"]
-[ext_resource type="PackedScene" uid="uid://ceek5f5hxvohe" path="res://scenes/items/wood.tscn" id="10_0j2xy"]
-[ext_resource type="PackedScene" uid="uid://bk38y6qrxf7ab" path="res://scenes/items/consumables/apple.tscn" id="10_w7piv"]
+[ext_resource type="PackedScene" path="res://scenes/items/wood.tscn" id="10_0j2xy"]
+[ext_resource type="PackedScene" uid="uid://bk38y6qrxf7ab" path="res://scenes/items/apple.tscn" id="10_w7piv"]
 [ext_resource type="PackedScene" uid="uid://brr1wrgpu1otg" path="res://scenes/items/weapons/cannon.tscn" id="11_8e02o"]
-[ext_resource type="PackedScene" uid="uid://f8a7c50dvi25" path="res://scenes/enemies/rat.tscn" id="11_bxtrw"]
 [ext_resource type="AudioStream" uid="uid://crs2tawygcvpd" path="res://assets/audio/ambiance/Ambience_Armory.wav" id="12_cfv7x"]
+[ext_resource type="PackedScene" uid="uid://f8a7c50dvi25" path="res://scenes/enemies/bigrat.tscn" id="12_ljk2v"]
+[ext_resource type="PackedScene" uid="uid://csf5xhiq73idu" path="res://scenes/menus/pause_menu.tscn" id="14_f1hpv"]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_haied")
+
+[node name="PauseMenu" parent="." instance=ExtResource("14_f1hpv")]
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -57,8 +60,11 @@ position = Vector2(143, 260)
 position = Vector2(358, 271)
 zoom = Vector2(2, 2)
 
-[node name="Rat" parent="." instance=ExtResource("11_bxtrw")]
+[node name="Rat" parent="." instance=ExtResource("12_ljk2v")]
 position = Vector2(362, 378)
+
+[node name="smallrat" parent="." instance=ExtResource("12_ljk2v")]
+position = Vector2(426, 335)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_cfv7x")
