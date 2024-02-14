@@ -41,6 +41,11 @@ var inv :
 			if hb == 1:
 				var temp_flash : Inv_Item = preload("res://scenes/items/inventory/inv_items/Flashlight.tres")
 				value.insert(temp_flash)
+				
+			if hb ==2 :
+				var temp_apple : Inv_Item = preload("res://scenes/items/inventory/inv_items/Apple.tres")
+				for i in range(0,5):				
+					value.insert(temp_apple)
 		for bp in bp_size:
 			value.bp_slots.append(Inventory_Slot.new())
 		
