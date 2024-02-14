@@ -75,7 +75,6 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_ed3k4")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
-one_shot = true
 
 [node name="Healthbar" type="ProgressBar" parent="."]
 visible = false
@@ -88,7 +87,6 @@ show_percentage = false
 script = ExtResource("8_quany")
 
 [node name="attack_cooldown" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="area_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]

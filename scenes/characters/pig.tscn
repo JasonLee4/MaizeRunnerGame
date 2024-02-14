@@ -9,8 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://beee3j71psqn4" path="res://assets/spritesheets/torchgif.png" id="4_ca7rt"]
 [ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="4_ws5bl"]
 [ext_resource type="Texture2D" uid="uid://rgvj1vn7og2p" path="res://assets/spritesheets/light.png" id="9_vx3vr"]
-[ext_resource type="AudioStream" uid="uid://bdgnycyb4700a" path="res://assets/audio/sfx/521588__fission9__hiking-boot-footsteps-on-gravel.wav" id="10_h70fu"]
-[ext_resource type="AudioStream" uid="uid://bp466y4c8jjfu" path="res://assets/audio/sfx/719637__zapsplatcom__fast-whoosh-bamboo-swoosh-through-air-version-2.wav" id="11_ixijk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a2be6"]
+
+[sub_resource type="Gradient" id="Gradient_su8b3"]
+offsets = PackedFloat32Array(0, 0.7173)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w7koc"]
+gradient = SubResource("Gradient_su8b3")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_kn2r4"]
 length = 0.001
@@ -134,13 +143,12 @@ height = 28.0
 radius = 16.0
 height = 32.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a2be6"]
-
 [node name="Pig" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_hx4hr")
 
 [node name="weapon" type="Node2D" parent="."]
+visible = false
 
 [node name="weapon_sprite" type="Sprite2D" parent="."]
 visible = false
@@ -159,6 +167,22 @@ hframes = 8
 [node name="Flashlight_Sprite" type="Sprite2D" parent="."]
 visible = false
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+light_mask = 2
+position = Vector2(1, 0)
+scale = Vector2(3, 3)
+color = Color(1, 1, 1, 0.760784)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("4_ws5bl")
+
+[node name="Area2D" type="Area2D" parent="PointLight2D"]
+rotation = 0.774926
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
+shape = SubResource("CircleShape2D_a2be6")
+
 [node name="Torch_Sprite" type="Sprite2D" parent="."]
 visible = false
 rotation = -0.483456
@@ -169,10 +193,20 @@ frame = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="Torch_Sprite"]
 position = Vector2(2.52331, 8.10142)
-scale = Vector2(4, 4)
 color = Color(0.998583, 0.791911, 0.644379, 1)
-blend_mode = 2
-texture = ExtResource("4_ws5bl")
+energy = 0.5
+texture = SubResource("GradientTexture2D_w7koc")
+texture_scale = 5.0
+
+[node name="Pig_Torch_light_shadow" type="PointLight2D" parent="Torch_Sprite"]
+position = Vector2(2.52331, 8.10142)
+color = Color(0.998583, 0.791911, 0.644379, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = SubResource("GradientTexture2D_w7koc")
+texture_scale = 5.0
 
 [node name="Roll" type="Sprite2D" parent="."]
 visible = false
@@ -222,23 +256,6 @@ one_shot = true
 
 [node name="state_dead" type="Node" parent="player_state_machine"]
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-light_mask = 2
-position = Vector2(1, 0)
-rotation = -0.774926
-scale = Vector2(2, 2)
-color = Color(1, 1, 1, 0.760784)
-blend_mode = 2
-shadow_enabled = true
-texture = ExtResource("4_ws5bl")
-
-[node name="Area2D" type="Area2D" parent="PointLight2D"]
-rotation = 0.774926
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
-shape = SubResource("CircleShape2D_a2be6")
-
 [node name="piglight" type="PointLight2D" parent="."]
 position = Vector2(1, 0)
 texture = ExtResource("9_vx3vr")
@@ -261,14 +278,6 @@ shadow_filter = 1
 shadow_filter_smooth = 3.0
 texture = ExtResource("9_vx3vr")
 offset = Vector2(46, -3)
-
-[node name="footsteps" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_h70fu")
-volume_db = -0.5
-
-[node name="throw" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_ixijk")
-volume_db = -2.0
 
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
