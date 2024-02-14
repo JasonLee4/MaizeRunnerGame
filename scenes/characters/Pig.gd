@@ -8,7 +8,6 @@ var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres"
 @onready var state_machine = get_node("player_state_machine")
 #@onready var fire_place = get_tree().current_scene.get_node("FirePlace")
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
-@onready var trajectory_line = $trajectory_line
 
 var dashDirection = Vector2(1,0)
 var dashready = true
@@ -37,9 +36,10 @@ var torch_speed = 10
 
 var current_tool
 var consumable_equipped = false
-var temp_speed = 0
+var temp_speed
 var hold_time = 0.0
 #@export var inv: Inventory
+
 
 func _ready():
 
@@ -66,8 +66,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	trajectory_line.look_at(get_global_mouse_position())
-	
 	# run through states
 	state_machine.process_states(delta)
 	$piglight.look_at(get_global_mouse_position())
@@ -232,12 +230,8 @@ func use_torch(delta):
 			elif Input.is_action_pressed("secondary_action"):
 				if torch_speed < 100:
 					torch_speed += 5
-					update_trajectory_torch(delta)
 				torch_hold_time += delta
 			elif Input.is_action_just_released("secondary_action"):
-				print(torch_speed)
-				trajectory_line.clear_points()
-				
 				Globals.inv.remove_item(torch_resource, 1)
 				var tr = torch_scene.instantiate()			
 				
@@ -308,20 +302,14 @@ func consumable_use(delta):
 	cons.effect(delta)
 	
 	#assuming all consumables have speed
-	#temp_speed = cons.speed
+	temp_speed = cons.speed
 	if Input.is_action_pressed("secondary_action"):
-		if temp_speed < cons.speed:
+		if temp_speed < 100:
 			temp_speed += 5
-			trajectory_line.show()
-			update_trajectory(delta)
 		hold_time += delta
-		
 	elif Input.is_action_just_released("secondary_action"):
-		#trajectory_line.hide()
-		print(temp_speed)
-		trajectory_line.clear_points()
 		Globals.inv.remove_item(current_tool.item, 1)
-		
+		#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
 		
 		hold_time = 0.0
 		
@@ -329,7 +317,6 @@ func consumable_use(delta):
 		var dir = (get_global_mouse_position() - cons.global_position).normalized()
 		cons.linear_velocity.x = dir.x*temp_speed
 		cons.linear_velocity.y = dir.y*temp_speed
-		cons.angular_velocity = 10
 		
 		cons.pickup = false
 		
@@ -337,38 +324,4 @@ func consumable_use(delta):
 		temp_speed = 0
 	if current_tool.amount == 0:		
 		consumable_equipped = false
-
-func update_trajectory_torch(delta):
-	#trajectory_line.clear_points()
 	
-	var	pos = global_position
-	
-	
-	#var vel = Vector2(1,0) * temp_speed
-	var vel = (get_global_mouse_position()-pos ).normalized()* torch_speed
-	
-	
-	#for i in max_points:
-	pos += vel
-	trajectory_line.add_point(trajectory_line.to_local(pos))
-	
-	
-
-func update_trajectory(delta):
-	#trajectory_line.clear_points()
-	
-	var	pos = global_position
-	
-	
-	#var vel = Vector2(1,0) * temp_speed
-	var vel = (get_global_mouse_position()-pos ).normalized()* temp_speed
-	
-	
-	#for i in max_points:
-	pos += vel
-	trajectory_line.add_point(trajectory_line.to_local(pos))
-	
-		
-		#vel.y += tank.gravity * delta
-		#vel += 
-		

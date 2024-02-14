@@ -2,7 +2,7 @@ extends RigidBody2D
 
 
 @export var item: Inv_Item
-@export var speed = 70
+@export var speed = 30
 var pickup = true
 #func _ready():
 	#$Area2D/CollisionShape2D.disabled = true
@@ -21,11 +21,9 @@ func _physics_process(delta):
 	
 	if collision_info:
 		linear_velocity = linear_velocity.bounce(collision_info.get_normal())
-		
-		
 		if contact_monitor:
 			pickup = true
-	if linear_velocity.length() < 2:
+	if linear_velocity.length() < 1:
 		pickup = true
 	
 	pass
