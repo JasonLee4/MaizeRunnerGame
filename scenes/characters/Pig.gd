@@ -6,7 +6,7 @@ var torch_scene = preload("res://scenes/items/torch.tscn")
 var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres")
 
 @onready var state_machine = get_node("player_state_machine")
-@onready var fire_place = get_tree().current_scene.get_node("FirePlace")
+#@onready var fire_place = get_tree().current_scene.get_node("FirePlace")
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
 @onready var flashlight = $Flashlight
 
@@ -36,6 +36,8 @@ var torch_speed = 10
 
 var current_tool
 var consumable_equipped = false
+var temp_speed
+var hold_time = 0.0
 #@export var inv: Inventory
 
 
@@ -108,7 +110,7 @@ func _physics_process(delta):
 		use_torch(delta)
 	
 	if consumable_equipped:
-		consumable_use()
+		consumable_use(delta)
 
 
 func _on_dash_cooldown_timeout():
@@ -249,11 +251,33 @@ func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
 	return 0
 
-func consumable_use():
+func consumable_use(delta):
 	var toolString = current_tool.item.useScript
 	var consScript = ResourceLoader.load(toolString)
 	var cons = consScript.instantiate()
-	cons.effect()
+	cons.effect(delta)
+	
+	#assuming all consumables have speed
+	temp_speed = cons.speed
+	if Input.is_action_pressed("secondary_action"):
+		if temp_speed < 100:
+			temp_speed += 5
+		hold_time += delta
+	elif Input.is_action_just_released("secondary_action"):
+		Globals.inv.remove_item(current_tool.item, 1)
+		#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
+		
+		hold_time = 0.0
+		
+		cons.global_position = $Marker2D2.global_position
+		var dir = (get_global_mouse_position() - cons.global_position).normalized()
+		cons.linear_velocity.x = dir.x*temp_speed
+		cons.linear_velocity.y = dir.y*temp_speed
+		
+		cons.pickup = false
+		
+		Globals.pig.get_tree().current_scene.add_child(cons)
+		temp_speed = 0
 	if current_tool.amount == 0:		
 		consumable_equipped = false
 	
