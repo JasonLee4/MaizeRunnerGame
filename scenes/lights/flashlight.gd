@@ -33,7 +33,6 @@ func _on_flashlight_area_body_exited(body):
 func _on_timer_timeout():
 	# add flashlight flicker
 	var rand_amt = randf()
-	print(rand_amt)
 	if rand_amt > max_brightness:
 		light.energy = max_brightness
 		timer.start(1)

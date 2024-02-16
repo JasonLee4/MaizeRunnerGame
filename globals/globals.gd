@@ -50,6 +50,8 @@ var inv :
 
 
 ### Game/Level Stats ###
+var cur_lvl = 1
+
 signal lvl_start
 signal lvl_end
 
@@ -64,11 +66,17 @@ var lvl_time:
 			return format_ts_to_str(lvl_end_time - lvl_start_time)
 		return format_ts_to_str(cur_time - lvl_start_time)
 
+func go_next_level():
+	lvl_start_time = null
+	lvl_end_time = null
+	cur_lvl += 1
+	
 func restart_game():
 	health = 5
 	inv = Inventory.new()
 	lvl_start_time = null
 	lvl_end_time = null
+	cur_lvl = 1
 	
 	
 

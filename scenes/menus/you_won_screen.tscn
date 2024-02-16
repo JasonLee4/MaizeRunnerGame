@@ -23,11 +23,11 @@ alignment = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-offset_left = 521.0
+offset_left = 434.0
 offset_top = 276.0
-offset_right = 631.0
+offset_right = 718.0
 offset_bottom = 299.0
-text = "Time: 00:00"
+text = "Level x completed in 00:00"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -54,7 +54,7 @@ size_flags_horizontal = 4
 [node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
-text = "Restart"
+text = "Next Level"
 
 [node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

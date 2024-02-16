@@ -5,15 +5,14 @@ extends Control
 func _ready():
 	$MarginContainer/VBoxContainer/RestartButton.grab_focus()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Label.text = "Time: " + str(Globals.lvl_time)
+	$Label.text = "Level " + str(Globals.cur_lvl) + " completed in "  + str(Globals.lvl_time)
 
 
 func _on_restart_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/menus/level_screen.tscn")
-	Globals.restart_game()
+	Globals.go_next_lvl()
+	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
+	
 
 
 func _on_quit_button_pressed():
