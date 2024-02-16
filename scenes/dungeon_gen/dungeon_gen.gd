@@ -136,7 +136,7 @@ func make_map():
 				var end = map.local_to_map(path.get_point_position(conn))
 				carve_path(start, end)
 		corridors.append(p)
-	# add corn
+	# add corn 
 	var grass_tiles: Array[Vector2i] = map.get_used_cells_by_id(0, 0, Vector2i(8, 4), 0)
 	for tile in grass_tiles:
 		map.set_cell(1, tile, 0, Vector2i(2,0), 0)

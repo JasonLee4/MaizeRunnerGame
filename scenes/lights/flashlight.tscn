@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl5yl2pomtmqm"]
+
+[ext_resource type="Script" path="res://scenes/lights/flashlight.gd" id="1_drrf6"]
+[ext_resource type="Texture2D" uid="uid://rgvj1vn7og2p" path="res://assets/spritesheets/light.png" id="1_xvo1d"]
+[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="2_yru3v"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ny28b"]
+polygon = PackedVector2Array(14, 7, -3, 0, 13, -7, 9, -11, -4, -11, -10, -10, -16, -5, -16, 3, -12, 9, -3, 11, 7, 11)
+
+[node name="Flashlight" type="Node2D"]
+script = ExtResource("1_drrf6")
+
+[node name="FlashlightArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlashlightArea"]
+position = Vector2(-113, -3)
+polygon = PackedVector2Array(196, -37, 113, 3, 196, 41)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(1, 0)
+occluder = SubResource("OccluderPolygon2D_ny28b")
+occluder_light_mask = 6
+
+[node name="FlashlightLight" type="PointLight2D" parent="."]
+scale = Vector2(4, 4)
+color = Color(0.729412, 1, 1, 1)
+energy = 0.6
+shadow_enabled = true
+shadow_item_cull_mask = 2
+texture = ExtResource("2_yru3v")
+
+[node name="FlashlightLightShadows" type="PointLight2D" parent="."]
+scale = Vector2(4, 4)
+energy = 0.5
+shadow_enabled = true
+shadow_item_cull_mask = 5
+texture = ExtResource("2_yru3v")
+
+[node name="PixellatedLight" type="PointLight2D" parent="."]
+visible = false
+energy = 0.0
+texture = ExtResource("1_xvo1d")
+offset = Vector2(46, -3)
+
+[connection signal="body_exited" from="FlashlightArea" to="." method="_on_flashlight_area_body_exited"]

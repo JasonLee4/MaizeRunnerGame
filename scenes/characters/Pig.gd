@@ -8,6 +8,7 @@ var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres"
 @onready var state_machine = get_node("player_state_machine")
 @onready var fire_place = get_tree().current_scene.get_node("FirePlace")
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
+@onready var flashlight = $Flashlight
 
 var dashDirection = Vector2(1,0)
 var dashready = true
@@ -27,7 +28,6 @@ var basic_damage = 50
 var equipped = false
 var curr_bullet_sprite
 
-var flashlight = false
 var flashlight_equipped = false
 
 var torch_equipped = false
@@ -41,13 +41,9 @@ var consumable_equipped = false
 
 func _ready():
 
-	#inv.update.connect(hotbar.update_slots)
-
 	Globals.pig = $"."
 	print("pig inst")
 	hotbar.connect("hotbar_select", change_tool)
-	#if fire_place:
-		#fire_place.craft_torch.connect(craft)
 
 	
 #func craft():
@@ -62,14 +58,9 @@ func _ready():
 		
 	
 
-
 func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
-	$piglight.look_at(get_global_mouse_position())
-	$piglight_shadows.look_at(get_global_mouse_position())
-	
-	
 	
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
@@ -77,32 +68,28 @@ func _physics_process(delta):
 			$Roll.visible = true
 			
 			$AnimationPlayer.play("pigroll")
-			
 		elif state_machine.selected_state.name == "state_moving":
 			$Sprite2D.visible = true
 			$Roll.visible = false
 			$AnimationPlayer.play("pigwalk")
+			
 		if velocity.x < 0:
 			$Sprite2D.flip_h = true
 			$weapon_sprite.flip_h = true
-			$Torch_Sprite.rotation = abs($Torch_Sprite.rotation)
+			$Torch.rotation = abs($Torch.rotation)
 			
 			$Roll.flip_h = true
 			$Marker2D.position.x = abs($Marker2D.position.x)
-			
 		elif velocity.x > 0:
 			$Sprite2D.flip_h = false
 			$weapon_sprite.flip_h = false
-			$Torch_Sprite.rotation = -1*abs($Torch_Sprite.rotation)
+			$Torch.rotation = -1*abs($Torch.rotation)
 			$Roll.flip_h = false			
 			$Marker2D.position.x = abs($Marker2D.position.x)
 		
-			
 	else:
 		$AnimationPlayer.stop()
 	
-		
-		
 	
 	move_and_slide()
 	shoot()
@@ -110,13 +97,13 @@ func _physics_process(delta):
 	if Globals.health <= 0:
 		pig_alive = false
 		print("Pig is dead")
+		Globals.lvl_end.emit()
 		get_tree().change_scene_to_file("res://scenes/menus/end_screen.tscn")
 		self.queue_free()
 
 	if flashlight_equipped:	
 		toggle_flashlight()
-
-	flash()
+	
 	if !flashlight_equipped and torch_equipped:
 		use_torch(delta)
 	
@@ -156,10 +143,6 @@ func _on_shoot_cooldown_timeout():
 	shootready = true
 
 
-
-
-
-
 func player():
 	pass
 
@@ -177,16 +160,14 @@ func _on_pig_hitbox_body_exited(body):
 
 func receive_damage(damage):
 	if not invulnerable:
-		Globals.health = Globals.health - damage
+		Globals.health -= damage
 		invulnerable = true
+		# flash red when talking damage
 		$Sprite2D.modulate = Color.RED
 		await get_tree().create_timer(0.1).timeout
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
-		
-		
-	
 	
 
 func set_invincible(time):
@@ -200,14 +181,6 @@ func set_invincible(time):
 func _on_dmg_iframe_cooldown_timeout():
 	invulnerable = false
 
-
-
-
-func _on_piglightarea_body_exited(body):
-	if body.has_method("light_unfreeze"):
-		body.light_unfreeze()
-	
-	
 func use_torch(delta):
 	if Globals.inv.contains(torch_resource):
 		#if Globals.inv.slots[1].amount > 0:
@@ -246,32 +219,15 @@ func use_torch(delta):
 		#else:
 			#$Tool_Sprite.visible = false
 	else:
-		$Torch_Sprite.visible = false
+		$Torch.visible = false
 			
 func toggle_flashlight():
 	if Input.is_action_just_pressed("primary_action"):
-		flashlight = !flashlight
-		
-		
-	
+		flashlight.light_on = not flashlight.light_on
+		print("light on")
+		print(flashlight.light_on)
 			
-func flash():
-	$piglight.visible = flashlight
-	$piglight_shadows.visible = flashlight
-	$piglight/piglightarea/CollisionPolygon2D.disabled = !flashlight
-	
-	if flashlight:
-		#$piglight/piglightarea/CollisionPolygon2D.disabled = false
-		
-		for body in $piglight/piglightarea.get_overlapping_bodies():
-			if body.has_method("light_freeze"):
-				body.light_freeze()
-	else:
-		#$piglight/piglightarea/CollisionPolygon2D.disabled = true
-		
-		for body in $piglight/piglightarea.get_overlapping_bodies():
-			if body.has_method("light_unfreeze"):
-				body.light_unfreeze()
+
 
 
 func change_tool(hb_num):
@@ -279,18 +235,18 @@ func change_tool(hb_num):
 	current_tool = Globals.inv.hb_slots[hb_num]
 	if current_tool.item != null:
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
-		flashlight = (current_tool.item.name == "Flashlight")
+		flashlight.light_on = (current_tool.item.name == "Flashlight")
+		print("change tool")
 		torch_equipped = (current_tool.item.name == "Torch")
 		consumable_equipped = !(flashlight_equipped or torch_equipped)
 	else:
 		torch_equipped = false
 		flashlight_equipped = false
-		flashlight = false
+		flashlight.light_on = false
 	return toggle_tool_sprites()
 	
 func toggle_tool_sprites():
-	$Torch_Sprite.visible = torch_equipped
-	$Flashlight_Sprite.visible = flashlight_equipped
+	$Torch.visible = torch_equipped
 	return 0
 
 func consumable_use():

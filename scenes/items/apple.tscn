@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk38y6qrxf7ab"]
+[gd_scene load_steps=7 format=3 uid="uid://bk38y6qrxf7ab"]
 
 [ext_resource type="Script" path="res://scenes/items/apple.gd" id="1_vdi25"]
 [ext_resource type="Texture2D" uid="uid://c64m8bioy63m1" path="res://assets/spritesheets/apple.png" id="2_0rb3t"]
 [ext_resource type="Resource" uid="uid://bmmxpybkyqxtu" path="res://scenes/items/inventory/inv_items/Apple.tres" id="2_27n7f"]
+[ext_resource type="PackedScene" uid="uid://dh26fh2f4pd2" path="res://scenes/lights/item_backlight.tscn" id="3_djovq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gnv3t"]
 radius = 8.0
@@ -19,6 +20,8 @@ lock_rotation = true
 linear_damp = 3.0
 script = ExtResource("1_vdi25")
 item = ExtResource("2_27n7f")
+
+[node name="ItemBacklight" parent="." instance=ExtResource("3_djovq")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 0)

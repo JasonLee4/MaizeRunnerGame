@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbv5dxydkhot"]
+[gd_scene load_steps=6 format=3 uid="uid://cbv5dxydkhot"]
 
 [ext_resource type="Script" path="res://scenes/items/key.gd" id="1_vsmdi"]
 [ext_resource type="Resource" uid="uid://b7agr8jacsdks" path="res://scenes/items/inventory/inv_items/key.tres" id="2_o12oa"]
+[ext_resource type="PackedScene" uid="uid://dh26fh2f4pd2" path="res://scenes/lights/item_backlight.tscn" id="3_k687p"]
 [ext_resource type="Texture2D" uid="uid://cbulik7y4qxal" path="res://assets/spritesheets/key.png" id="3_r53bp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5akms"]
@@ -11,6 +12,8 @@ radius = 22.0227
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_vsmdi")
 item = ExtResource("2_o12oa")
+
+[node name="ItemBacklight" parent="." instance=ExtResource("3_k687p")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_r53bp")

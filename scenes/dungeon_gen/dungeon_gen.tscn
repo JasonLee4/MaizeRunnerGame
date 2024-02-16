@@ -5,23 +5,31 @@
 [ext_resource type="AudioStream" uid="uid://crs2tawygcvpd" path="res://assets/audio/ambiance/Ambience_Armory.wav" id="3_51tyk"]
 
 [node name="DungeonGen" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_7plxx")
 
 [node name="Rooms" type="Node2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+z_index = -1
 
 [node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
 tile_set = ExtResource("2_0cbpq")
 rendering_quadrant_size = 32
 format = 2
 layer_0/name = "ground"
+layer_0/z_index = -1
 layer_1/name = "walls"
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "objects"
+layer_2/y_sort_enabled = true
 layer_2/tile_data = PackedInt32Array()
 
-[node name="Enemies" type="Node2D" parent="."]
-
 [node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Enemies" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.00392157, 0.0235294, 0.141176, 0.92549)

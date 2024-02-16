@@ -7,3 +7,5 @@
 script = ExtResource("1_hxn4x")
 name = "key"
 texture = ExtResource("2_jnvqx")
+tool = false
+useScript = ""
