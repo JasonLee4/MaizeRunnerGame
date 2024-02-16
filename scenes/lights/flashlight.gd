@@ -1,6 +1,11 @@
 extends Node2D
 
 @export var light_on = false
+@onready var timer = $Timer
+@onready var light = $FlashlightLight
+
+const max_brightness = .7
+const min_brightness = .4
 
 func _physics_process(_delta):
 	flash()
@@ -23,3 +28,20 @@ func flash():
 func _on_flashlight_area_body_exited(body):
 	if body.has_method("light_unfreeze"):
 		body.light_unfreeze()
+
+
+func _on_timer_timeout():
+	# add flashlight flicker
+	var rand_amt = randf()
+	print(rand_amt)
+	if rand_amt > max_brightness:
+		light.energy = max_brightness
+		timer.start(1)
+	elif rand_amt < min_brightness:
+		light.energy = min_brightness
+		timer.start(.1)
+	else:
+		light.energy = rand_amt
+		timer.start(rand_amt/randf_range(1,20))
+	
+	
