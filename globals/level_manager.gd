@@ -29,7 +29,7 @@ func get_num_rooms():
 	# level 9-10: 40 rooms
 	# level 11+: lvl * 5 rooms
 	var lvl = Globals.cur_lvl
-	if lvl < 1:
+	if lvl < 2:
 		return 15
 	elif lvl < 4:
 		return 20

@@ -115,7 +115,7 @@ func make_map():
 	var bottomright = map.local_to_map(full_rect.end)
 	#print(topleft)
 	#print(bottomright)
-	const offset = 5
+	const offset = 100
 	for x in range(topleft.x-offset, bottomright.x+offset):
 		for y in range(topleft.y-offset, bottomright.y+offset):
 			# set background to grass
