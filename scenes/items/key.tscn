@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbv5dxydkhot"]
+[gd_scene load_steps=7 format=3 uid="uid://cbv5dxydkhot"]
 
 [ext_resource type="Script" path="res://scenes/items/key.gd" id="1_vsmdi"]
 [ext_resource type="Resource" uid="uid://b7agr8jacsdks" path="res://scenes/items/inventory/inv_items/key.tres" id="2_o12oa"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5akms"]
 radius = 22.0227
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j0bs6"]
+polygon = PackedVector2Array(-10, 1.42857, 10, -18.5714, 17.1429, -11.4286, 15.7143, -10, 10, -15.7143, 5.71429, -11.4286, 10, -7.14286, 8.57143, -5.71429, 4.28571, -10, -8.57143, 2.85714, -5.71429, 5.71429, -4.28571, 8.57143, -5.71429, 12.8571, -8.57143, 12.8571, -11.4286, 11.4286, -14.2857, 8.57143, -15.7143, 5.71429, -15.7143, 2.85714, -14.2857, 0, -11.4286, 0)
 
 [node name="Key" type="Node2D"]
 scale = Vector2(0.7, 0.7)
@@ -23,5 +26,8 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_5akms")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_j0bs6")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
