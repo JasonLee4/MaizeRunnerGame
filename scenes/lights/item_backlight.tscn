@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh26fh2f4pd2"]
+
+[ext_resource type="Script" path="res://scenes/lights/item_backlight.gd" id="1_4xwme"]
+[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="2_3d5jn"]
+
+[node name="ItemBacklight" type="Node2D"]
+script = ExtResource("1_4xwme")
+
+[node name="Glow" type="PointLight2D" parent="."]
+color = Color(0.894118, 0.823529, 0, 1)
+energy = 0.5
+texture = ExtResource("2_3d5jn")
+
+[node name="GlowShadow" type="PointLight2D" parent="."]
+energy = 0.1
+texture = ExtResource("2_3d5jn")
+
+[node name="Timer" type="Timer" parent="."]

@@ -12,12 +12,16 @@ var key_scene = preload("res://scenes/items/key.tscn")
 @onready var map = $TileMap
 @onready var camera
 
-var tile_size = 32
-var num_rooms = 25
-var min_size = 4
-var max_size = 7
-var h_spread = 100
-var cull_pct = .6
+@onready var num_rooms = LevelManager.get_num_rooms()
+@onready var enemies_per_rm = LevelManager.get_num_enemies()
+
+# room generation vars
+const min_size = 4
+const max_size = 7
+const h_spread = 100
+const cull_pct = .6
+const tile_size = 32
+
 var start_room = null
 var key_room = null
 var exit_room = null
@@ -27,8 +31,9 @@ var path # AStar pathfinder to hold MST
 var enemy_spawns = []
 
 func _ready():
-	seed("maizerun".hash())
+	seed("maizerunner".hash())
 	print("Making rooms...")
+	print(num_rooms)
 	await make_rooms()
 	print("Loading UI...")
 	add_child(ui_scene.instantiate())
@@ -37,7 +42,8 @@ func _ready():
 	print("Creating map...")
 	make_map()
 	print("Spawning enemies...")
-	spawn_enemies(2)
+	print(enemies_per_rm)
+	spawn_enemies(enemies_per_rm)
 	print("Spawn items...")
 	spawn_items()
 	# start game timer
@@ -109,7 +115,7 @@ func make_map():
 	var bottomright = map.local_to_map(full_rect.end)
 	#print(topleft)
 	#print(bottomright)
-	const offset = 5
+	const offset = 100
 	for x in range(topleft.x-offset, bottomright.x+offset):
 		for y in range(topleft.y-offset, bottomright.y+offset):
 			# set background to grass
@@ -136,7 +142,7 @@ func make_map():
 				var end = map.local_to_map(path.get_point_position(conn))
 				carve_path(start, end)
 		corridors.append(p)
-	# add corn
+	# add corn 
 	var grass_tiles: Array[Vector2i] = map.get_used_cells_by_id(0, 0, Vector2i(8, 4), 0)
 	for tile in grass_tiles:
 		map.set_cell(1, tile, 0, Vector2i(2,0), 0)

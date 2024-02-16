@@ -1,17 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://efwdnoirj55t"]
+[gd_scene load_steps=11 format=3 uid="uid://efwdnoirj55t"]
 
 [ext_resource type="Script" path="res://scenes/items/torch.gd" id="1_kfmpc"]
 [ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_o4iw7"]
 [ext_resource type="Texture2D" uid="uid://beee3j71psqn4" path="res://assets/spritesheets/torchgif.png" id="3_cy505"]
-
-[sub_resource type="Gradient" id="Gradient_su8b3"]
-offsets = PackedFloat32Array(0, 0.7173)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w7koc"]
-gradient = SubResource("Gradient_su8b3")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="3_fjoov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ydk86"]
 radius = 12.5399
@@ -56,9 +48,8 @@ item = ExtResource("2_o4iw7")
 light_mask = 2
 rotation = -0.774926
 scale = Vector2(3, 3)
-color = Color(1, 0.792157, 0.635294, 1)
 energy = 0.5
-texture = SubResource("GradientTexture2D_w7koc")
+texture = ExtResource("3_fjoov")
 
 [node name="Torch_Light_Area" type="Area2D" parent="PointLight2D"]
 rotation = 0.774926
@@ -76,7 +67,7 @@ color = Color(1, 0.792157, 0.635294, 1)
 energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
-texture = SubResource("GradientTexture2D_w7koc")
+texture = ExtResource("3_fjoov")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 3

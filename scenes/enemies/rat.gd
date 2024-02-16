@@ -1,7 +1,6 @@
 extends enemy
 
 @onready var stateMachine = get_node("State Machine")
-@onready var pigLight = Globals.pig.get_node("piglight/piglightarea")
 
 @export var detectionRadius : float
 var cooldown : float

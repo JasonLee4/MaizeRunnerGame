@@ -18,6 +18,8 @@ func _ready():
 	Globals.inv = Inventory.new()
 	update_slots()
 	open()
+	
+	
 
 func _process(delta):
 	for i in [1,2,3]:
@@ -27,7 +29,7 @@ func _process(delta):
 			# choose tool send to pig
 			#hotbar_select.emit(curr_idx)
 			
-	hotbar_select.emit(curr_idx)
+			hotbar_select.emit(curr_idx)
 	pass
 
 

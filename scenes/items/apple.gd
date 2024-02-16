@@ -14,6 +14,7 @@ func effect(delta):
 			Globals.inv.remove_item(item, 1)
 			
 			Globals.health += 1
+
 	
 	
 func _physics_process(delta):
@@ -27,6 +28,7 @@ func _physics_process(delta):
 		pickup = true
 	
 	pass
+
 
 
 

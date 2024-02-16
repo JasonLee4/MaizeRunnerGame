@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://beojxqj7yugwu"]
 
-[ext_resource type="Script" path="res://scenes/menus/end_screen.gd" id="1_piyvg"]
+[ext_resource type="Script" path="res://scenes/menus/you_won_screen.gd" id="1_5vbjb"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_piyvg")
+script = ExtResource("1_5vbjb")
 
 [node name="TextEdit" type="LineEdit" parent="."]
 layout_mode = 2
@@ -23,11 +23,11 @@ alignment = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-offset_left = 521.0
+offset_left = 434.0
 offset_top = 276.0
-offset_right = 631.0
+offset_right = 718.0
 offset_bottom = 299.0
-text = "Time: 00:00"
+text = "Level x completed in 00:00"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -54,7 +54,7 @@ size_flags_horizontal = 4
 [node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
-text = "Restart"
+text = "Next Level"
 
 [node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
