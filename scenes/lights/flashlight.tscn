@@ -25,15 +25,15 @@ occluder_light_mask = 6
 
 [node name="FlashlightLight" type="PointLight2D" parent="."]
 scale = Vector2(4, 4)
-color = Color(0.729412, 1, 1, 1)
-energy = 0.6
+color = Color(0.823529, 0.964706, 0.964706, 1)
+energy = 0.7
 shadow_enabled = true
 shadow_item_cull_mask = 2
 texture = ExtResource("2_yru3v")
 
 [node name="FlashlightLightShadows" type="PointLight2D" parent="."]
 scale = Vector2(4, 4)
-energy = 0.5
+energy = 0.1
 shadow_enabled = true
 shadow_item_cull_mask = 5
 texture = ExtResource("2_yru3v")
