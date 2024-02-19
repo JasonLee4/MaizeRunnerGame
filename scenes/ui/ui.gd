@@ -12,7 +12,6 @@ func _ready():
 	update_health()
 	# inventory
 	Globals.inv.connect("update", update_inventory)
-	backpack.visible = false
 	
 	# level stats
 	Globals.connect("lvl_start", start_timer)
