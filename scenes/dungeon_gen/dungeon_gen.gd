@@ -96,9 +96,12 @@ func load_player():
 	Globals.pig = player
 	player.position = start_room.position
 	play_mode = true
-	camera = Camera2D.new()
-	camera.zoom = Vector2(2.5,2.5)
-	player.add_child(camera)
+	#camera = Camera2D.new()
+	#
+	#camera.set_script(load("res://scenes/levels/Camera.gd"))
+	#
+	#camera.zoom = Vector2(2.5,2.5)
+	#player.add_child(camera)
 
 func make_map():
 	map.clear()

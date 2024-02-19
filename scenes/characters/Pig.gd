@@ -40,6 +40,7 @@ var consumable_equipped = false
 var temp_speed = 0
 var hold_time = 0.0
 #@export var inv: Inventory
+signal damage_player
 
 
 func _ready():
@@ -47,6 +48,7 @@ func _ready():
 	Globals.pig = $"."
 	print("pig inst")
 	hotbar.connect("hotbar_select", change_tool)
+	change_tool(0)
 	traj_line.clear_points()
 	
 #func craft():
@@ -96,7 +98,7 @@ func _physics_process(delta):
 	
 	
 	move_and_slide()
-	shoot()
+	#shoot()
 	
 	if Globals.health <= 0:
 		pig_alive = false
@@ -172,6 +174,7 @@ func receive_damage(damage):
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
+		damage_player.emit()
 	
 
 func set_invincible(time):

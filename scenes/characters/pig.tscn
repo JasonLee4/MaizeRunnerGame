@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=25 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://ddkcgxfupj33n" path="res://assets/spritesheets/pigmoving.png" id="3_5iu3b"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/states/state_rolling.gd" id="4_a3gfp"]
 [ext_resource type="Texture2D" uid="uid://beee3j71psqn4" path="res://assets/spritesheets/torchgif.png" id="4_ca7rt"]
 [ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="4_ws5bl"]
+[ext_resource type="Script" path="res://scenes/levels/Camera.gd" id="10_sbke0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
 height = 28.0
@@ -141,6 +142,58 @@ _data = {
 radius = 16.0
 height = 32.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mwk50"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_6jwj7"]
+offsets = PackedFloat32Array(0.704641, 0.898734, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.897059, 0.897059, 0.897059, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jpsl2"]
+gradient = SubResource("Gradient_6jwj7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.196581)
+
+[sub_resource type="Animation" id="Animation_mhjdc"]
+resource_name = "damage"
+length = 0.2
+step = 0.0745
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.388235, 0, 0, 0), Color(0.388235, 0, 0, 0.588235), Color(0.388235, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fpbo6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.388235, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hfu3h"]
+_data = {
+"RESET": SubResource("Animation_fpbo6"),
+"damage": SubResource("Animation_mhjdc")
+}
+
 [node name="Pig" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_hx4hr")
@@ -258,6 +311,29 @@ width = 1.0
 sharp_limit = 1.0
 round_precision = 1
 antialiased = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+script = ExtResource("10_sbke0")
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D"]
+modulate = Color(0.388235, 0, 0, 0)
+material = SubResource("CanvasItemMaterial_mwk50")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -129.0
+offset_right = 229.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_jpsl2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+libraries = {
+"": SubResource("AnimationLibrary_hfu3h")
+}
 
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
