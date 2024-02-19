@@ -23,8 +23,8 @@ func _process(delta):
 	if Globals.lvl_time:
 		timer_label.text = Globals.lvl_time
 		
-	if Input.is_action_just_pressed("open_inventory"):
-		$backpack_menu.visible = !$backpack_menu.visible
+	#if Input.is_action_just_pressed("open_inventory"):
+		#$backpack_menu.visible = !$backpack_menu.visible
 
 
 func update_health():
