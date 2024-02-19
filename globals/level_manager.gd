@@ -22,22 +22,19 @@ func get_num_enemies():
 		return 5
 
 func get_num_rooms():
-	# level 1: 15 rooms
-	# level 2-3: 20 rooms
-	# level 4-5: 25 rooms
-	# level 6-8: 30 rooms
-	# level 9-10: 40 rooms
-	# level 11+: lvl * 5 rooms
+	# level 1-3: 15 rooms
+	# level 4-8: 20 rooms
+	# level 9-12: 25 rooms
+	# level 13-15: 30 rooms
+	# level 16+: 2 * level
 	var lvl = Globals.cur_lvl
-	if lvl < 2:
+	if lvl < 4:
 		return 15
-	elif lvl < 4:
-		return 20
-	elif lvl < 6:
-		return 25
 	elif lvl < 9:
+		return 20
+	elif lvl < 13:
+		return 25
+	elif lvl < 16:
 		return 30
-	elif lvl < 11:
-		return 40
 	else:
-		return lvl * 5
+		return lvl * 2
