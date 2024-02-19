@@ -17,6 +17,8 @@ script = ExtResource("1_vsmdi")
 item = ExtResource("2_o12oa")
 
 [node name="ItemBacklight" parent="." instance=ExtResource("3_k687p")]
+scale = Vector2(2, 2)
+color = Color(0.517647, 0.631373, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_r53bp")
