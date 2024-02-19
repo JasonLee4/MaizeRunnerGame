@@ -1,40 +1,58 @@
 extends enemy
 
-@onready var stateMachine = get_node("State Machine")
+@onready var state_machine = get_node("State Machine")
 
-@export var detectionRadius : float
-var cooldown : float
+@export var detection_radius : float
 
 func _ready():
-	##var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
-	##$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
-	#
-	#set_health()
-	print("ready")
 	$squeak_cooldown.start(randf_range(1, 5))
-	
+
 func choose_animation():
+	#Movement animation
 	super.choose_animation()
 	if velocity.x == 0 and velocity.y == 0:
-		$AnimatedSprite2D.play("tail_wag")
+		#$AnimatedSprite2D.play("tail_wag")
+		$AnimationPlayer.play("tail_wag")
+		
+	#Eye animation flipping
+	if $Base.flip_h == true:
+		$RedEyes.flip_h = true
+		$YellowEyes.flip_h = true
+	else:
+		$RedEyes.flip_h = false
+		$YellowEyes.flip_h = false
+		
+	#Eye animation color
+	if state_machine.get_current_state().name != "EnemyFollow" and state_machine.get_current_state().name != "EnemyAttack":
+		$RedEyes.hide()
+		$YellowEyes.show()
+		#$Eyes.play("yellow")
+	else:
+		$RedEyes.show()
+		$YellowEyes.hide()
+		#$Eyes.play("red")
+		
+func process_sound():
+	if state_machine.get_current_state().name == "EnemyFollow" and !$run.playing:
+		print("playing run")
+		$run.play()
+	elif state_machine.get_current_state().name != "EnemyFollow" and $run.playing:
+		print("stopping run")
+		$run.stop()
 
 func light_unfreeze():
 	#print("Rat can move")
-	var currentState = stateMachine.get_current_state()
+	var currentState = state_machine.get_current_state()
 	currentState.transitioned.emit(currentState, "EnemyIdle")
 
 func light_freeze():
 	#print("Rat shined on")
-	var currentState = stateMachine.get_current_state()
+	var currentState = state_machine.get_current_state()
 	currentState.transitioned.emit(currentState, "EnemyFreeze")
-		
-
 
 func _on_squeak_cooldown_timeout():
-	print("Playing squeak");
 	$squeak_cooldown.stop()
 	$squeak.play();
-
 
 func _on_audio_stream_player_2d_finished():
 	$squeak_cooldown.start(randf_range(20, 60));
