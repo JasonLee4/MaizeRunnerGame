@@ -4,6 +4,8 @@ extends CharacterBody2D
 var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 var torch_scene = preload("res://scenes/items/torch.tscn")
 var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres")
+var flashlight_scene = preload("res://scenes/items/Flashlight.tscn")
+var flashlight_resource = preload("res://scenes/items/inventory/inv_items/Flashlight.tres")
 
 @onready var traj_line = $trajectory_line
 @onready var state_machine = get_node("player_state_machine")
@@ -28,6 +30,8 @@ var torch_hold_time = 0.0
 var torch_speed = 10
 
 var current_tool
+var curr_hb_num
+
 var consumable_equipped = false
 var temp_speed = 0
 var hold_time = 0.0
@@ -98,7 +102,8 @@ func _physics_process(delta):
 		self.queue_free()
 
 	if flashlight_equipped:	
-		toggle_flashlight()
+		flashlight.visible = true
+		toggle_flashlight(delta)
 	
 	if !flashlight_equipped and torch_equipped:
 		use_torch(delta)
@@ -222,17 +227,45 @@ func use_torch(delta):
 	else:
 		$Torch.visible = false
 			
-func toggle_flashlight():
-	if Input.is_action_just_pressed("primary_action"):
-		flashlight.light_on = not flashlight.light_on
-		print("light on")
-		print(flashlight.light_on)
+func toggle_flashlight(delta):
+	if Globals.inv.contains(flashlight_resource):
+		var flashlight_instance = flashlight_scene.instantiate()
+		if Input.is_action_just_pressed("primary_action"):
+			flashlight.light_on = not flashlight.light_on
+			print("light on")
+			print(flashlight.light_on)
+		
+		elif Input.is_action_pressed("secondary_action"):
+			if temp_speed < flashlight_instance.speed:
+				temp_speed += 5
+				traj_line.show()
+				update_trajectory(temp_speed)
+			hold_time += delta
+		elif Input.is_action_just_released("secondary_action"):
+			traj_line.hide()
+			traj_line.clear_points()		
+			Globals.inv.remove_item(current_tool.item, 1)
+			#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
 			
+			hold_time = 0.0
+			
+			flashlight_instance.global_position = $Marker2D2.global_position
+			var dir = (get_global_mouse_position() - flashlight_instance.global_position).normalized()
+			flashlight_instance.linear_velocity.x = dir.x*temp_speed
+			flashlight_instance.linear_velocity.y = dir.y*temp_speed
+			flashlight_instance.angular_velocity = 10
+			flashlight_instance.pickup = false
+			
+			Globals.pig.get_tree().current_scene.add_child(flashlight_instance)
+			temp_speed = 0
+		
+	else:
+		flashlight.visible = false
 
 
 
 func change_tool(hb_num):
-	
+	curr_hb_num = hb_num
 	current_tool = Globals.inv.hb_slots[hb_num]
 	if current_tool.item != null:
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
