@@ -156,6 +156,21 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.196581)
 
+[sub_resource type="Animation" id="Animation_fpbo6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.388235, 0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_mhjdc"]
 resource_name = "damage"
 length = 0.2
@@ -173,21 +188,6 @@ tracks/0/keys = {
 "values": [Color(0.388235, 0, 0, 0), Color(0.388235, 0, 0, 0.588235), Color(0.388235, 0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_fpbo6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.388235, 0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hfu3h"]
 _data = {
 "RESET": SubResource("Animation_fpbo6"),
@@ -202,9 +202,6 @@ script = ExtResource("1_hx4hr")
 y_sort_enabled = true
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_a3r7q")
-
-[node name="weapon" type="Node2D" parent="."]
-visible = false
 
 [node name="weapon_sprite" type="Sprite2D" parent="."]
 visible = false
@@ -276,14 +273,8 @@ shape = SubResource("CapsuleShape2D_w6u8y")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
 
-[node name="shoot_cooldown" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="dash_cooldown" type="Timer" parent="."]
 wait_time = 4.0
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(16, -15)
 
 [node name="player_state_machine" type="Node" parent="."]
 script = ExtResource("3_e2ml4")
@@ -338,7 +329,6 @@ libraries = {
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
-[connection signal="timeout" from="shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="player_state_machine/state_rolling/RollTime" to="player_state_machine/state_rolling" method="_on_roll_time_timeout"]
 [connection signal="timeout" from="player_state_machine/state_moving/RollCooldown" to="player_state_machine/state_moving" method="_on_roll_cooldown_timeout"]

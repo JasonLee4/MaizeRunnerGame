@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var light_on = false
+@export var equipped = false
 @onready var timer = $Timer
 @onready var light = $FlashlightLight
 
@@ -12,7 +13,10 @@ func _physics_process(_delta):
 
 func flash():
 	$".".look_at(get_global_mouse_position())	
-	$".".visible = light_on
+	#$".".visible = light_on
+	$FlashlightLight.visible = light_on
+	$FlashlightLightShadows.visible = light_on
+	$Sprite2D.visible = equipped
 	#$FlashlightLightShadows.visible = light_on
 	$FlashlightArea/CollisionPolygon2D.disabled = !light_on
 	

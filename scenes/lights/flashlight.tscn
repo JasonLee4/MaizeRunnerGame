@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bl5yl2pomtmqm"]
+[gd_scene load_steps=6 format=3 uid="uid://bl5yl2pomtmqm"]
 
 [ext_resource type="Script" path="res://scenes/lights/flashlight.gd" id="1_drrf6"]
 [ext_resource type="Texture2D" uid="uid://rgvj1vn7og2p" path="res://assets/spritesheets/light.png" id="1_xvo1d"]
+[ext_resource type="Texture2D" uid="uid://d18oosn4jflwk" path="res://assets/spritesheets/flashlight.png" id="2_gy83q"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="2_yru3v"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ny28b"]
@@ -22,6 +23,12 @@ polygon = PackedVector2Array(196, -37, 113, 3, 196, 41)
 position = Vector2(1, 0)
 occluder = SubResource("OccluderPolygon2D_ny28b")
 occluder_light_mask = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_gy83q")
+flip_h = true
 
 [node name="FlashlightLight" type="PointLight2D" parent="."]
 scale = Vector2(4, 4)

@@ -9,7 +9,7 @@ var rng = RandomNumberGenerator.new()
 var shake_strength : float = 0.0
 
 func _ready():
-	get_parent().connect("damage_player", apply_shake)
+	get_parent().connect("camera_shake", apply_shake)
 
 func apply_shake():
 	shake_strength = randomStrength
