@@ -2,21 +2,21 @@ extends Node
 
 func get_num_enemies():
 	# level 1: no enemies
-	# level 2-3: 1/room
-	# level 4-5: 2/room
-	# level 6-8: 3/room
-	# level 9-10: 4/room
-	# level 11+: 5/room
+	# level 2-5: 1/room
+	# level 6-10: 2/room
+	# level 11-14: 3/room
+	# level 15-18: 4/room
+	# level 19+: 5/room
 	var lvl = Globals.cur_lvl
 	if lvl < 2:
 		return 0
-	elif lvl < 4:
-		return 1
 	elif lvl < 6:
-		return 2
-	elif lvl < 9:
-		return 3
+		return 1
 	elif lvl < 11:
+		return 2
+	elif lvl < 15:
+		return 3
+	elif lvl < 19:
 		return 4
 	else:
 		return 5
