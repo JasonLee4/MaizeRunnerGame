@@ -7,27 +7,19 @@ var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres"
 
 @onready var traj_line = $trajectory_line
 @onready var state_machine = get_node("player_state_machine")
-#@onready var fire_place = get_tree().current_scene.get_node("FirePlace")
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
 @onready var flashlight = $Flashlight
 
-var dashDirection = Vector2(1,0)
+
 var dashready = true
 
-var shootready = true
 
-var punchready = true
 
-@export var enemies_pig_can_attack = []
 var invulnerable = false
 var pig_alive = true
  
-var can_basic_attack = true
 
-var basic_damage = 50
 
-var equipped = false
-var curr_bullet_sprite
 
 var flashlight_equipped = false
 
@@ -40,7 +32,7 @@ var consumable_equipped = false
 var temp_speed = 0
 var hold_time = 0.0
 #@export var inv: Inventory
-signal damage_player
+signal camera_shake
 
 
 func _ready():
@@ -85,13 +77,11 @@ func _physics_process(delta):
 			$Torch.rotation = abs($Torch.rotation)
 			
 			$Roll.flip_h = true
-			$Marker2D.position.x = abs($Marker2D.position.x)
 		elif velocity.x > 0:
 			$Sprite2D.flip_h = false
 			$weapon_sprite.flip_h = false
 			$Torch.rotation = -1*abs($Torch.rotation)
 			$Roll.flip_h = false			
-			$Marker2D.position.x = abs($Marker2D.position.x)
 		
 	else:
 		$AnimationPlayer.stop()
@@ -121,32 +111,32 @@ func _on_dash_cooldown_timeout():
 	print("dash is ready")
 	dashready = true
 
-func equip_weapon(weaponsprite, bulletsprite):
-	equipped = true
-	$weapon_sprite.texture = load(weaponsprite)
-	$weapon_sprite.visible = true
-	curr_bullet_sprite = load(bulletsprite)
-	pass
-	
+#func equip_weapon(weaponsprite, bulletsprite):
+	#equipped = true
+	#$weapon_sprite.texture = load(weaponsprite)
+	#$weapon_sprite.visible = true
+	#curr_bullet_sprite = load(bulletsprite)
+	#pass
+	#
 
 	
 #ranged ability
-func shoot():
-	if Input.is_action_just_pressed("primary_action") and shootready and equipped:
-		shootready = false
-		var pb = pigbullet_scene.instantiate()
-		pb.get_node("Sprite2D").texture = curr_bullet_sprite
-		get_parent().add_child(pb)
-		pb.global_position = $Marker2D.global_position
-		var dir = (get_global_mouse_position() - pb.global_position).normalized()
-		#pb.global_rotation = dir.angle() + PI / 2.0
-		pb.direction = dir
-		
-		$shoot_cooldown.start()
+#func shoot():
+	#if Input.is_action_just_pressed("primary_action") and shootready and equipped:
+		#shootready = false
+		#var pb = pigbullet_scene.instantiate()
+		#pb.get_node("Sprite2D").texture = curr_bullet_sprite
+		#get_parent().add_child(pb)
+		#pb.global_position = $Marker2D.global_position
+		#var dir = (get_global_mouse_position() - pb.global_position).normalized()
+		##pb.global_rotation = dir.angle() + PI / 2.0
+		#pb.direction = dir
+		#
+		#$shoot_cooldown.start()
 
-
-func _on_shoot_cooldown_timeout():
-	shootready = true
+#
+#func _on_shoot_cooldown_timeout():
+	#shootready = true
 
 
 func player():
@@ -174,7 +164,7 @@ func receive_damage(damage):
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
-		damage_player.emit()
+		camera_shake.emit()
 	
 
 func set_invincible(time):
@@ -247,6 +237,7 @@ func change_tool(hb_num):
 	if current_tool.item != null:
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
 		flashlight.light_on = (current_tool.item.name == "Flashlight")
+		flashlight.equipped = (current_tool.item.name == "Flashlight")
 		print("change tool")
 		torch_equipped = (current_tool.item.name == "Torch")
 		consumable_equipped = !(flashlight_equipped or torch_equipped)
@@ -254,6 +245,7 @@ func change_tool(hb_num):
 		torch_equipped = false
 		flashlight_equipped = false
 		flashlight.light_on = false
+		flashlight.equipped = false
 	return toggle_tool_sprites()
 	
 func toggle_tool_sprites():
