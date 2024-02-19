@@ -12,6 +12,6 @@ func update(slot: Inventory_Slot):
 		print("Update with item")
 		item_visual.visible = true
 		item_visual.texture = slot.item.texture
-		amount_text.visible = true
-		amount_text.text = str(slot.amount)
 		
+		amount_text.text = str(slot.amount)	
+		amount_text.visible = (slot.amount > 1)
