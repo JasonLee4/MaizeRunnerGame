@@ -1,4 +1,7 @@
 extends Node
+var torch_item : Inv_Item  = preload("res://scenes/items/inventory/inv_items/Torch.tres")
+var flash_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/Flashlight.tres")
+var apple_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/Apple.tres")
 
 var pig
 
@@ -27,29 +30,11 @@ var inv :
 	get:
 		return inv
 	set(value):
-		#value.slots.resize(3)
-		#value.slots.fill(Inventory_Slot.new())
+		print("reseting inv")
 		for hb in hb_size:
 			value.hb_slots.append(Inventory_Slot.new())
-			
-			###GIVING PLAYER 5 TORCHES INITIALLY
-			if hb == 0:
-				for i in range(0,5):
-					var temp_torch : Inv_Item  = preload("res://scenes/items/inventory/inv_items/Torch.tres")
-					value.insert(temp_torch)
-			###GIVING PLAYER 5 TORCHES INITIALLY
-			if hb == 1:
-				var temp_flash : Inv_Item = preload("res://scenes/items/inventory/inv_items/Flashlight.tres")
-				value.insert(temp_flash)
-				
-			if hb ==2 :
-				var temp_apple : Inv_Item = preload("res://scenes/items/inventory/inv_items/Apple.tres")
-				for i in range(0,5):				
-					value.insert(temp_apple)
 		for bp in bp_size:
 			value.bp_slots.append(Inventory_Slot.new())
-		
-		
 		inv = value
 		
 
@@ -78,10 +63,19 @@ func go_next_lvl():
 	
 func restart_game():
 	health = 5
-	inv = Inventory.new()
+	
 	lvl_start_time = null
 	lvl_end_time = null
 	cur_lvl = 1
+	
+	# give player 10 torches and 5 apples to start
+	inv = Inventory.new()
+	inv.insert(flash_item)
+	for _i in range(10):
+		inv.insert(torch_item)
+	for _i in range(5):
+		inv.insert(apple_item)
+	
 	
 	
 

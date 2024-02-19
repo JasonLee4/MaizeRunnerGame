@@ -15,7 +15,6 @@ func _ready():
 	#print("connection to update")
 	#inventory.update.connect(update_slots)
 	curr_idx = 0
-	Globals.inv = Inventory.new()
 	update_slots()
 	open()
 	
