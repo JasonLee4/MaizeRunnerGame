@@ -53,6 +53,7 @@ texture = ExtResource("3_fjoov")
 
 [node name="Torch_Light_Area" type="Area2D" parent="PointLight2D"]
 rotation = 0.774926
+scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 18
 

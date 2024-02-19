@@ -233,13 +233,32 @@ func carve_path(start, end):
 func find_key_exit_rooms():
 	var max_x = -INF
 	var min_x = INF
+	var max_y = -INF
+	var min_y = INF
+	var top_room
+	var right_room
+	var down_room
+	var left_room
 	for room in $Rooms.get_children():
 		if room.position.x > max_x:
-			key_room = room
+			right_room = room
 			max_x = room.position.x
 		if room.position.x < min_x:
-			exit_room = room
+			left_room = room
 			min_x = room.position.x
+		if room.position.y > max_y:
+			top_room = room
+			max_y = room.position.y
+		if room.position.y < min_y:
+			down_room = room
+			min_y = room.position.y
+	var room_arr = [top_room, right_room, down_room, left_room]
+	
+	key_room = room_arr.pick_random()
+	exit_room = room_arr.pick_random()
+	while exit_room == key_room:
+		exit_room = room_arr.pick_random()
+	
 
 func find_mst(nodes):
 	# Prim's algorithm
