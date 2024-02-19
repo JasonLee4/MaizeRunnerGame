@@ -251,6 +251,14 @@ one_shot = true
 
 [node name="Marker2D2" type="Marker2D" parent="."]
 
+[node name="trajectory_line" type="Line2D" parent="."]
+visible = false
+closed = true
+width = 1.0
+sharp_limit = 1.0
+round_precision = 1
+antialiased = true
+
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]

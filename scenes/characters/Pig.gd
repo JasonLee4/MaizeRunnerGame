@@ -5,6 +5,7 @@ var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 var torch_scene = preload("res://scenes/items/torch.tscn")
 var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres")
 
+@onready var traj_line = $trajectory_line
 @onready var state_machine = get_node("player_state_machine")
 #@onready var fire_place = get_tree().current_scene.get_node("FirePlace")
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
@@ -36,7 +37,7 @@ var torch_speed = 10
 
 var current_tool
 var consumable_equipped = false
-var temp_speed
+var temp_speed = 0
 var hold_time = 0.0
 #@export var inv: Inventory
 
@@ -46,7 +47,7 @@ func _ready():
 	Globals.pig = $"."
 	print("pig inst")
 	hotbar.connect("hotbar_select", change_tool)
-
+	traj_line.clear_points()
 	
 #func craft():
 	#if inv.slots[0].amount >= 2:	
@@ -63,6 +64,7 @@ func _ready():
 func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
+	traj_line.look_at(get_global_mouse_position())
 	
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
@@ -203,8 +205,12 @@ func use_torch(delta):
 			elif Input.is_action_pressed("secondary_action"):
 				if torch_speed < 100:
 					torch_speed += 5
+					traj_line.show()
+					update_trajectory(torch_speed)
 				torch_hold_time += delta
 			elif Input.is_action_just_released("secondary_action"):
+				traj_line.hide()
+				traj_line.clear_points()
 				Globals.inv.remove_item(torch_resource, 1)
 				var tr = torch_scene.instantiate()			
 				
@@ -258,12 +264,16 @@ func consumable_use(delta):
 	cons.effect(delta)
 	
 	#assuming all consumables have speed
-	temp_speed = cons.speed
+	#temp_speed = cons.speed
 	if Input.is_action_pressed("secondary_action"):
-		if temp_speed < 100:
+		if temp_speed < cons.speed:
 			temp_speed += 5
+			traj_line.show()
+			update_trajectory(temp_speed)
 		hold_time += delta
 	elif Input.is_action_just_released("secondary_action"):
+		traj_line.hide()
+		traj_line.clear_points()		
 		Globals.inv.remove_item(current_tool.item, 1)
 		#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
 		
@@ -280,4 +290,13 @@ func consumable_use(delta):
 		temp_speed = 0
 	if current_tool.amount == 0:		
 		consumable_equipped = false
+
+func update_trajectory(spd_val):
+	var pos = global_position
 	
+	var vel = (get_global_mouse_position()-global_position).normalized() * spd_val
+	
+	pos += vel
+	
+	traj_line.add_point(traj_line.to_local(pos))
+	pass

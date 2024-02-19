@@ -2,7 +2,7 @@ extends RigidBody2D
 
 
 @export var item: Inv_Item
-@export var speed = 30
+@export var speed = 70
 var pickup = true
 #func _ready():
 	#$Area2D/CollisionShape2D.disabled = true
