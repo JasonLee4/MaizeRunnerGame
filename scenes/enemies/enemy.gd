@@ -16,59 +16,46 @@ var invulnerable = false
 
 func _physics_process(delta):
 	choose_animation()
-	#pass
-	#move()
-	#if player != null:
-		#deal_damage(ranged)
+	process_sound()
+
+func process_sound():
+	pass
 
 func choose_animation():
-	var animationNames = $AnimatedSprite2D.sprite_frames.get_animation_names()
-	var walkRatio = abs(velocity.x/velocity.y)
-	if walkRatio >= 1 and "walk_side" in animationNames:
+	#var animationNames = $AnimatedSprite2D.sprite_frames.get_animation_names()
+	var walk_ratio = abs(velocity.x/velocity.y)
+	if walk_ratio >= 1 and $AnimationPlayer.get_animation("walk_side") != null:
 		if velocity.x > 0 :
-			$AnimatedSprite2D.flip_h = false
+			#$AnimatedSprite2D.flip_h = false
+			$Base.flip_h = false
 		else:
-			$AnimatedSprite2D.flip_h = true
+			#$AnimatedSprite2D.flip_h = true
+			$Base.flip_h = true
 		#print("playing walk side")
-		$AnimatedSprite2D.play("walk_side")
-	elif 0 < walkRatio and walkRatio < 1:	
-		if velocity.y > 0 and "walk_down" in animationNames:
-			$AnimatedSprite2D.play("walk_down")
-		elif velocity.y < 0 and "walk_up" in animationNames:
+		$AnimationPlayer.play("walk_side")
+		#$AnimatedSprite2D.play("walk_side")
+	elif 0 < walk_ratio and walk_ratio < 1:	
+		if velocity.y > 0 and $AnimationPlayer.get_animation("walk_down") != null:
+			$AnimationPlayer.play("walk_down")
+			#$AnimatedSprite2D.play("walk_down")
+		elif velocity.y < 0 and $AnimationPlayer.get_animation("walk_up") != null:
 			#print("up")
-			$AnimatedSprite2D.play("walk_up")
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#set_health()
-	pass
+			$AnimationPlayer.play("walk_up")
+			#$AnimatedSprite2D.play("walk_up")
 
 func set_health():
 	$Healthbar.max_value = MAX_HEALTH	
 	$Healthbar.value = health
-	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+	#pass
 	
 func enemy():
 	pass
-
-#func _on_enemy_hitbox_body_entered(body):
-	#if body.has_method("player"):
-		##body.enemies_pig_can_attack.append(self)
-		##player_in_hitbox = true
-		#player = body
-#
-#func _on_enemy_hitbox_body_exited(body):
-	#if body.has_method("player"):
-		##body.enemies_pig_can_attack.erase(self)
-		##player_in_hitbox = false
-		#player = null
  
-func move():
-	pass
+#func move():
+	#pass
 
 func deal_damage():
 	#if can_attack_player and can_attack:
@@ -82,9 +69,9 @@ func deal_damage():
 func take_damage(damage_value):
 	#print("damaged hit")
 	#if not invulnerable:
-	$AnimatedSprite2D.modulate = Color(2,2,2,2)
+	$Base.modulate = Color(2,2,2,2)
 	await get_tree().create_timer(0.1).timeout
-	$AnimatedSprite2D.modulate = Color.WHITE
+	$Base.modulate = Color.WHITE
 	
 	health = health - damage_value
 	set_health()

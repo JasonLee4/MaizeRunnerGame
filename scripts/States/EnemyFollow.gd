@@ -17,7 +17,7 @@ func update(delta: float):
 	if enemy.can_attack and enemy.can_attack_player:
 		print("follow -> attack")
 		transitioned.emit(self, "EnemyAttack")
-	elif "detectionRadius" in enemy and enemy.global_position.distance_to(pig.global_position) > enemy.detectionRadius:
+	elif "detection_radius" in enemy and enemy.global_position.distance_to(pig.global_position) > enemy.detection_radius:
 		transitioned.emit(self, "EnemyIdle")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

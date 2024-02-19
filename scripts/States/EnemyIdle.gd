@@ -21,14 +21,11 @@ func randomize_wander():
 	
 func enter():
 	#print("enemy wandering")
-	#if get_tree() != null:
-		#pig = get_tree().get_current_scene().get_node("Pig")
 	assert(pig != null)
-	#print("enemy idle")
 	randomize_wander()
 
 func update(delta: float):
-	if "detectionRadius" in enemy and enemy.global_position.distance_to(pig.global_position) <= enemy.detectionRadius:
+	if "detection_radius" in enemy and enemy.global_position.distance_to(pig.global_position) <= enemy.detection_radius:
 		transitioned.emit(self, "EnemyFollow")
 	elif enemy.can_attack and enemy.can_attack_player:
 		print("idle -> attack")
