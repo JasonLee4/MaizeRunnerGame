@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://byeselobihax4"]
+[gd_scene load_steps=3 format=3 uid="uid://byeselobihax4"]
 
 [ext_resource type="Script" path="res://scenes/ui/hotbar_slot.gd" id="1_kkbiw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_atcaj"]
+line_spacing = 0.0
 
 [node name="HotbarSlot" type="Button"]
 custom_minimum_size = Vector2(60, 60)
@@ -33,3 +36,4 @@ offset_top = 9.0
 offset_right = 13.0
 offset_bottom = 32.0
 text = "0"
+label_settings = SubResource("LabelSettings_atcaj")

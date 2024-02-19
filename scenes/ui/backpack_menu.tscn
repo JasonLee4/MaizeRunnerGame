@@ -14,8 +14,8 @@ script = ExtResource("1_vu6jp")
 [node name="GridContainer" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(112, 54)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 149.0
+offset_bottom = 78.0
 columns = 4
 
 [node name="BackpackSlot" parent="GridContainer" instance=ExtResource("1_js2h8")]
