@@ -162,6 +162,7 @@ func _on_pig_hitbox_body_exited(body):
 func receive_damage(damage):
 	if not invulnerable:
 		Globals.health -= damage
+		camera_shake.emit()
 		invulnerable = true
 		# flash red when talking damage
 		$Sprite2D.modulate = Color.RED
@@ -169,7 +170,7 @@ func receive_damage(damage):
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
-		camera_shake.emit()
+		#camera_shake.emit()
 	
 
 func set_invincible(time):
