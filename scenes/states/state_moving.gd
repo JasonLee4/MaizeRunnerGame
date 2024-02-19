@@ -1,7 +1,8 @@
 extends PlayerState
 
-@export var max_spd = 100
+
 @export var accspd = 1500
+var max_spd = Globals.pig_speed
 var can_roll = false
 var move = Vector2.ZERO
 
