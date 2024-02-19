@@ -4,6 +4,7 @@ var flash_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/Flas
 var apple_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/Apple.tres")
 
 var pig
+var pig_speed = 100
 
 ### Health ###
 signal health_change
@@ -96,3 +97,6 @@ func format_ts_to_str(timestamp):
 		time_str += "0" + str(secs)
 	
 	return time_str
+
+func increase_pig_speed():
+	pig_speed += 50

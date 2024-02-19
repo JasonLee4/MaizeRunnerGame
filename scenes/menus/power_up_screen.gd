@@ -1,30 +1,34 @@
 extends Control
 
-@export var item: Inv_Item
+#@export var item: Inv_Item
 
+var itemArr = ["Torch", "wood", "Apple"]
+var item
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$VBoxContainer/HBoxContainer/VBoxContainer/Power1.grab_focus()
-
+	var item_name = itemArr.pick_random()
+	item = ResourceLoader.load("res://scenes/items/inventory/inv_items/" + item_name + ".tres")
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Power3.text = "+ "+item_name.capitalize()+"\nPig will recieve 1 " + item_name
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func next_level():
+	Globals.go_next_lvl()
+	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
 
 func _on_power_1_pressed():
 	Globals.health = Globals.health+1
-	Globals.go_next_lvl()
-	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
+	next_level()
 
 
 func _on_power_2_pressed():
-	Globals.pig.get_node("player_state_machine").get_node("state_moving").max_spd = Globals.pig.get_node("player_state_machine").get_node("state_moving").max_spd+100
-	Globals.go_next_lvl()
-	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
-
+	Globals.increase_pig_speed()
+	next_level()
 
 func _on_power_3_pressed():
 	Globals.inv.insert(item)
-	Globals.go_next_lvl()
-	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
+	next_level()
+	
