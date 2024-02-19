@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 @export var item: Inv_Item
+@export var light_radius = 1.0
 #@export var speed = 100
 #@export var damage = 20
 #var direction = Vector2.LEFT
@@ -13,6 +14,7 @@ var placed = false
 
 func _ready():
 	$Torch_Timer.start()
+	$PointLight2D.scale = 3 * Vector2(light_radius, light_radius)
 	
 func _physics_process(delta):
 	#translate(direction*speed*delta)
