@@ -1,33 +1,47 @@
-[gd_scene load_steps=11 format=3 uid="uid://efwdnoirj55t"]
+[gd_scene load_steps=13 format=3 uid="uid://efwdnoirj55t"]
 
 [ext_resource type="Script" path="res://scenes/items/torch.gd" id="1_kfmpc"]
 [ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_o4iw7"]
-[ext_resource type="Texture2D" uid="uid://beee3j71psqn4" path="res://assets/spritesheets/torchgif.png" id="3_cy505"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="3_fjoov"]
+[ext_resource type="Texture2D" uid="uid://dkj0nu7jyyh65" path="res://assets/spritesheets/torchhh1.png" id="4_y0hw2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ydk86"]
 radius = 12.5399
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oeekn"]
-atlas = ExtResource("3_cy505")
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw4th"]
+atlas = ExtResource("4_y0hw2")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ina8w"]
-atlas = ExtResource("3_cy505")
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsvkk"]
+atlas = ExtResource("4_y0hw2")
 region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovbln"]
+atlas = ExtResource("4_y0hw2")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3cif"]
+atlas = ExtResource("4_y0hw2")
+region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_noiea"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oeekn")
+"texture": SubResource("AtlasTexture_yw4th")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ina8w")
+"texture": SubResource("AtlasTexture_wsvkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovbln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3cif")
 }],
 "loop": true,
 "name": &"torchflame",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbb71"]
