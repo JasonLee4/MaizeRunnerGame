@@ -4,9 +4,9 @@ class_name Inventory
 
 signal update
 
-var hb_slots: Array[Inventory_Slot] = []
+@export var hb_slots: Array[Inventory_Slot] = []
 
-var bp_slots: Array[Inventory_Slot] = []
+@export var bp_slots: Array[Inventory_Slot] = []
 
 func insert(item: Inv_Item):
 	
@@ -28,6 +28,9 @@ func insert(item: Inv_Item):
 			emptyslots[0].amount = 1
 			#print(slots[0].item.name)
 	update.emit()
+	
+	
+	
 	pass
 
 func remove_item(item, amount):
@@ -62,3 +65,21 @@ func get_amount(item):
 		total += sl2.amount
 	
 	return total
+
+func size():
+	var total = 0
+	for sl1 in hb_slots.filter(func(hb_slot) : return hb_slot.item != null):
+		total += sl1.amount
+		
+	for sl2 in bp_slots.filter(func(bp_slot) : return bp_slot.item == null):
+		total += sl2.amount
+	return total
+
+func transfer(inv2: Inventory):
+	for sl1 in inv2.hb_slots:
+		for i in sl1.amount:
+			insert(sl1.item)
+		
+	for sl2 in inv2.bp_slots:
+		for i in sl2.amount:
+			insert(sl2.item)

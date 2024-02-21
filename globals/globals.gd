@@ -39,13 +39,15 @@ var inv :
 	get:
 		return inv
 	set(value):
-		print("reseting inv")
-		for hb in hb_size:
-			value.hb_slots.append(Inventory_Slot.new())
-		for bp in bp_size:
-			value.bp_slots.append(Inventory_Slot.new())
+		print("size of new inventory = ", value.size())
+		if value.size() == 0:
+			print("reseting inv")
+			for hb in hb_size:
+				value.hb_slots.append(Inventory_Slot.new())
+			for bp in bp_size:
+				value.bp_slots.append(Inventory_Slot.new())
 		inv = value
-		
+		inv.update.emit()
 
 
 ### Game/Level Stats ###
