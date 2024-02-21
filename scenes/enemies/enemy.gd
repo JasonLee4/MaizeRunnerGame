@@ -15,8 +15,8 @@ var can_attack_player = false
 var invulnerable = false
 
 func _physics_process(delta):
-	choose_animation()
 	process_sound()
+	choose_animation()
 
 func process_sound():
 	pass

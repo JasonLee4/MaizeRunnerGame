@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyFreeze.gd" id="6_0hfgx"]
 [ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_djy2a"]
 [ext_resource type="Script" path="res://scripts/States/EnemyAttack.gd" id="8_drdnq"]
-[ext_resource type="AudioStream" uid="uid://bqqma6oalrfh7" path="res://assets/audio/sfx/rat_squeak.wav" id="10_005yy"]
-[ext_resource type="AudioStream" uid="uid://dpbvq3hqpwjqe" path="res://assets/audio/sfx/575318__taure__run-carpet.wav" id="12_qmxrf"]
+[ext_resource type="AudioStream" uid="uid://8erki8b1qp0q" path="res://assets/audio/sfx/squeak_1.wav" id="10_h70rs"]
+[ext_resource type="AudioStream" uid="uid://cs7cyhg65x06k" path="res://assets/audio/sfx/rat_steps.wav" id="11_vb4oh"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -406,11 +406,11 @@ script = ExtResource("8_drdnq")
 enemy = NodePath("../..")
 
 [node name="squeak" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_005yy")
+stream = ExtResource("10_h70rs")
 volume_db = -10.0
-pitch_scale = 0.8
-attenuation = 15.0
-panning_strength = 3.0
+pitch_scale = 0.5
+attenuation = 20.0
+panning_strength = 5.0
 
 [node name="squeak_cooldown" type="Timer" parent="."]
 
@@ -418,10 +418,11 @@ panning_strength = 3.0
 occluder = SubResource("OccluderPolygon2D_2mqo0")
 
 [node name="run" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_qmxrf")
-volume_db = 3.0
-pitch_scale = 3.0
-autoplay = true
+stream = ExtResource("11_vb4oh")
+volume_db = 0.2
+pitch_scale = 1.7
+attenuation = 20.0
+panning_strength = 10.0
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
