@@ -177,21 +177,21 @@ func spawn_enemies(enemies_per_rm):
 		$Enemies.add_child(rat)
 
 func spawn_items():
+	var fireplace = fireplace_scene.instantiate()
+	var key = key_scene.instantiate()
+	var exit = exit_scene.instantiate()
 	for room in $Rooms.get_children():
 		var spawn_pos = room.get_rand_pt() + room.global_position
 		if room == start_room:
 			# spawn campfire in start room
-			var fireplace = fireplace_scene.instantiate()
 			fireplace.global_position = spawn_pos
 			$Objects.add_child(fireplace)
 		elif room == key_room:
-			# spawn key in rightmost room
-			var key = key_scene.instantiate()
+			# spawn key
 			key.global_position = spawn_pos
 			$Objects.add_child(key)
 		elif room == exit_room:
-			# spawn exit in leftmost room
-			var exit = exit_scene.instantiate()
+			# spawn exit
 			exit.global_position = spawn_pos
 			$Objects.add_child(exit)
 		else:
@@ -204,7 +204,9 @@ func spawn_items():
 				item = apple_scene.instantiate()
 			item.global_position = spawn_pos
 			$Objects.add_child(item)
-
+	# set light arrow guides pointing to key and exit
+	fireplace.set_key_guide(key.global_position)
+	fireplace.set_exit_guide(exit.global_position)
 
 ### Helper functions ###
 func carve_path(start, end):
