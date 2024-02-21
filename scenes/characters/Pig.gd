@@ -75,6 +75,7 @@ func _physics_process(delta):
 			$Sprite2D.visible = true
 			$Roll.visible = false
 			if flashlight_equipped or torch_equipped:
+				
 				$AnimationPlayer.play("pigwalk_equip")
 			else:
 				$AnimationPlayer.play("pigwalk")
@@ -252,11 +253,14 @@ func toggle_flashlight(delta):
 				update_trajectory(temp_speed)
 			hold_time += delta
 		elif Input.is_action_just_released("secondary_action"):
+			
+			flashlight.equipped = false
+			
 			traj_line.hide()
 			traj_line.clear_points()		
 			Globals.inv.remove_item(current_tool.item, 1)
 			#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
-			
+			flashlight_equipped = false
 			hold_time = 0.0
 			
 			flashlight_instance.global_position = $Marker2D2.global_position
@@ -268,7 +272,7 @@ func toggle_flashlight(delta):
 			
 			Globals.pig.get_tree().current_scene.add_child(flashlight_instance)
 			temp_speed = 0
-		
+			
 	else:
 		flashlight.visible = false
 

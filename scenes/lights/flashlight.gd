@@ -16,7 +16,12 @@ func flash():
 	#$".".visible = light_on
 	$FlashlightLight.visible = light_on
 	$FlashlightLightShadows.visible = light_on
+	$LightOccluder2D.visible = light_on
 	$Sprite2D.visible = equipped
+	if not $Sprite2D.visible:
+		$FlashlightLight.visible = false
+		$FlashlightLightShadows.visible = false
+		$LightOccluder2D.visible = false
 	#$FlashlightLightShadows.visible = light_on
 	$FlashlightArea/CollisionPolygon2D.disabled = !light_on
 	
