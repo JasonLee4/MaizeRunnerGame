@@ -11,12 +11,12 @@ func _ready():
 
 func _process(_delta):
 	if decreasing:
-		if light.energy >= .2:
+		if light.energy >= .1:
 			light.energy -= .001
 		else:
 			decreasing = false
 	else:
-		if light.energy <= .5:
+		if light.energy <= .4:
 			light.energy += .001
 		else:
 			decreasing = true

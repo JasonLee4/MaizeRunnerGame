@@ -35,7 +35,10 @@ script = ExtResource("1_ysrrx")
 
 [node name="ItemBacklight" parent="." instance=ExtResource("2_opkfs")]
 scale = Vector2(2, 2)
-color = Color(0.54902, 1, 0.517647, 1)
+color = Color(0, 0.898039, 0.00392157, 1)
+
+[node name="ItemBacklight2" parent="." instance=ExtResource("2_opkfs")]
+color = Color(1, 1, 1, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_507ky")
