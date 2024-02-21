@@ -20,6 +20,7 @@ func next_level():
 	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
 
 func _on_power_1_pressed():
+	Globals.max_health = Globals.max_health+1
 	Globals.health = Globals.health+1
 	next_level()
 

@@ -10,7 +10,7 @@ var pickup = true
 func effect(delta):
 	if Input.is_action_just_pressed("primary_action"):
 		
-		if Globals.health < 5:
+		if Globals.health < Globals.max_health:
 			Globals.inv.remove_item(item, 1)
 			
 			Globals.health += 1
