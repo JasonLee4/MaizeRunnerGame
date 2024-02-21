@@ -8,7 +8,7 @@ class_name Player_State_Machine
 var possible_states = [] # an array of strings containing the name of every possible state
 var selected_state: PlayerState # a refernce to whatever state is currently active
 @export var starting_args = []  # arguments for the starting state
-@export var starting_state = "state_moving" # a path to the starting state
+@export var starting_state = "state_idle" # a path to the starting state
 @export var output_changes = false # whether state changes should be outputted to the debug console
 
 signal state_changed(old_state, new_state) # emitted whenever a state is changed

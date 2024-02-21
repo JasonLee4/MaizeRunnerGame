@@ -46,6 +46,9 @@ func _transition_logic(existing_states):
 	if can_roll and Input.is_action_just_pressed("dash") and move.length() > 0:
 		# transition to rolling
 		machine.change_state("state_rolling", [move], [])
+	elif move.length() == 0:
+		machine.change_state("state_idle")
+		
 
 
 func _enter(args := []):
