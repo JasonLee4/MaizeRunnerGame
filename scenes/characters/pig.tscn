@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=33 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://depoalr5gvqrd" path="res://assets/spritesheets/pigrolling.png" id="3_6qboe"]
@@ -11,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://dkj0nu7jyyh65" path="res://assets/spritesheets/torchhh1.png" id="5_e87gt"]
 [ext_resource type="Script" path="res://scenes/levels/Camera.gd" id="10_sbke0"]
 [ext_resource type="Script" path="res://scenes/states/state_idle.gd" id="10_w0bou"]
+[ext_resource type="AudioStream" uid="uid://jd6cud28kcjs" path="res://assets/audio/sfx/flashlight.wav" id="11_veocr"]
+[ext_resource type="AudioStream" uid="uid://b2sx5uil7jtq5" path="res://assets/audio/sfx/pig_squeal.wav" id="13_8vltw"]
+[ext_resource type="AudioStream" uid="uid://8nw1gs5nvy2x" path="res://assets/audio/sfx/throw.wav" id="14_ms47v"]
+[ext_resource type="AudioStream" uid="uid://mm7b5nt5oewp" path="res://assets/audio/sfx/pig_steps.wav" id="15_1vx51"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
 height = 28.0
@@ -478,6 +482,28 @@ texture = SubResource("GradientTexture2D_jpsl2")
 libraries = {
 "": SubResource("AnimationLibrary_hfu3h")
 }
+
+[node name="FlashlightSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_veocr")
+pitch_scale = 2.0
+
+[node name="PigHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_8vltw")
+
+[node name="Throw" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ms47v")
+
+[node name="HeavyThrow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ms47v")
+pitch_scale = 0.8
+
+[node name="LightThrow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ms47v")
+pitch_scale = 1.2
+
+[node name="Steps" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_1vx51")
+volume_db = -8.0
 
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]

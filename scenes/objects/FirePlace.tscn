@@ -90,7 +90,7 @@ texture = ExtResource("4_rvtvu")
 
 [node name="Crackle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_wpshn")
-volume_db = 10.0
+volume_db = 5.0
 autoplay = true
 attenuation = 15.0
 panning_strength = 5.0

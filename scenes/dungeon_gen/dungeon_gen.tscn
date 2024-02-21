@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx3kt1flbreh8"]
+[gd_scene load_steps=5 format=3 uid="uid://dx3kt1flbreh8"]
 
 [ext_resource type="Script" path="res://scenes/dungeon_gen/dungeon_gen.gd" id="1_7plxx"]
 [ext_resource type="TileSet" uid="uid://vii48tc24ua7" path="res://assets/tilesets/corn_ground_tileset.tres" id="2_0cbpq"]
 [ext_resource type="AudioStream" uid="uid://crs2tawygcvpd" path="res://assets/audio/ambiance/Ambience_Armory.wav" id="3_51tyk"]
+[ext_resource type="AudioStream" uid="uid://eocc1t221tix" path="res://assets/audio/ambiance/437004__samuelgremaud__ambience-night-in-nature-south-of-france-7.wav" id="3_84oys"]
 
 [node name="DungeonGen" type="Node2D"]
 y_sort_enabled = true
@@ -35,7 +36,13 @@ y_sort_enabled = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.00392157, 0.0235294, 0.141176, 1)
 
+[node name="Crickets" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_84oys")
+volume_db = -35.0
+pitch_scale = 0.3
+autoplay = true
+
 [node name="Ambiance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_51tyk")
 volume_db = -18.0
-autoplay = true
+pitch_scale = 0.2

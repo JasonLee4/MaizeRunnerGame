@@ -65,6 +65,13 @@ func _physics_process(delta):
 	state_machine.process_states(delta)
 	traj_line.look_at(get_global_mouse_position())
 	
+	if velocity != Vector2(0,0) and !$Steps.is_playing():
+		print("playing steps")
+		$Steps.play()
+	elif velocity == Vector2(0,0) and $Steps.is_playing():
+		print("stopping steps")
+		$Steps.stop()
+	
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
 			$Sprite2D.visible = false
@@ -172,6 +179,7 @@ func _on_pig_hitbox_body_exited(body):
 func receive_damage(damage):
 	if not invulnerable:
 		Globals.health -= damage
+		$PigHit.play()
 		camera_shake.emit()
 		invulnerable = true
 		# flash red when talking damage
@@ -221,6 +229,7 @@ func use_torch(delta):
 				traj_line.hide()
 				traj_line.clear_points()
 				Globals.inv.remove_item(torch_resource, 1)
+				$Throw.play()
 				var tr = torch_scene.instantiate()			
 				
 				torch_hold_time = 0.0
@@ -242,6 +251,7 @@ func toggle_flashlight(delta):
 	if Globals.inv.contains(flashlight_resource):
 		var flashlight_instance = flashlight_scene.instantiate()
 		if Input.is_action_just_pressed("primary_action"):
+			$FlashlightSound.play()
 			flashlight.light_on = not flashlight.light_on
 			print("light on")
 			print(flashlight.light_on)
@@ -259,6 +269,7 @@ func toggle_flashlight(delta):
 			traj_line.hide()
 			traj_line.clear_points()		
 			Globals.inv.remove_item(current_tool.item, 1)
+			$HeavyThrow.play()
 			#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
 			flashlight_equipped = false
 			hold_time = 0.0
@@ -323,6 +334,7 @@ func consumable_use(delta):
 		traj_line.hide()
 		traj_line.clear_points()		
 		Globals.inv.remove_item(current_tool.item, 1)
+		$LightThrow.play()
 		#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
 		
 		hold_time = 0.0
