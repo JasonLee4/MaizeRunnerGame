@@ -5,7 +5,7 @@ var move
 
 func _enter(args := []) -> void:
 	print("Entered player idle state...")
-	animation_player.stop()
+	
 	$IdleCooldown.start()
 
 
@@ -31,11 +31,12 @@ func _transition_logic(existing_states: Array):
 		
 
 func _on_idle_cooldown_timeout():
-	print("playing idle animation [idle state]")
+	#print("playing idle animation [idle state]")
 	#var randii = randi()%2
 	#print(randii)
 	#if randii == 0:
-	animation_player.play("pigidle")
+	#animation_player.play("pigidle")
+	pass
 	#else:
 		#player.get_node("Wave").visible = true
 		#player.get_node("Sprite2D").visible = false

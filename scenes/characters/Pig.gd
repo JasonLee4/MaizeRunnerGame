@@ -38,26 +38,17 @@ var hold_time = 0.0
 #@export var inv: Inventory
 signal camera_shake
 
+# true = facing right, false = facing left
+var pigfacing = true
 
 func _ready():
 
 	Globals.pig = $"."
 	print("pig inst")
 	hotbar.connect("hotbar_select", change_tool)
-	$Sprite2D.frame = 3
 	change_tool(0)
 	traj_line.clear_points()
-	
-#func craft():
-	#if inv.slots[0].amount >= 2:	
-		#print("crafting... using wood...")
-		#inv.remove_item(inv.slots[0].item, 2)	
-		#print(inv.slots[0].amount)
-		#collect(fire_place.inv_item)
-		
-	#print("crafting... using coal and wood...")
-	#inv.remove_item2(["Wood", "Coal"], [2,1])	
-		
+	$Torch.play()
 	
 
 func _physics_process(delta):
@@ -81,31 +72,43 @@ func _physics_process(delta):
 		elif state_machine.selected_state.name == "state_moving":
 			$Sprite2D.visible = true
 			$Roll.visible = false
-			if flashlight_equipped or torch_equipped:
+			if velocity.x < 0:
+					pigfacing = false
+					$Sprite2D.flip_h = true
+					$Roll.flip_h = true					
+					$Torch.rotation = abs($Torch.rotation)
+			elif velocity.x > 0:
+					pigfacing = true
+					$Sprite2D.flip_h = false
+					$Roll.flip_h = false					
+					$Torch.rotation = -1*abs($Torch.rotation)
 				
-				$AnimationPlayer.play("pigwalk_equip")
+			if flashlight_equipped or torch_equipped:				
+				if pigfacing:
+					$AnimationPlayer.play("pigwalk_equip_right")
+				else:
+					$AnimationPlayer.play("pigwalk_equip_left")
+					
 			else:
 				$AnimationPlayer.play("pigwalk")
-				
-		elif state_machine.selected_state.name == "state_idle":
-			$Sprite2D.visible = true
-			$Roll.visible = false
-			$AnimationPlayer.stop()
 			
-		if velocity.x < 0:
-			$Sprite2D.flip_h = true
-			$weapon_sprite.flip_h = true
-			$Torch.rotation = abs($Torch.rotation)
 			
-			$Roll.flip_h = true
-		elif velocity.x > 0:
-			$Sprite2D.flip_h = false
-			$weapon_sprite.flip_h = false
-			$Torch.rotation = -1*abs($Torch.rotation)
-			$Roll.flip_h = false			
+			
 		
 	else:
-		$AnimationPlayer.stop()
+		$AnimationPlayer.stop(true)
+		if pigfacing:
+			$Torch.position.x = abs($Torch.position.x)
+		else:
+			$Torch.position.x = -1 * abs($Torch.position.x)
+			
+			
+		if state_machine.selected_state.name == "state_idle":
+			$Sprite2D.visible = true
+			$Roll.visible = false
+				
+			
+			
 	
 	
 	move_and_slide()
@@ -133,32 +136,7 @@ func _on_dash_cooldown_timeout():
 	print("dash is ready")
 	dashready = true
 
-#func equip_weapon(weaponsprite, bulletsprite):
-	#equipped = true
-	#$weapon_sprite.texture = load(weaponsprite)
-	#$weapon_sprite.visible = true
-	#curr_bullet_sprite = load(bulletsprite)
-	#pass
-	#
 
-	
-#ranged ability
-#func shoot():
-	#if Input.is_action_just_pressed("primary_action") and shootready and equipped:
-		#shootready = false
-		#var pb = pigbullet_scene.instantiate()
-		#pb.get_node("Sprite2D").texture = curr_bullet_sprite
-		#get_parent().add_child(pb)
-		#pb.global_position = $Marker2D.global_position
-		#var dir = (get_global_mouse_position() - pb.global_position).normalized()
-		##pb.global_rotation = dir.angle() + PI / 2.0
-		#pb.direction = dir
-		#
-		#$shoot_cooldown.start()
-
-#
-#func _on_shoot_cooldown_timeout():
-	#shootready = true
 
 
 func player():
@@ -242,6 +220,9 @@ func use_torch(delta):
 				get_tree().current_scene.add_child(tr)
 				
 				torch_speed = 0
+				if !Globals.inv.contains(torch_resource):
+					torch_equipped = false
+					$Torch.visible = false
 		#else:
 			#$Tool_Sprite.visible = false
 	else:
@@ -305,16 +286,17 @@ func change_tool(hb_num):
 		flashlight.light_on = false
 		flashlight.equipped = false
 		consumable_equipped = false
-	return toggle_tool_sprites()
+	toggle_tool_sprites()
 	
 func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
+	
 	if torch_equipped or flashlight_equipped:
 		$Sprite2D.frame = 9
-		$AnimationPlayer.play("torch")
 	else:
 		$Sprite2D.frame = 3
-	return 0
+		
+	
 
 func consumable_use(delta):
 	var toolString = current_tool.item.useScript
@@ -350,6 +332,7 @@ func consumable_use(delta):
 		temp_speed = 0
 	if current_tool.amount == 0:		
 		consumable_equipped = false
+
 
 func update_trajectory(spd_val):
 	var pos = global_position
