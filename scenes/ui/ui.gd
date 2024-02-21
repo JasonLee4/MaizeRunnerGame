@@ -17,6 +17,8 @@ func _ready():
 	Globals.connect("lvl_start", start_timer)
 	Globals.connect("lvl_end", stop_timer)
 	
+	#tooltip display
+	Globals.connect("tooltip_update", update_tooltip)
 	
 
 func _process(delta):
@@ -44,3 +46,6 @@ func start_timer():
 	
 func stop_timer():
 	Globals.lvl_end_time = Time.get_ticks_msec()
+
+func update_tooltip(text, display):
+	$Tooltip.apply_text(text, display)
