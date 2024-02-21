@@ -1,8 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=29 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
-[ext_resource type="Texture2D" uid="uid://ddkcgxfupj33n" path="res://assets/spritesheets/pigmoving.png" id="3_5iu3b"]
 [ext_resource type="Texture2D" uid="uid://depoalr5gvqrd" path="res://assets/spritesheets/pigrolling.png" id="3_6qboe"]
+[ext_resource type="Texture2D" uid="uid://clxiejrlfshta" path="res://assets/spritesheets/pigianajonesactions1.png" id="3_74h5l"]
 [ext_resource type="Script" path="res://scenes/states/Player_State_Machine.gd" id="3_e2ml4"]
 [ext_resource type="PackedScene" uid="uid://bl5yl2pomtmqm" path="res://scenes/lights/flashlight.tscn" id="4_33qj8"]
 [ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="4_ws5bl"]
 [ext_resource type="Texture2D" uid="uid://dkj0nu7jyyh65" path="res://assets/spritesheets/torchhh1.png" id="5_e87gt"]
 [ext_resource type="Script" path="res://scenes/levels/Camera.gd" id="10_sbke0"]
+[ext_resource type="Script" path="res://scenes/states/state_idle.gd" id="10_w0bou"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
 height = 28.0
@@ -28,7 +29,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Roll:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -40,26 +41,62 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Roll:frame")
+tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Torch:frame")
+tracks/2/path = NodePath("Torch:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, -6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Torch:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.00868974]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flashlight:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Torch:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_87a35"]
@@ -82,6 +119,7 @@ tracks/0/keys = {
 resource_name = "pigwalk"
 length = 0.8
 loop_mode = 1
+step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,29 +127,157 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 5, 1, 2, 3, 4, 5, 6, 3]
+"values": [3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_yvqkv"]
+resource_name = "pigwalk_equip"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Torch:frame")
+tracks/1/path = NodePath("Torch:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Torch:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.00868974]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flashlight:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ykrt1"]
+resource_name = "pigidle"
+length = 1.5
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 0]
+"values": [1, 2, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Torch:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Torch:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.711682]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Torch:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flashlight:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-13, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_thuxf"]
+resource_name = "torch"
+length = 0.6
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Torch:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_07awo"]
 _data = {
 "RESET": SubResource("Animation_kn2r4"),
+"pigidle": SubResource("Animation_ykrt1"),
 "pigroll": SubResource("Animation_87a35"),
-"pigwalk": SubResource("Animation_utpj3")
+"pigwalk": SubResource("Animation_utpj3"),
+"pigwalk_equip": SubResource("Animation_yvqkv"),
+"torch": SubResource("Animation_thuxf")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w6u8y"]
@@ -190,8 +356,10 @@ scale = Vector2(3.485, 2.5)
 texture = ExtResource("4_ws5bl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_5iu3b")
-hframes = 8
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_74h5l")
+hframes = 15
+frame = 3
 
 [node name="DefaultCircleLight" type="Node2D" parent="."]
 rotation = -0.483456
@@ -205,14 +373,16 @@ texture = SubResource("GradientTexture2D_w7koc")
 texture_scale = 5.0
 
 [node name="Flashlight" parent="." instance=ExtResource("4_33qj8")]
+position = Vector2(16, 1)
+rotation = 0.412987
 
 [node name="Torch" type="Sprite2D" parent="."]
 visible = false
-rotation = -0.483456
-scale = Vector2(0.5, 0.5)
+position = Vector2(16, -6)
+rotation = 0.00868974
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_e87gt")
 hframes = 4
-frame = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="Torch"]
 position = Vector2(2.52331, 8.10142)
@@ -269,6 +439,13 @@ one_shot = true
 
 [node name="state_dead" type="Node" parent="player_state_machine"]
 
+[node name="state_idle" type="Node" parent="player_state_machine"]
+script = ExtResource("10_w0bou")
+
+[node name="IdleCooldown" type="Timer" parent="player_state_machine/state_idle"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Marker2D2" type="Marker2D" parent="."]
 
 [node name="trajectory_line" type="Line2D" parent="."]
@@ -308,3 +485,4 @@ libraries = {
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="player_state_machine/state_rolling/RollTime" to="player_state_machine/state_rolling" method="_on_roll_time_timeout"]
 [connection signal="timeout" from="player_state_machine/state_moving/RollCooldown" to="player_state_machine/state_moving" method="_on_roll_cooldown_timeout"]
+[connection signal="timeout" from="player_state_machine/state_idle/IdleCooldown" to="player_state_machine/state_idle" method="_on_idle_cooldown_timeout"]

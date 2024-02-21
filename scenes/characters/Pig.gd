@@ -44,6 +44,7 @@ func _ready():
 	Globals.pig = $"."
 	print("pig inst")
 	hotbar.connect("hotbar_select", change_tool)
+	$Sprite2D.frame = 3
 	change_tool(0)
 	traj_line.clear_points()
 	
@@ -73,7 +74,15 @@ func _physics_process(delta):
 		elif state_machine.selected_state.name == "state_moving":
 			$Sprite2D.visible = true
 			$Roll.visible = false
-			$AnimationPlayer.play("pigwalk")
+			if flashlight_equipped or torch_equipped:
+				$AnimationPlayer.play("pigwalk_equip")
+			else:
+				$AnimationPlayer.play("pigwalk")
+				
+		elif state_machine.selected_state.name == "state_idle":
+			$Sprite2D.visible = true
+			$Roll.visible = false
+			$AnimationPlayer.stop()
 			
 		if velocity.x < 0:
 			$Sprite2D.flip_h = true
@@ -280,10 +289,16 @@ func change_tool(hb_num):
 		flashlight_equipped = false
 		flashlight.light_on = false
 		flashlight.equipped = false
+		consumable_equipped = false
 	return toggle_tool_sprites()
 	
 func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
+	if torch_equipped or flashlight_equipped:
+		$Sprite2D.frame = 9
+		$AnimationPlayer.play("torch")
+	else:
+		$Sprite2D.frame = 3
 	return 0
 
 func consumable_use(delta):
