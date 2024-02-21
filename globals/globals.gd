@@ -9,6 +9,12 @@ var pig_speed = 100
 ### Health ###
 signal health_change
 
+var max_health = 5:
+	get:
+		return max_health
+	set(value):
+		max_health = value
+
 var health = 5:
 	get:
 		return health

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpivxkm32i6ol"]
+
+[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="1_whlyk"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jrvo4"]
+polygon = PackedVector2Array(0, -41, -54, -24, -70, 55, -31, 72, 0, 17, -27, 31)
+
+[node name="ArrowLight" type="PointLight2D"]
+color = Color(0, 0.215686, 1, 1)
+energy = 0.7
+range_item_cull_mask = 33
+shadow_enabled = true
+shadow_item_cull_mask = 32
+texture = ExtResource("1_whlyk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, 4.5)
+scale = Vector2(0.5, 0.5)
+occluder = SubResource("OccluderPolygon2D_jrvo4")
+occluder_light_mask = 32
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(0, 4.5)
+rotation = 3.14159
+scale = Vector2(0.5, -0.5)
+occluder = SubResource("OccluderPolygon2D_jrvo4")
+occluder_light_mask = 32

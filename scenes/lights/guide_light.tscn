@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1rpep7xu3i83"]
+
+[ext_resource type="Script" path="res://scenes/lights/guide_light.gd" id="1_6foff"]
+[ext_resource type="PackedScene" uid="uid://cpivxkm32i6ol" path="res://scenes/lights/arrow_light.tscn" id="2_ygcsn"]
+
+[node name="GuideLight" type="Node2D"]
+script = ExtResource("1_6foff")
+
+[node name="ArrowLight" parent="." instance=ExtResource("2_ygcsn")]
+position = Vector2(80, 0)
+rotation = 1.5708

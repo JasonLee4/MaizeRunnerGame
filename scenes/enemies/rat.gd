@@ -34,10 +34,10 @@ func choose_animation():
 		
 func process_sound():
 	if state_machine.get_current_state().name == "EnemyFollow" and !$run.playing:
-		print("playing run")
+		#print("playing run")
 		$run.play()
 	elif state_machine.get_current_state().name != "EnemyFollow" and $run.playing:
-		print("stopping run")
+		#print("stopping run")
 		$run.stop()
 
 func light_unfreeze():
@@ -55,4 +55,4 @@ func _on_squeak_cooldown_timeout():
 	$squeak.play();
 
 func _on_audio_stream_player_2d_finished():
-	$squeak_cooldown.start(randf_range(20, 60));
+	$squeak_cooldown.start(randf_range(1, 5));

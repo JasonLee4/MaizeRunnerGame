@@ -1,9 +1,13 @@
 extends Node2D
 
+@export var color: Color = Color.YELLOW
 @onready var light = $Glow
 @onready var shadow = $GlowShadow
 
 var decreasing = true
+
+func _ready():
+	light.color = color
 
 func _process(_delta):
 	if decreasing:

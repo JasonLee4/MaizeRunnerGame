@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvxtel4kt8t1d"]
+[gd_scene load_steps=14 format=3 uid="uid://bvxtel4kt8t1d"]
 
 [ext_resource type="Script" path="res://scenes/objects/FirePlace.gd" id="1_m0kst"]
 [ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_ll4gk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="4_rvtvu"]
 [ext_resource type="AudioStream" uid="uid://dasnlixiyfnjy" path="res://assets/audio/sfx/410736__selector__campfire-in-the-open-field-3.wav" id="5_wpshn"]
 [ext_resource type="PackedScene" uid="uid://wqx546fxgt0q" path="res://scenes/ui/tooltip.tscn" id="6_djigm"]
+[ext_resource type="PackedScene" uid="uid://b1rpep7xu3i83" path="res://scenes/lights/guide_light.tscn" id="7_4wo75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mt8ow"]
 atlas = ExtResource("3_ak5db")
@@ -89,7 +90,7 @@ texture = ExtResource("4_rvtvu")
 
 [node name="Crackle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_wpshn")
-volume_db = 10.0
+volume_db = 5.0
 autoplay = true
 attenuation = 15.0
 panning_strength = 5.0
@@ -99,6 +100,14 @@ offset_left = 32.0
 offset_top = -54.0
 offset_right = 92.0
 offset_bottom = 6.0
+
+[node name="GuideLightBlue" parent="." instance=ExtResource("7_4wo75")]
+visible = false
+color = Color(0.219608, 0.447059, 1, 1)
+
+[node name="GuideLightGreen" parent="." instance=ExtResource("7_4wo75")]
+visible = false
+color = Color(0.513726, 1, 0.482353, 1)
 
 [connection signal="body_entered" from="CraftingArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="CraftingArea" to="." method="_on_area_2d_body_exited"]

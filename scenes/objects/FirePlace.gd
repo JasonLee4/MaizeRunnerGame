@@ -3,7 +3,8 @@ extends Node2D
 class_name FirePlace
 
 @export var torch_item: Inv_Item
-@export var tooltip_message:String
+@export var tooltip_message: String
+
 var crafting_available
 signal tooltip_update
 #signal craft_torch
@@ -11,8 +12,20 @@ signal tooltip_update
 #may change how this works for future recipes
 var req_resource : Inv_Item = preload("res://scenes/items/inventory/inv_items/wood.tres")
 
+@onready var key_guidelight = $GuideLightBlue
+@onready var exit_guidelight = $GuideLightGreen
+
 func _ready():
 	tooltip_update.emit(tooltip_message)
+
+func set_key_guide(pos: Vector2):
+	key_guidelight.visible = true
+	key_guidelight.look_at(pos)
+	
+func set_exit_guide(pos: Vector2):
+	exit_guidelight.visible = true
+	exit_guidelight.look_at(pos)
+
 func _physics_process(delta):
 	$AnimatedSprite2D.play()
 	if Input.is_action_just_pressed("interact") and crafting_available:
