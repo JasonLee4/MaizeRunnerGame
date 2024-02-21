@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=34 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://depoalr5gvqrd" path="res://assets/spritesheets/pigrolling.png" id="3_6qboe"]
@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://bl5yl2pomtmqm" path="res://scenes/lights/flashlight.tscn" id="4_33qj8"]
 [ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
 [ext_resource type="Script" path="res://scenes/states/state_rolling.gd" id="4_a3gfp"]
-[ext_resource type="Texture2D" uid="uid://1m6kvuxu25w5" path="res://assets/spritesheets/whitecircle.png" id="4_ws5bl"]
 [ext_resource type="Texture2D" uid="uid://dkj0nu7jyyh65" path="res://assets/spritesheets/torchhh1.png" id="5_e87gt"]
 [ext_resource type="Script" path="res://scenes/levels/Camera.gd" id="10_sbke0"]
 [ext_resource type="Script" path="res://scenes/states/state_idle.gd" id="10_w0bou"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
-height = 28.0
+radius = 13.5
+height = 48.75
 
 [sub_resource type="Gradient" id="Gradient_su8b3"]
 offsets = PackedFloat32Array(0, 0.7173)
@@ -23,6 +23,42 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_su8b3")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tisv"]
+atlas = ExtResource("5_e87gt")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cxn5"]
+atlas = ExtResource("5_e87gt")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxf3s"]
+atlas = ExtResource("5_e87gt")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2j2cb"]
+atlas = ExtResource("5_e87gt")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mwlb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tisv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cxn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxf3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2j2cb")
+}],
+"loop": true,
+"name": &"torch",
+"speed": 1.0
+}]
 
 [sub_resource type="Animation" id="Animation_kn2r4"]
 length = 0.001
@@ -97,6 +133,30 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Torch:animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"torch"]
 }
 
 [sub_resource type="Animation" id="Animation_ykrt1"]
@@ -175,10 +235,10 @@ tracks/0/path = NodePath("Roll:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [8, 8, 9, 8, 9, 0]
+"values": [8, 8, 9, 8, 9]
 }
 
 [sub_resource type="Animation" id="Animation_utpj3"]
@@ -199,8 +259,26 @@ tracks/0/keys = {
 "values": [3, 4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_thuxf"]
+resource_name = "torch"
+length = 0.6
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Torch:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="Animation" id="Animation_yvqkv"]
-resource_name = "pigwalk_equip"
+resource_name = "pigwalk_equip_right"
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
@@ -251,23 +329,106 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(16, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Torch:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"torch"]
+}
 
-[sub_resource type="Animation" id="Animation_thuxf"]
-resource_name = "torch"
-length = 0.6
+[sub_resource type="Animation" id="Animation_13uwa"]
+resource_name = "pigwalk_equip_left"
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Torch:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [9, 10, 11, 12, 13, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Torch:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Torch:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.00868974]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flashlight:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Torch:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"torch"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_07awo"]
@@ -276,13 +437,14 @@ _data = {
 "pigidle": SubResource("Animation_ykrt1"),
 "pigroll": SubResource("Animation_87a35"),
 "pigwalk": SubResource("Animation_utpj3"),
-"pigwalk_equip": SubResource("Animation_yvqkv"),
+"pigwalk_equip_left": SubResource("Animation_13uwa"),
+"pigwalk_equip_right": SubResource("Animation_yvqkv"),
 "torch": SubResource("Animation_thuxf")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w6u8y"]
-radius = 16.0
-height = 32.0
+radius = 11.5
+height = 41.45
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mwk50"]
 blend_mode = 1
@@ -340,26 +502,17 @@ _data = {
 collision_mask = 14
 script = ExtResource("1_hx4hr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-y_sort_enabled = true
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_a3r7q")
-
-[node name="weapon_sprite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -13)
-scale = Vector2(0.864583, 0.958333)
-
-[node name="PointLight2D" type="PointLight2D" parent="weapon_sprite"]
-position = Vector2(1.52588e-05, 14.6087)
-scale = Vector2(3.485, 2.5)
-texture = ExtResource("4_ws5bl")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_74h5l")
+flip_h = true
 hframes = 15
 frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 1.73)
+shape = SubResource("CapsuleShape2D_a3r7q")
 
 [node name="DefaultCircleLight" type="Node2D" parent="."]
 rotation = -0.483456
@@ -373,16 +526,16 @@ texture = SubResource("GradientTexture2D_w7koc")
 texture_scale = 5.0
 
 [node name="Flashlight" parent="." instance=ExtResource("4_33qj8")]
+visible = false
 position = Vector2(16, 1)
 rotation = 0.412987
 
-[node name="Torch" type="Sprite2D" parent="."]
-visible = false
+[node name="Torch" type="AnimatedSprite2D" parent="."]
 position = Vector2(16, -6)
 rotation = 0.00868974
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("5_e87gt")
-hframes = 4
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_mwlb7")
+animation = &"torch"
 
 [node name="PointLight2D" type="PointLight2D" parent="Torch"]
 position = Vector2(2.52331, 8.10142)
@@ -415,12 +568,10 @@ libraries = {
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pig_hitbox"]
+position = Vector2(0, 1.445)
 shape = SubResource("CapsuleShape2D_w6u8y")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
-
-[node name="dash_cooldown" type="Timer" parent="."]
-wait_time = 4.0
 
 [node name="player_state_machine" type="Node" parent="."]
 script = ExtResource("3_e2ml4")
@@ -482,7 +633,6 @@ libraries = {
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
-[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="player_state_machine/state_rolling/RollTime" to="player_state_machine/state_rolling" method="_on_roll_time_timeout"]
 [connection signal="timeout" from="player_state_machine/state_moving/RollCooldown" to="player_state_machine/state_moving" method="_on_roll_cooldown_timeout"]
 [connection signal="timeout" from="player_state_machine/state_idle/IdleCooldown" to="player_state_machine/state_idle" method="_on_idle_cooldown_timeout"]
