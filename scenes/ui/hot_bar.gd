@@ -13,7 +13,7 @@ var curr_idx : int:
 
 func _ready():
 	#print("connection to update")
-	#inventory.update.connect(update_slots)
+	#Globals.inv.update.connect(update_slots)
 	curr_idx = 0
 	update_slots()
 	open()

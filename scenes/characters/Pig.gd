@@ -12,6 +12,9 @@ var flashlight_resource = preload("res://scenes/items/inventory/inv_items/Flashl
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
 @onready var flashlight = $Flashlight
 
+@export var gameData = GameData.new()
+var save_file_path = "res://saves/"
+var save_file_name = "GameSave.tres"
 
 var dashready = true
 
@@ -42,7 +45,8 @@ signal camera_shake
 var pigfacing = true
 
 func _ready():
-
+	verify_save_directory(save_file_path)
+	
 	Globals.pig = $"."
 	print("pig inst")
 	hotbar.connect("hotbar_select", change_tool)
@@ -51,11 +55,12 @@ func _ready():
 	$Torch.play()
 	
 
+	
 func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	traj_line.look_at(get_global_mouse_position())
-	
+	gameData.update_playerHealth(Globals.health)
 	if velocity != Vector2(0,0) and !$Steps.is_playing():
 		print("playing steps")
 		$Steps.play()
@@ -99,12 +104,16 @@ func _physics_process(delta):
 		$AnimationPlayer.stop(true)
 		if pigfacing:
 			$Torch.position.x = abs($Torch.position.x)
+			flashlight.position.x = abs(flashlight.position.x)
+			
 		else:
 			$Torch.position.x = -1 * abs($Torch.position.x)
+			flashlight.position.x = -1 * abs(flashlight.position.x)
 			
 			
 		if state_machine.selected_state.name == "state_idle":
 			$Sprite2D.visible = true
+			$Sprite2D.flip_h = !pigfacing
 			$Roll.visible = false
 				
 			
@@ -131,6 +140,39 @@ func _physics_process(delta):
 	if consumable_equipped:
 		consumable_use(delta)
 
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("save"):
+		save_data()
+	if Input.is_action_just_pressed("load"):
+		load_data()
+		
+
+
+func verify_save_directory(path):
+	DirAccess.make_dir_absolute(path)
+
+func load_data():
+	gameData = ResourceLoader.load(save_file_path + save_file_name)
+	print("Game data loaded...")
+	Globals.health = gameData.playerHealth
+	Globals.cur_lvl = gameData.currentLevel
+	Globals.pig_speed = gameData.playerSpeed
+	Globals.inv = gameData.playerInventory
+	Globals.inv.update.emit()
+	
+
+func save_data():
+	gameData.update_playerHealth(Globals.health)
+	gameData.update_currentLevel(Globals.cur_lvl)
+	gameData.update_playerSpeed(Globals.pig_speed) 
+	gameData.update_playerInventory(Globals.inv)
+	print("current inv size to save : ", Globals.inv.size())
+	ResourceSaver.save(gameData, save_file_path + save_file_name)
+	print("Game data saved...")
+	print("size of saved inventory = ", gameData.playerInventory.size())
+	
 
 func _on_dash_cooldown_timeout():
 	print("dash is ready")
