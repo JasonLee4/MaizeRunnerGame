@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx0pvdscatwe5"]
+[gd_scene load_steps=12 format=3 uid="uid://cx0pvdscatwe5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cb6u7h12t2r43" path="res://assets/ui/joystix monospace.otf" id="6_1tqm1"]
 [ext_resource type="PackedScene" uid="uid://c6jq8xlxnv1r8" path="res://scenes/ui/backpack_menu.tscn" id="7_4nqm3"]
 [ext_resource type="PackedScene" uid="uid://buqcuuo15n8sg" path="res://scenes/menus/pause_menu.tscn" id="8_nvfsd"]
+[ext_resource type="PackedScene" uid="uid://wqx546fxgt0q" path="res://scenes/ui/tooltip.tscn" id="9_drrv1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exthu"]
 texture = ExtResource("4_etjpm")
@@ -108,3 +109,9 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="PauseMenu" parent="." instance=ExtResource("8_nvfsd")]
+
+[node name="Tooltip" parent="." instance=ExtResource("9_drrv1")]
+offset_left = 544.0
+offset_top = 584.0
+offset_right = 604.0
+offset_bottom = 644.0

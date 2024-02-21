@@ -21,6 +21,7 @@ gravity_scale = 0.0
 linear_damp = 1.5
 script = ExtResource("1_pl8ew")
 item = ExtResource("2_cjqs0")
+speed = 70
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.785398

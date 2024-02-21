@@ -27,6 +27,8 @@ var health = 5:
 ### Dungeon ###
 signal dungeon_created
 
+### Tooltip ###
+signal tooltip_update
 
 ### Inventory ###
 signal inv_update
