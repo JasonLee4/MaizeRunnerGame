@@ -147,7 +147,8 @@ func _process(delta):
 		save_data()
 	if Input.is_action_just_pressed("load"):
 		load_data()
-		
+	change_tool(curr_hb_num)
+	
 
 
 func verify_save_directory(path):
@@ -157,10 +158,12 @@ func load_data():
 	gameData = ResourceLoader.load(save_file_path + save_file_name)
 	print("Game data loaded...")
 	Globals.health = gameData.playerHealth
+	position = Vector2(0,0)
 	Globals.cur_lvl = gameData.currentLevel
 	Globals.pig_speed = gameData.playerSpeed
-	Globals.inv = gameData.playerInventory
-	Globals.inv.update.emit()
+	
+	Globals.inv.transfer(gameData.playerInventory)
+	print("Loaded new inventory size: ", Globals.inv.size())
 	
 
 func save_data():
@@ -168,7 +171,6 @@ func save_data():
 	gameData.update_currentLevel(Globals.cur_lvl)
 	gameData.update_playerSpeed(Globals.pig_speed) 
 	gameData.update_playerInventory(Globals.inv)
-	print("current inv size to save : ", Globals.inv.size())
 	ResourceSaver.save(gameData, save_file_path + save_file_name)
 	print("Game data saved...")
 	print("size of saved inventory = ", gameData.playerInventory.size())
@@ -319,7 +321,7 @@ func change_tool(hb_num):
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
 		flashlight.light_on = (current_tool.item.name == "Flashlight")
 		flashlight.equipped = (current_tool.item.name == "Flashlight")
-		print("change tool")
+		#print("change tool")
 		torch_equipped = (current_tool.item.name == "Torch")
 		consumable_equipped = !(flashlight_equipped or torch_equipped)
 	else:
@@ -333,10 +335,13 @@ func change_tool(hb_num):
 func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
 	
-	if torch_equipped or flashlight_equipped:
-		$Sprite2D.frame = 9
+	if torch_equipped or flashlight_equipped:	
+		if $Sprite2D.frame not in range(9,15):
+			$Sprite2D.frame = 9
 	else:
-		$Sprite2D.frame = 3
+		if $Sprite2D.frame not in range(3,8):
+		
+			$Sprite2D.frame = 3
 		
 	
 

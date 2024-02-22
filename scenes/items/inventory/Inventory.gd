@@ -71,15 +71,25 @@ func size():
 	for sl1 in hb_slots.filter(func(hb_slot) : return hb_slot.item != null):
 		total += sl1.amount
 		
-	for sl2 in bp_slots.filter(func(bp_slot) : return bp_slot.item == null):
+	for sl2 in bp_slots.filter(func(bp_slot) : return bp_slot.item != null):
 		total += sl2.amount
 	return total
 
 func transfer(inv2: Inventory):
-	for sl1 in inv2.hb_slots:
-		for i in sl1.amount:
-			insert(sl1.item)
+	
+	for sl1 in hb_slots.filter(func(hb_slot) : return hb_slot.item != null):
+		remove_item(sl1.item, sl1.amount)
 		
-	for sl2 in inv2.bp_slots:
-		for i in sl2.amount:
-			insert(sl2.item)
+	for sl2 in bp_slots.filter(func(bp_slot) : return bp_slot.item != null):
+		remove_item(sl2.item, sl2.amount)
+	
+	for nsl1 in inv2.hb_slots:
+		for k in nsl1.amount:
+			insert(nsl1.item)
+		
+	for nsl2 in inv2.bp_slots:
+		for l in nsl2.amount:
+			insert(nsl2.item)
+	update.emit()
+
+		
