@@ -17,10 +17,15 @@ func _on_quit_button_pressed():
 
 
 func _on_load_save_1_pressed():
-	Globals.new_game = false
-	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
-	Globals.restart_game()
-	
+	if FileAccess.file_exists(Globals.save_file_path+Globals.save_file_name):
+		Globals.new_game = false
+		get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
+		Globals.restart_game()
+	else:
+		$TextEdit.visible = true
+		await get_tree().create_timer(2.0).timeout
+		$TextEdit.visible = false
+		
 
 func _on_create_save_pressed():
 	Globals.new_game = true
