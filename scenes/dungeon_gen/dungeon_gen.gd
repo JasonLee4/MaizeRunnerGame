@@ -96,6 +96,8 @@ func load_player():
 	Globals.pig = player
 	player.position = start_room.position
 	play_mode = true
+	if !Globals.new_game:
+		Globals.load_data()
 	#camera = Camera2D.new()
 	#
 	#camera.set_script(load("res://scenes/levels/Camera.gd"))

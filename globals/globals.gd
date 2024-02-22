@@ -1,4 +1,10 @@
 extends Node
+
+var save_file_path = "res://saves/"
+var save_file_name = "GameSave.tres"
+var gameData
+var new_game
+
 var torch_item : Inv_Item  = preload("res://scenes/items/inventory/inv_items/Torch.tres")
 var flash_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/Flashlight.tres")
 var apple_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/Apple.tres")
@@ -110,3 +116,19 @@ func format_ts_to_str(timestamp):
 
 func increase_pig_speed():
 	pig_speed += 50
+
+func verify_save_directory(path):
+	DirAccess.make_dir_absolute(path)
+
+
+func load_data():
+	gameData = ResourceLoader.load(Globals.save_file_path + Globals.save_file_name)
+	print("Game data loaded...")
+	Globals.max_health = gameData.playerMaxHealth
+	Globals.health = gameData.playerHealth
+	pig.position = Vector2(0,0)
+	Globals.cur_lvl = gameData.currentLevel
+	Globals.pig_speed = gameData.playerSpeed
+	
+	Globals.inv.transfer(gameData.playerInventory)
+	print("Loaded new inventory size: ", Globals.inv.size())

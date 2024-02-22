@@ -3,6 +3,7 @@ extends Resource
 class_name GameData
 
 @export var playerHealth: int
+@export var playerMaxHealth: int
 @export var savePos : Vector2
 @export var playerSpeed : int
 @export var currentLevel : int
@@ -12,6 +13,9 @@ class_name GameData
 
 func update_playerHealth(value):
 	playerHealth = value
+	
+func update_playerMaxHealth(value):
+	playerMaxHealth = value
 	
 func update_savePos(pos):
 	savePos = pos

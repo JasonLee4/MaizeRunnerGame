@@ -45,7 +45,7 @@ signal camera_shake
 var pigfacing = true
 
 func _ready():
-	verify_save_directory(save_file_path)
+	verify_save_directory(Globals.save_file_path)
 	
 	Globals.pig = $"."
 	print("pig inst")
@@ -143,10 +143,6 @@ func _physics_process(delta):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("save"):
-		save_data()
-	if Input.is_action_just_pressed("load"):
-		load_data()
 	change_tool(curr_hb_num)
 	
 
@@ -154,27 +150,29 @@ func _process(delta):
 func verify_save_directory(path):
 	DirAccess.make_dir_absolute(path)
 
-func load_data():
-	gameData = ResourceLoader.load(save_file_path + save_file_name)
-	print("Game data loaded...")
-	Globals.health = gameData.playerHealth
-	position = Vector2(0,0)
-	Globals.cur_lvl = gameData.currentLevel
-	Globals.pig_speed = gameData.playerSpeed
-	
-	Globals.inv.transfer(gameData.playerInventory)
-	print("Loaded new inventory size: ", Globals.inv.size())
+#func load_data():
+	#gameData = ResourceLoader.load(Globals.save_file_path + Globals.save_file_name)
+	#print("Game data loaded...")
+	#Globals.max_health = gameData.playerMaxHealth
+	#Globals.health = gameData.playerHealth
+	#position = Vector2(0,0)
+	#Globals.cur_lvl = gameData.currentLevel
+	#Globals.pig_speed = gameData.playerSpeed
+	#
+	#Globals.inv.transfer(gameData.playerInventory)
+	#print("Loaded new inventory size: ", Globals.inv.size())
 	
 
-func save_data():
-	gameData.update_playerHealth(Globals.health)
-	gameData.update_currentLevel(Globals.cur_lvl)
-	gameData.update_playerSpeed(Globals.pig_speed) 
-	gameData.update_playerInventory(Globals.inv)
-	ResourceSaver.save(gameData, save_file_path + save_file_name)
-	print("Game data saved...")
-	print("size of saved inventory = ", gameData.playerInventory.size())
-	
+#func save_data():
+	#gameData.update_playerMaxHealth(Globals.max_health)
+	#gameData.update_playerHealth(Globals.health)
+	#gameData.update_currentLevel(Globals.cur_lvl)
+	#gameData.update_playerSpeed(Globals.pig_speed)
+	#gameData.update_playerInventory(Globals.inv)
+	#ResourceSaver.save(gameData, Globals.save_file_path + Globals.save_file_name)
+	#print("Game data saved...")
+	#print("size of saved inventory = ", gameData.playerInventory.size())
+	#
 
 func _on_dash_cooldown_timeout():
 	print("dash is ready")
