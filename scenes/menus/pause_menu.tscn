@@ -49,9 +49,14 @@ text = "Continue"
 layout_mode = 2
 text = "Options"
 
+[node name="SaveButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Save Data"
+
 [node name="ReturnButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Return to Menu"
 
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
