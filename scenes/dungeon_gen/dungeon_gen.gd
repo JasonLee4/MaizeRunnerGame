@@ -98,6 +98,8 @@ func load_player():
 	play_mode = true
 	if !Globals.new_game:
 		Globals.load_data()
+	else:
+		Globals.gameData = GameData.new()
 	#camera = Camera2D.new()
 	#
 	#camera.set_script(load("res://scenes/levels/Camera.gd"))
