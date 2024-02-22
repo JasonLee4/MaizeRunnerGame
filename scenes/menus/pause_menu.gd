@@ -31,7 +31,7 @@ func _on_save_button_pressed():
 	save_data()
 
 func save_data():
-	var gameData = GameData.new()
+	var gameData = Globals.gameData
 	gameData.update_playerMaxHealth(Globals.max_health)
 	gameData.update_playerHealth(Globals.health)
 	gameData.update_currentLevel(Globals.cur_lvl)

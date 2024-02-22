@@ -87,11 +87,12 @@ func restart_game():
 	
 	# give player 10 torches and 5 apples to start
 	inv = Inventory.new()
-	inv.insert(flash_item)
-	for _i in range(10):
-		inv.insert(torch_item)
-	for _i in range(5):
-		inv.insert(apple_item)
+	if new_game:
+		inv.insert(flash_item)
+		for _i in range(10):
+			inv.insert(torch_item)
+		for _i in range(5):
+			inv.insert(apple_item)
 	
 	
 	
