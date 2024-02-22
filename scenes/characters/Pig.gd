@@ -45,7 +45,9 @@ signal camera_shake
 var pigfacing = true
 
 func _ready():
+
 	verify_save_directory(Globals.save_file_path)
+
 	
 	Globals.pig = $"."
 	print("pig inst")
@@ -143,12 +145,14 @@ func _physics_process(delta):
 
 
 func _process(delta):
+
 	change_tool(curr_hb_num)
 	
 
 
 func verify_save_directory(path):
 	DirAccess.make_dir_absolute(path)
+
 
 #func load_data():
 	#gameData = ResourceLoader.load(Globals.save_file_path + Globals.save_file_name)
@@ -173,6 +177,7 @@ func verify_save_directory(path):
 	#print("Game data saved...")
 	#print("size of saved inventory = ", gameData.playerInventory.size())
 	#
+
 
 func _on_dash_cooldown_timeout():
 	print("dash is ready")
