@@ -1,0 +1,164 @@
+[gd_scene load_steps=6 format=3 uid="uid://birnt2vsteh6n"]
+
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_nho4f"]
+[ext_resource type="Script" path="res://scenes/menus/tutorial.gd" id="2_jwdkf"]
+[ext_resource type="Texture2D" uid="uid://xf5o2funmhsm" path="res://assets/tutorial/tutorial1.png" id="3_x10a1"]
+[ext_resource type="Texture2D" uid="uid://bm62x2x3xnr7k" path="res://assets/tutorial/tutorial2.png" id="4_f8nw1"]
+[ext_resource type="Texture2D" uid="uid://ma0jryt5m3s1" path="res://assets/tutorial/tutorial3.png" id="5_7abpp"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_nho4f")
+script = ExtResource("2_jwdkf")
+
+[node name="1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+texture = ExtResource("3_x10a1")
+
+[node name="Label" type="Label" parent="1"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 234.0
+offset_right = 672.0
+offset_bottom = 271.0
+text = "Use WASD to move and SPACE to dash."
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="1"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 582.0
+offset_right = 492.0
+offset_bottom = 619.0
+text = "Use 1 2 3 to switch between hotbar items."
+vertical_alignment = 2
+
+[node name="2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+texture = ExtResource("4_f8nw1")
+
+[node name="Label4" type="Label" parent="2"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 156.0
+offset_right = 468.0
+offset_bottom = 189.0
+text = "In each level, you must find the key 
+
+
+
+and get to the chest to escape."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label3" type="Label" parent="2"]
+layout_mode = 0
+offset_left = 439.0
+offset_top = 602.0
+offset_right = 909.0
+offset_bottom = 635.0
+text = "Crafting a torch requires 2 wood."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label5" type="Label" parent="2"]
+layout_mode = 0
+offset_left = 734.0
+offset_top = 205.0
+offset_right = 1204.0
+offset_bottom = 238.0
+text = "These light arrows will
+
+
+
+guide you in the right directions."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="3" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+texture = ExtResource("5_7abpp")
+
+[node name="Label6" type="Label" parent="3"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 170.0
+offset_right = 613.0
+offset_bottom = 211.0
+text = "Use LEFTCLICK to place a torch or eat an apple."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label7" type="Label" parent="3"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 223.0
+offset_right = 695.0
+offset_bottom = 264.0
+text = "Use RIGHTCLICK and hold to throw your equipped tool."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label8" type="Label" parent="3"]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 507.0
+offset_right = 944.0
+offset_bottom = 548.0
+text = "Enemies will interact with light in different ways."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label9" type="Label" parent="3"]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 575.0
+offset_right = 948.0
+offset_bottom = 616.0
+text = "How far will you go in the maize?"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 646.0
+offset_right = 846.0
+offset_bottom = 683.0
+theme_override_colors/font_color = Color(0.929412, 0.74902, 0, 1)
+text = "Press SPACE to continue."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+
+[node name="TextureRect7" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
