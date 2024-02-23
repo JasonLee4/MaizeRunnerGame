@@ -17,7 +17,6 @@ script = ExtResource("1_vsmdi")
 item = ExtResource("2_o12oa")
 
 [node name="ItemBacklight2" parent="." instance=ExtResource("3_k687p")]
-scale = Vector2(1, 1)
 color = Color(0.176471, 0.411765, 1, 1)
 
 [node name="ItemBacklight" parent="." instance=ExtResource("3_k687p")]
