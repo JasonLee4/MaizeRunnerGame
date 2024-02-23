@@ -4,6 +4,8 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Buttons/VBoxContainer/StartButton.grab_focus()
+	$AnimatedSprite2D.flip_h = true
+	$AnimatedSprite2D.play("idle")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

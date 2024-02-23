@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cfnha2uh4r7lt"]
+[gd_scene load_steps=26 format=3 uid="uid://cfnha2uh4r7lt"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_r22ps"]
 [ext_resource type="Texture2D" uid="uid://d5n5unmbmv76" path="res://assets/ui/slidepic.png" id="2_wd1v4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dhq72de8exge2" path="res://assets/ui/title-Sheet.png" id="3_4vohq"]
 [ext_resource type="Texture2D" uid="uid://bcsbcqbva51hq" path="res://assets/ui/startButton.png" id="4_3cdn6"]
 [ext_resource type="Texture2D" uid="uid://civc1u17i6qsf" path="res://assets/ui/optionsButton.png" id="5_x2ryh"]
+[ext_resource type="Texture2D" uid="uid://clxiejrlfshta" path="res://assets/spritesheets/pigianajonesactions1.png" id="7_2mj4c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ekd5"]
 atlas = ExtResource("3_4vohq")
@@ -97,6 +98,35 @@ region = Rect2(9, 16, 255, 78)
 atlas = ExtResource("3_0gawl")
 region = Rect2(16, 27, 255, 78)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8rdd"]
+atlas = ExtResource("7_2mj4c")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07i2v"]
+atlas = ExtResource("7_2mj4c")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flrbg"]
+atlas = ExtResource("7_2mj4c")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0mfeg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8rdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07i2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flrbg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -109,8 +139,8 @@ script = ExtResource("1_r22ps")
 [node name="Background" type="MarginContainer" parent="."]
 layout_mode = 2
 offset_top = 3.0
-offset_right = 1149.0
-offset_bottom = 645.0
+offset_right = 1270.0
+offset_bottom = 723.0
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
 layout_mode = 2
@@ -169,6 +199,12 @@ texture_normal = SubResource("AtlasTexture_7sdub")
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../../StartButton")
 texture_normal = SubResource("AtlasTexture_2jgr1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(971, 520)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_0mfeg")
+animation = &"idle"
 
 [connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

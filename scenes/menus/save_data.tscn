@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bemtgxcht20eb"]
+[gd_scene load_steps=4 format=3 uid="uid://bemtgxcht20eb"]
 
+[ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="1_kmvng"]
 [ext_resource type="Script" path="res://scenes/menus/save_data.gd" id="1_v36xd"]
+
+[sub_resource type="Theme" id="Theme_iju4e"]
+default_font = ExtResource("1_kmvng")
 
 [node name="SaveData" type="Control"]
 layout_mode = 3
@@ -9,7 +13,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_iju4e")
 script = ExtResource("1_v36xd")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+color = Color(0.133333, 0.12549, 0.203922, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -24,7 +35,7 @@ alignment = 1
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "SAVE FILE DATA"
+text = "Runs"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -34,23 +45,24 @@ alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "SAVE 1"
+text = "Save 1"
 horizontal_alignment = 1
 
 [node name="Load_Save1" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "LOAD SAVE
-- -"
+text = "Load"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
@@ -68,6 +80,7 @@ text = "LOAD SAVE
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
@@ -84,19 +97,19 @@ text = "LOAD SAVE
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer4"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "NEW GAME"
+text = "New Game"
 horizontal_alignment = 1
 
 [node name="Create_Save" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer4"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "CREATE SAVE
---"
+text = "Start"
 
 [node name="Back_Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -105,6 +118,7 @@ text = "BACK"
 
 [node name="TextEdit" type="LineEdit" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 317.0
 offset_top = 192.0
 offset_right = 841.0

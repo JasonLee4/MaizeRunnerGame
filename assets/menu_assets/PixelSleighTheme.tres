@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cvvg3yf2kj0gs"]
+
+[ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="1_wmvyv"]
+
+[resource]
+default_font = ExtResource("1_wmvyv")
