@@ -14,7 +14,7 @@ grow_vertical = 2
 theme = ExtResource("1_wvldy")
 script = ExtResource("1_b7dga")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TransparentBackground" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

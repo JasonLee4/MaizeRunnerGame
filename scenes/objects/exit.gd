@@ -10,4 +10,4 @@ func _on_area_2d_body_entered(body):
 		Globals.inv.remove_item(key_item, 1)
 		# go to next level
 		Globals.lvl_end.emit()
-		get_tree().change_scene_to_file("res://scenes/menus/you_won_screen.tscn")
+		get_tree().change_scene_to_file("res://scenes/menus/power_up_screen.tscn")

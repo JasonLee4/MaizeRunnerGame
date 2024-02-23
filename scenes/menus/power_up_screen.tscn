@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnh2oqn26sp1s"]
+[gd_scene load_steps=4 format=3 uid="uid://dnh2oqn26sp1s"]
 
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_hv186"]
 [ext_resource type="Script" path="res://scenes/menus/power_up_screen.gd" id="1_k5xjp"]
+[ext_resource type="PackedScene" uid="uid://dpa5kvvtdlhnb" path="res://scenes/menus/hanging_sign.tscn" id="3_jsobi"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,13 +11,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_hv186")
 script = ExtResource("1_k5xjp")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+color = Color(0.133333, 0.12549, 0.203922, 1)
+
+[node name="Sign" parent="." instance=ExtResource("3_jsobi")]
+layout_mode = 1
+offset_left = 391.0
+offset_right = -627.0
+scale = Vector2(2, 2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -67.0
+offset_right = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 100
@@ -23,62 +40,66 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
 theme_override_font_sizes/font_size = 50
 text = "CHOOSE YOUR UPGRADE"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 80
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "POWER 1"
+text = "Extra Hungry"
 horizontal_alignment = 1
 
 [node name="Power1" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "+1 Health
-Increase Pig's max health by 1"
+text = "
++1 max hp"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "POWER 2"
+text = "Light Hooves"
 horizontal_alignment = 1
 
 [node name="Power2" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "+Speed
-Increase Pig's walking speed"
+text = "
++10% movespeed"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "POWER 3"
+text = "Scavenge"
 horizontal_alignment = 1
 
 [node name="Power3" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "+ item
-Pig will recieve an item"
+text = "
++2 apples"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Power1" to="." method="_on_power_1_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Power2" to="." method="_on_power_2_pressed"]

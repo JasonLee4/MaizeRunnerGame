@@ -115,8 +115,8 @@ func format_ts_to_str(timestamp):
 	
 	return time_str
 
-func increase_pig_speed():
-	pig_speed += 50
+func increase_pig_speed(pct_increase):
+	pig_speed *= (1.0 + pct_increase)
 
 func verify_save_directory(path):
 	DirAccess.make_dir_absolute(path)

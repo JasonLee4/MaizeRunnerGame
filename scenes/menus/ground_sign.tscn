@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3c4n4opxdqmq"]
+
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_p88ep"]
+[ext_resource type="Script" path="res://scenes/menus/ground_sign.gd" id="2_0jqq1"]
+[ext_resource type="Texture2D" uid="uid://dc75two36vl0b" path="res://assets/menu_assets/ground_sign.png" id="2_ctdq3"]
+
+[node name="GroundSign" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1017.0
+offset_bottom = -588.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p88ep")
+script = ExtResource("2_0jqq1")
+text = "You Died..."
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -57.0
+offset_top = -169.0
+offset_right = 2343.0
+offset_bottom = 1831.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_ctdq3")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 16.0
+offset_right = 240.0
+offset_bottom = 47.0
+theme_override_colors/font_color = Color(0.243137, 0.109804, 0.0235294, 1)
+text = "You Died..."
+horizontal_alignment = 1
+vertical_alignment = 2
