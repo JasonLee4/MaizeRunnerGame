@@ -65,17 +65,19 @@ tile_set = SubResource("TileSet_ve6ca")
 format = 2
 
 [node name="HotBar" parent="." instance=ExtResource("5_hlh8u")]
-offset_left = 48.0
-offset_top = 576.0
-offset_right = -920.0
-offset_bottom = -8.0
+offset_left = 12.0
+offset_top = 647.0
+offset_right = -956.0
+offset_bottom = 63.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
 [node name="CurrentLvl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 939.0
+offset_left = 1061.0
 offset_top = 12.0
-offset_right = 1007.0
+offset_right = 1129.0
 offset_bottom = 52.0
 
 [node name="LvlText" type="Label" parent="CurrentLvl"]
@@ -90,10 +92,10 @@ vertical_alignment = 1
 [node name="GameTimer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 986.0
-offset_top = 4.0
-offset_right = 1152.0
-offset_bottom = 50.0
+offset_left = 1126.0
+offset_top = 2.0
+offset_right = 1292.0
+offset_bottom = 48.0
 
 [node name="TimerText" type="Label" parent="GameTimer"]
 layout_mode = 1
