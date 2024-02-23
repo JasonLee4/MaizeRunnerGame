@@ -22,6 +22,8 @@ LevelManager="*res://globals/level_manager.gd"
 
 [display]
 
+window/size/viewport_width=1270
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 
 [dotnet]

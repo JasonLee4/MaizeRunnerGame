@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://buqcuuo15n8sg"]
+[gd_scene load_steps=3 format=3 uid="uid://buqcuuo15n8sg"]
 
 [ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="1_b7dga"]
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_wvldy"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -10,9 +11,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_wvldy")
 script = ExtResource("1_b7dga")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TransparentBackground" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,11 +36,12 @@ offset_right = 65.0
 offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
 
 [node name="Paused" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "PAUSED"
+theme_override_font_sizes/font_size = 30
+text = "Paused"
 horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
@@ -51,7 +54,7 @@ text = "Options"
 
 [node name="SaveButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Save Data"
+text = "Save Game"
 
 [node name="ReturnButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgnq3cthow4ok"]
+[gd_scene load_steps=4 format=3 uid="uid://bgnq3cthow4ok"]
 
 [ext_resource type="Script" path="res://scenes/ui/backpack_slot.gd" id="1_ydx18"]
+[ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="2_5h41g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0ddv"]
 font_size = 25
@@ -28,11 +29,13 @@ scale = Vector2(1.65625, 1.57292)
 
 [node name="Label" type="Label" parent="CenterContainer/Panel"]
 layout_mode = 0
-offset_left = -23.0
-offset_top = 8.0
-offset_right = 66.0
-offset_bottom = 43.0
+offset_left = -22.0
+offset_top = 5.0
+offset_right = 67.0
+offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("2_5h41g")
 text = "0"
 label_settings = SubResource("LabelSettings_s0ddv")
 horizontal_alignment = 2
+vertical_alignment = 2

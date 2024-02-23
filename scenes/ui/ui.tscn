@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_g5b3g"]
 [ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
 [ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hot_bar.tscn" id="5_hlh8u"]
-[ext_resource type="FontFile" uid="uid://cb6u7h12t2r43" path="res://assets/ui/joystix monospace.otf" id="6_1tqm1"]
+[ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="6_r816i"]
 [ext_resource type="PackedScene" uid="uid://c6jq8xlxnv1r8" path="res://scenes/ui/backpack_menu.tscn" id="7_4nqm3"]
 [ext_resource type="PackedScene" uid="uid://buqcuuo15n8sg" path="res://scenes/menus/pause_menu.tscn" id="8_nvfsd"]
 [ext_resource type="PackedScene" uid="uid://wqx546fxgt0q" path="res://scenes/ui/tooltip.tscn" id="9_drrv1"]
@@ -65,18 +65,37 @@ tile_set = SubResource("TileSet_ve6ca")
 format = 2
 
 [node name="HotBar" parent="." instance=ExtResource("5_hlh8u")]
-offset_left = 48.0
-offset_top = 576.0
-offset_right = -920.0
-offset_bottom = -8.0
+offset_left = 12.0
+offset_top = 647.0
+offset_right = -956.0
+offset_bottom = 63.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="CurrentLvl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1061.0
+offset_top = 12.0
+offset_right = 1129.0
+offset_bottom = 52.0
+
+[node name="LvlText" type="Label" parent="CurrentLvl"]
+layout_mode = 0
+offset_right = 69.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("6_r816i")
+text = "Lvl 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GameTimer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 967.0
-offset_top = 12.0
-offset_right = 1133.0
-offset_bottom = 58.0
+offset_left = 1126.0
+offset_top = 2.0
+offset_right = 1292.0
+offset_bottom = 48.0
 
 [node name="TimerText" type="Label" parent="GameTimer"]
 layout_mode = 1
@@ -85,15 +104,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -52.5
-offset_top = -15.0
-offset_right = 52.5
-offset_bottom = 15.0
+offset_left = -55.0
+offset_top = -8.0
+offset_right = 50.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_1tqm1")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("6_r816i")
 text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="backpack_menu" parent="." instance=ExtResource("7_4nqm3")]
 anchors_preset = 3
@@ -111,7 +131,7 @@ grow_vertical = 0
 [node name="PauseMenu" parent="." instance=ExtResource("8_nvfsd")]
 
 [node name="Tooltip" parent="." instance=ExtResource("9_drrv1")]
-offset_left = 544.0
+offset_left = 500.0
 offset_top = 584.0
 offset_right = 604.0
 offset_bottom = 644.0

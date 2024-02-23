@@ -6,11 +6,12 @@ func _ready():
 	$MarginContainer/VBoxContainer/RestartButton.grab_focus()
 
 func _process(delta):
-	$Label.text = "Time: " + str(Globals.lvl_time)
+	$VBoxContainer/Label.text = "You survived until level " + str(Globals.cur_lvl) + "..."
+	$VBoxContainer/Label2.text = "Time: " + str(Globals.lvl_time)
 
 
 func _on_restart_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/menus/level_screen.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/save_data.tscn")
 	Globals.restart_game()
 
 

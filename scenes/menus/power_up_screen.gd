@@ -6,10 +6,11 @@ var itemArr = ["Torch", "wood", "Apple"]
 var item
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Sign.text = "Level " + str(Globals.cur_lvl) + " Complete"
 	$VBoxContainer/HBoxContainer/VBoxContainer/Power1.grab_focus()
 	var item_name = itemArr.pick_random()
 	item = ResourceLoader.load("res://scenes/items/inventory/inv_items/" + item_name + ".tres")
-	$VBoxContainer/HBoxContainer/VBoxContainer3/Power3.text = "+ "+item_name.capitalize()+"\nPig will recieve 1 " + item_name
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Power3.text = "\n+2 " + item_name
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,10 +27,12 @@ func _on_power_1_pressed():
 
 
 func _on_power_2_pressed():
-	Globals.increase_pig_speed()
+	# increase pig speed by 10 percent
+	Globals.increase_pig_speed(.1)
 	next_level()
 
 func _on_power_3_pressed():
+	Globals.inv.insert(item)
 	Globals.inv.insert(item)
 	next_level()
 	

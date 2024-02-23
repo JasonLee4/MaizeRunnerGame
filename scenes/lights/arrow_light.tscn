@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="1_whlyk"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jrvo4"]
-polygon = PackedVector2Array(0, -41, -54, -24, -70, 55, -31, 72, 0, 17, -27, 31)
+polygon = PackedVector2Array(0, -41, -20, -11, -32, 35, -22, 37, 0, 17, -27, 31)
 
 [node name="ArrowLight" type="PointLight2D"]
 color = Color(0, 0.215686, 1, 1)

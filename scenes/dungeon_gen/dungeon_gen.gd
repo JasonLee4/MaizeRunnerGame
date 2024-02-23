@@ -46,6 +46,8 @@ func _ready():
 	spawn_enemies(enemies_per_rm)
 	print("Spawn items...")
 	spawn_items()
+	# hide loading screen
+	turn_off_loading()
 	# start game timer
 	Globals.lvl_start.emit()
 	$Ambiance.play()
@@ -295,6 +297,10 @@ func check_overlap(room1, room2):
 	var room1_rect = Rect2(room1.global_position, room1.size + Vector2(20,20))
 	var room2_rect = Rect2(room2.global_position, room2.size + Vector2(20,20))
 	return room1_rect.intersects(room2_rect)
+
+func turn_off_loading():
+	$LoadingScreen.visible = false
+	$CanvasModulate.visible = true
 
 func _input(event):
 	pass

@@ -6,6 +6,6 @@ func _ready():
 	
 
 func apply_text(text, display):
-	$RichTextLabel.text = text
-	$RichTextLabel.visible = display
+	$TextLabel.text = text
+	$TextLabel.visible = display
 	
