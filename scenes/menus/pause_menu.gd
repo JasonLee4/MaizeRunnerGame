@@ -10,6 +10,7 @@ func _unhandled_input(event):
 func pause():
 	visible = true
 	get_tree().paused = true
+	$VBoxContainer/SaveButton.text = "Save Game"
 	
 func unpause():
 	visible = false
@@ -38,5 +39,6 @@ func save_data():
 	gameData.update_playerSpeed(Globals.pig_speed)
 	gameData.update_playerInventory(Globals.inv)
 	ResourceSaver.save(gameData, Globals.save_file_path + Globals.save_file_name)
+	$VBoxContainer/SaveButton.text = "Saved!"
 	print("Game data saved...")
 	print("size of saved inventory = ", gameData.playerInventory.size())
