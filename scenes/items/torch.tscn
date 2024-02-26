@@ -1,9 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://efwdnoirj55t"]
+[gd_scene load_steps=15 format=3 uid="uid://efwdnoirj55t"]
 
 [ext_resource type="Script" path="res://scenes/items/torch.gd" id="1_kfmpc"]
-[ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_o4iw7"]
+[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/Inv_Item.gd" id="2_2rurk"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="3_fjoov"]
+[ext_resource type="Texture2D" uid="uid://ct2r4652uchy1" path="res://assets/spritesheets/torch.png" id="3_o0q8v"]
 [ext_resource type="Texture2D" uid="uid://dkj0nu7jyyh65" path="res://assets/spritesheets/torchhh1.png" id="4_y0hw2"]
+
+[sub_resource type="Resource" id="Resource_q1v4w"]
+script = ExtResource("2_2rurk")
+name = "Torch"
+texture = ExtResource("3_o0q8v")
+tool = true
+useScript = "res://scenes/items/torch.tscn"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ydk86"]
 radius = 12.5399
@@ -56,7 +64,7 @@ collision_mask = 6
 gravity_scale = 0.0
 linear_damp = 1.0
 script = ExtResource("1_kfmpc")
-item = ExtResource("2_o4iw7")
+item = SubResource("Resource_q1v4w")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 2

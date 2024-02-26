@@ -4,17 +4,13 @@ extends CharacterBody2D
 var pigbullet_scene = preload("res://scenes/projectiles/pigbullet.tscn")
 var torch_scene = preload("res://scenes/items/torch.tscn")
 var torch_resource = preload("res://scenes/items/inventory/inv_items/Torch.tres")
-var flashlight_scene = preload("res://scenes/items/Flashlight.tscn")
+var flashlight_scene = preload("res://scenes/items/Flashlight_item.tscn")
 var flashlight_resource = preload("res://scenes/items/inventory/inv_items/Flashlight.tres")
 
 @onready var traj_line = $trajectory_line
 @onready var state_machine = get_node("player_state_machine")
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
 @onready var flashlight = $Flashlight
-
-@export var gameData = GameData.new()
-var save_file_path = "res://saves/"
-var save_file_name = "GameSave.tres"
 
 var dashready = true
 
@@ -46,7 +42,7 @@ var pigfacing = true
 
 func _ready():
 
-	verify_save_directory(Globals.save_file_path)
+	#verify_save_directory(Globals.save_file_path)
 
 	
 	Globals.pig = $"."
@@ -62,7 +58,6 @@ func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	traj_line.look_at(get_global_mouse_position())
-	gameData.update_playerHealth(Globals.health)
 	if velocity != Vector2(0,0) and !$Steps.is_playing():
 		print("playing steps")
 		$Steps.play()
@@ -146,37 +141,11 @@ func _physics_process(delta):
 
 func _process(delta):
 
-	change_tool(curr_hb_num)
+	#change_tool(curr_hb_num)
+	pass
 	
 
 
-func verify_save_directory(path):
-	DirAccess.make_dir_absolute(path)
-
-
-#func load_data():
-	#gameData = ResourceLoader.load(Globals.save_file_path + Globals.save_file_name)
-	#print("Game data loaded...")
-	#Globals.max_health = gameData.playerMaxHealth
-	#Globals.health = gameData.playerHealth
-	#position = Vector2(0,0)
-	#Globals.cur_lvl = gameData.currentLevel
-	#Globals.pig_speed = gameData.playerSpeed
-	#
-	#Globals.inv.transfer(gameData.playerInventory)
-	#print("Loaded new inventory size: ", Globals.inv.size())
-	
-
-#func save_data():
-	#gameData.update_playerMaxHealth(Globals.max_health)
-	#gameData.update_playerHealth(Globals.health)
-	#gameData.update_currentLevel(Globals.cur_lvl)
-	#gameData.update_playerSpeed(Globals.pig_speed)
-	#gameData.update_playerInventory(Globals.inv)
-	#ResourceSaver.save(gameData, Globals.save_file_path + Globals.save_file_name)
-	#print("Game data saved...")
-	#print("size of saved inventory = ", gameData.playerInventory.size())
-	#
 
 
 func _on_dash_cooldown_timeout():

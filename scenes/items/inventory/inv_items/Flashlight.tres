@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Inv_Item" load_steps=3 format=3 uid="uid://di8ab1v84vtn2"]
 
-[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/InvItem.gd" id="1_u5p0r"]
+[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/Inv_Item.gd" id="1_u5p0r"]
 [ext_resource type="Texture2D" uid="uid://d18oosn4jflwk" path="res://assets/spritesheets/flashlight.png" id="2_6j08t"]
 
 [resource]

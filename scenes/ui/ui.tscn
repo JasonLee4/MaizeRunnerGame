@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
 [ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_g5b3g"]
 [ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
-[ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hot_bar.tscn" id="5_hlh8u"]
+[ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hotbar.tscn" id="5_xgbid"]
 [ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="6_r816i"]
 [ext_resource type="PackedScene" uid="uid://c6jq8xlxnv1r8" path="res://scenes/ui/backpack_menu.tscn" id="7_4nqm3"]
 [ext_resource type="PackedScene" uid="uid://buqcuuo15n8sg" path="res://scenes/menus/pause_menu.tscn" id="8_nvfsd"]
@@ -64,7 +64,7 @@ script = ExtResource("3_g5b3g")
 tile_set = SubResource("TileSet_ve6ca")
 format = 2
 
-[node name="HotBar" parent="." instance=ExtResource("5_hlh8u")]
+[node name="HotBar" parent="." instance=ExtResource("5_xgbid")]
 offset_left = 12.0
 offset_top = 647.0
 offset_right = -956.0

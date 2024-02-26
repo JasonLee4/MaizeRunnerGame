@@ -1,11 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvxtel4kt8t1d"]
+[gd_scene load_steps=15 format=3 uid="uid://bvxtel4kt8t1d"]
 
 [ext_resource type="Script" path="res://scenes/objects/FirePlace.gd" id="1_m0kst"]
-[ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_ll4gk"]
+[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/Inv_Item.gd" id="2_c8uvd"]
 [ext_resource type="Texture2D" uid="uid://p2ae71l8x3qr" path="res://assets/spritesheets/campfire.png" id="3_ak5db"]
+[ext_resource type="Texture2D" uid="uid://ct2r4652uchy1" path="res://assets/spritesheets/torch.png" id="3_p002i"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="4_rvtvu"]
 [ext_resource type="AudioStream" uid="uid://dasnlixiyfnjy" path="res://assets/audio/sfx/410736__selector__campfire-in-the-open-field-3.wav" id="5_wpshn"]
 [ext_resource type="PackedScene" uid="uid://b1rpep7xu3i83" path="res://scenes/lights/guide_light.tscn" id="7_4wo75"]
+
+[sub_resource type="Resource" id="Resource_q1v4w"]
+script = ExtResource("2_c8uvd")
+name = "Torch"
+texture = ExtResource("3_p002i")
+tool = true
+useScript = "res://scenes/items/torch.tscn"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mt8ow"]
 atlas = ExtResource("3_ak5db")
@@ -42,7 +50,7 @@ height = 72.0
 [node name="FirePlace" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_m0kst")
-torch_item = ExtResource("2_ll4gk")
+torch_item = SubResource("Resource_q1v4w")
 tooltip_message = "Press 'f' to craft a torch."
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

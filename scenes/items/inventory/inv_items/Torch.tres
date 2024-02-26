@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Inv_Item" load_steps=3 format=3 uid="uid://du10n1gotovf2"]
 
-[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/InvItem.gd" id="1_y7lyh"]
+[ext_resource type="Script" path="res://scenes/items/inventory/inv_items/Inv_Item.gd" id="1_y7lyh"]
 [ext_resource type="Texture2D" uid="uid://ct2r4652uchy1" path="res://assets/spritesheets/torch.png" id="2_340vb"]
 
 [resource]
