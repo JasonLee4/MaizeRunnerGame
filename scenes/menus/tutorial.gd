@@ -12,11 +12,20 @@ func _ready():
 	tut3.visible = false
 
 func _input(event):
-	if event.is_action_pressed("space"):
+	if event.is_action_pressed("ui_left"):
+		if i == 0:
+			get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
+			return
+		i -= 1 % 3
+		tutorial[i].visible = true
+		tutorial[i+1].visible = false
+		
+	if event.is_action_pressed("ui_right"):
 		if i == 2:
 			get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 			return
-		i += 1
+		i += 1 % 3
 		tutorial[i].visible = true
+		tutorial[i-1].visible = false
 		
 		

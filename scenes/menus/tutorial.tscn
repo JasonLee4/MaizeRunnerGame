@@ -130,12 +130,12 @@ vertical_alignment = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 646.0
-offset_right = 846.0
-offset_bottom = 683.0
+offset_left = 295.0
+offset_top = 648.0
+offset_right = 923.0
+offset_bottom = 685.0
 theme_override_colors/font_color = Color(0.929412, 0.74902, 0, 1)
-text = "Press SPACE to continue."
+text = "Use the left and right arrows to navigate the tutorial."
 horizontal_alignment = 1
 vertical_alignment = 2
 
