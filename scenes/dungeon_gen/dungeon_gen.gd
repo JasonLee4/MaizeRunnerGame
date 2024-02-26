@@ -50,8 +50,7 @@ func _ready():
 	turn_off_loading()
 	# start game timer
 	Globals.lvl_start.emit()
-	$Ambiance.play()
-	
+	$NightSounds.play_rand_sound()
 
 func _process(_delta):
 	queue_redraw()

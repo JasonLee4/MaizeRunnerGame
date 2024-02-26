@@ -37,7 +37,7 @@ func process_sound():
 		#print("playing run")
 		$run.play()
 	elif state_machine.get_current_state().name != "EnemyFollow" and $run.playing:
-		#print("stopping run")
+		#print("stopping run")a
 		$run.stop()
 
 func light_unfreeze():
