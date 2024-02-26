@@ -127,7 +127,7 @@ func load_data():
 	print("Game data loaded...")
 	Globals.max_health = gameData.playerMaxHealth
 	Globals.health = gameData.playerHealth
-	pig.position = Vector2(0,0)
+	#pig.position = Vector2(0,0)
 	Globals.cur_lvl = gameData.currentLevel
 	Globals.pig_speed = gameData.playerSpeed
 	
