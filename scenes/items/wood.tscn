@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ceek5f5hxvohe"]
+[gd_scene load_steps=8 format=3 uid="uid://ceek5f5hxvohe"]
 
 [ext_resource type="Texture2D" uid="uid://0gfyq1lcklhe" path="res://assets/spritesheets/wood.png" id="1_huaco"]
 [ext_resource type="Script" path="res://scenes/items/wood.gd" id="1_wgwtm"]
 [ext_resource type="Resource" uid="uid://d0rlo1xffr4of" path="res://scenes/items/inventory/inv_items/wood.tres" id="2_lihq0"]
 [ext_resource type="PackedScene" uid="uid://dh26fh2f4pd2" path="res://scenes/lights/item_backlight.tscn" id="3_bsrr4"]
+[ext_resource type="AudioStream" uid="uid://bqgoyufrfmr3h" path="res://assets/audio/sfx/item_pickup.wav" id="5_d3cw5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyc43"]
 radius = 18.0
@@ -29,5 +30,9 @@ shape = SubResource("CircleShape2D_jyc43")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_4fyfm")
+
+[node name="Pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_d3cw5")
+volume_db = -10.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

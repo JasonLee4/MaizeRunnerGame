@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://f8a7c50dvi25"]
+[gd_scene load_steps=28 format=3 uid="uid://f8a7c50dvi25"]
 
 [ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="2_m7wqm"]
@@ -9,8 +9,11 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyFreeze.gd" id="6_0hfgx"]
 [ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_djy2a"]
 [ext_resource type="Script" path="res://scripts/States/EnemyAttack.gd" id="8_drdnq"]
-[ext_resource type="AudioStream" uid="uid://8erki8b1qp0q" path="res://assets/audio/sfx/squeak_1.wav" id="10_h70rs"]
+[ext_resource type="Script" path="res://scripts/RandLoopAudio2D.gd" id="10_rrr33"]
+[ext_resource type="AudioStream" uid="uid://8erki8b1qp0q" path="res://assets/audio/sfx/rat_squeak_1.wav" id="11_qi6e3"]
 [ext_resource type="AudioStream" uid="uid://cs7cyhg65x06k" path="res://assets/audio/sfx/rat_steps.wav" id="11_vb4oh"]
+[ext_resource type="AudioStream" uid="uid://uj7icr0abhyo" path="res://assets/audio/sfx/rat_squeak_2.wav" id="12_k2280"]
+[ext_resource type="AudioStream" uid="uid://byymnyw5ao22n" path="res://assets/audio/sfx/rat_squeak_3.wav" id="13_ro6ld"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -329,7 +332,7 @@ polygon = PackedVector2Array(-8, 7, 4, 7, 3, -1, -7, -1)
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_tq7uu")
-detection_radius = 100.0
+detection_radius = 125.0
 speed = 75
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -406,11 +409,14 @@ script = ExtResource("8_drdnq")
 enemy = NodePath("../..")
 
 [node name="squeak" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_h70rs")
 volume_db = -10.0
 pitch_scale = 0.5
 attenuation = 20.0
 panning_strength = 5.0
+script = ExtResource("10_rrr33")
+min_wait_time = 7
+max_wait_time = 14
+sounds = Array[Resource]([ExtResource("11_qi6e3"), ExtResource("12_k2280"), ExtResource("13_ro6ld")])
 
 [node name="squeak_cooldown" type="Timer" parent="."]
 

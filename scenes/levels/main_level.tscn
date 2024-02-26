@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmr5pc0estma1"]
+[gd_scene load_steps=14 format=3 uid="uid://bmr5pc0estma1"]
 
 [ext_resource type="Script" path="res://scenes/levels/main_level.gd" id="1_haied"]
 [ext_resource type="PackedScene" uid="uid://cj72oa0j0cfj6" path="res://scenes/characters/pig.tscn" id="1_u1kou"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bk38y6qrxf7ab" path="res://scenes/items/apple.tscn" id="10_w7piv"]
 [ext_resource type="PackedScene" uid="uid://brr1wrgpu1otg" path="res://scenes/items/weapons/cannon.tscn" id="11_8e02o"]
 [ext_resource type="PackedScene" uid="uid://f8a7c50dvi25" path="res://scenes/enemies/rat.tscn" id="11_bxtrw"]
+[ext_resource type="PackedScene" uid="uid://uqahyjnd7nah" path="res://scenes/enemies/sheep.tscn" id="11_mknk4"]
 [ext_resource type="AudioStream" uid="uid://crs2tawygcvpd" path="res://assets/audio/ambiance/Ambience_Armory.wav" id="12_cfv7x"]
 
 [node name="MainLevel" type="Node2D"]
@@ -57,10 +58,14 @@ position = Vector2(143, 260)
 position = Vector2(358, 271)
 zoom = Vector2(2, 2)
 
+[node name="Sheep" parent="." instance=ExtResource("11_mknk4")]
+position = Vector2(362, 378)
+
 [node name="Rat" parent="." instance=ExtResource("11_bxtrw")]
+visible = false
 position = Vector2(362, 378)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_cfv7x")
-volume_db = -12.0
+volume_db = -20.0
 autoplay = true

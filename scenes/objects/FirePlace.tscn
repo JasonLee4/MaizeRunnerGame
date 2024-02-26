@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://du10n1gotovf2" path="res://scenes/items/inventory/inv_items/Torch.tres" id="2_ll4gk"]
 [ext_resource type="Texture2D" uid="uid://p2ae71l8x3qr" path="res://assets/spritesheets/campfire.png" id="3_ak5db"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="4_rvtvu"]
-[ext_resource type="AudioStream" uid="uid://dasnlixiyfnjy" path="res://assets/audio/sfx/410736__selector__campfire-in-the-open-field-3.wav" id="5_wpshn"]
+[ext_resource type="AudioStream" uid="uid://dasnlixiyfnjy" path="res://assets/audio/sfx/campfire.wav" id="5_8xfa2"]
 [ext_resource type="PackedScene" uid="uid://b1rpep7xu3i83" path="res://scenes/lights/guide_light.tscn" id="7_4wo75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mt8ow"]
@@ -88,8 +88,8 @@ shadow_filter_smooth = 3.0
 texture = ExtResource("4_rvtvu")
 
 [node name="Crackle" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_wpshn")
-volume_db = 5.0
+stream = ExtResource("5_8xfa2")
+volume_db = -3.0
 autoplay = true
 attenuation = 15.0
 panning_strength = 5.0

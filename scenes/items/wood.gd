@@ -6,4 +6,7 @@ func _on_area_2d_body_entered(body):
 	if body.has_method("player"):
 		#body.collect(item)
 		Globals.inv.insert(item)
+		$Pickup.play()
+		visible = false
+		await $Pickup.finished
 		queue_free()
