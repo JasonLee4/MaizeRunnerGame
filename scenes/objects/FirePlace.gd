@@ -42,7 +42,8 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	if body.has_method("player"):
 		crafting_available = true
-		Globals.tooltip_update.emit(tooltip_message, true)
+		if Globals.inv.contains(req_resource) and Globals.inv.get_amount(req_resource) >= 2:
+			Globals.tooltip_update.emit(tooltip_message, true)
 		
 		
 		
