@@ -1,8 +1,8 @@
-[gd_scene load_steps=44 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=45 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
+[ext_resource type="Texture2D" uid="uid://dfc18eshca62o" path="res://assets/spritesheets/pigactionsprites.png" id="2_53h5b"]
 [ext_resource type="Texture2D" uid="uid://depoalr5gvqrd" path="res://assets/spritesheets/pigrolling.png" id="3_6qboe"]
-[ext_resource type="Texture2D" uid="uid://clxiejrlfshta" path="res://assets/spritesheets/pigianajonesactions1.png" id="3_74h5l"]
 [ext_resource type="Script" path="res://scenes/states/Player_State_Machine.gd" id="3_e2ml4"]
 [ext_resource type="PackedScene" uid="uid://bl5yl2pomtmqm" path="res://scenes/lights/flashlight.tscn" id="4_33qj8"]
 [ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
@@ -253,7 +253,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_utpj3"]
 resource_name = "pigwalk"
-length = 0.8
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
@@ -263,10 +262,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [3, 4, 5, 6, 7]
+"values": [6, 7, 8, 9, 10, 11]
 }
 
 [sub_resource type="Animation" id="Animation_13uwa"]
@@ -283,7 +282,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [9, 10, 11, 12, 13, 14]
+"values": [12, 13, 14, 15, 16, 17]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -360,63 +359,15 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [9, 10, 11, 12, 13, 14]
+"values": [12, 13, 14, 15, 16, 17]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Torch:position")
+tracks/1/path = NodePath("Torch:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(16, -6)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Torch:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.00868974]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Flashlight:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(16, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Torch:animation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -441,11 +392,29 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_wnlkw"]
+resource_name = "pigthrow"
+length = 0.6
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_07awo"]
 _data = {
 "RESET": SubResource("Animation_kn2r4"),
 "pigidle": SubResource("Animation_ykrt1"),
 "pigroll": SubResource("Animation_87a35"),
+"pigthrow": SubResource("Animation_wnlkw"),
 "pigwalk": SubResource("Animation_utpj3"),
 "pigwalk_equip_left": SubResource("Animation_13uwa"),
 "pigwalk_equip_right": SubResource("Animation_yvqkv"),
@@ -514,9 +483,9 @@ script = ExtResource("1_hx4hr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("3_74h5l")
+texture = ExtResource("2_53h5b")
 flip_h = true
-hframes = 15
+hframes = 18
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -536,7 +505,6 @@ texture = SubResource("GradientTexture2D_w7koc")
 texture_scale = 5.0
 
 [node name="Flashlight" parent="." instance=ExtResource("4_33qj8")]
-visible = false
 position = Vector2(16, 1)
 rotation = 0.412987
 

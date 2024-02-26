@@ -39,6 +39,7 @@ signal camera_shake
 
 # true = facing right, false = facing left
 var pigfacing = true
+var lookright
 
 func _ready():
 
@@ -49,6 +50,7 @@ func _ready():
 	print("pig inst")
 	hotbar.connect("hotbar_select", change_tool)
 	change_tool(0)
+	flashlight.light_on = true
 	traj_line.clear_points()
 	$Torch.play()
 	
@@ -58,15 +60,26 @@ func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	traj_line.look_at(get_global_mouse_position())
-	
+	lookright = ((get_global_mouse_position().x - global_position.x) >= 0)
 	
 	if ($Sprite2D.frame == 5 or 
 		$Sprite2D.frame == 7 or 
 		$Sprite2D.frame == 11 or 
 		$Sprite2D.frame == 13) and velocity != Vector2(0,0) and $Steps.playing == false:
 		$Steps.play_rand_sound()
-
+		
+	#$Sprite2D.flip_h = !lookright
 	
+	if lookright:
+		flashlight.position.x = abs(flashlight.position.x)
+		$Torch.position.x = abs($Torch.position.x)
+		$Sprite2D.flip_h = false
+		
+	else:
+		flashlight.position.x = -1 * abs(flashlight.position.x)
+		$Torch.position.x = -1 * abs($Torch.position.x)
+		$Sprite2D.flip_h = true
+		
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
 			$Sprite2D.visible = false
@@ -77,23 +90,33 @@ func _physics_process(delta):
 			$Sprite2D.visible = true
 			$Roll.visible = false
 			if velocity.x < 0:
-					pigfacing = false
-					$Sprite2D.flip_h = true
+					#pigfacing = false
+					#$Sprite2D.flip_h = true
 					$Roll.flip_h = true					
-					$Torch.rotation = abs($Torch.rotation)
+					
 			elif velocity.x > 0:
-					pigfacing = true
-					$Sprite2D.flip_h = false
+					#pigfacing = true
+					#$Sprite2D.flip_h = false
 					$Roll.flip_h = false					
-					$Torch.rotation = -1*abs($Torch.rotation)
+					
 				
 			if flashlight_equipped or torch_equipped:				
-				if pigfacing:
-					$AnimationPlayer.play("pigwalk_equip_right")
-				else:
-					$AnimationPlayer.play("pigwalk_equip_left")
+				
+				#$Sprite2D.flip_h = !lookright
+				#if lookright:
+					#flashlight.position.x = abs(flashlight.position.x)
+					#$Torch.position.x = abs($Torch.position.x)
+					#
+				#else:
+					#flashlight.position.x = -1 * abs(flashlight.position.x)
+					#$Torch.position.x = -1 * abs($Torch.position.x)
+				
+				$AnimationPlayer.play("pigwalk_equip_right")
+				#else:
+					#$AnimationPlayer.play("pigwalk_equip_left")
 					
 			else:
+				
 				$AnimationPlayer.play("pigwalk")
 			
 			
@@ -101,18 +124,18 @@ func _physics_process(delta):
 		
 	else:
 		$AnimationPlayer.stop(true)
-		if pigfacing:
-			$Torch.position.x = abs($Torch.position.x)
-			flashlight.position.x = abs(flashlight.position.x)
-			
-		else:
-			$Torch.position.x = -1 * abs($Torch.position.x)
-			flashlight.position.x = -1 * abs(flashlight.position.x)
+		#if pigfacing:
+			#$Torch.position.x = abs($Torch.position.x)
+			#flashlight.position.x = abs(flashlight.position.x)
+			#
+		#else:
+			#$Torch.position.x = -1 * abs($Torch.position.x)
+			#flashlight.position.x = -1 * abs(flashlight.position.x)
 			
 			
 		if state_machine.selected_state.name == "state_idle":
 			$Sprite2D.visible = true
-			$Sprite2D.flip_h = !pigfacing
+			$Sprite2D.flip_h = !lookright
 			$Roll.visible = false
 				
 			
@@ -142,11 +165,9 @@ func _physics_process(delta):
 
 
 func _process(delta):
-
-	#change_tool(curr_hb_num)
-	pass
 	
-
+	change_tool(curr_hb_num)
+	pass
 
 
 
@@ -184,7 +205,6 @@ func receive_damage(damage):
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
-		#camera_shake.emit()
 	
 
 func set_invincible(time):
@@ -225,7 +245,10 @@ func use_torch(delta):
 				traj_line.hide()
 				traj_line.clear_points()
 				Globals.inv.remove_item(torch_resource, 1)
-				$Throw.play()
+				
+				$LightThrow.play()
+				
+				
 				var tr = torch_scene.instantiate()			
 				
 				torch_hold_time = 0.0
@@ -234,15 +257,14 @@ func use_torch(delta):
 				var dir = (get_global_mouse_position() - tr.global_position).normalized()
 				tr.linear_velocity.x = dir.x*torch_speed
 				tr.linear_velocity.y = dir.y*torch_speed
-				
+				tr.angular_velocity = 10
 				get_tree().current_scene.add_child(tr)
 				
 				torch_speed = 0
 				if !Globals.inv.contains(torch_resource):
 					torch_equipped = false
 					$Torch.visible = false
-		#else:
-			#$Tool_Sprite.visible = false
+					
 	else:
 		$Torch.visible = false
 			
@@ -268,8 +290,9 @@ func toggle_flashlight(delta):
 			traj_line.hide()
 			traj_line.clear_points()		
 			Globals.inv.remove_item(current_tool.item, 1)
-			$HeavyThrow.play()
-			#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
+			
+			$LightThrow.play()
+			
 			flashlight_equipped = false
 			hold_time = 0.0
 			
@@ -293,7 +316,7 @@ func change_tool(hb_num):
 	current_tool = Globals.inv.hb_slots[hb_num]
 	if current_tool.item != null:
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
-		flashlight.light_on = (current_tool.item.name == "Flashlight")
+		#flashlight.light_on = (current_tool.item.name == "Flashlight")
 		flashlight.equipped = (current_tool.item.name == "Flashlight")
 		#print("change tool")
 		torch_equipped = (current_tool.item.name == "Torch")
@@ -310,12 +333,12 @@ func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
 	
 	if torch_equipped or flashlight_equipped:	
-		if $Sprite2D.frame not in range(9,15):
-			$Sprite2D.frame = 9
+		if $Sprite2D.frame not in range(12,18):
+			$Sprite2D.frame = 12
 	else:
-		if $Sprite2D.frame not in range(3,8):
+		if $Sprite2D.frame not in range(6,11):
 		
-			$Sprite2D.frame = 3
+			$Sprite2D.frame = 6
 		
 	
 
@@ -325,8 +348,7 @@ func consumable_use(delta):
 	var cons = consScript.instantiate()
 	cons.effect(delta)
 	
-	#assuming all consumables have speed
-	#temp_speed = cons.speed
+	
 	if Input.is_action_pressed("secondary_action"):
 		if temp_speed < cons.speed:
 			temp_speed += 5
@@ -337,8 +359,9 @@ func consumable_use(delta):
 		traj_line.hide()
 		traj_line.clear_points()		
 		Globals.inv.remove_item(current_tool.item, 1)
+		
 		$LightThrow.play()
-		#var temp_apple = load("res://scenes/items/apple.tscn").instantiate()
+		
 		
 		hold_time = 0.0
 		
@@ -346,7 +369,7 @@ func consumable_use(delta):
 		var dir = (get_global_mouse_position() - cons.global_position).normalized()
 		cons.linear_velocity.x = dir.x*temp_speed
 		cons.linear_velocity.y = dir.y*temp_speed
-		
+		cons.angular_velocity = 20
 		cons.pickup = false
 		
 		Globals.pig.get_tree().current_scene.add_child(cons)
