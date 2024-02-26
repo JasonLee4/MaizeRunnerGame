@@ -25,8 +25,8 @@ func _physics_process(delta):
 	
 	if collision_info:
 		linear_velocity = linear_velocity.bounce(collision_info.get_normal())
-		linear_velocity.x *= 0.01
-		linear_velocity.y *= 0.01
+		linear_velocity *= 0.01
+		angular_velocity = -1
 	if linear_velocity.length() < 2:
 		placed = true
 		

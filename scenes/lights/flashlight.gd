@@ -18,7 +18,7 @@ func flash():
 	$FlashlightLightShadows.visible = light_on
 	$LightOccluder2D.visible = light_on
 	$Sprite2D.visible = equipped
-	if not $Sprite2D.visible:
+	if not equipped:
 		$FlashlightLight.visible = false
 		$FlashlightLightShadows.visible = false
 		$LightOccluder2D.visible = false
