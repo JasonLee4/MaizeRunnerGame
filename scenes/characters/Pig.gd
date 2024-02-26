@@ -62,10 +62,12 @@ func _physics_process(delta):
 	traj_line.look_at(get_global_mouse_position())
 	lookright = ((get_global_mouse_position().x - global_position.x) >= 0)
 	
-	if ($Sprite2D.frame == 5 or 
-		$Sprite2D.frame == 7 or 
-		$Sprite2D.frame == 11 or 
-		$Sprite2D.frame == 13) and velocity != Vector2(0,0) and $Steps.playing == false:
+	if ($Sprite2D.frame == 6 or 
+		$Sprite2D.frame == 8 or 
+		$Sprite2D.frame == 10 or 
+		$Sprite2D.frame == 12 or
+		$Sprite2D.frame == 14 or
+		$Sprite2D.frame == 16) and velocity != Vector2(0,0) and $Steps.playing == false:
 		$Steps.play_rand_sound()
 		
 	#$Sprite2D.flip_h = !lookright

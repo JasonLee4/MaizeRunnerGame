@@ -1,4 +1,5 @@
 extends RandAudio2D
+class_name RandAudioLoop2D
 
 var wait_time : float
 var waiting : bool
