@@ -51,7 +51,7 @@ height = 72.0
 y_sort_enabled = true
 script = ExtResource("1_m0kst")
 torch_item = SubResource("Resource_q1v4w")
-tooltip_message = "Press 'f' to craft a torch."
+tooltip_message = "[2 Wood] Press 'f' to craft a torch."
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true

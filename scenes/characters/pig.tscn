@@ -22,8 +22,8 @@
 [ext_resource type="AudioStream" uid="uid://kfxsb2f8g8k6" path="res://assets/audio/sfx/pig_steps_4.wav" id="20_oju05"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
-radius = 14.0
-height = 42.54
+radius = 11.0
+height = 24.0
 
 [sub_resource type="Gradient" id="Gradient_su8b3"]
 offsets = PackedFloat32Array(0, 0.7173)
@@ -490,7 +490,7 @@ frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, 1.73)
+position = Vector2(1, 16)
 shape = SubResource("CapsuleShape2D_a3r7q")
 
 [node name="DefaultCircleLight" type="Node2D" parent="."]
@@ -548,6 +548,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pig_hitbox"]
 position = Vector2(0.0918503, 2.92132)
 shape = SubResource("CapsuleShape2D_w6u8y")
+debug_color = Color(0.694118, 0.282353, 1, 0.419608)
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
 

@@ -11,3 +11,11 @@ func _on_area_2d_body_entered(body):
 		# go to next level
 		Globals.lvl_end.emit()
 		get_tree().change_scene_to_file("res://scenes/menus/power_up_screen.tscn")
+	else:
+		Globals.tooltip_update.emit("The chest is locked.", true)
+
+func _on_area_2d_body_exited(body):
+	if not body.has_method("player"):
+		return
+	Globals.tooltip_update.emit("", false)
+	
