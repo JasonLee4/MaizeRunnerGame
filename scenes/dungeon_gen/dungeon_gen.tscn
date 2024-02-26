@@ -84,7 +84,7 @@ visible = false
 color = Color(0.00392157, 0.0235294, 0.141176, 1)
 
 [node name="NightSounds" type="AudioStreamPlayer" parent="."]
-volume_db = -40.0
+volume_db = -39.0
 autoplay = true
 script = ExtResource("6_rkcr6")
 min_wait_time = 7
