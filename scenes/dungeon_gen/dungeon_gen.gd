@@ -12,8 +12,11 @@ var key_scene = preload("res://scenes/items/key.tscn")
 @onready var map = $TileMap
 @onready var camera
 
-@onready var num_rooms = LevelManager.get_num_rooms()
-@onready var enemies_per_rm = LevelManager.get_num_enemies()
+#@onready var num_rooms = LevelManager.get_num_rooms()
+#@onready var enemies_per_rm = LevelManager.get_num_enemies()
+var num_rooms
+var enemies_per_rm
+
 
 # room generation vars
 const min_size = 4
@@ -32,8 +35,14 @@ var enemy_spawns = []
 
 func _ready():
 	seed("maizerunner".hash())
+	if !Globals.new_game:
+		Globals.load_data()
+	else:
+		Globals.gameData = GameData.new()
+	num_rooms = LevelManager.get_num_rooms()
+	enemies_per_rm = LevelManager.get_num_enemies()
 	print("Making rooms...")
-	print(num_rooms)
+	#print(num_rooms)
 	await make_rooms()
 	print("Loading UI...")
 	add_child(ui_scene.instantiate())
@@ -97,10 +106,7 @@ func load_player():
 	Globals.pig = player
 	player.position = start_room.position
 	play_mode = true
-	if !Globals.new_game:
-		Globals.load_data()
-	else:
-		Globals.gameData = GameData.new()
+	
 	#camera = Camera2D.new()
 	#
 	#camera.set_script(load("res://scenes/levels/Camera.gd"))
