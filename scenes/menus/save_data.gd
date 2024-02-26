@@ -1,9 +1,12 @@
 extends Control
 
+@onready var load_save_option = $VBoxContainer/HBoxContainer/VBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$VBoxContainer/HBoxContainer/VBoxContainer/Load_Save1.grab_focus()
+	if FileAccess.file_exists(Globals.save_file_path+Globals.save_file_name):
+		load_save_option.visible = true
+		load_save_option.grab_focus()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
