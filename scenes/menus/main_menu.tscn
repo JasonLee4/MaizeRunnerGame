@@ -1,16 +1,23 @@
-[gd_scene load_steps=35 format=3 uid="uid://cfnha2uh4r7lt"]
+[gd_scene load_steps=40 format=3 uid="uid://cfnha2uh4r7lt"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_r22ps"]
 [ext_resource type="Texture2D" uid="uid://d5n5unmbmv76" path="res://assets/ui/slidepic.png" id="2_wd1v4"]
 [ext_resource type="Texture2D" uid="uid://bq7mxe4k804f7" path="res://assets/ui/quitButton.png" id="3_0gawl"]
-[ext_resource type="Texture2D" uid="uid://dw6ox3kh6ej8o" path="res://assets/ui/titleNoFarmer.png" id="3_kn55m"]
 [ext_resource type="Texture2D" uid="uid://bcsbcqbva51hq" path="res://assets/ui/startButton.png" id="4_3cdn6"]
 [ext_resource type="Texture2D" uid="uid://bsdud1uo3rsbk" path="res://assets/spritesheets/pigwaving.png" id="4_yh2so"]
 [ext_resource type="Texture2D" uid="uid://civc1u17i6qsf" path="res://assets/ui/optionsButton.png" id="5_x2ryh"]
 [ext_resource type="Texture2D" uid="uid://clxiejrlfshta" path="res://assets/spritesheets/pigianajonesactions1.png" id="7_2mj4c"]
+[ext_resource type="Script" path="res://scripts/RandLoopAudio.gd" id="8_7isq1"]
+[ext_resource type="AudioStream" uid="uid://ckl33epydx1qx" path="res://assets/audio/ambiance/banjo_1.wav" id="9_sbc55"]
+[ext_resource type="AudioStream" uid="uid://ky7swaljkjsh" path="res://assets/audio/ambiance/banjo_2.wav" id="10_2s8q5"]
+[ext_resource type="AudioStream" uid="uid://dhqk5xcyhob3" path="res://assets/audio/ambiance/banjo_3.wav" id="11_7oby8"]
+[ext_resource type="AudioStream" uid="uid://0bwksggkkjft" path="res://assets/audio/ambiance/birds.wav" id="12_txb1b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yfrrw"]
+load_path = "res://.godot/imported/titleNoFarmer.png-405b4f15c443724d3fd145819eded81a.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8tpyp"]
-atlas = ExtResource("3_kn55m")
+atlas = SubResource("CompressedTexture2D_yfrrw")
 region = Rect2(100, 1000, 3030, 900)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1u0xu"]
@@ -264,6 +271,17 @@ position = Vector2(971, 520)
 scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_0mfeg")
 animation = &"idle"
+
+[node name="Banjo" type="AudioStreamPlayer" parent="."]
+volume_db = -27.0
+script = ExtResource("8_7isq1")
+max_wait_time = 7
+sounds = Array[Resource]([ExtResource("9_sbc55"), ExtResource("10_2s8q5"), ExtResource("11_7oby8")])
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_txb1b")
+volume_db = -25.0
+autoplay = true
 
 [connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

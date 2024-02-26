@@ -1,4 +1,5 @@
 extends RandAudio
+class_name RandAudioLoop
 
 var wait_time : float
 var waiting : bool
