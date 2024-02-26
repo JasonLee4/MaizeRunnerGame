@@ -6,6 +6,7 @@ var itemArr = ["Torch", "wood", "Apple"]
 var item
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Yay.play()
 	$Sign.text = "Level " + str(Globals.cur_lvl) + " Complete"
 	$VBoxContainer/HBoxContainer/VBoxContainer/Power1.grab_focus()
 	var item_name = itemArr.pick_random()

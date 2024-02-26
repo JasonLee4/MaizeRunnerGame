@@ -37,6 +37,9 @@ func _on_area_2d_body_entered(body):
 	if body.has_method("player") and pickup:
 		#body.collect(item)
 		Globals.inv.insert(item)
+		$Pickup.play()
+		visible = false
+		await $Pickup.finished
 		queue_free()
 	elif body.has_method("enemy"):
 		body.take_damage(0)

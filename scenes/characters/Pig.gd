@@ -58,12 +58,14 @@ func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	traj_line.look_at(get_global_mouse_position())
-	if velocity != Vector2(0,0) and !$Steps.is_playing():
-		print("playing steps")
-		$Steps.play()
-	elif velocity == Vector2(0,0) and $Steps.is_playing():
-		print("stopping steps")
-		$Steps.stop()
+	
+	
+	if ($Sprite2D.frame == 5 or 
+		$Sprite2D.frame == 7 or 
+		$Sprite2D.frame == 11 or 
+		$Sprite2D.frame == 13) and velocity != Vector2(0,0) and $Steps.playing == false:
+		$Steps.play_rand_sound()
+
 	
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
@@ -173,7 +175,7 @@ func _on_pig_hitbox_body_exited(body):
 func receive_damage(damage):
 	if not invulnerable:
 		Globals.health -= damage
-		$PigHit.play()
+		$PigHit.play_rand_sound()
 		camera_shake.emit()
 		invulnerable = true
 		# flash red when talking damage
