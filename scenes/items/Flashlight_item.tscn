@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dgju2mt1en6k0"]
 
-[ext_resource type="Script" path="res://scenes/items/Flashlight.gd" id="1_pl8ew"]
-[ext_resource type="Texture2D" uid="uid://d18oosn4jflwk" path="res://assets/spritesheets/flashlight.png" id="2_3opx2"]
-[ext_resource type="Resource" uid="uid://di8ab1v84vtn2" path="res://scenes/items/inventory/inv_items/Flashlight.tres" id="2_cjqs0"]
-[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="3_j172s"]
+[ext_resource type="Script" path="res://scenes/items/Flashlight_item.gd" id="1_oppru"]
+[ext_resource type="Resource" uid="uid://di8ab1v84vtn2" path="res://scenes/items/inventory/inv_items/Flashlight.tres" id="2_5toft"]
+[ext_resource type="Texture2D" uid="uid://d18oosn4jflwk" path="res://assets/spritesheets/flashlight.png" id="3_ccttr"]
+[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="4_13urf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mt4l8"]
 size = Vector2(17.0019, 4.30187)
@@ -19,14 +19,14 @@ collision_layer = 16
 collision_mask = 6
 gravity_scale = 0.0
 linear_damp = 1.5
-script = ExtResource("1_pl8ew")
-item = ExtResource("2_cjqs0")
+script = ExtResource("1_oppru")
+item = ExtResource("2_5toft")
 speed = 70
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.785398
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3opx2")
+texture = ExtResource("3_ccttr")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -58,14 +58,14 @@ color = Color(0.823529, 0.964706, 0.964706, 1)
 energy = 0.7
 shadow_enabled = true
 shadow_item_cull_mask = 2
-texture = ExtResource("3_j172s")
+texture = ExtResource("4_13urf")
 
 [node name="FlashlightLightShadows" type="PointLight2D" parent="."]
 scale = Vector2(4, 4)
 energy = 0.1
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("3_j172s")
+texture = ExtResource("4_13urf")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
