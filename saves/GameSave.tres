@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="GameData" load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scenes/items/inventory/inventory_slot.gd" id="1_j6bdr"]
+[ext_resource type="Resource" path="res://scenes/items/inventory/inv_items/Flashlight.tres" id="2_0u2fw"]
+[ext_resource type="Resource" path="res://scenes/items/inventory/inv_items/Torch.tres" id="3_fsog7"]
+[ext_resource type="Resource" path="res://scenes/items/inventory/inv_items/Apple.tres" id="4_fpc8g"]
+[ext_resource type="Script" path="res://scenes/items/inventory/Inventory.gd" id="5_ujkuy"]
+[ext_resource type="Script" path="res://scripts/GameData.gd" id="6_ujl1f"]
+
+[sub_resource type="Resource" id="Resource_qedr6"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_kbtr4"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_15mq7"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_u6oim"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_afqyr"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_oocx4"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_kllct"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_x6mml"]
+script = ExtResource("1_j6bdr")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_y1o7u"]
+script = ExtResource("1_j6bdr")
+item = ExtResource("2_0u2fw")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_tgyrk"]
+script = ExtResource("1_j6bdr")
+item = ExtResource("3_fsog7")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_2kjd0"]
+script = ExtResource("1_j6bdr")
+item = ExtResource("4_fpc8g")
+amount = 5
+
+[sub_resource type="Resource" id="Resource_rnvgi"]
+script = ExtResource("5_ujkuy")
+hb_slots = Array[ExtResource("1_j6bdr")]([SubResource("Resource_y1o7u"), SubResource("Resource_tgyrk"), SubResource("Resource_2kjd0")])
+bp_slots = Array[ExtResource("1_j6bdr")]([SubResource("Resource_qedr6"), SubResource("Resource_kbtr4"), SubResource("Resource_15mq7"), SubResource("Resource_u6oim"), SubResource("Resource_afqyr"), SubResource("Resource_oocx4"), SubResource("Resource_kllct"), SubResource("Resource_x6mml")])
+
+[resource]
+script = ExtResource("6_ujl1f")
+playerHealth = 5
+playerMaxHealth = 5
+savePos = Vector2(0, 0)
+playerSpeed = 100
+currentLevel = 1
+dungeonSeed = ""
+playerInventory = SubResource("Resource_rnvgi")
+elapsedTime = 8182
