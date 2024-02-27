@@ -37,8 +37,10 @@ func _ready():
 	seed("maizerunner".hash())
 	if !Globals.new_game:
 		Globals.load_data()
+			
 	else:
 		Globals.gameData = GameData.new()
+	Globals.new_game = true
 	num_rooms = LevelManager.get_num_rooms()
 	enemies_per_rm = LevelManager.get_num_enemies()
 	print("Making rooms...")

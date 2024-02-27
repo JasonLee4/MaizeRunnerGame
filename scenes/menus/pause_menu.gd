@@ -38,6 +38,8 @@ func save_data():
 	gameData.update_currentLevel(Globals.cur_lvl)
 	gameData.update_playerSpeed(Globals.pig_speed)
 	gameData.update_playerInventory(Globals.inv)
+	gameData.update_elapsedTime(Time.get_ticks_msec())
+	
 	ResourceSaver.save(gameData, Globals.save_file_path + Globals.save_file_name)
 	$VBoxContainer/SaveButton.text = "Saved!"
 	print("Game data saved...")

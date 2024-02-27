@@ -151,6 +151,7 @@ func _physics_process(delta):
 		pig_alive = false
 		print("Pig is dead")
 		Globals.lvl_end.emit()
+		Globals.game_end_time = Time.get_ticks_msec()
 		get_tree().change_scene_to_file("res://scenes/menus/end_screen.tscn")
 		self.queue_free()
 

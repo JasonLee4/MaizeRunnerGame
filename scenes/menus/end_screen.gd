@@ -7,7 +7,7 @@ func _ready():
 
 func _process(delta):
 	$VBoxContainer/Label.text = "You survived until level " + str(Globals.cur_lvl) + "..."
-	$VBoxContainer/Label2.text = "Time: " + str(Globals.lvl_time)
+	$VBoxContainer/Label2.text = "Time: " + str(Globals.game_end_time)
 
 
 func _on_restart_button_pressed():

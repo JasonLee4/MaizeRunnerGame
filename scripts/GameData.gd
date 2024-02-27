@@ -10,7 +10,7 @@ class_name GameData
 @export var currentLevel : int
 @export var dungeonSeed : String
 @export var playerInventory : Inventory
-
+@export var elapsedTime: int
 
 func update_playerHealth(value):
 	playerHealth = value
@@ -34,4 +34,5 @@ func update_DungeonSeed(levelseed):
 func update_playerInventory(inv):
 	playerInventory = inv
 
-
+func update_elapsedTime(time):
+	elapsedTime = time

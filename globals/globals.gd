@@ -62,6 +62,11 @@ var cur_lvl = 1
 signal lvl_start
 signal lvl_end
 
+var game_start_time = 0
+var game_end_time:
+	set(ts):
+		game_end_time = format_ts_to_str(ts + game_start_time)
+
 var lvl_start_time = null
 var lvl_end_time = null
 var lvl_time:
@@ -83,7 +88,7 @@ func restart_game():
 	
 	lvl_start_time = null
 	lvl_end_time = null
-	cur_lvl = 1
+	#cur_lvl = 1
 	
 	# give player 10 torches and 5 apples to start
 	inv = Inventory.new()
@@ -133,3 +138,5 @@ func load_data():
 	
 	Globals.inv.transfer(gameData.playerInventory)
 	print("Loaded new inventory size: ", Globals.inv.size())
+
+	Globals.game_start_time = gameData.elapsedTime
