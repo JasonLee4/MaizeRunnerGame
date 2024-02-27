@@ -25,6 +25,9 @@ func _game_logic(delta):
 		if distance > max_spd:
 			distance = max_spd
 		
+		if (move.x > 0 and !Globals.pig.lookright) or (move.x < 0 and Globals.pig.lookright):
+			print("walking backwards")
+			distance *= 0.7
 		# set the velocity
 		player.velocity = move * distance
 	else:

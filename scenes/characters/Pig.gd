@@ -12,6 +12,8 @@ var flashlight_resource = preload("res://scenes/items/inventory/inv_items/Flashl
 @onready var hotbar = get_tree().current_scene.get_node("UI").get_node("HotBar")
 @onready var flashlight = $Flashlight
 
+@export var lookright : bool
+
 var dashready = true
 
 
@@ -39,7 +41,6 @@ signal camera_shake
 
 # true = facing right, false = facing left
 var pigfacing = true
-var lookright
 
 func _ready():
 
