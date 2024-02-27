@@ -57,3 +57,11 @@ func _on_torch_hitbox_body_entered(body):
 func _on_torch_timer_timeout():
 	$PointLight2D/Torch_Light_Area/CollisionShape2D.disabled = true
 	queue_free()
+
+
+func _on_shrink_timer_timeout():
+	$PointLight2D.scale *= 0.8
+	$Torch_light_shadow.scale *= 0.8
+	$PointLight2D/Torch_Light_Area/CollisionShape2D.scale *= 0.8
+	
+	
