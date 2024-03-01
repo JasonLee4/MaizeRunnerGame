@@ -11,7 +11,9 @@ func enter():
 	print("enemy attacking")
 
 func update(delta):
-	if enemy.can_attack and enemy.can_attack_player:
+	if enemy.health <=0:
+		transitioned.emit(self, "EnemyDead")
+	elif enemy.can_attack and enemy.can_attack_player:
 		enemy.deal_damage()
 	elif enemy.can_attack and !enemy.can_attack_player:
 		print("attack -> idle")
