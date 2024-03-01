@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/items/wood.gd" id="1_wgwtm"]
 [ext_resource type="Resource" uid="uid://d0rlo1xffr4of" path="res://scenes/items/inventory/inv_items/wood.tres" id="2_lihq0"]
 [ext_resource type="PackedScene" uid="uid://dh26fh2f4pd2" path="res://scenes/lights/item_backlight.tscn" id="3_bsrr4"]
-[ext_resource type="AudioStream" uid="uid://bqgoyufrfmr3h" path="res://assets/audio/sfx/item_pickup.wav" id="5_d3cw5"]
+[ext_resource type="AudioStream" uid="uid://c0udbqxsx3anw" path="res://assets/audio/sfx/bag_rustle.wav" id="5_qkdfv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyc43"]
 radius = 18.0
@@ -32,7 +32,7 @@ shape = SubResource("CircleShape2D_jyc43")
 occluder = SubResource("OccluderPolygon2D_4fyfm")
 
 [node name="Pickup" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_d3cw5")
-volume_db = -10.0
+stream = ExtResource("5_qkdfv")
+volume_db = -5.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

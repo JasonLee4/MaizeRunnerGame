@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=47 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://dfc18eshca62o" path="res://assets/spritesheets/pigactionsprites.png" id="2_53h5b"]
@@ -20,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://cj0racck3bjhm" path="res://assets/audio/sfx/pig_steps_2.wav" id="18_u5ngr"]
 [ext_resource type="AudioStream" uid="uid://d2ev2bqfgxwqc" path="res://assets/audio/sfx/pig_steps_3.wav" id="19_2ne71"]
 [ext_resource type="AudioStream" uid="uid://kfxsb2f8g8k6" path="res://assets/audio/sfx/pig_steps_4.wav" id="20_oju05"]
+[ext_resource type="AudioStream" uid="uid://c64ku5314wyf5" path="res://assets/audio/sfx/eat.wav" id="21_7mn2k"]
+[ext_resource type="AudioStream" uid="uid://bkr8umv80emty" path="res://assets/audio/sfx/dash.wav" id="22_2qiia"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3r7q"]
 radius = 11.0
@@ -614,7 +616,7 @@ stream = ExtResource("11_veocr")
 pitch_scale = 2.0
 
 [node name="PigHit" type="AudioStreamPlayer2D" parent="."]
-volume_db = -3.0
+volume_db = 1.0
 script = ExtResource("12_ssacy")
 sounds = Array[Resource]([ExtResource("13_nvv1e"), ExtResource("14_ohdn6"), ExtResource("15_wpq7i")])
 
@@ -633,6 +635,16 @@ pitch_scale = 1.2
 volume_db = -8.0
 script = ExtResource("12_ssacy")
 sounds = Array[Resource]([ExtResource("17_lybie"), ExtResource("18_u5ngr"), ExtResource("19_2ne71"), ExtResource("20_oju05")])
+
+[node name="Eat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_7mn2k")
+volume_db = -5.0
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_2qiia")
+volume_db = -10.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
 
 [connection signal="body_entered" from="pig_hitbox" to="." method="_on_pig_hitbox_body_entered"]
 [connection signal="body_exited" from="pig_hitbox" to="." method="_on_pig_hitbox_body_exited"]

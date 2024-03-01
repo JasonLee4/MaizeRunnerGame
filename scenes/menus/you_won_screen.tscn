@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://beojxqj7yugwu"]
+[gd_scene load_steps=3 format=3 uid="uid://beojxqj7yugwu"]
 
 [ext_resource type="Script" path="res://scenes/menus/you_won_screen.gd" id="1_5vbjb"]
+[ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="2_hdv7t"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -64,6 +65,9 @@ text = "Main Menu"
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../ContinueButton")
 text = "Quit"
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hdv7t")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

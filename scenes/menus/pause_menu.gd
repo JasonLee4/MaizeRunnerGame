@@ -21,14 +21,20 @@ func _ready():
 	visible = false
 
 func _on_continue_button_pressed():
+	$Button.play()
+	await $Button.finished
 	unpause()
 
 func _on_return_button_pressed():
+	$Button.play()
+	await $Button.finished
 	unpause()
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 
 
 func _on_save_button_pressed():
+	$Button.play()
+	await $Button.finished
 	save_data()
 
 func save_data():

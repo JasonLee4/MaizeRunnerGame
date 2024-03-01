@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://buqcuuo15n8sg"]
+[gd_scene load_steps=4 format=3 uid="uid://buqcuuo15n8sg"]
 
 [ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="1_b7dga"]
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_wvldy"]
+[ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="3_364sb"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -59,6 +60,9 @@ text = "Save Game"
 [node name="ReturnButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Return to Menu"
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_364sb")
 
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

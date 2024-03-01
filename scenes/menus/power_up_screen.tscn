@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnh2oqn26sp1s"]
+[gd_scene load_steps=6 format=3 uid="uid://dnh2oqn26sp1s"]
 
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_hv186"]
 [ext_resource type="Script" path="res://scenes/menus/power_up_screen.gd" id="1_k5xjp"]
 [ext_resource type="PackedScene" uid="uid://dpa5kvvtdlhnb" path="res://scenes/menus/hanging_sign.tscn" id="3_jsobi"]
 [ext_resource type="AudioStream" uid="uid://bpurer8vn83h7" path="res://assets/audio/sfx/finish.wav" id="4_dgvk6"]
+[ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_ac7r1"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -105,6 +106,9 @@ text = "
 [node name="Yay" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dgvk6")
 volume_db = -3.0
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ac7r1")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Power1" to="." method="_on_power_1_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Power2" to="." method="_on_power_2_pressed"]
