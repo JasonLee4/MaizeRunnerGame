@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bemtgxcht20eb"]
+[gd_scene load_steps=4 format=3 uid="uid://bemtgxcht20eb"]
 
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_b2t1v"]
 [ext_resource type="Script" path="res://scenes/menus/save_data.gd" id="1_v36xd"]
+[ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="3_dj0ko"]
 
 [node name="SaveData" type="Control"]
 layout_mode = 3
@@ -123,6 +124,9 @@ offset_bottom = 276.0
 theme_override_font_sizes/font_size = 35
 text = "No Save File Exists"
 alignment = 1
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dj0ko")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Load_Save1" to="." method="_on_load_save_1_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer4/Create_Save" to="." method="_on_create_save_pressed"]

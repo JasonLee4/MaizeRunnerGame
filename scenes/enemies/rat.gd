@@ -43,6 +43,10 @@ func process_sound():
 	elif state_machine.get_current_state().name != "EnemyFollow" and $run.playing:
 		#print("stopping run")a
 		$run.stop()
+		
+func deal_damage():
+	$bite.play()
+	super.deal_damage()
 
 func light_unfreeze():
 	#print("Rat can move")

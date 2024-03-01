@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://biti6vfd012ge" path="res://assets/audio/sfx/owl_1.wav" id="9_htdfk"]
 [ext_resource type="AudioStream" uid="uid://b1rbhafo4y0e4" path="res://assets/audio/ambiance/cricket_3.wav" id="9_o5ka5"]
 [ext_resource type="AudioStream" uid="uid://jerojfl01k4a" path="res://assets/audio/sfx/owl_2.wav" id="10_tnvs8"]
-[ext_resource type="AudioStream" uid="uid://mr360oq4dynf" path="res://assets/audio/ambiance/night_music.wav" id="11_q063w"]
+[ext_resource type="AudioStream" uid="uid://dv280c4h5m3jq" path="res://assets/audio/ambiance/night_music_slow.wav" id="11_77wdm"]
 
 [node name="DungeonGen" type="Node2D"]
 y_sort_enabled = true
@@ -92,6 +92,6 @@ max_wait_time = 20
 sounds = Array[Resource]([ExtResource("7_1l6ob"), ExtResource("8_vocet"), ExtResource("9_o5ka5"), ExtResource("9_htdfk"), ExtResource("10_tnvs8")])
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_q063w")
-volume_db = -20.0
+stream = ExtResource("11_77wdm")
+volume_db = -10.0
 autoplay = true

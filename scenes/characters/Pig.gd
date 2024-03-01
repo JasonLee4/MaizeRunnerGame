@@ -38,7 +38,8 @@ var pigfacing = true
 func _ready():
 
 	#verify_save_directory(Globals.save_file_path)
-
+	
+	
 	
 	Globals.pig = $"."
 	print("pig inst")
@@ -81,6 +82,8 @@ func _physics_process(delta):
 		if state_machine.selected_state.name == "state_rolling":
 			$Sprite2D.visible = false
 			$Roll.visible = true
+			if(!$Dash.is_playing()):
+				$Dash.play()
 			
 			$AnimationPlayer.play("pigroll")
 		elif state_machine.selected_state.name == "state_moving":

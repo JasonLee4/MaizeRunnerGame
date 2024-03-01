@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvxtel4kt8t1d"]
+[gd_scene load_steps=16 format=3 uid="uid://bvxtel4kt8t1d"]
 
 [ext_resource type="Script" path="res://scenes/objects/FirePlace.gd" id="1_m0kst"]
 [ext_resource type="Script" path="res://scenes/items/inventory/inv_items/Inv_Item.gd" id="2_c8uvd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="4_rvtvu"]
 [ext_resource type="AudioStream" uid="uid://dasnlixiyfnjy" path="res://assets/audio/sfx/campfire.wav" id="5_8xfa2"]
 [ext_resource type="PackedScene" uid="uid://b1rpep7xu3i83" path="res://scenes/lights/guide_light.tscn" id="7_4wo75"]
+[ext_resource type="AudioStream" uid="uid://cgntfl5uruf2g" path="res://assets/audio/sfx/bag_open.wav" id="8_1l4d5"]
 
 [sub_resource type="Resource" id="Resource_q1v4w"]
 script = ExtResource("2_c8uvd")
@@ -95,11 +96,10 @@ shadow_enabled = true
 shadow_filter_smooth = 3.0
 texture = ExtResource("4_rvtvu")
 
-[node name="Crackle" type="AudioStreamPlayer2D" parent="."]
+[node name="Crackle" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_8xfa2")
-volume_db = -3.0
+volume_db = 1.0
 autoplay = true
-attenuation = 15.0
 panning_strength = 5.0
 
 [node name="GuideLightBlue" parent="." instance=ExtResource("7_4wo75")]
@@ -109,6 +109,10 @@ color = Color(0.219608, 0.447059, 1, 1)
 [node name="GuideLightGreen" parent="." instance=ExtResource("7_4wo75")]
 visible = false
 color = Color(0.513726, 1, 0.482353, 1)
+
+[node name="Craft" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1l4d5")
+volume_db = -10.0
 
 [connection signal="body_entered" from="CraftingArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="CraftingArea" to="." method="_on_area_2d_body_exited"]

@@ -11,6 +11,6 @@ func play_rand_sound():
 		index = randi_range(0, sounds.size()-1)
 	prev_index = index
 	var audio = sounds[index]
-	print("playing audio number ", index)
+	#print("playing audio number ", index)
 	self.stream = audio
 	self.play()

@@ -9,12 +9,12 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyFreeze.gd" id="6_0hfgx"]
 [ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_djy2a"]
 [ext_resource type="Script" path="res://scripts/States/EnemyAttack.gd" id="8_drdnq"]
-[ext_resource type="Script" path="res://scripts/States/EnemyDead.gd" id="10_kdmpy"]
 [ext_resource type="Script" path="res://scripts/RandLoopAudio2D.gd" id="10_rrr33"]
 [ext_resource type="AudioStream" uid="uid://8erki8b1qp0q" path="res://assets/audio/sfx/rat_squeak_1.wav" id="11_qi6e3"]
 [ext_resource type="AudioStream" uid="uid://cs7cyhg65x06k" path="res://assets/audio/sfx/rat_steps.wav" id="11_vb4oh"]
 [ext_resource type="AudioStream" uid="uid://uj7icr0abhyo" path="res://assets/audio/sfx/rat_squeak_2.wav" id="12_k2280"]
 [ext_resource type="AudioStream" uid="uid://byymnyw5ao22n" path="res://assets/audio/sfx/rat_squeak_3.wav" id="13_ro6ld"]
+[ext_resource type="AudioStream" uid="uid://beuwf7o73r55q" path="res://assets/audio/sfx/rat_bite_3.wav" id="15_76mv0"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -404,14 +404,9 @@ enemy = NodePath("../..")
 [node name="EnemyFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_djy2a")
 enemy = NodePath("../..")
-move_speed = null
 
 [node name="EnemyAttack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("8_drdnq")
-enemy = NodePath("../..")
-
-[node name="EnemyDead" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("10_kdmpy")
 enemy = NodePath("../..")
 
 [node name="squeak" type="AudioStreamPlayer2D" parent="."]
@@ -433,8 +428,12 @@ occluder = SubResource("OccluderPolygon2D_2mqo0")
 stream = ExtResource("11_vb4oh")
 volume_db = 0.2
 pitch_scale = 1.7
-attenuation = 20.0
 panning_strength = 10.0
+
+[node name="bite" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_76mv0")
+volume_db = -10.0
+pitch_scale = 1.3
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
