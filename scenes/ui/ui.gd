@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var heart: PackedScene = preload("res://scenes/ui/heart.tscn")
+var heart_scene: PackedScene = preload("res://scenes/ui/heart.tscn")
 @onready var hotbar = $HotBar
 @onready var health_counter: HBoxContainer = $HealthCounter/HBoxContainer
 @onready var timer_label: Label = $GameTimer/TimerText
@@ -39,8 +39,16 @@ func update_health():
 	for child in health_counter.get_children():
 		child.queue_free()
 	# repopulate hearts
+	
 	for i in Globals.health:
-		health_counter.add_child(heart.instantiate())
+		var heart = heart_scene.instantiate()
+		heart.set_full(true)
+		health_counter.add_child(heart)
+		
+	for i in (Globals.max_health - Globals.health):
+		var heart = heart_scene.instantiate()
+		heart.set_full(false)
+		health_counter.add_child(heart)
 		
 func update_inventory():
 	hotbar.update_slots()
