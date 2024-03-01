@@ -38,3 +38,23 @@ func get_num_rooms():
 		return 30
 	else:
 		return lvl * 2
+
+func get_loading_screen_text():
+	var texts = [
+		"Welcome to the maize", # for tutorial level
+		"We smell fresh meat...",
+		"The rats are starving!",
+		"You can run all you want...",
+		"But you cannot escape.",
+		"The maize devours all.", 
+		"More rats. MORE. RATS.", # 6
+		"Fear the darkness...",
+		"Delicious ham, come to us!",
+		"The maize grows larger.",
+		"We can taste your fear.",
+		"Lost, are you?"
+	]
+	var lvl = Globals.cur_lvl
+	if lvl & lvl < len(texts):
+		return texts[lvl]
+	return "YOUR TIME IS NIGH, BACON"
