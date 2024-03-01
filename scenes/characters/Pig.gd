@@ -13,30 +13,23 @@ var flashlight_resource = preload("res://scenes/items/inventory/inv_items/Flashl
 @onready var flashlight = $Flashlight
 
 @export var lookright : bool
+@export var flashlight_equipped = false
 
+@export var curr_hb_num = 0
 var dashready = true
-
-
-
 var invulnerable = false
 var pig_alive = true
- 
 
-
-
-@export var flashlight_equipped = false
 
 var torch_equipped = false
 var torch_hold_time = 0.0
 var torch_speed = 10
 
 var current_tool
-@export var curr_hb_num = 0
-
 var consumable_equipped = false
+
 var temp_speed = 0
 var hold_time = 0.0
-#@export var inv: Inventory
 signal camera_shake
 
 # true = facing right, false = facing left
@@ -61,7 +54,7 @@ func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	traj_line.look_at(get_global_mouse_position())
-	lookright = ((get_global_mouse_position().x - global_position.x) >= 0)
+	
 	
 	if ($Sprite2D.frame == 6 or 
 		$Sprite2D.frame == 8 or 
@@ -72,16 +65,17 @@ func _physics_process(delta):
 		$Steps.play_rand_sound()
 		
 	#$Sprite2D.flip_h = !lookright
-	
-	if lookright:
-		flashlight.position.x = abs(flashlight.position.x)
-		$Torch.position.x = abs($Torch.position.x)
-		$Sprite2D.flip_h = false
-		
-	else:
-		flashlight.position.x = -1 * abs(flashlight.position.x)
-		$Torch.position.x = -1 * abs($Torch.position.x)
-		$Sprite2D.flip_h = true
+	if flashlight_equipped:
+		lookright = ((get_global_mouse_position().x - global_position.x) >= 0)
+		if lookright:
+			flashlight.position.x = abs(flashlight.position.x)
+			#$Torch.position.x = abs($Torch.position.x)
+			$Sprite2D.flip_h = false
+			
+		else:
+			flashlight.position.x = -1 * abs(flashlight.position.x)
+			#$Torch.position.x = -1 * abs($Torch.position.x)
+			$Sprite2D.flip_h = true
 		
 	if velocity != Vector2(0,0):
 		if state_machine.selected_state.name == "state_rolling":
@@ -92,18 +86,18 @@ func _physics_process(delta):
 		elif state_machine.selected_state.name == "state_moving":
 			$Sprite2D.visible = true
 			$Roll.visible = false
-			if velocity.x < 0:
+			#if velocity.x < 0:
 					#pigfacing = false
-					#$Sprite2D.flip_h = true
-					$Roll.flip_h = true					
-					
-			elif velocity.x > 0:
+					##$Sprite2D.flip_h = true
+					#$Roll.flip_h = true					
+					#
+			#elif velocity.x > 0:
 					#pigfacing = true
-					#$Sprite2D.flip_h = false
-					$Roll.flip_h = false					
+					##$Sprite2D.flip_h = false
+					#$Roll.flip_h = false					
 					
 				
-			if flashlight_equipped or torch_equipped:				
+			if flashlight_equipped:				
 				
 				#$Sprite2D.flip_h = !lookright
 				#if lookright:
@@ -117,11 +111,27 @@ func _physics_process(delta):
 				$AnimationPlayer.play("pigwalk_equip_right")
 				#else:
 					#$AnimationPlayer.play("pigwalk_equip_left")
-					
 			else:
+				if velocity.x < 0:
+					#pigfacing = false
+					$Torch.position.x = -1 * abs($Torch.position.x)
+					
+					$Sprite2D.flip_h = true
+					$Roll.flip_h = true					
+					
+				elif velocity.x > 0:
+					#pigfacing = true
+					$Torch.position.x = abs($Torch.position.x)
+					
+					$Sprite2D.flip_h = false
+					$Roll.flip_h = false	
+				if torch_equipped:
+					$AnimationPlayer.play("pigwalk_equip_right")
+					
+				else:
+					
+					$AnimationPlayer.play("pigwalk")
 				
-				$AnimationPlayer.play("pigwalk")
-			
 			
 			
 		
@@ -138,7 +148,9 @@ func _physics_process(delta):
 			
 		if state_machine.selected_state.name == "state_idle":
 			$Sprite2D.visible = true
-			$Sprite2D.flip_h = !lookright
+			if flashlight_equipped:
+				$Sprite2D.flip_h = !lookright
+				
 			$Roll.visible = false
 				
 			
