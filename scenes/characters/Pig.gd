@@ -24,7 +24,7 @@ var pig_alive = true
 
 
 
-var flashlight_equipped = false
+@export var flashlight_equipped = false
 
 var torch_equipped = false
 var torch_hold_time = 0.0
