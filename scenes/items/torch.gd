@@ -49,7 +49,7 @@ func _on_torch_light_area_body_exited(body):
 
 func _on_torch_hitbox_body_entered(body):
 	if body.has_method("enemy") and !placed:
-		body.take_damage(body.MAX_HEALTH/2)
+		body.take_damage(body.MAX_HEALTH)
 		#body.queue_free()
 		#queue_free()
 

@@ -78,8 +78,9 @@ func take_damage(damage_value):
 		#invulnerable = true
 		#$dmg_iframe_cooldown.start()
 	#print("Slime health = ", health)
-	if health <= 0:
-		self.queue_free() 
+	
+	#if health <= 0:
+		#self.queue_free() 
 
 func _on_attack_cooldown_timeout():
 	#print("attack cooldown done")
