@@ -29,6 +29,8 @@ func insert(item: Inv_Item):
 			#print(slots[0].item.name)
 	update.emit()
 	
+	if Globals.pig != null:
+		Globals.pig.change_tool(Globals.pig.curr_hb_num)
 	
 	
 	pass

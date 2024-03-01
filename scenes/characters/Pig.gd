@@ -31,7 +31,7 @@ var torch_hold_time = 0.0
 var torch_speed = 10
 
 var current_tool
-var curr_hb_num
+@export var curr_hb_num = 0
 
 var consumable_equipped = false
 var temp_speed = 0
@@ -170,7 +170,7 @@ func _physics_process(delta):
 
 func _process(delta):
 	
-	change_tool(curr_hb_num)
+	#change_tool(curr_hb_num)
 	pass
 
 
@@ -320,7 +320,7 @@ func change_tool(hb_num):
 	current_tool = Globals.inv.hb_slots[hb_num]
 	if current_tool.item != null:
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
-		#flashlight.light_on = (current_tool.item.name == "Flashlight")
+		flashlight.light_on = (current_tool.item.name == "Flashlight")
 		flashlight.equipped = (current_tool.item.name == "Flashlight")
 		#print("change tool")
 		torch_equipped = (current_tool.item.name == "Torch")
