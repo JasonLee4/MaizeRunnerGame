@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://f8a7c50dvi25"]
+[gd_scene load_steps=30 format=3 uid="uid://f8a7c50dvi25"]
 
 [ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="2_m7wqm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyFreeze.gd" id="6_0hfgx"]
 [ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_djy2a"]
 [ext_resource type="Script" path="res://scripts/States/EnemyAttack.gd" id="8_drdnq"]
+[ext_resource type="Script" path="res://scripts/States/EnemyDead.gd" id="10_2mc8f"]
 [ext_resource type="Script" path="res://scripts/RandLoopAudio2D.gd" id="10_rrr33"]
 [ext_resource type="AudioStream" uid="uid://8erki8b1qp0q" path="res://assets/audio/sfx/rat_squeak_1.wav" id="11_qi6e3"]
 [ext_resource type="AudioStream" uid="uid://cs7cyhg65x06k" path="res://assets/audio/sfx/rat_steps.wav" id="11_vb4oh"]
@@ -407,6 +408,10 @@ enemy = NodePath("../..")
 
 [node name="EnemyAttack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("8_drdnq")
+enemy = NodePath("../..")
+
+[node name="EnemyDead" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("10_2mc8f")
 enemy = NodePath("../..")
 
 [node name="squeak" type="AudioStreamPlayer2D" parent="."]
