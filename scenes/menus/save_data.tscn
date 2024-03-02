@@ -47,51 +47,20 @@ theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Save 1"
 horizontal_alignment = 1
 
 [node name="Load_Save1" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Load"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
-text = "SAVE 2"
-horizontal_alignment = 1
-
-[node name="Load_Save2" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "LOAD SAVE
--NOT WORKING-"
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "SAVE 3"
-horizontal_alignment = 1
-
-[node name="Load_Save3" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "LOAD SAVE
--NOT WORKING-"
+text = "                      "
+flat = true
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -99,28 +68,67 @@ theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer4"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "New Game"
 horizontal_alignment = 1
 
 [node name="Create_Save" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer4"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Start"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "                      "
+flat = true
 
-[node name="Back_Button" type="Button" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Back_Button" type="Button" parent="VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 20
 text = "BACK"
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 0
+offset_left = 352.0
+offset_top = 331.0
+offset_right = 563.0
+offset_bottom = 371.0
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Load Save"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 0
+offset_left = 697.0
+offset_top = 332.0
+offset_right = 917.0
+offset_bottom = 372.0
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "New Game"
+fit_content = true
+autowrap_mode = 0
 
 [node name="TextEdit" type="LineEdit" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 317.0
-offset_top = 192.0
-offset_right = 841.0
-offset_bottom = 276.0
+offset_left = 377.0
+offset_top = 560.0
+offset_right = 901.0
+offset_bottom = 644.0
 theme_override_font_sizes/font_size = 35
 text = "No Save File Exists"
 alignment = 1
@@ -128,6 +136,12 @@ alignment = 1
 [node name="Button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_dj0ko")
 
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/Load_Save1" to="." method="_on_load_save_1_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer/Load_Save1" to="." method="_on_load_save_1_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Load_Save1" to="." method="_on_load_save_1_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer4/Create_Save" to="." method="_on_create_save_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer4/Create_Save" to="." method="_on_create_save_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer4/Create_Save" to="." method="_on_create_save_pressed"]
-[connection signal="pressed" from="VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]

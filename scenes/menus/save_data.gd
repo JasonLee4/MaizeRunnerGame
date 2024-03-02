@@ -49,3 +49,22 @@ func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 
 
+
+
+
+
+
+
+
+func _on_load_save_1_mouse_entered():
+	$RichTextLabel.text = "[wave amp=90]" + $RichTextLabel.text + "[/wave]"
+
+func _on_load_save_1_mouse_exited():
+	$RichTextLabel.text = "Load Save"
+
+func _on_create_save_mouse_entered():
+	$RichTextLabel2.text = "[wave amp=90]" + $RichTextLabel2.text + "[/wave]"
+
+func _on_create_save_mouse_exited():
+	$RichTextLabel2.text = "New Game"
+	
