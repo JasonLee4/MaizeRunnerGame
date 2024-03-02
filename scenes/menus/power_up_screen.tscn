@@ -33,8 +33,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -67.0
-offset_right = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 100
@@ -49,6 +47,7 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_constants/separation = 80
 alignment = 1
 
@@ -57,51 +56,72 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Label1" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
 text = "Extra Hungry"
-horizontal_alignment = 1
+fit_content = true
+autowrap_mode = 0
 
 [node name="Power1" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 20
 text = "
 +1 max hp"
+flat = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
 text = "Light Hooves"
-horizontal_alignment = 1
+fit_content = true
+autowrap_mode = 0
 
 [node name="Power2" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 20
 text = "
 +10% movespeed"
+flat = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="Label3" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
 text = "Scavenge"
-horizontal_alignment = 1
+fit_content = true
+autowrap_mode = 0
 
 [node name="Power3" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 20
 text = "
 +2 apples"
+flat = true
 
 [node name="Yay" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dgvk6")
@@ -110,6 +130,12 @@ volume_db = -3.0
 [node name="Button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ac7r1")
 
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/Power1" to="." method="_on_power_1_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer/Power1" to="." method="_on_power_1_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Power1" to="." method="_on_power_1_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer2/Power2" to="." method="_on_power_2_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer2/Power2" to="." method="_on_power_2_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Power2" to="." method="_on_power_2_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer3/Power3" to="." method="_on_power_3_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer3/Power3" to="." method="_on_power_3_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer3/Power3" to="." method="_on_power_3_pressed"]
