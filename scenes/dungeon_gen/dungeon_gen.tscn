@@ -1,59 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://dx3kt1flbreh8"]
+[gd_scene load_steps=11 format=3 uid="uid://dx3kt1flbreh8"]
 
 [ext_resource type="Script" path="res://scenes/dungeon_gen/dungeon_gen.gd" id="1_7plxx"]
 [ext_resource type="TileSet" uid="uid://vii48tc24ua7" path="res://assets/tilesets/corn_ground_tileset.tres" id="2_0cbpq"]
-[ext_resource type="Texture2D" uid="uid://d33ww4b36dowc" path="res://assets/menu_assets/loading_screen.png" id="2_h2pyp"]
-[ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="3_w7oc5"]
+[ext_resource type="PackedScene" uid="uid://l5fgvvplufog" path="res://scenes/ui/loading_screen.tscn" id="2_u3jyu"]
 [ext_resource type="Script" path="res://scripts/RandLoopAudio.gd" id="6_rkcr6"]
 [ext_resource type="AudioStream" uid="uid://dpr7iegcl04j" path="res://assets/audio/ambiance/cricket_1.wav" id="7_1l6ob"]
 [ext_resource type="AudioStream" uid="uid://b6p172s0shd2k" path="res://assets/audio/ambiance/cricket_2.wav" id="8_vocet"]
 [ext_resource type="AudioStream" uid="uid://biti6vfd012ge" path="res://assets/audio/sfx/owl_1.wav" id="9_htdfk"]
 [ext_resource type="AudioStream" uid="uid://b1rbhafo4y0e4" path="res://assets/audio/ambiance/cricket_3.wav" id="9_o5ka5"]
 [ext_resource type="AudioStream" uid="uid://jerojfl01k4a" path="res://assets/audio/sfx/owl_2.wav" id="10_tnvs8"]
-[ext_resource type="AudioStream" uid="uid://mr360oq4dynf" path="res://assets/audio/ambiance/night_music.wav" id="11_q063w"]
+[ext_resource type="AudioStream" uid="uid://dv280c4h5m3jq" path="res://assets/audio/ambiance/night_music_slow.wav" id="11_77wdm"]
 
 [node name="DungeonGen" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_7plxx")
 
-[node name="LoadingScreen" type="Control" parent="."]
-clip_contents = true
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1270.0
-offset_bottom = 720.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="Background" type="HBoxContainer" parent="LoadingScreen"]
-layout_mode = 0
-offset_right = 2400.0
-offset_bottom = 1350.0
-scale = Vector2(0.535, 0.535)
-
-[node name="TextureRect" type="TextureRect" parent="LoadingScreen/Background"]
-layout_mode = 2
-texture = ExtResource("2_h2pyp")
-
-[node name="Label" type="Label" parent="LoadingScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -483.0
-offset_top = -34.0
-offset_right = 483.0
-offset_bottom = 70.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
-theme_override_fonts/font = ExtResource("3_w7oc5")
-theme_override_font_sizes/font_size = 45
-text = "The rats are starving!"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="LoadingScreen" parent="." instance=ExtResource("2_u3jyu")]
 
 [node name="Rooms" type="Node2D" parent="."]
 light_mask = 0
@@ -92,6 +54,6 @@ max_wait_time = 20
 sounds = Array[Resource]([ExtResource("7_1l6ob"), ExtResource("8_vocet"), ExtResource("9_o5ka5"), ExtResource("9_htdfk"), ExtResource("10_tnvs8")])
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_q063w")
-volume_db = -20.0
+stream = ExtResource("11_77wdm")
+volume_db = -10.0
 autoplay = true

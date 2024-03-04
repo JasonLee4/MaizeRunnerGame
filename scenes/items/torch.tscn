@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://efwdnoirj55t"]
+[gd_scene load_steps=18 format=3 uid="uid://efwdnoirj55t"]
 
 [ext_resource type="Script" path="res://scenes/items/torch.gd" id="1_kfmpc"]
 [ext_resource type="Script" path="res://scenes/items/inventory/inv_items/Inv_Item.gd" id="2_2rurk"]
@@ -58,6 +58,23 @@ size = Vector2(4.59593, 28.2827)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cwhm8"]
 radius = 4.24241
 height = 33.9393
+
+[sub_resource type="Curve" id="Curve_iiqvf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.175824), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j77fq"]
+curve = SubResource("Curve_iiqvf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_enyvg"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_j77fq")
 
 [node name="Torch" type="RigidBody2D"]
 collision_mask = 6
@@ -121,6 +138,16 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 0.596078, 0.207843, 1)
+position = Vector2(3.91928, -4.80862)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_enyvg")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="body_exited" from="PointLight2D/Torch_Light_Area" to="." method="_on_torch_light_area_body_exited"]
 [connection signal="body_entered" from="Torch_Hitbox" to="." method="_on_torch_hitbox_body_entered"]

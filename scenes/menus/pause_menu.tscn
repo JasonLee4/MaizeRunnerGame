@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://buqcuuo15n8sg"]
+[gd_scene load_steps=5 format=3 uid="uid://buqcuuo15n8sg"]
 
 [ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="1_b7dga"]
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_wvldy"]
+[ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="3_364sb"]
+[ext_resource type="Texture2D" uid="uid://bta6mgpjurx0g" path="res://assets/menu_assets/pause_menu_signs.png" id="3_c1ylx"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -23,43 +25,153 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.129412, 0.129412, 0.141176, 0.556863)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -65.0
-offset_top = -73.0
-offset_right = 65.0
-offset_bottom = 73.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 192.0
+offset_right = 460.0
+offset_bottom = 232.0
+scale = Vector2(10.405, 10.405)
+texture = ExtResource("3_c1ylx")
+expand_mode = 1
 
-[node name="Paused" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Paused"
+[node name="Paused" type="Label" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 526.0
+offset_top = 275.0
+offset_right = 745.0
+offset_bottom = 283.0
+theme_override_font_sizes/font_size = 35
+text = "PAUSED"
 horizontal_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="ContinueButton" type="Button" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 492.0
+offset_top = 329.0
+offset_right = 664.0
+offset_bottom = 343.0
+scale = Vector2(1.664, 3.73453)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 25
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ContinueButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.8461
+offset_top = 8.30091
+offset_right = 132.846
+offset_bottom = 48.3009
+scale = Vector2(1.07568, 0.462235)
+mouse_filter = 2
+bbcode_enabled = true
 text = "Continue"
+fit_content = true
+autowrap_mode = 0
 
-[node name="OptionButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="OptionButton" type="Button" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 492.0
+offset_top = 416.0
+offset_right = 590.0
+offset_bottom = 428.0
+scale = Vector2(1.29851, 4.53237)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="OptionButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 10.0114
+offset_top = 6.8397
+offset_right = 100.011
+offset_bottom = 46.8397
+scale = Vector2(0.843315, 0.268981)
+mouse_filter = 2
+bbcode_enabled = true
 text = "Options"
+fit_content = true
+autowrap_mode = 0
 
-[node name="SaveButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="SaveButton" type="Button" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 652.0
+offset_top = 415.0
+offset_right = 778.0
+offset_bottom = 427.0
+scale = Vector2(1, 4.67194)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SaveButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 7.49153
+offset_right = 122.0
+offset_bottom = 47.4915
+scale = Vector2(1.02003, 0.244511)
+mouse_filter = 2
 text = "Save Game"
+fit_content = true
+autowrap_mode = 0
 
-[node name="ReturnButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Return to Menu"
+[node name="ReturnButton" type="Button" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 492.0
+offset_top = 488.0
+offset_right = 682.0
+offset_bottom = 500.0
+scale = Vector2(0.670994, 4.57777)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
 
-[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ReturnButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 10.4323
+offset_top = 7.4272
+offset_right = 132.432
+offset_bottom = 47.4272
+scale = Vector2(1.41174, 0.245757)
+mouse_filter = 2
+text = "Main Menu"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ExitButton" type="Button" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
+offset_left = 652.0
+offset_top = 488.0
+offset_right = 712.0
+offset_bottom = 500.0
+scale = Vector2(2.11166, 4.58961)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ExitButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 16.5746
+offset_top = 7.19016
+offset_right = 68.5746
+offset_bottom = 47.1902
+scale = Vector2(0.439748, 0.208713)
+mouse_filter = 2
+text = "Exit"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_364sb")
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

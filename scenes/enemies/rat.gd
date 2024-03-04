@@ -10,6 +10,10 @@ func _ready():
 func choose_animation():
 	#Movement animation
 	super.choose_animation()
+	
+	if health <=0 :
+		return 0
+	
 	if velocity.x == 0 and velocity.y == 0:
 		#$AnimatedSprite2D.play("tail_wag")
 		$AnimationPlayer.play("tail_wag")
@@ -39,6 +43,10 @@ func process_sound():
 	elif state_machine.get_current_state().name != "EnemyFollow" and $run.playing:
 		#print("stopping run")a
 		$run.stop()
+		
+func deal_damage():
+	$bite.play()
+	super.deal_damage()
 
 func light_unfreeze():
 	#print("Rat can move")

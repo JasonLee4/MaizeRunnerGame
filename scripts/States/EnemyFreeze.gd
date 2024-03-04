@@ -12,6 +12,8 @@ func enter():
 	
 func update(delta):
 	enemy.get_node("AnimationPlayer").stop()
+	if enemy.health <=0:
+		transitioned.emit(self, "EnemyDead")
 	
 func exit():
 	enemy.get_node("AnimationPlayer").play()

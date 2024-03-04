@@ -25,9 +25,9 @@ func _game_logic(delta):
 		if distance > max_spd:
 			distance = max_spd
 		
-		if (move.x > 0 and !Globals.pig.lookright) or (move.x < 0 and Globals.pig.lookright):
-			print("walking backwards")
-			distance *= 0.7
+		if Globals.pig.flashlight_equipped and ((move.x > 0 and !Globals.pig.lookright) or (move.x < 0 and Globals.pig.lookright)):
+			#print("walking backwards")
+			distance *= 0.75
 		# set the velocity
 		player.velocity = move * distance
 	else:
@@ -45,8 +45,10 @@ func _game_logic(delta):
 
 
 func _transition_logic(existing_states):
+	if not Globals.pig.pig_alive:
+		machine.change_state("state_dead") 
 	
-	if can_roll and Input.is_action_just_pressed("dash") and move.length() > 0:
+	elif can_roll and Input.is_action_just_pressed("dash") and move.length() > 0:
 		# transition to rolling
 		machine.change_state("state_rolling", [move], [])
 	elif move.length() == 0:

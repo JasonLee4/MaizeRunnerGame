@@ -13,30 +13,23 @@ var flashlight_resource = preload("res://scenes/items/inventory/inv_items/Flashl
 @onready var flashlight = $Flashlight
 
 @export var lookright : bool
+@export var flashlight_equipped = false
 
+@export var curr_hb_num = 0
 var dashready = true
-
-
-
 var invulnerable = false
-var pig_alive = true
- 
+@export var pig_alive = true
 
-
-
-var flashlight_equipped = false
 
 var torch_equipped = false
 var torch_hold_time = 0.0
 var torch_speed = 10
 
 var current_tool
-var curr_hb_num
-
 var consumable_equipped = false
+
 var temp_speed = 0
 var hold_time = 0.0
-#@export var inv: Inventory
 signal camera_shake
 
 # true = facing right, false = facing left
@@ -45,7 +38,8 @@ var pigfacing = true
 func _ready():
 
 	#verify_save_directory(Globals.save_file_path)
-
+	
+	
 	
 	Globals.pig = $"."
 	print("pig inst")
@@ -61,116 +55,148 @@ func _physics_process(delta):
 	# run through states
 	state_machine.process_states(delta)
 	traj_line.look_at(get_global_mouse_position())
-	lookright = ((get_global_mouse_position().x - global_position.x) >= 0)
-	
-	if ($Sprite2D.frame == 6 or 
-		$Sprite2D.frame == 8 or 
-		$Sprite2D.frame == 10 or 
-		$Sprite2D.frame == 12 or
-		$Sprite2D.frame == 14 or
-		$Sprite2D.frame == 16) and velocity != Vector2(0,0) and $Steps.playing == false:
-		$Steps.play_rand_sound()
-		
-	#$Sprite2D.flip_h = !lookright
-	
-	if lookright:
-		flashlight.position.x = abs(flashlight.position.x)
-		$Torch.position.x = abs($Torch.position.x)
-		$Sprite2D.flip_h = false
-		
-	else:
-		flashlight.position.x = -1 * abs(flashlight.position.x)
-		$Torch.position.x = -1 * abs($Torch.position.x)
-		$Sprite2D.flip_h = true
-		
-	if velocity != Vector2(0,0):
-		if state_machine.selected_state.name == "state_rolling":
-			$Sprite2D.visible = false
-			$Roll.visible = true
+	if pig_alive:
+		#use keying instead in anim player
+		if ($Sprite2D.frame == 6 or 
+			$Sprite2D.frame == 8 or 
+			$Sprite2D.frame == 10 or 
+			$Sprite2D.frame == 12 or
+			$Sprite2D.frame == 14 or
+			$Sprite2D.frame == 16) and velocity != Vector2(0,0) and $Steps.playing == false:
+			$Steps.play_rand_sound()
 			
-			$AnimationPlayer.play("pigroll")
-		elif state_machine.selected_state.name == "state_moving":
-			$Sprite2D.visible = true
-			$Roll.visible = false
-			if velocity.x < 0:
-					#pigfacing = false
-					#$Sprite2D.flip_h = true
-					$Roll.flip_h = true					
-					
-			elif velocity.x > 0:
-					#pigfacing = true
-					#$Sprite2D.flip_h = false
-					$Roll.flip_h = false					
-					
+		#$Sprite2D.flip_h = !lookright
+		if flashlight_equipped:
+			lookright = ((get_global_mouse_position().x - global_position.x) >= 0)
+			if lookright:
+				flashlight.position.x = abs(flashlight.position.x)
+				$Torch.position.x = abs($Torch.position.x)
+				$Sprite2D.flip_h = false
 				
-			if flashlight_equipped or torch_equipped:				
-				
-				#$Sprite2D.flip_h = !lookright
-				#if lookright:
-					#flashlight.position.x = abs(flashlight.position.x)
-					#$Torch.position.x = abs($Torch.position.x)
-					#
-				#else:
-					#flashlight.position.x = -1 * abs(flashlight.position.x)
-					#$Torch.position.x = -1 * abs($Torch.position.x)
-				
-				$AnimationPlayer.play("pigwalk_equip_right")
-				#else:
-					#$AnimationPlayer.play("pigwalk_equip_left")
-					
 			else:
+				flashlight.position.x = -1 * abs(flashlight.position.x)
+				$Torch.position.x = -1 * abs($Torch.position.x)
+				$Sprite2D.flip_h = true
+			
+		if velocity != Vector2(0,0):
+			if state_machine.selected_state.name == "state_rolling":
+				$Sprite2D.visible = false
+				$Roll.visible = true
+				if(!$Dash.is_playing()):
+					$Dash.play()
 				
-				$AnimationPlayer.play("pigwalk")
+				$AnimationPlayer.play("pigroll")
+			elif state_machine.selected_state.name == "state_moving":
+				$Sprite2D.visible = true
+				$Roll.visible = false
+				#if velocity.x < 0:
+						#pigfacing = false
+						##$Sprite2D.flip_h = true
+						#$Roll.flip_h = true					
+						#
+				#elif velocity.x > 0:
+						#pigfacing = true
+						##$Sprite2D.flip_h = false
+						#$Roll.flip_h = false					
+						
+					
+				if flashlight_equipped:				
+					
+					#$Sprite2D.flip_h = !lookright
+					#if lookright:
+						#flashlight.position.x = abs(flashlight.position.x)
+						#$Torch.position.x = abs($Torch.position.x)
+						#
+					#else:
+						#flashlight.position.x = -1 * abs(flashlight.position.x)
+						#$Torch.position.x = -1 * abs($Torch.position.x)
+					
+					$AnimationPlayer.play("pigwalk_equip_right")
+					#else:
+						#$AnimationPlayer.play("pigwalk_equip_left")
+				else:
+					if velocity.x < 0:
+						#pigfacing = false
+						$Torch.position.x = -1 * abs($Torch.position.x)
+						
+						$Sprite2D.flip_h = true
+						$Roll.flip_h = true					
+						
+					elif velocity.x > 0:
+						#pigfacing = true
+						$Torch.position.x = abs($Torch.position.x)
+						
+						$Sprite2D.flip_h = false
+						$Roll.flip_h = false	
+					if torch_equipped:
+						$AnimationPlayer.play("pigwalk_equip_right")
+						
+					else:
+						
+						$AnimationPlayer.play("pigwalk")
+					
+				
+				
 			
-			
-			
+		else:
+			$AnimationPlayer.stop(true)
+			#if pigfacing:
+				#$Torch.position.x = abs($Torch.position.x)
+				#flashlight.position.x = abs(flashlight.position.x)
+				#
+			#else:
+				#$Torch.position.x = -1 * abs($Torch.position.x)
+				#flashlight.position.x = -1 * abs(flashlight.position.x)
+				
+				
+			if state_machine.selected_state.name == "state_idle":
+				$Sprite2D.visible = true
+				if flashlight_equipped:
+					$Sprite2D.flip_h = !lookright
+					
+				$Roll.visible = false
+					
+				
+				
 		
-	else:
-		$AnimationPlayer.stop(true)
-		#if pigfacing:
-			#$Torch.position.x = abs($Torch.position.x)
-			#flashlight.position.x = abs(flashlight.position.x)
-			#
-		#else:
-			#$Torch.position.x = -1 * abs($Torch.position.x)
-			#flashlight.position.x = -1 * abs(flashlight.position.x)
-			
-			
-		if state_machine.selected_state.name == "state_idle":
-			$Sprite2D.visible = true
-			$Sprite2D.flip_h = !lookright
-			$Roll.visible = false
-				
-			
-			
-	
-	
-	move_and_slide()
-	#shoot()
-	
-	if Globals.health <= 0:
-		pig_alive = false
-		print("Pig is dead")
-		Globals.lvl_end.emit()
-		Globals.game_end_time = Time.get_ticks_msec()
-		get_tree().change_scene_to_file("res://scenes/menus/end_screen.tscn")
-		self.queue_free()
+		
+		move_and_slide()
 
-	if flashlight_equipped:	
-		flashlight.visible = true
-		toggle_flashlight(delta)
+		#
+		if Globals.health <= 0:
+			pig_alive = false
+			print("Pig is dead")
+			Globals.lvl_end.emit()
+			Globals.game_end_time = Time.get_ticks_msec()
+			
+			#$AnimationPlayer.play("pigdeath")
+			#
+			#await get_tree().create_timer(1.5).timeout
+			#get_tree().change_scene_to_file("res://scenes/menus/end_screen.tscn")
+			#self.queue_free()
+
+		if flashlight_equipped:	
+			flashlight.visible = true
+			toggle_flashlight(delta)
+		
+		if !flashlight_equipped and torch_equipped:
+			use_torch(delta)
+		
+		if consumable_equipped:
+			consumable_use(delta)
 	
-	if !flashlight_equipped and torch_equipped:
-		use_torch(delta)
-	
-	if consumable_equipped:
-		consumable_use(delta)
+	else:
+		velocity = Vector2(0,0)
+		flashlight.visible = false
+		flashlight.light_on = false
+		$Torch.visible = false
+		
 
 
 
 func _process(delta):
 	
-	change_tool(curr_hb_num)
+	#change_tool(curr_hb_num)
 	pass
 
 
@@ -209,6 +235,11 @@ func receive_damage(damage):
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
+	
+	if Globals.health <= 0:
+		invulnerable = true
+		
+
 	
 
 func set_invincible(time):
@@ -320,7 +351,7 @@ func change_tool(hb_num):
 	current_tool = Globals.inv.hb_slots[hb_num]
 	if current_tool.item != null:
 		flashlight_equipped = (current_tool.item.name == "Flashlight")
-		#flashlight.light_on = (current_tool.item.name == "Flashlight")
+		flashlight.light_on = (current_tool.item.name == "Flashlight")
 		flashlight.equipped = (current_tool.item.name == "Flashlight")
 		#print("change tool")
 		torch_equipped = (current_tool.item.name == "Torch")
@@ -337,12 +368,11 @@ func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
 	
 	if torch_equipped or flashlight_equipped:	
-		if $Sprite2D.frame not in range(12,18):
-			$Sprite2D.frame = 12
+		if $Sprite2D.frame not in range(23,28):
+			$Sprite2D.frame = 23
 	else:
-		if $Sprite2D.frame not in range(6,11):
-		
-			$Sprite2D.frame = 6
+		if $Sprite2D.frame not in range(17,22):
+			$Sprite2D.frame = 17
 		
 	
 

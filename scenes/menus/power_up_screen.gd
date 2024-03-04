@@ -1,7 +1,7 @@
 extends Control
 
 #@export var item: Inv_Item
-
+var powerTextArr = [["Extra Hungry"],["Light Hooves"],["Scavenge"]]
 var itemArr = ["Torch", "wood", "Apple"]
 var item
 # Called when the node enters the scene tree for the first time.
@@ -22,18 +22,50 @@ func next_level():
 	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
 
 func _on_power_1_pressed():
+	$Button.play()
+	await $Button.finished
 	Globals.max_health = Globals.max_health+1
 	Globals.health = Globals.health+1
 	next_level()
 
 
 func _on_power_2_pressed():
+	$Button.play()
+	await $Button.finished
 	# increase pig speed by 10 percent
 	Globals.increase_pig_speed(.1)
 	next_level()
 
 func _on_power_3_pressed():
+	$Button.play()
+	await $Button.finished
 	Globals.inv.insert(item)
 	Globals.inv.insert(item)
 	next_level()
 	
+
+
+func _on_power_1_mouse_entered():
+	$VBoxContainer/HBoxContainer/VBoxContainer/Label1.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer/Label1.text+"[/shake]"
+
+func _on_power_1_mouse_exited():
+	$VBoxContainer/HBoxContainer/VBoxContainer/Label1.text = powerTextArr[0][0]
+
+
+func _on_power_2_mouse_entered():
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text+"[/shake]"
+
+func _on_power_2_mouse_exited():
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text = powerTextArr[1][0]
+
+	
+func _on_power_3_mouse_entered():
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text+"[/shake]"
+
+func _on_power_3_mouse_exited():
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text = powerTextArr[2][0]
+
+
+
+
+

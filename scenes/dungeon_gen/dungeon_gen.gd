@@ -10,7 +10,7 @@ var apple_scene = preload("res://scenes/items/apple.tscn")
 var key_scene = preload("res://scenes/items/key.tscn")
 
 @onready var map = $TileMap
-@onready var camera
+@onready var loading_screen = $LoadingScreen
 
 #@onready var num_rooms = LevelManager.get_num_rooms()
 #@onready var enemies_per_rm = LevelManager.get_num_enemies()
@@ -37,12 +37,12 @@ func _ready():
 	seed("maizerunner".hash())
 	if !Globals.new_game:
 		Globals.load_data()
-			
 	else:
 		Globals.gameData = GameData.new()
 	Globals.new_game = true
 	num_rooms = LevelManager.get_num_rooms()
 	enemies_per_rm = LevelManager.get_num_enemies()
+	loading_screen.set_text(LevelManager.get_loading_screen_text())
 	print("Making rooms...")
 	#print(num_rooms)
 	await make_rooms()

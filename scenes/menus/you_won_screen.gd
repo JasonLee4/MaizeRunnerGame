@@ -10,10 +10,16 @@ func _process(delta):
 
 
 func _on_continue_button_pressed():
+	$Button.play()
+	await $Button.finished
 	get_tree().change_scene_to_file("res://scenes/menus/power_up_screen.tscn")
 
 func _on_quit_button_pressed():
+	$Button.play()
+	await $Button.finished
 	get_tree().quit()
 
 func _on_main_menu_button_pressed():
+	$Button.play()
+	await $Button.finished
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")

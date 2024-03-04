@@ -10,7 +10,7 @@ func _unhandled_input(event):
 func pause():
 	visible = true
 	get_tree().paused = true
-	$VBoxContainer/SaveButton.text = "Save Game"
+	$SaveButton/RichTextLabel.text = "Save Game"
 	
 func unpause():
 	visible = false
@@ -21,14 +21,20 @@ func _ready():
 	visible = false
 
 func _on_continue_button_pressed():
+	$Button.play()
+	await $Button.finished
 	unpause()
 
 func _on_return_button_pressed():
+	$Button.play()
+	await $Button.finished
 	unpause()
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 
 
 func _on_save_button_pressed():
+	$Button.play()
+	await $Button.finished
 	save_data()
 
 func save_data():
@@ -41,6 +47,8 @@ func save_data():
 	gameData.update_elapsedTime(Time.get_ticks_msec())
 	
 	ResourceSaver.save(gameData, Globals.save_file_path + Globals.save_file_name)
-	$VBoxContainer/SaveButton.text = "Saved!"
+	$SaveButton/RichTextLabel.text = "Saved!"
+	#$SaveButton.size = Vector2(120, 40)
+	
 	print("Game data saved...")
 	print("size of saved inventory = ", gameData.playerInventory.size())

@@ -14,7 +14,9 @@ func enter():
 	assert(pig != null)
 
 func update(delta: float):
-	if enemy.can_attack and enemy.can_attack_player:
+	if enemy.health <=0:
+		transitioned.emit(self, "EnemyDead")
+	elif enemy.can_attack and enemy.can_attack_player:
 		print("follow -> attack")
 		transitioned.emit(self, "EnemyAttack")
 	elif "detection_radius" in enemy and enemy.global_position.distance_to(pig.global_position) > enemy.detection_radius:

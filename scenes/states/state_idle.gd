@@ -21,8 +21,9 @@ func _game_logic(delta) -> void:
 # virtual method for running transition logic
 # this in
 func _transition_logic(existing_states: Array):
-	
-	if move.length() > 0:
+	if not Globals.pig.pig_alive:
+		machine.change_state("state_dead")
+	elif move.length() > 0:
 		#if Input.is_action_just_pressed("dash"):
 			## transition to rolling
 			#machine.change_state("state_rolling", [move], [])
