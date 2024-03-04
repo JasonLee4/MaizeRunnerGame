@@ -167,12 +167,10 @@ position = Vector2(2003, 380)
 [node name="Torch" parent="Objects/Torches" instance=ExtResource("7_yx0m6")]
 position = Vector2(524, 395)
 rotation = -0.785398
-scale = Vector2(1, 1)
 
 [node name="Torch2" parent="Objects/Torches" instance=ExtResource("7_yx0m6")]
 position = Vector2(636, 401)
 rotation = -0.785398
-scale = Vector2(1, 1)
 
 [node name="Torch3" parent="Objects/Torches" instance=ExtResource("7_yx0m6")]
 position = Vector2(353, 422)
@@ -201,12 +199,10 @@ rotation = -0.785398
 [node name="Torch9" parent="Objects/Torches" instance=ExtResource("7_yx0m6")]
 position = Vector2(1418, 478)
 rotation = -0.785398
-scale = Vector2(1, 1)
 
 [node name="Torch10" parent="Objects/Torches" instance=ExtResource("7_yx0m6")]
 position = Vector2(1777, 403)
 rotation = -0.785398
-scale = Vector2(1, 1)
 
 [node name="Enemies" type="Node2D" parent="."]
 
