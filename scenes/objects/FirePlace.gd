@@ -35,6 +35,8 @@ func _physics_process(delta):
 				Globals.inv.remove_item(req_resource, 2)
 				print("crafting... ", torch_item.name)	
 				Globals.inv.insert(torch_item)
+				if Globals.inv.get_amount(req_resource) < 2:	
+					Globals.tooltip_update.emit("I need more wood...", true)
 		
 		await get_tree().create_timer(1).timeout
 

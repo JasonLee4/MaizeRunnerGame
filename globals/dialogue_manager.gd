@@ -30,6 +30,7 @@ func _show_text_box():
 
 func _on_textbox_finished_displaying():
 	can_advance_line = true
+	Globals.tooltip_update.emit("[F] Continue", true)
 
 func _unhandled_input(event):
 	if (
@@ -42,5 +43,6 @@ func _unhandled_input(event):
 		if current_line_index >= dialog_lines.size():
 			is_dialogue_active = false
 			current_line_index = 0
+			Globals.tooltip_update.emit("", false)
 			return
 		_show_text_box()

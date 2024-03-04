@@ -33,6 +33,9 @@ func _process(delta):
 
 
 func update_slots():
+	if not Globals.inv:
+		print("No inventory")
+		return
 	for i in range(min(Globals.inv.hb_slots.size(), hb_slots.size())):
 		if Globals.inv.hb_slots[i]:
 			hb_slots[i].update(Globals.inv.hb_slots[i])

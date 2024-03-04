@@ -53,4 +53,4 @@ func stop_timer():
 	Globals.lvl_end_time = Time.get_ticks_msec()
 
 func update_tooltip(text, display):
-	$Tooltip.apply_text(text, display)
+	$Tooltip/Tooltip.apply_text(text, display)
