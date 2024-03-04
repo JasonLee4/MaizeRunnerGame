@@ -57,13 +57,13 @@ func _physics_process(delta):
 	traj_line.look_at(get_global_mouse_position())
 	if pig_alive:
 		#use keying instead in anim player
-		if ($Sprite2D.frame == 6 or 
-			$Sprite2D.frame == 8 or 
-			$Sprite2D.frame == 10 or 
-			$Sprite2D.frame == 12 or
-			$Sprite2D.frame == 14 or
-			$Sprite2D.frame == 16) and velocity != Vector2(0,0) and $Steps.playing == false:
-			$Steps.play_rand_sound()
+		#if ($Sprite2D.frame == 6 or 
+			#$Sprite2D.frame == 8 or 
+			#$Sprite2D.frame == 10 or 
+			#$Sprite2D.frame == 12 or
+			#$Sprite2D.frame == 14 or
+			#$Sprite2D.frame == 16) and velocity != Vector2(0,0) and $Steps.playing == false:
+			#$Steps.play_rand_sound()
 			
 		#$Sprite2D.flip_h = !lookright
 		if flashlight_equipped:

@@ -304,6 +304,29 @@ tracks/0/keys = {
 "update": 1,
 "values": [17, 18, 19, 20, 21, 22]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Steps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.366759,
+"start_offset": 0.0,
+"stream": ExtResource("17_lybie")
+}, {
+"end_offset": 0.307719,
+"start_offset": 0.0,
+"stream": ExtResource("18_u5ngr")
+}, {
+"end_offset": 0.400751,
+"start_offset": 0.0,
+"stream": ExtResource("19_2ne71")
+}],
+"times": PackedFloat32Array(0, 0.4, 0.8)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_13uwa"]
 resource_name = "pigwalk_equip_left"
@@ -410,6 +433,29 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"torch"]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Steps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.30593,
+"start_offset": 0.0,
+"stream": ExtResource("20_oju05")
+}, {
+"end_offset": 0.38286,
+"start_offset": 0.0,
+"stream": ExtResource("17_lybie")
+}, {
+"end_offset": 0.291618,
+"start_offset": 0.0,
+"stream": ExtResource("18_u5ngr")
+}],
+"times": PackedFloat32Array(0, 0.4, 0.8)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_thuxf"]
 resource_name = "torch"
