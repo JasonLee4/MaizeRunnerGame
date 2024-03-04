@@ -37,6 +37,7 @@ expand_mode = 1
 
 [node name="Paused" type="Label" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 526.0
 offset_top = 275.0
 offset_right = 745.0
@@ -47,6 +48,7 @@ horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 492.0
 offset_top = 329.0
 offset_right = 664.0
@@ -73,6 +75,7 @@ autowrap_mode = 0
 
 [node name="OptionButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 492.0
 offset_top = 416.0
 offset_right = 590.0
@@ -98,6 +101,7 @@ autowrap_mode = 0
 
 [node name="SaveButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 652.0
 offset_top = 415.0
 offset_right = 778.0
@@ -122,6 +126,7 @@ autowrap_mode = 0
 
 [node name="ReturnButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 492.0
 offset_top = 488.0
 offset_right = 682.0

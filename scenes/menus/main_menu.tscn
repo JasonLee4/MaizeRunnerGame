@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cfnha2uh4r7lt"]
+[gd_scene load_steps=40 format=3 uid="uid://cfnha2uh4r7lt"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_r22ps"]
 [ext_resource type="Texture2D" uid="uid://bo7xwuvdfc2ng" path="res://assets/spritesheets/slidepicdarkSkyMoon.png" id="2_cyjrx"]
@@ -8,10 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://civc1u17i6qsf" path="res://assets/ui/optionsButton.png" id="5_x2ryh"]
 [ext_resource type="Texture2D" uid="uid://clxiejrlfshta" path="res://assets/spritesheets/pigianajonesactions1.png" id="7_2mj4c"]
 [ext_resource type="Script" path="res://scripts/RandLoopAudio.gd" id="8_7isq1"]
-[ext_resource type="AudioStream" uid="uid://ckl33epydx1qx" path="res://assets/audio/ambiance/banjo_1.wav" id="9_sbc55"]
-[ext_resource type="AudioStream" uid="uid://ky7swaljkjsh" path="res://assets/audio/ambiance/banjo_2.wav" id="10_2s8q5"]
-[ext_resource type="AudioStream" uid="uid://dhqk5xcyhob3" path="res://assets/audio/ambiance/banjo_3.wav" id="11_7oby8"]
-[ext_resource type="AudioStream" uid="uid://0bwksggkkjft" path="res://assets/audio/ambiance/birds.wav" id="12_txb1b"]
+[ext_resource type="AudioStream" uid="uid://di3cxp5boe31m" path="res://assets/audio/ambiance/spooky_1.wav" id="9_susbi"]
+[ext_resource type="AudioStream" uid="uid://caxqh4mb35ny3" path="res://assets/audio/ambiance/spooky_2.wav" id="10_d4dm1"]
+[ext_resource type="AudioStream" uid="uid://boxlynivdthcr" path="res://assets/audio/ambiance/crickets.wav" id="12_tbxk8"]
 [ext_resource type="AudioStream" uid="uid://cx14xcdp860do" path="res://assets/audio/sfx/button_wood.wav" id="13_yuyg5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yfrrw"]
@@ -273,20 +272,21 @@ scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_0mfeg")
 animation = &"idle"
 
-[node name="Banjo" type="AudioStreamPlayer" parent="."]
+[node name="Creepy" type="AudioStreamPlayer" parent="."]
 volume_db = -25.0
 script = ExtResource("8_7isq1")
-max_wait_time = 7
-sounds = Array[Resource]([ExtResource("9_sbc55"), ExtResource("10_2s8q5"), ExtResource("11_7oby8")])
-
-[node name="Ambiance" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_txb1b")
-volume_db = -25.0
-autoplay = true
+min_wait_time = 3
+max_wait_time = 3
+sounds = Array[Resource]([ExtResource("9_susbi"), ExtResource("10_d4dm1")])
 
 [node name="Button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_yuyg5")
 volume_db = -3.0
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_tbxk8")
+volume_db = -3.0
+autoplay = true
 
 [connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

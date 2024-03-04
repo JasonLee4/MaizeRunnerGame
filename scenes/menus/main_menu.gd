@@ -6,7 +6,7 @@ func _ready():
 	$Buttons/VBoxContainer/StartButton.grab_focus()
 	$AnimatedSprite2D.flip_h = true
 	$AnimatedSprite2D.play("idle")
-	$Banjo.play_rand_sound()
+	#$Creepy.play_rand_sound()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
