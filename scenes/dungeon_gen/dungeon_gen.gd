@@ -62,7 +62,19 @@ func _ready():
 	# start game timer
 	Globals.lvl_start.emit()
 	$NightSounds.play_rand_sound()
-
+	var mono = ""
+	if Globals.cur_lvl == 1:
+		mono = "The ultimate corn awaits! Time to make bacon history."
+	elif Globals.cur_lvl == 2:
+		mono = "Rats. Why'd it have to be rats?"
+	elif Globals.cur_lvl == 3:
+		mono = "Gonna a nice long smoke after this mess..."
+	elif Globals.cur_lvl == 3:
+		mono = "Goddamn rats everywhere. Scurrying around like they own the place."
+	elif Globals.cur_lvl == 4:
+		mono = "An apple a day keeps the doctor away. Shame there's no doctor in this maze."
+	await(get_tree().create_timer(2).timeout)
+	Globals.monologue.emit(mono)
 func _process(_delta):
 	queue_redraw()
 	

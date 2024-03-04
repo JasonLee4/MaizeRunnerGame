@@ -168,7 +168,7 @@ func _physics_process(delta):
 			print("Pig is dead")
 			Globals.lvl_end.emit()
 			Globals.game_end_time = Time.get_ticks_msec()
-			
+			Globals.monologue.emit(" ")
 			#$AnimationPlayer.play("pigdeath")
 			#
 			#await get_tree().create_timer(1.5).timeout
@@ -224,7 +224,7 @@ func _on_pig_hitbox_body_exited(body):
 		
 
 func receive_damage(damage):
-	if not invulnerable:
+	if not invulnerable && pig_alive:
 		Globals.health -= damage
 		$PigHit.play_rand_sound()
 		camera_shake.emit()
@@ -235,7 +235,15 @@ func receive_damage(damage):
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
-	
+		var roll = randf()
+		var mono = " "
+		if roll < .15:
+			mono = "My granny's dentures bite harder than this!"
+		elif  roll < .3:
+			mono = "You call that a bite? I've had worse from a day-old apple!"	
+		elif roll < .5:
+			mono = "Ah shucks"
+		Globals.monologue.emit(mono)
 	if Globals.health <= 0:
 		invulnerable = true
 		

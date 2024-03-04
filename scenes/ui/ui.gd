@@ -20,6 +20,7 @@ func _ready():
 	
 	#tooltip display
 	Globals.connect("tooltip_update", update_tooltip)
+	Globals.connect("monologue", monologue)
 	
 
 func _process(delta):
@@ -59,6 +60,9 @@ func start_timer():
 	
 func stop_timer():
 	Globals.lvl_end_time = Time.get_ticks_msec()
+
+func monologue(text):
+	$Monologue.display_text(text)
 
 func update_tooltip(text, display):
 	$Tooltip/Tooltip.apply_text(text, display)
