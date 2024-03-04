@@ -35,6 +35,7 @@ signal dungeon_created
 
 ### Tooltip ###
 signal tooltip_update
+signal monologue(text)
 
 ### Inventory ###
 signal inv_update

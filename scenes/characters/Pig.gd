@@ -235,6 +235,13 @@ func receive_damage(damage):
 		$Sprite2D.modulate = Color.WHITE
 		
 		$dmg_iframe_cooldown.start()
+		var roll = randf()
+		if roll < .15:
+			Globals.monologue.emit("My granny's dentures hit bite harder than this.")
+		elif  roll < .3:
+			Globals.monologue.emit("You call that a bite? I've had worse from a day-old apple.")	
+		elif roll < .5:
+			Globals.monologue.emit("Ah shucks!")
 	
 	if Globals.health <= 0:
 		invulnerable = true

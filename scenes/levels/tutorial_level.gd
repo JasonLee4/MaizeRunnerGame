@@ -3,7 +3,7 @@ extends Node2D
 var ui_scene = preload("res://scenes/ui/ui.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
 var rat_enemy = preload("res://scenes/enemies/rat.tscn")
-
+var ui
 @onready var key_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/key.tres")
 
 func _ready():
@@ -11,7 +11,8 @@ func _ready():
 	
 	# add ui
 	print("Loading UI...")
-	add_child(ui_scene.instantiate())
+	ui = ui_scene.instantiate()
+	add_child(ui)
 	
 	# spawn pig
 	var player = player_scene.instantiate()
@@ -31,6 +32,7 @@ func _ready():
 	# make sure starting torches don't expire
 	for torch in $Objects/Torches.get_children():
 		torch.expires = false
+	
 
 
 func _on_finish_body_entered(body):
