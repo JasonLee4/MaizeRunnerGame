@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfvwg4my1dndr"]
+[gd_scene load_steps=7 format=3 uid="uid://cfvwg4my1dndr"]
 
 [ext_resource type="Script" path="res://scenes/menus/end_screen.gd" id="1_emcpa"]
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_rom7k"]
 [ext_resource type="PackedScene" uid="uid://b3c4n4opxdqmq" path="res://scenes/menus/ground_sign.tscn" id="3_xno15"]
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="4_v8vxj"]
 [ext_resource type="AudioStream" uid="uid://li6obo0m05v5" path="res://assets/audio/sfx/defeat.wav" id="5_3ttvo"]
+[ext_resource type="AudioStream" uid="uid://caxqh4mb35ny3" path="res://assets/audio/ambiance/spooky_2.wav" id="6_6igoc"]
 
-[node name="Control3" type="Control"]
+[node name="Control4" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,7 +168,12 @@ stream = ExtResource("4_v8vxj")
 
 [node name="Defeat" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_3ttvo")
+volume_db = -1.0
 bus = &"Defeat"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6igoc")
+volume_db = -10.0
 
 [connection signal="mouse_entered" from="RestartButton" to="." method="_on_restart_button_mouse_entered"]
 [connection signal="mouse_exited" from="RestartButton" to="." method="_on_restart_button_mouse_exited"]

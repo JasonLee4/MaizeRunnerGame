@@ -7,8 +7,9 @@ func _ready():
 	$debug_screen_change.button_pressed = false
 	$AnimatedSprite2D.flip_h = true
 	$AnimatedSprite2D.play("idle")
-	$Banjo.play_rand_sound()
-	
+
+	#$Creepy.play_rand_sound()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
