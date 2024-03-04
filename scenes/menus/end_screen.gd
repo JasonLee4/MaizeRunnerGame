@@ -5,6 +5,7 @@ extends Control
 func _ready():
 	$Defeat.play()
 	$Music.play()
+	$Death_Animation.play()
 	#$MarginContainer/RestartButton.grab_focus()
 
 func _process(delta):
