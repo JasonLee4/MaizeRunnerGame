@@ -58,6 +58,7 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 30
 
 [node name="RestartButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 568.0
 offset_top = 269.0
 offset_right = 668.0
@@ -82,6 +83,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 542.0
 offset_top = 325.0
 offset_right = 672.0
@@ -105,6 +107,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 588.0
 offset_top = 385.0
 offset_right = 650.0

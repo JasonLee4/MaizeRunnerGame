@@ -4,15 +4,15 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Buttons/VBoxContainer/StartButton.grab_focus()
+	$debug_screen_change.button_pressed = false
 	$AnimatedSprite2D.flip_h = true
 	$AnimatedSprite2D.play("idle")
 	$Banjo.play_rand_sound()
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
 
 func _on_start_button_pressed():
 	$Button.play()
@@ -34,3 +34,16 @@ func _on_options_button_pressed():
 	$Button.play()
 	await $Button.finished
 	get_tree().change_scene_to_file("res://scenes/menus/tutorial.tscn")
+
+
+func _on_debug_screen_change_toggled(toggled_on):
+	
+	if $debug_screen_change.button_pressed:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		
+
+
+func _on_timer_timeout():
+	$RichTextLabel.visible = !$RichTextLabel.visible

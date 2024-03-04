@@ -12,7 +12,7 @@ func _ready():
 	var item_name = itemArr.pick_random()
 	item = ResourceLoader.load("res://scenes/items/inventory/inv_items/" + item_name + ".tres")
 	$VBoxContainer/HBoxContainer/VBoxContainer3/Power3.text = "\n+2 " + item_name
-
+	$AnimatedSprite2D.play()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

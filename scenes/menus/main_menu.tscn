@@ -3,9 +3,8 @@
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_r22ps"]
 [ext_resource type="Texture2D" uid="uid://bo7xwuvdfc2ng" path="res://assets/spritesheets/slidepicdarkSkyMoon.png" id="2_cyjrx"]
 [ext_resource type="Texture2D" uid="uid://c5lqbhln73ff2" path="res://assets/menu_assets/pigwaving1.png" id="3_0dsne"]
-[ext_resource type="Texture2D" uid="uid://bq7mxe4k804f7" path="res://assets/ui/quitButton.png" id="3_0gawl"]
-[ext_resource type="Texture2D" uid="uid://bcsbcqbva51hq" path="res://assets/ui/startButton.png" id="4_3cdn6"]
-[ext_resource type="Texture2D" uid="uid://civc1u17i6qsf" path="res://assets/ui/optionsButton.png" id="5_x2ryh"]
+[ext_resource type="Texture2D" uid="uid://d0bh01h21gwlg" path="res://assets/menu_assets/buttonWordless3.png" id="4_2g6ob"]
+[ext_resource type="Texture2D" uid="uid://bhjxw2ouotoox" path="res://assets/menu_assets/buttonWordless1.png" id="6_w8lr5"]
 [ext_resource type="Texture2D" uid="uid://clxiejrlfshta" path="res://assets/spritesheets/pigianajonesactions1.png" id="7_2mj4c"]
 [ext_resource type="Script" path="res://scripts/RandLoopAudio.gd" id="8_7isq1"]
 [ext_resource type="AudioStream" uid="uid://ckl33epydx1qx" path="res://assets/audio/ambiance/banjo_1.wav" id="9_sbc55"]
@@ -13,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dhqk5xcyhob3" path="res://assets/audio/ambiance/banjo_3.wav" id="11_7oby8"]
 [ext_resource type="AudioStream" uid="uid://0bwksggkkjft" path="res://assets/audio/ambiance/birds.wav" id="12_txb1b"]
 [ext_resource type="AudioStream" uid="uid://cx14xcdp860do" path="res://assets/audio/sfx/button_wood.wav" id="13_yuyg5"]
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="15_glaci"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yfrrw"]
 load_path = "res://.godot/imported/titleNoFarmer.png-405b4f15c443724d3fd145819eded81a.ctex"
@@ -148,17 +148,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_501qu"]
-atlas = ExtResource("4_3cdn6")
-region = Rect2(25, 45, 539, 78)
+[sub_resource type="AtlasTexture" id="AtlasTexture_feeak"]
+atlas = ExtResource("4_2g6ob")
+region = Rect2(46.7756, 67.3463, 539.841, 78.8148)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7sdub"]
-atlas = ExtResource("5_x2ryh")
-region = Rect2(9, 16, 255, 78)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2rkh"]
+atlas = ExtResource("6_w8lr5")
+region = Rect2(32.0576, 29.576, 256.722, 78.958)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2jgr1"]
-atlas = ExtResource("3_0gawl")
-region = Rect2(16, 27, 255, 78)
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6i7y"]
+atlas = ExtResource("6_w8lr5")
+region = Rect2(33.1916, 28.9329, 255.256, 80.2371)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c8rdd"]
 atlas = ExtResource("7_2mj4c")
@@ -200,9 +200,8 @@ script = ExtResource("1_r22ps")
 
 [node name="Background" type="MarginContainer" parent="."]
 layout_mode = 2
-offset_top = 3.0
 offset_right = 1270.0
-offset_bottom = 723.0
+offset_bottom = 720.0
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
 layout_mode = 2
@@ -249,7 +248,22 @@ autoplay = "default"
 layout_mode = 2
 size_flags_horizontal = 4
 focus_neighbor_top = NodePath("../HBoxContainer/QuitButton")
-texture_normal = SubResource("AtlasTexture_501qu")
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_feeak")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Buttons/VBoxContainer/StartButton"]
+modulate = Color(0.290196, 0.164706, 0.141176, 1)
+clip_contents = false
+layout_mode = 0
+offset_left = 171.5
+offset_top = 50.0
+offset_right = 277.5
+offset_bottom = 90.0
+scale = Vector2(3, 3)
+theme = ExtResource("15_glaci")
+text = "Start"
+fit_content = true
+autowrap_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Buttons/VBoxContainer"]
 layout_mode = 2
@@ -260,18 +274,77 @@ alignment = 1
 [node name="OptionsButton" type="TextureButton" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-texture_normal = SubResource("AtlasTexture_7sdub")
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_l2rkh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Buttons/VBoxContainer/HBoxContainer/OptionsButton"]
+modulate = Color(0.290196, 0.164706, 0.141176, 1)
+clip_contents = false
+layout_mode = 0
+offset_left = 30.5
+offset_top = 45.0
+offset_right = 128.5
+offset_bottom = 85.0
+scale = Vector2(2, 2)
+theme = ExtResource("15_glaci")
+text = "Tutorial"
+fit_content = true
+autowrap_mode = 0
 
 [node name="QuitButton" type="TextureButton" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../../StartButton")
-texture_normal = SubResource("AtlasTexture_2jgr1")
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_m6i7y")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Buttons/VBoxContainer/HBoxContainer/QuitButton"]
+modulate = Color(0.290196, 0.164706, 0.141176, 1)
+clip_contents = false
+layout_mode = 0
+offset_left = 68.5
+offset_top = 44.0
+offset_right = 122.5
+offset_bottom = 84.0
+scale = Vector2(2, 2)
+theme = ExtResource("15_glaci")
+text = "Quit"
+fit_content = true
+autowrap_mode = 0
+
+[node name="debug_screen_change" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 945.0
+offset_top = 486.0
+offset_right = 989.0
+offset_bottom = 510.0
+scale = Vector2(1.13225, 3.0839)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(971, 520)
 scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_0mfeg")
 animation = &"idle"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.933333, 0.764706, 0.603922, 1)
+clip_contents = false
+layout_mode = 0
+offset_left = 949.0
+offset_top = 378.0
+offset_right = 1195.0
+offset_bottom = 418.0
+theme = ExtResource("15_glaci")
+bbcode_enabled = true
+text = "*[wave]Starring Kevin Bacon[/wave]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Timer" type="Timer" parent="RichTextLabel"]
+wait_time = 5.0
+autostart = true
 
 [node name="Banjo" type="AudioStreamPlayer" parent="."]
 volume_db = -25.0
@@ -291,3 +364,5 @@ volume_db = -3.0
 [connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="toggled" from="debug_screen_change" to="." method="_on_debug_screen_change_toggled"]
+[connection signal="timeout" from="RichTextLabel/Timer" to="." method="_on_timer_timeout"]

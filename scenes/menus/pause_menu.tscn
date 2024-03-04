@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://buqcuuo15n8sg"]
+[gd_scene load_steps=6 format=3 uid="uid://buqcuuo15n8sg"]
 
 [ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="1_b7dga"]
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_wvldy"]
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="3_364sb"]
 [ext_resource type="Texture2D" uid="uid://bta6mgpjurx0g" path="res://assets/menu_assets/pause_menu_signs.png" id="3_c1ylx"]
+[ext_resource type="Texture2D" uid="uid://djyvwnasfpk8k" path="res://assets/menu_assets/smallBoard.png" id="4_vyhng"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -37,6 +38,7 @@ expand_mode = 1
 
 [node name="Paused" type="Label" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 526.0
 offset_top = 275.0
 offset_right = 745.0
@@ -47,6 +49,7 @@ horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 492.0
 offset_top = 329.0
 offset_right = 664.0
@@ -73,6 +76,7 @@ autowrap_mode = 0
 
 [node name="OptionButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 492.0
 offset_top = 416.0
 offset_right = 590.0
@@ -98,6 +102,7 @@ autowrap_mode = 0
 
 [node name="SaveButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 652.0
 offset_top = 415.0
 offset_right = 778.0
@@ -122,6 +127,7 @@ autowrap_mode = 0
 
 [node name="ReturnButton" type="Button" parent="."]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 492.0
 offset_top = 488.0
 offset_right = 682.0
@@ -169,9 +175,29 @@ text = "Exit"
 fit_content = true
 autowrap_mode = 0
 
+[node name="Saved_Button_Sprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(702, 445)
+rotation = -0.131552
+texture = ExtResource("4_vyhng")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Saved_Button_Sprite"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+clip_contents = false
+offset_left = -19.6807
+offset_top = 2.45691
+offset_right = 50.3193
+offset_bottom = 42.4569
+theme = ExtResource("1_wvldy")
+bbcode_enabled = true
+text = "Saved!"
+fit_content = true
+autowrap_mode = 0
+
 [node name="Button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_364sb")
 
 [connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
