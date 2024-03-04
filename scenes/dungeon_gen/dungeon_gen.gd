@@ -71,6 +71,8 @@ func _ready():
 		mono = "Gonna a nice long smoke after this mess..."
 	elif Globals.cur_lvl == 3:
 		mono = "Goddamn rats everywhere. Scurrying around like they own the place."
+	elif Globals.cur_lvl == 4:
+		mono = "An apple a day keeps the doctor away. Shame there's no doctor in this maze."
 	await(get_tree().create_timer(2).timeout)
 	Globals.monologue.emit(mono)
 func _process(_delta):
