@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3vtti24til65"
-path="res://.godot/imported/enemyWalking_2.png-ad5b045cf3f8ed681f6c58609768ab21.ctex"
+uid="uid://ck26qd5ngugv0"
+path="res://.godot/imported/heartsmallempty.png-ea7b742d464dc1826d2eae4e3aea53aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemyWalking_2.png"
-dest_files=["res://.godot/imported/enemyWalking_2.png-ad5b045cf3f8ed681f6c58609768ab21.ctex"]
+source_file="res://assets/ui/heartsmallempty.png"
+dest_files=["res://.godot/imported/heartsmallempty.png-ea7b742d464dc1826d2eae4e3aea53aa.ctex"]
 
 [params]
 
