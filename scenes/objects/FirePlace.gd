@@ -34,8 +34,10 @@ func _physics_process(delta):
 			if Globals.inv.get_amount(req_resource) >= 2:	
 				Globals.inv.remove_item(req_resource, 2)
 				print("crafting... ", torch_item.name)	
-				$Craft.play()
 				Globals.inv.insert(Globals.torch_item)
+        $Craft.play()
+				if Globals.inv.get_amount(req_resource) < 2:	
+					Globals.tooltip_update.emit("I need more wood...", true)
 		
 		await get_tree().create_timer(1).timeout
 

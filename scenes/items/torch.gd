@@ -2,6 +2,7 @@ extends RigidBody2D
 
 @export var item: Inv_Item
 @export var light_radius = 1.0
+@export var expires  = true
 #@export var speed = 100
 #@export var damage = 20
 #var direction = Vector2.LEFT
@@ -57,11 +58,15 @@ func _on_torch_hitbox_body_entered(body):
 
 
 func _on_torch_timer_timeout():
+	if not expires:
+		return
 	$PointLight2D/Torch_Light_Area/CollisionShape2D.disabled = true
 	queue_free()
 
 
 func _on_shrink_timer_timeout():
+	if not expires:
+		return
 	$PointLight2D.scale *= 0.8
 	$Torch_light_shadow.scale *= 0.8
 	$PointLight2D/Torch_Light_Area/CollisionShape2D.scale *= 0.8

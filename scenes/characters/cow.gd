@@ -4,10 +4,12 @@ extends StaticBody2D
 
 const lines: Array[String] = [
 	"Hey!",
-	"Wow, you're trying to escape the farm?",
+	"Wow, you're trying to find the best corn in the maize?",
 	"You got some chops, for sure.",
 	"I heard there's some baddies ahead...",
-	"Press space to dash, F to pickup items, and LMB to attack!",
+	"Use LEFTCLICK to turn on your flashlight.",
+	"You can also use SPACE to dash. ",
+	"Good luck out there!"
 ]
 
 func _unhandled_input(event):
@@ -17,6 +19,16 @@ func _unhandled_input(event):
 			print("overlap detected")
 			DialogueManager.start_dialogue(global_position, lines)
 			
+			
 
 func _process(delta):
 	$AnimatedSprite2D.play("cowidle")
+
+
+func _on_area_2d_body_entered(body):
+	if body.has_method("player"):
+		Globals.tooltip_update.emit("[F] Speak", true)
+
+func _on_area_2d_body_exited(body):
+	if body.has_method("player"):
+		Globals.tooltip_update.emit("", false)
