@@ -29,12 +29,13 @@ func display_text(text_to_display):
 	#global_position.y -= size.y + 24
 	print("display text")
 	label.text = ""
-	if text_to_display != "":
+	if text != "":
 		_display_letter()
 
 func _display_letter():
 	print("display letter")
-	label.text += text[letter_index]
+	if letter_index < text.length():
+		label.text += text[letter_index]
 	
 	letter_index += 1
 	if letter_index >= text.length():
