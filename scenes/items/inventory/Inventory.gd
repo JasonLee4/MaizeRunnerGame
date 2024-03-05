@@ -30,7 +30,9 @@ func insert(item: Inv_Item):
 	update.emit()
 	
 	if Globals.pig != null:
-		Globals.pig.change_tool(Globals.pig.curr_hb_num)
+		if Globals.pig.current_tool.item == null:
+			print("[inventory] current tool item is null")
+			Globals.pig.change_tool(Globals.pig.curr_hb_num)
 	
 	
 	pass

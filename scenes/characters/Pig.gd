@@ -25,7 +25,7 @@ var torch_equipped = false
 var torch_hold_time = 0.0
 var torch_speed = 10
 
-var current_tool
+@export var current_tool: Inventory_Slot
 var consumable_equipped = false
 
 var temp_speed = 0
@@ -418,6 +418,7 @@ func consumable_use(delta):
 		temp_speed = 0
 	if current_tool.amount == 0:		
 		consumable_equipped = false
+		current_tool = Inventory_Slot.new()
 
 
 func update_trajectory(spd_val):
