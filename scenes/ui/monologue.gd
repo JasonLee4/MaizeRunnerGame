@@ -29,7 +29,8 @@ func display_text(text_to_display):
 	#global_position.y -= size.y + 24
 	print("display text")
 	label.text = ""
-	_display_letter()
+	if text_to_display != "":
+		_display_letter()
 
 func _display_letter():
 	print("display letter")
