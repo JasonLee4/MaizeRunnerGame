@@ -259,6 +259,7 @@ offset_top = 50.0
 offset_right = 277.5
 offset_bottom = 90.0
 scale = Vector2(3, 3)
+mouse_filter = 2
 theme = ExtResource("15_glaci")
 text = "Start"
 fit_content = true
@@ -285,6 +286,7 @@ offset_top = 45.0
 offset_right = 128.5
 offset_bottom = 85.0
 scale = Vector2(2, 2)
+mouse_filter = 2
 theme = ExtResource("15_glaci")
 text = "Tutorial"
 fit_content = true
@@ -305,6 +307,7 @@ offset_top = 44.0
 offset_right = 122.5
 offset_bottom = 84.0
 scale = Vector2(2, 2)
+mouse_filter = 2
 theme = ExtResource("15_glaci")
 text = "Quit"
 fit_content = true
@@ -327,7 +330,6 @@ scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_0mfeg")
 animation = &"idle"
 
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 modulate = Color(0.933333, 0.764706, 0.603922, 1)
 clip_contents = false
@@ -346,9 +348,7 @@ autowrap_mode = 0
 wait_time = 5.0
 autostart = true
 
-
 [node name="Creepy" type="AudioStreamPlayer" parent="."]
-
 volume_db = -25.0
 script = ExtResource("8_7isq1")
 min_wait_time = 3
