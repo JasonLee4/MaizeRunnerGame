@@ -90,7 +90,8 @@ func restart_game():
 	lvl_start_time = null
 	lvl_end_time = null
 	#cur_lvl = 1
-	
+	if Globals.new_game:
+		cur_lvl = 1
 	# give player 10 torches and 5 apples to start
 	inv = Inventory.new()
 	if new_game:
