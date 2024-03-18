@@ -197,7 +197,13 @@ func spawn_enemies(enemies_per_rm):
 			enemy_spawns.append(rand_pt)
 	# spawn just rats for now
 	for spawn_pos in enemy_spawns:
-		var rat = rat_enemy.pick_random().instantiate()
+		var choice = randf();
+		var rat;
+		if choice <= 0.8:
+			rat = rat_enemy[0].instantiate()
+		else:
+			rat = rat_enemy[1].instantiate()
+		
 		rat.global_position = spawn_pos
 		$Enemies.add_child(rat)
 
