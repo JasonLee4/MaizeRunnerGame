@@ -1,7 +1,7 @@
 extends Node2D
 var Room = preload("res://scenes/dungeon_gen/rooms/rect_room.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
-var rat_enemy = preload("res://scenes/enemies/rat.tscn")
+var rat_enemy : Array[Resource] = [preload("res://scenes/enemies/rat.tscn"), preload("res://scenes/enemies/albinorat.tscn")]
 var ui_scene = preload("res://scenes/ui/ui.tscn")
 var fireplace_scene = preload("res://scenes/objects/FirePlace.tscn")
 var exit_scene = preload("res://scenes/objects/exit.tscn")
@@ -197,7 +197,7 @@ func spawn_enemies(enemies_per_rm):
 			enemy_spawns.append(rand_pt)
 	# spawn just rats for now
 	for spawn_pos in enemy_spawns:
-		var rat = rat_enemy.instantiate()
+		var rat = rat_enemy.pick_random().instantiate()
 		rat.global_position = spawn_pos
 		$Enemies.add_child(rat)
 

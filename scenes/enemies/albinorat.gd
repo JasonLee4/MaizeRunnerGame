@@ -12,19 +12,19 @@ func choose_animation():
 	#Eye animation flipping
 	if $Base.flip_h == true:
 		$RedEyes.flip_h = true
-		$YellowEyes.flip_h = true
+		#$YellowEyes.flip_h = true
 	else:
 		$RedEyes.flip_h = false
-		$YellowEyes.flip_h = false
+		#$YellowEyes.flip_h = false
 		
 	#Eye animation color
-	if state_machine.get_current_state().name != "EnemyFollow" and state_machine.get_current_state().name != "EnemyAttack":
-		$RedEyes.hide()
-		$YellowEyes.show()
-		#$Eyes.play("yellow")
-	else:
-		$RedEyes.show()
-		$YellowEyes.hide()
+	#if state_machine.get_current_state().name != "EnemyFollow" and state_machine.get_current_state().name != "EnemyAttack":
+		#$RedEyes.hide()
+		#$YellowEyes.show()
+		##$Eyes.play("yellow")
+	#else:
+		#$RedEyes.show()
+		#$YellowEyes.hide()
 		#$Eyes.play("red")
 		
 func process_sound():
