@@ -53,11 +53,11 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbb71"]
-size = Vector2(4.59593, 28.2827)
+size = Vector2(4.24241, 23.3258)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cwhm8"]
-radius = 4.24241
-height = 33.9393
+radius = 5.65654
+height = 35.3682
 
 [sub_resource type="Curve" id="Curve_iiqvf"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.175824), 0.0, 0.0, 0, 0]
@@ -118,7 +118,7 @@ sprite_frames = SubResource("SpriteFrames_noiea")
 animation = &"torchflame"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 2)
+position = Vector2(-3.23925, 3.27607)
 rotation = 0.774926
 shape = SubResource("RectangleShape2D_rbb71")
 
