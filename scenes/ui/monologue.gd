@@ -8,10 +8,15 @@ var letter_time = 0.03
 var space_time = 0.06
 var punctuation_time = 0.2
 
+var displaying = false
+
 @onready var label = $Label
 @onready var timer = $Timer
 
 func display_text(text_to_display):
+	if displaying:
+		return
+	displaying = true
 	letter_index = 0
 	text = text_to_display
 	##label.text = text_to_display
@@ -41,6 +46,7 @@ func _display_letter():
 	if letter_index >= text.length():
 		await(get_tree().create_timer(2).timeout)
 		label.text = ""
+		displaying = false
 		return
 	match text[letter_index]:
 		"!", ",", ".", "?":
