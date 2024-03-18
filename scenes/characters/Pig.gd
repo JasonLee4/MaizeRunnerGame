@@ -168,7 +168,7 @@ func _physics_process(delta):
 			print("Pig is dead")
 			Globals.lvl_end.emit()
 			Globals.game_end_time = Time.get_ticks_msec()
-			Globals.monologue.emit(" ")
+			Globals.monologue.emit("")
 			#$AnimationPlayer.play("pigdeath")
 			#
 			#await get_tree().create_timer(1.5).timeout
@@ -236,13 +236,13 @@ func receive_damage(damage):
 		
 		$dmg_iframe_cooldown.start()
 		var roll = randf()
-		var mono = " "
+		var mono = ""
 		if roll < .15:
 			mono = "My granny's dentures bite harder than this!"
 		elif  roll < .3:
 			mono = "You call that a bite? I've had worse from a day-old apple!"	
 		elif roll < .5:
-			mono = "Ah shucks"
+			mono = "Ah shucks..."
 		Globals.monologue.emit(mono)
 	if Globals.health <= 0:
 		invulnerable = true
