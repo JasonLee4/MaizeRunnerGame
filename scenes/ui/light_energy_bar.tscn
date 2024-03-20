@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://5qlsjht7ufmu"]
+
+[node name="LightEnergyBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rounded = true
+nine_patch_stretch = true
+
+[node name="Energy" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 0.882353, 1)
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 27.0
+step = 1.0
+rounded = true
+show_percentage = false

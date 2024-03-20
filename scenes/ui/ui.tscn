@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cx0pvdscatwe5"]
+[gd_scene load_steps=14 format=3 uid="uid://cx0pvdscatwe5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
 [ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_g5b3g"]
+[ext_resource type="PackedScene" uid="uid://5qlsjht7ufmu" path="res://scenes/ui/light_energy_bar.tscn" id="3_oixyk"]
 [ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
 [ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hotbar.tscn" id="5_xgbid"]
 [ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="6_r816i"]
@@ -42,6 +43,12 @@ theme_override_constants/separation = 30
 
 [node name="Heart" parent="HealthCounter/HBoxContainer" instance=ExtResource("2_vnf4r")]
 layout_mode = 2
+
+[node name="LightEnergyBar" parent="." instance=ExtResource("3_oixyk")]
+offset_left = 31.0
+offset_top = 94.0
+offset_right = 31.0
+offset_bottom = 94.0
 
 [node name="MinimapContainer" type="SubViewportContainer" parent="."]
 visible = false

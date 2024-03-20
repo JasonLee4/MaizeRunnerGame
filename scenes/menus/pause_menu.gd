@@ -43,6 +43,7 @@ func save_data():
 	var gameData = Globals.gameData
 	gameData.update_playerMaxHealth(Globals.max_health)
 	gameData.update_playerHealth(Globals.health)
+	gameData.update_laserEnergy(Globals.laser_energy)
 	gameData.update_currentLevel(Globals.cur_lvl)
 	gameData.update_playerSpeed(Globals.pig_speed)
 	gameData.update_playerInventory(Globals.inv)
