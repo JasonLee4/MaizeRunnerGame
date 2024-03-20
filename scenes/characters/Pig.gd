@@ -313,42 +313,54 @@ func use_torch(delta):
 			
 func toggle_flashlight(delta):
 	if Globals.inv.contains(flashlight_resource):
+		
 		var flashlight_instance = flashlight_scene.instantiate()
-		if Input.is_action_just_pressed("primary_action"):
+		if Input.is_action_just_pressed("primary_action") and !flashlight.laser_on:
 			$FlashlightSound.play()
 			flashlight.light_on = not flashlight.light_on
-			print("light on")
-			print(flashlight.light_on)
+			#print("light on")
+			#print(flashlight.light_on)
 		
-		elif Input.is_action_pressed("secondary_action"):
-			if temp_speed < flashlight_instance.speed:
-				temp_speed += 5
-				traj_line.show()
-				update_trajectory(temp_speed)
-			hold_time += delta
+		#elif Input.is_action_pressed("secondary_action"):
+			#if temp_speed < flashlight_instance.speed:
+				#temp_speed += 5
+				#traj_line.show()
+				#update_trajectory(temp_speed)
+			#hold_time += delta
+		#elif Input.is_action_just_released("secondary_action"):
+			#
+			#flashlight.equipped = false
+			#
+			#traj_line.hide()
+			#traj_line.clear_points()		
+			#Globals.inv.remove_item(current_tool.item, 1)
+			#
+			#$LightThrow.play()
+			#
+			#flashlight_equipped = false
+			#hold_time = 0.0
+			#
+			#flashlight_instance.global_position = $Marker2D2.global_position
+			#var dir = (get_global_mouse_position() - flashlight_instance.global_position).normalized()
+			#flashlight_instance.linear_velocity.x = dir.x*temp_speed
+			#flashlight_instance.linear_velocity.y = dir.y*temp_speed
+			#flashlight_instance.angular_velocity = 10
+			#flashlight_instance.pickup = false
+			#
+			#Globals.pig.get_tree().current_scene.add_child(flashlight_instance)
+			#temp_speed = 0
+		
 		elif Input.is_action_just_released("secondary_action"):
+			flashlight.light_on = false
+			flashlight.laser_on = not flashlight.laser_on
+			#flashlight.get_node("laser_glow_timer").start()
+			flashlight.get_node("laserlight").energy = 1
+			flashlight.get_node("laserlightShadows").energy = 0.7
 			
-			flashlight.equipped = false
 			
-			traj_line.hide()
-			traj_line.clear_points()		
-			Globals.inv.remove_item(current_tool.item, 1)
 			
-			$LightThrow.play()
-			
-			flashlight_equipped = false
-			hold_time = 0.0
-			
-			flashlight_instance.global_position = $Marker2D2.global_position
-			var dir = (get_global_mouse_position() - flashlight_instance.global_position).normalized()
-			flashlight_instance.linear_velocity.x = dir.x*temp_speed
-			flashlight_instance.linear_velocity.y = dir.y*temp_speed
-			flashlight_instance.angular_velocity = 10
-			flashlight_instance.pickup = false
-			
-			Globals.pig.get_tree().current_scene.add_child(flashlight_instance)
-			temp_speed = 0
-			
+			pass
+				
 	else:
 		flashlight.visible = false
 
@@ -370,6 +382,7 @@ func change_tool(hb_num):
 		flashlight.light_on = false
 		flashlight.equipped = false
 		consumable_equipped = false
+	flashlight.laser_on = false
 	toggle_tool_sprites()
 	
 func toggle_tool_sprites():
