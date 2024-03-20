@@ -3,6 +3,7 @@ extends Node2D
 var ui_scene = preload("res://scenes/ui/ui.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
 var boss_enemy = preload("res://scenes/bosses/boss.tscn")
+var laser_res = preload("res://scenes/items/laser_resource.tscn")
 var ui
 
 # Called when the node enters the scene tree for the first time.
@@ -29,3 +30,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_timer_timeout():
+	var lr = laser_res.instantiate()
+
+	lr.global_position.x = randf_range(59, 480)
+	lr.global_position.y = randf_range(42, 296)
+	
+	add_child(lr)
+	print($Boss.get_child(1).health)
