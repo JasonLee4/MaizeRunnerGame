@@ -53,7 +53,7 @@ func flash():
 				$GPUParticles2D.global_position = body.global_position
 				
 				$GPUParticles2D.emitting = true
-					
+				
 					
 
 func _on_flashlight_area_body_exited(body):
@@ -91,3 +91,11 @@ func _on_laser_glow_timer_timeout():
 		glow = 1
 	$laserlight.energy += 0.5 * glow
 	$laserlightShadows.energy += 0.05 * glow
+
+
+func _on_laser_duration_timer_timeout():
+	Globals.laser_energy -= 20
+	if Globals.laser_energy <= 0:
+		laser_on = false
+		$laser_duration_timer.stop()
+	pass

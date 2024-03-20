@@ -28,7 +28,18 @@ var health = 5:
 		health = value
 		health_change.emit()
 
-
+signal laser_energy_change
+var laser_energy = 100:
+	get:
+		return laser_energy
+	set(value):
+		if value > 100:
+			laser_energy = 100
+		elif value < 0:
+			laser_energy = 0
+		else:
+			laser_energy = value
+		laser_energy_change.emit()
 
 ### Dungeon ###
 signal dungeon_created
@@ -86,7 +97,7 @@ func go_next_lvl():
 	
 func restart_game():
 	health = 5
-	
+	laser_energy = 0
 	lvl_start_time = null
 	lvl_end_time = null
 	#cur_lvl = 1
@@ -134,6 +145,7 @@ func load_data():
 	print("Game data loaded...")
 	Globals.max_health = gameData.playerMaxHealth
 	Globals.health = gameData.playerHealth
+	Globals.laser_energy = gameData.laserEnergy
 	#pig.position = Vector2(0,0)
 	Globals.cur_lvl = gameData.currentLevel
 	Globals.pig_speed = gameData.playerSpeed

@@ -4,6 +4,7 @@ class_name GameData
 
 @export var playerHealth: int
 @export var playerMaxHealth: int
+@export var laserEnergy : int
 
 @export var savePos : Vector2
 @export var playerSpeed : int
@@ -18,7 +19,9 @@ func update_playerHealth(value):
 func update_playerMaxHealth(value):
 	playerMaxHealth = value
 	
-
+func update_laserEnergy(value):
+	laserEnergy = value	
+	
 func update_savePos(pos):
 	savePos = pos
 	

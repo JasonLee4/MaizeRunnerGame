@@ -8,6 +8,7 @@ var exit_scene = preload("res://scenes/objects/exit.tscn")
 var wood_scene = preload("res://scenes/items/wood.tscn")
 var apple_scene = preload("res://scenes/items/apple.tscn")
 var key_scene = preload("res://scenes/items/key.tscn")
+var laser_resource_scene = preload("res://scenes/items/laser_resource.tscn")
 
 @onready var map = $TileMap
 @onready var loading_screen = $LoadingScreen
@@ -229,7 +230,9 @@ func spawn_items():
 			# spawn wood or apple
 			var roll = randf()
 			var item
-			if roll < .7:
+			if roll <= .4:
+				item = laser_resource_scene.instantiate()
+			elif roll > .4 and roll < .7:
 				item = wood_scene.instantiate()
 			else:
 				item = apple_scene.instantiate()

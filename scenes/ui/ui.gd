@@ -22,7 +22,9 @@ func _ready():
 	Globals.connect("tooltip_update", update_tooltip)
 	Globals.connect("monologue", monologue)
 	
-
+	Globals.connect("laser_energy_change", update_laser_energy)
+	update_laser_energy()
+	
 func _process(delta):
 	if Globals.lvl_time:
 		timer_label.text = Globals.lvl_time
@@ -66,3 +68,6 @@ func monologue(text):
 
 func update_tooltip(text, display):
 	$Tooltip/Tooltip.apply_text(text, display)
+
+func update_laser_energy():
+	$LightEnergyBar/Energy.value = Globals.laser_energy

@@ -189,6 +189,7 @@ func _physics_process(delta):
 		velocity = Vector2(0,0)
 		flashlight.visible = false
 		flashlight.light_on = false
+		flashlight.laser_on = false
 		$Torch.visible = false
 		
 
@@ -350,14 +351,17 @@ func toggle_flashlight(delta):
 			#Globals.pig.get_tree().current_scene.add_child(flashlight_instance)
 			#temp_speed = 0
 		
-		elif Input.is_action_just_released("secondary_action"):
+		elif Input.is_action_just_released("secondary_action") and Globals.laser_energy > 0:
 			flashlight.light_on = false
 			flashlight.laser_on = not flashlight.laser_on
 			#flashlight.get_node("laser_glow_timer").start()
 			flashlight.get_node("laserlight").energy = 1
 			flashlight.get_node("laserlightShadows").energy = 0.7
-			
-			
+			if flashlight.laser_on:
+				flashlight.get_node("laser_duration_timer").start()
+			else:
+				flashlight.get_node("laser_duration_timer").stop()
+				
 			
 			pass
 				
