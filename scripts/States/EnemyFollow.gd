@@ -6,7 +6,7 @@ class_name EnemyFollow
 @export var enemy: enemy
 @export var move_speed := 100
 
-var move_direction : Vector2
+#var move_direction : Vector2
 	
 func enter():
 	#print("enemy following")
