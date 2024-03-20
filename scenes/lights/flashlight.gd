@@ -49,12 +49,18 @@ func flash():
 		
 		for body in $laser_area.get_overlapping_bodies():
 			if body.has_method("enemy"):
-				body.take_damage(body.MAX_HEALTH)
+				if body.has_method("boss"):
+					body.take_damage(1)
+				else:
+					body.take_damage(body.MAX_HEALTH)
+					
 				$GPUParticles2D.global_position = body.global_position
 				
 				$GPUParticles2D.emitting = true
 				
-					
+	else:
+		$GPUParticles2D.emitting = false
+				
 
 func _on_flashlight_area_body_exited(body):
 	if body.has_method("light_unfreeze"):

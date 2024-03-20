@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpc1af5lkn4py"]
+[gd_scene load_steps=11 format=3 uid="uid://bpc1af5lkn4py"]
 
 [ext_resource type="Texture2D" uid="uid://biy6q2grrbrec" path="res://assets/tilesets/TX Tileset Grass.png" id="1_rygch"]
 [ext_resource type="Script" path="res://scenes/levels/boss_level.gd" id="1_wwei5"]
 [ext_resource type="Texture2D" uid="uid://cgi1v6psm40ow" path="res://assets/tilesets/testTiles.png" id="2_wf5ro"]
 [ext_resource type="Texture2D" uid="uid://dfi1i4ca0lpgk" path="res://assets/tilesets/TX Tileset Wall.png" id="3_cwfnr"]
+[ext_resource type="PackedScene" uid="uid://dgju2mt1en6k0" path="res://scenes/items/Flashlight_item.tscn" id="5_cnqn1"]
+[ext_resource type="PackedScene" uid="uid://b1xnncpd5wmhs" path="res://scenes/items/laser_resource.tscn" id="6_fy7d1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k4stf"]
 texture = ExtResource("1_rygch")
@@ -1573,3 +1575,18 @@ position = Vector2(153, 170)
 
 [node name="Marker2D" type="Marker2D" parent="Boss"]
 position = Vector2(354, 169)
+
+[node name="Flashlight" parent="." instance=ExtResource("5_cnqn1")]
+position = Vector2(154, 234)
+
+[node name="LaserResource" parent="." instance=ExtResource("6_fy7d1")]
+position = Vector2(89, 64)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(480, 296)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

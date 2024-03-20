@@ -7,3 +7,5 @@ func _ready():
 	
 	$Healthbar.max_value = MAX_HEALTH
 	set_health()
+func boss():
+	pass
