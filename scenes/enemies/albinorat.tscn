@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://uqahyjnd7nah"]
+[gd_scene load_steps=25 format=3 uid="uid://uqahyjnd7nah"]
 
 [ext_resource type="Script" path="res://scenes/enemies/albinorat.gd" id="1_7i3q6"]
 [ext_resource type="Texture2D" uid="uid://cx451xt6iqaqr" path="res://assets/spritesheets/smallRatredeyesalbino-Sheet-export.png" id="2_maegl"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyFollow.gd" id="7_ansh2"]
 [ext_resource type="Script" path="res://scripts/States/EnemyAttack.gd" id="8_g3otq"]
 [ext_resource type="AudioStream" uid="uid://cs7cyhg65x06k" path="res://assets/audio/sfx/rat_steps.wav" id="9_0vbl7"]
+[ext_resource type="Script" path="res://scripts/States/EnemyDead.gd" id="9_weews"]
+[ext_resource type="AudioStream" uid="uid://q6x1f5elybn0" path="res://assets/audio/sfx/rat_death.wav" id="11_fte4x"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -397,6 +399,10 @@ enemy = NodePath("../..")
 script = ExtResource("8_g3otq")
 enemy = NodePath("../..")
 
+[node name="EnemyDead" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_weews")
+enemy = NodePath("../..")
+
 [node name="squeak_cooldown" type="Timer" parent="."]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
@@ -408,6 +414,9 @@ volume_db = 0.2
 pitch_scale = 0.5
 attenuation = 20.0
 panning_strength = 10.0
+
+[node name="death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_fte4x")
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
