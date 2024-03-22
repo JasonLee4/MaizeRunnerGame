@@ -96,7 +96,10 @@ func go_next_lvl():
 	cur_lvl += 1
 	
 func restart_game():
+	
 	health = 5
+	max_health = 5
+	pig_speed = 100
 	laser_energy = 0
 	lvl_start_time = null
 	lvl_end_time = null
