@@ -230,9 +230,11 @@ func spawn_items():
 			# spawn wood or apple
 			var roll = randf()
 			var item
-			if roll <= .4:
-				item = laser_resource_scene.instantiate()
-			elif roll > .4 and roll < .7:
+			if roll <= .2:
+				if Globals.cur_lvl >= 6:
+					item = laser_resource_scene.instantiate()
+				item = wood_scene.instantiate()
+			elif roll < .6:
 				item = wood_scene.instantiate()
 			else:
 				item = apple_scene.instantiate()
