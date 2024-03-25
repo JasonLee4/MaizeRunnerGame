@@ -9,7 +9,7 @@ func get_num_enemies():
 	# level 19+: 5/room
 	var lvl = Globals.cur_lvl
 	if lvl < 2:
-		return 0
+		return 1
 	elif lvl < 6:
 		return 1
 	elif lvl < 11:

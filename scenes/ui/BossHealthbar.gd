@@ -14,4 +14,5 @@ func init_boss(new_boss):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	value = curr_boss.health
+	if curr_boss:
+		value = curr_boss.health
