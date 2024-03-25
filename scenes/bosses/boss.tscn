@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cyjp1plfm3sc2"]
+[gd_scene load_steps=19 format=3 uid="uid://cyjp1plfm3sc2"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss.gd" id="1_0dwle"]
 [ext_resource type="Texture2D" uid="uid://bynvkabloqytl" path="res://assets/spritesheets/mediumRat-flippedSheet.png" id="2_x8sh3"]
 [ext_resource type="PackedScene" uid="uid://f8a7c50dvi25" path="res://scenes/enemies/rat.tscn" id="5_h1dg5"]
+[ext_resource type="Script" path="res://scripts/States/BossDead.gd" id="5_qjqme"]
 [ext_resource type="Script" path="res://scripts/States/BossAttack.gd" id="7_6h417"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="7_qons8"]
 [ext_resource type="Script" path="res://scripts/States/State Machine.gd" id="8_afv7l"]
 [ext_resource type="Script" path="res://scripts/States/BossDash.gd" id="8_wc5jd"]
 [ext_resource type="Script" path="res://scripts/States/BossSpawnMinions.gd" id="9_t82vn"]
+[ext_resource type="Script" path="res://scripts/States/BossStomp.gd" id="11_c2suk"]
 [ext_resource type="Script" path="res://scripts/States/BossFollow.gd" id="11_u0yoo"]
 
 [sub_resource type="Animation" id="Animation_o62dk"]
@@ -23,6 +25,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(2, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Base:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_tbhcy"]
@@ -42,9 +56,25 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-2, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(-2, 0), Vector2(-3, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_sude8"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8s4tk"]
 _data = {
 "RESET": SubResource("Animation_o62dk"),
+"death": SubResource("Animation_sude8"),
 "windup": SubResource("Animation_tbhcy")
 }
 
@@ -99,6 +129,7 @@ position = Vector2(2, 0)
 texture = ExtResource("2_x8sh3")
 hframes = 6
 vframes = 4
+frame = 18
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -138,13 +169,17 @@ script = ExtResource("7_qons8")
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_afv7l")
-initial_state = NodePath("BossDash")
+initial_state = NodePath("BossStomp")
 
-[node name="BossSpawnMinions" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
+[node name="BossDead" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_qjqme")
+enemy = NodePath("../..")
+
+[node name="BossSpawnMinions" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("9_t82vn")
 totalMinions = 2
 spawnTime = 3.0
-boss = NodePath("../..")
+enemy = NodePath("../..")
 minion_scene = ExtResource("5_h1dg5")
 
 [node name="BossFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
@@ -158,9 +193,16 @@ enemy = NodePath("../..")
 
 [node name="BossDash" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("8_wc5jd")
-totalTime = 20
-max_speed = 225.0
-accelaration = 85.0
+max_speed = 400.0
+accelaration = 300.0
+enemy = NodePath("../..")
+
+[node name="BossStomp" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("11_c2suk")
+totalStomps = 3
+stompRadius = 100
+initial_jump_speed = 200.0
+accelaration = 400.0
 enemy = NodePath("../..")
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]

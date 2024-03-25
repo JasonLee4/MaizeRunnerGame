@@ -62,7 +62,7 @@ func deal_damage():
 		can_attack = false
 		$attack_cooldown.start()
 		if not ranged and player:
-			print(damage)
+			#print(damage)
 			player.receive_damage(damage)
 	
 

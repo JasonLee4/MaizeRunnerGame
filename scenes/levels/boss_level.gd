@@ -5,7 +5,7 @@ var player_scene = preload("res://scenes/characters/pig.tscn")
 var boss_enemy = preload("res://scenes/bosses/boss.tscn")
 var laser_res = preload("res://scenes/items/laser_resource.tscn")
 var ui
-
+ 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.restart_game()
@@ -24,6 +24,8 @@ func _ready():
 	var boss = boss_enemy.instantiate()
 	$Boss.add_child(boss)
 	boss.position = $Boss/Marker2D.global_position
+	
+	ui.get_node("BossHealthbar").init_boss(boss)
 	
 
 

@@ -1,13 +1,13 @@
 extends State
-class_name BossDash
+class_name BossStomp
 
-@export var totalDashes = 5
-var dashes : float
+@export var totalStomps = 5
+@export var stompRadius = 10
+var stomps : float
 
 @onready var pig = 	Globals.pig
-@export var max_speed : float
+@export var initial_jump_speed : float
 @export var accelaration : float
-var direction : Vector2
 var speed : float
 
 @export var enemy: enemy
@@ -16,22 +16,27 @@ var windupTime : float
 
 # Called when the node enters the scene tree for the first time.
 func enter():
-	print("dashing")
+	print("stomping")
 	windupTime = 0
-	direction = Vector2(-1,-1)
+	speed = 0
 
-func dashing(delta):
-	enemy.velocity = Vector2(direction.normalized() * speed)
+func jumping(delta):
+	enemy.velocity = Vector2(0, -speed)
 	enemy.move_and_slide()
 
 	if enemy.can_attack and enemy.can_attack_player:
 		enemy.deal_damage()
 
-	speed = maxf(enemy.velocity.length() - (accelaration*delta), 0)
-	if speed <= 0:
-		direction = Vector2(-1,-1)
+	speed = speed - (accelaration*delta)
+	if speed <= -initial_jump_speed:
+		stomp()
 		windupTime = 0
-		dashes += 1
+		speed = 0
+		
+func stomp():
+	if(abs((pig.global_position - enemy.global_position).length()) <= stompRadius):
+		enemy.deal_damage()
+	stomps += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
@@ -40,16 +45,11 @@ func update(delta):
 	if windupTime < totalWindupTime:
 		enemy.get_node("AnimationPlayer").play("windup")
 		windupTime += delta
-	elif dashes < totalDashes:
+	elif stomps < totalStomps:
 		enemy.get_node("AnimationPlayer").stop()
-		if direction == Vector2(-1,-1):
-			direction = pig.global_position - enemy.global_position
-			speed = max_speed
-		dashing(delta)
+		if speed == 0:
+			speed = initial_jump_speed
+		jumping(delta)
 	else:
 		enemy.get_node("AnimationPlayer").stop()
-		transitioned.emit(self, "BossFollow")
-		
-	
-	
-	
+		transitioned.emit(self, "BossDash")
