@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://cx0pvdscatwe5"]
+[gd_scene load_steps=15 format=3 uid="uid://cx0pvdscatwe5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
 [ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_g5b3g"]
 [ext_resource type="PackedScene" uid="uid://5qlsjht7ufmu" path="res://scenes/ui/light_energy_bar.tscn" id="3_oixyk"]
 [ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
-[ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hotbar.tscn" id="5_xgbid"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hotbar.tscn" id="5_xgbid"]
 [ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="6_r816i"]
 [ext_resource type="PackedScene" uid="uid://c6jq8xlxnv1r8" path="res://scenes/ui/backpack_menu.tscn" id="7_4nqm3"]
 [ext_resource type="PackedScene" uid="uid://buqcuuo15n8sg" path="res://scenes/menus/pause_menu.tscn" id="8_nvfsd"]
 [ext_resource type="PackedScene" uid="uid://wqx546fxgt0q" path="res://scenes/ui/tooltip.tscn" id="9_drrv1"]
-[ext_resource type="PackedScene" uid="uid://d2xb6apapstdw" path="res://scenes/ui/monologue.tscn" id="10_5i85d"]
+[ext_resource type="PackedScene" path="res://scenes/ui/monologue.tscn" id="10_5i85d"]
+[ext_resource type="Script" path="res://scenes/ui/BossHealthbar.gd" id="12_udhc4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exthu"]
 texture = ExtResource("4_etjpm")
@@ -169,3 +170,12 @@ offset_right = 102.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
+
+[node name="BossHealthbar" type="ProgressBar" parent="."]
+visible = false
+offset_left = 302.0
+offset_top = 657.0
+offset_right = 962.0
+offset_bottom = 684.0
+show_percentage = false
+script = ExtResource("12_udhc4")

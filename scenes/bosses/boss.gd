@@ -1,4 +1,5 @@
 extends enemy
+class_name boss
 
 func _ready():
 	MAX_HEALTH = 1000

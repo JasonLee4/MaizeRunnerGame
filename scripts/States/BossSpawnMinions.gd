@@ -7,7 +7,7 @@ class_name BossSpawnMinions
 var spawnCooldown : float
 var minionsSpawned : int
 
-@export var boss : CharacterBody2D
+@export var enemy : CharacterBody2D
 
 @export var minionSpawnDistance = 50
 @export var minion_scene : Resource
@@ -20,12 +20,14 @@ func enter():
 	
 func spawn_minion():
 	var minion = minion_scene.instantiate()
-	boss.get_parent().add_child(minion)
-	minion.global_position = boss.global_position+Vector2(randf()*minionSpawnDistance, randf()*minionSpawnDistance)
+	enemy.get_parent().add_child(minion)
+	minion.global_position = enemy.global_position+Vector2(randf()*minionSpawnDistance, randf()*minionSpawnDistance)
 	minionsSpawned += 1
 	
 func update(delta: float):
-	if spawnCooldown > 0:
+	if enemy.health <= 0:
+		transitioned.emit(self, "BossDead")
+	elif spawnCooldown > 0:
 		spawnCooldown -= delta
 	elif minionsSpawned < totalMinions:
 		spawn_minion()

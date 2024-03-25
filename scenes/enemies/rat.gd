@@ -60,7 +60,10 @@ func light_freeze():
 
 func _on_squeak_cooldown_timeout():
 	$squeak_cooldown.stop()
-	$squeak.play();
+	$squeak.play()
 
 func _on_audio_stream_player_2d_finished():
-	$squeak_cooldown.start(randf_range(1, 5));
+	$squeak_cooldown.start(randf_range(1, 5))
+	
+func rat():
+	pass

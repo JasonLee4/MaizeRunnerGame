@@ -8,9 +8,12 @@ func _ready():
 func enter():
 	enemy.speed = 0
 	enemy.velocity = Vector2(0,0)
-	enemy.get_node("death").play()
-	enemy.get_node("YellowEyes").visible = false
-	enemy.get_node("RedEyes").visible = false
+	if enemy.get_node("death") != null:
+		enemy.get_node("death").play()
+	if enemy.has_method("rat"):
+		enemy.get_node("YellowEyes").visible = false
+		enemy.get_node("RedEyes").visible = false
 	enemy.get_node("CollisionShape2D").disabled = true
 	
+	enemy.get_node("AnimationPlayer").stop()
 	enemy.get_node("AnimationPlayer").play("death")
