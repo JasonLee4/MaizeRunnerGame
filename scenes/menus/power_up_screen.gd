@@ -19,10 +19,10 @@ func _process(delta):
 
 func next_level():
 	Globals.go_next_lvl()
-	get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
-
-
-
+	if Globals.cur_lvl in [5, 10]:
+		get_tree().change_scene_to_file("res://scenes/levels/boss_level.tscn")
+	else:
+		get_tree().change_scene_to_file("res://scenes/dungeon_gen/dungeon_gen.tscn")
 
 func _on_get_power_1_pressed():
 	$Button.play()

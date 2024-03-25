@@ -69,7 +69,7 @@ var inv :
 
 
 ### Game/Level Stats ###
-var cur_lvl = 1
+var cur_lvl = 4
 
 signal lvl_start
 signal lvl_end
