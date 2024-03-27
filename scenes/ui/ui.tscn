@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
 [ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_g5b3g"]
-[ext_resource type="PackedScene" path="res://scenes/ui/light_energy_bar.tscn" id="3_oixyk"]
+[ext_resource type="PackedScene" uid="uid://5qlsjht7ufmu" path="res://scenes/ui/light_energy_bar.tscn" id="3_oixyk"]
 [ext_resource type="Texture2D" uid="uid://wiol24vxcxnv" path="res://assets/ui/minimap-icons.png" id="4_etjpm"]
 [ext_resource type="PackedScene" uid="uid://cbkisr6j6ais2" path="res://scenes/ui/hotbar.tscn" id="5_xgbid"]
 [ext_resource type="FontFile" uid="uid://d1eqqtaqlhuy4" path="res://assets/ui/PixelSleigh.ttf" id="6_r816i"]

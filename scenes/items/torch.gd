@@ -3,14 +3,11 @@ extends RigidBody2D
 @export var item: Inv_Item
 @export var light_radius = 1.0
 @export var expires  = true
-#@export var speed = 100
-#@export var damage = 20
-#var direction = Vector2.LEFT
+@onready var light = $PointLight2D
 	
-#func _ready():
-	#$SelfdestructTimer.start()
-	
-var placed = false	
+var placed = false
+var abt_to_expire = false
+var decreasing = true
 
 
 func _ready():
@@ -32,6 +29,9 @@ func _physics_process(delta):
 		placed = true
 		
 	torch()
+	
+	if abt_to_expire:
+		flicker()
 
 
 func torch():
@@ -67,8 +67,17 @@ func _on_torch_timer_timeout():
 func _on_shrink_timer_timeout():
 	if not expires:
 		return
-	$PointLight2D.scale *= 0.8
-	$Torch_light_shadow.scale *= 0.8
-	$PointLight2D/Torch_Light_Area/CollisionShape2D.scale *= 0.8
-	
-	
+	abt_to_expire = true
+
+func flicker():
+	if decreasing:
+		if light.energy >= .2:
+			light.energy -= .02
+		else:
+			decreasing = false
+	else:
+		if light.energy <= .5:
+			light.energy += .02
+		else:
+			decreasing = true
+
