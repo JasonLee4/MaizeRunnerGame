@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://uqahyjnd7nah"]
+[gd_scene load_steps=26 format=3 uid="uid://uqahyjnd7nah"]
 
 [ext_resource type="Script" path="res://scenes/enemies/albinorat.gd" id="1_7i3q6"]
 [ext_resource type="Texture2D" uid="uid://cx451xt6iqaqr" path="res://assets/spritesheets/smallRatredeyesalbino-Sheet-export.png" id="2_maegl"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cs7cyhg65x06k" path="res://assets/audio/sfx/rat_steps.wav" id="9_0vbl7"]
 [ext_resource type="Script" path="res://scripts/States/EnemyDead.gd" id="9_weews"]
 [ext_resource type="AudioStream" uid="uid://q6x1f5elybn0" path="res://assets/audio/sfx/rat_death.wav" id="11_fte4x"]
+[ext_resource type="PackedScene" uid="uid://d04mvc8svbufw" path="res://scenes/lights/FireParticles.tscn" id="12_edqr2"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -417,6 +418,19 @@ panning_strength = 10.0
 
 [node name="death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_fte4x")
+
+[node name="Burning" type="Node2D" parent="."]
+visible = false
+position = Vector2(12, 2)
+
+[node name="FireParticles" parent="Burning" instance=ExtResource("12_edqr2")]
+position = Vector2(-16, 2)
+
+[node name="FireParticles2" parent="Burning" instance=ExtResource("12_edqr2")]
+position = Vector2(1, 4)
+
+[node name="FireParticles3" parent="Burning" instance=ExtResource("12_edqr2")]
+position = Vector2(-8, 7)
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

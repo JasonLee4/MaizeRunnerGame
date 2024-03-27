@@ -6,6 +6,7 @@ func choose_animation():
 	#Movement animation
 	super.choose_animation()
 	if health <=0 :
+		$Burning.visible = true
 		return 0
 	if velocity.x == 0 and velocity.y == 0:
 		#$AnimatedSprite2D.play("tail_wag")
