@@ -12,6 +12,7 @@ func choose_animation():
 	super.choose_animation()
 	
 	if health <=0 :
+		$Burning.visible = true
 		return 0
 	
 	if velocity.x == 0 and velocity.y == 0:
