@@ -4,11 +4,25 @@ var ui_scene = preload("res://scenes/ui/ui.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
 var boss_enemy = preload("res://scenes/bosses/boss.tscn")
 var laser_res = preload("res://scenes/items/laser_resource.tscn")
+
 var ui
+
+@onready var loading_screen = $LoadingScreen
  
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Globals.restart_game()
+	if not Globals.inv:
+		Globals.restart_game()
+	
+	# loading screen
+	loading_screen.set_text(LevelManager.get_loading_screen_text())
+	$Objects.visible = false
+	
+	await(get_tree().create_timer(2).timeout)
+	
+	loading_screen.visible = false
+	$Objects.visible = true
+	$CanvasModulate.visible = true
 	
 	# add ui
 	print("Loading UI...")
