@@ -41,6 +41,8 @@ func _ready():
 	
 	ui.get_node("BossHealthbar").init_boss(boss)
 	
+	Globals.lvl_start.emit()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

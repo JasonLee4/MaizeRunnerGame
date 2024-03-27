@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnh2oqn26sp1s"]
+[gd_scene load_steps=17 format=3 uid="uid://dnh2oqn26sp1s"]
 
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_hv186"]
 [ext_resource type="Script" path="res://scenes/menus/power_up_screen.gd" id="1_k5xjp"]
 [ext_resource type="PackedScene" uid="uid://dpa5kvvtdlhnb" path="res://scenes/menus/hanging_sign.tscn" id="3_jsobi"]
 [ext_resource type="AudioStream" uid="uid://bpurer8vn83h7" path="res://assets/audio/sfx/finish.wav" id="4_dgvk6"]
+[ext_resource type="Texture2D" uid="uid://bn05a57ru8yvx" path="res://assets/menu_assets/levelupkernalsbig.png" id="4_jirmk"]
+[ext_resource type="PackedScene" uid="uid://dh26fh2f4pd2" path="res://scenes/lights/item_backlight.tscn" id="4_n86p1"]
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_ac7r1"]
 [ext_resource type="Texture2D" uid="uid://cax7np3goouwi" path="res://assets/spritesheets/newpigianajonesactions.png" id="6_5ocvn"]
 
@@ -114,6 +116,18 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
+[node name="ItemBacklight" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_n86p1")]
+position = Vector2(145, 21)
+scale = Vector2(5, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(145, 21)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_jirmk")
+hframes = 6
+frame = 3
+
 [node name="Label1" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
@@ -146,6 +160,18 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
+
+[node name="ItemBacklight" parent="VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_n86p1")]
+position = Vector2(145, 21)
+scale = Vector2(5, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(129, 21)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_jirmk")
+hframes = 6
+frame = 4
 
 [node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
@@ -180,6 +206,18 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
+
+[node name="ItemBacklight" parent="VBoxContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("4_n86p1")]
+position = Vector2(145, 21)
+scale = Vector2(5, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(89, 21)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_jirmk")
+hframes = 6
+frame = 5
 
 [node name="Label3" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
 clip_contents = false

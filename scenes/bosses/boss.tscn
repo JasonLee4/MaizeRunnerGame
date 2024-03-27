@@ -1,16 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://cyjp1plfm3sc2"]
+[gd_scene load_steps=23 format=3 uid="uid://cyjp1plfm3sc2"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss.gd" id="1_0dwle"]
 [ext_resource type="Texture2D" uid="uid://bynvkabloqytl" path="res://assets/spritesheets/mediumRat-flippedSheet.png" id="2_x8sh3"]
+[ext_resource type="Script" path="res://scripts/States/BossRunAway.gd" id="5_2xs1h"]
 [ext_resource type="PackedScene" uid="uid://f8a7c50dvi25" path="res://scenes/enemies/rat.tscn" id="5_h1dg5"]
-[ext_resource type="Script" path="res://scripts/States/BossDead.gd" id="5_qjqme"]
+[ext_resource type="PackedScene" uid="uid://cbv5dxydkhot" path="res://scenes/items/key.tscn" id="6_ae1vx"]
 [ext_resource type="Script" path="res://scripts/States/BossAttack.gd" id="7_6h417"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="7_qons8"]
 [ext_resource type="Script" path="res://scripts/States/State Machine.gd" id="8_afv7l"]
-[ext_resource type="Script" path="res://scripts/States/BossDash.gd" id="8_wc5jd"]
 [ext_resource type="Script" path="res://scripts/States/BossSpawnMinions.gd" id="9_t82vn"]
-[ext_resource type="Script" path="res://scripts/States/BossStomp.gd" id="11_c2suk"]
 [ext_resource type="Script" path="res://scripts/States/BossFollow.gd" id="11_u0yoo"]
+[ext_resource type="Script" path="res://scripts/RandLoopAudio2D.gd" id="12_ysuue"]
+[ext_resource type="AudioStream" uid="uid://d8y3cws7apc4" path="res://assets/audio/sfx/boss_growl_1.wav" id="13_54ihf"]
+[ext_resource type="Script" path="res://scripts/States/BossDashAndStomp.gd" id="13_p6xlw"]
+[ext_resource type="AudioStream" uid="uid://hq75lvij8vul" path="res://assets/audio/sfx/boss_growl_2.wav" id="14_uvuws"]
+[ext_resource type="AudioStream" uid="uid://bj1u85oc8mxig" path="res://assets/audio/sfx/boss_growl_3.wav" id="15_cw37h"]
 
 [sub_resource type="Animation" id="Animation_o62dk"]
 length = 0.001
@@ -39,6 +43,21 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_sude8"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+
 [sub_resource type="Animation" id="Animation_tbhcy"]
 resource_name = "windup"
 length = 0.5
@@ -54,21 +73,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 0), Vector2(-2, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(-2, 0), Vector2(-3, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_sude8"]
-resource_name = "death"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Base:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8s4tk"]
@@ -169,11 +173,14 @@ script = ExtResource("7_qons8")
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_afv7l")
-initial_state = NodePath("BossStomp")
+initial_state = NodePath("BossDashAndStomp")
 
-[node name="BossDead" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_qjqme")
-enemy = NodePath("../..")
+[node name="BossRunAway" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
+script = ExtResource("5_2xs1h")
+boss = NodePath("../..")
+speed = 300.0
+cam_follow_time = 1.5
+drop_scene = ExtResource("6_ae1vx")
 
 [node name="BossSpawnMinions" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("9_t82vn")
@@ -185,25 +192,23 @@ minion_scene = ExtResource("5_h1dg5")
 [node name="BossFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("11_u0yoo")
 enemy = NodePath("../..")
-move_speed = 50
+move_speed = 80
 
 [node name="BossAttack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_6h417")
 enemy = NodePath("../..")
 
-[node name="BossDash" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("8_wc5jd")
-max_speed = 400.0
-accelaration = 300.0
+[node name="BossDashAndStomp" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("13_p6xlw")
 enemy = NodePath("../..")
 
-[node name="BossStomp" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("11_c2suk")
-totalStomps = 3
-stompRadius = 100
-initial_jump_speed = 200.0
-accelaration = 400.0
-enemy = NodePath("../..")
+[node name="growl" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("12_ysuue")
+max_wait_time = 7
+sounds = Array[Resource]([ExtResource("13_54ihf"), ExtResource("14_uvuws"), ExtResource("15_cw37h")])
+
+[node name="RunAwayCam" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

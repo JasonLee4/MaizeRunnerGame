@@ -18,6 +18,7 @@ var windupTime : float
 func enter():
 	print("dashing")
 	windupTime = 0
+	dashes = 0
 	direction = Vector2(-1,-1)
 
 func dashing(delta):
@@ -36,7 +37,7 @@ func dashing(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossDead")
+		transitioned.emit(self, "BossRunAway")
 	if windupTime < totalWindupTime:
 		enemy.get_node("AnimationPlayer").play("windup")
 		windupTime += delta
@@ -48,7 +49,7 @@ func update(delta):
 		dashing(delta)
 	else:
 		enemy.get_node("AnimationPlayer").stop()
-		transitioned.emit(self, "BossFollow")
+		transitioned.emit(self, "BossStomp")
 		
 	
 	
