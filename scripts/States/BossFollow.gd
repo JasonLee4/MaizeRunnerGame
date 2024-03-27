@@ -9,11 +9,11 @@ func enter():
 
 func update(delta: float):
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossDead")
+		transitioned.emit(self, "BossRunAway")
 	elif time < totalTime:
 		time += delta
 	elif enemy.can_attack and enemy.can_attack_player:
 		print("follow -> attack")
 		transitioned.emit(self, "BossAttack")
 	else:
-		transitioned.emit(self, "BossSpawnMinions")
+		transitioned.emit(self, "BossDashAndStomp")

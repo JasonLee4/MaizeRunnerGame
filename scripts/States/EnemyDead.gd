@@ -3,6 +3,9 @@ class_name EnemyDead
 
 @export var enemy: enemy
 
+@export var despawn_timer : float
+var timer
+
 func _ready():
 	pass
 func enter():
@@ -17,3 +20,11 @@ func enter():
 	
 	enemy.get_node("AnimationPlayer").stop()
 	enemy.get_node("AnimationPlayer").play("death")
+	
+	timer = 0
+	
+func update(delta):
+	if timer < despawn_timer:
+		timer += delta
+	else:
+		enemy.queue_free()

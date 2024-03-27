@@ -21,12 +21,13 @@ func enter():
 func spawn_minion():
 	var minion = minion_scene.instantiate()
 	enemy.get_parent().add_child(minion)
-	minion.global_position = enemy.global_position+Vector2(randf()*minionSpawnDistance, randf()*minionSpawnDistance)
+	var position = enemy.global_position+Vector2(randf()*minionSpawnDistance, randf()*minionSpawnDistance)
+	minion.global_position = position
 	minionsSpawned += 1
 	
 func update(delta: float):
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossDead")
+		transitioned.emit(self, "BossRunAway")
 	elif spawnCooldown > 0:
 		spawnCooldown -= delta
 	elif minionsSpawned < totalMinions:
@@ -34,5 +35,5 @@ func update(delta: float):
 		spawnCooldown = spawnTime
 	else:
 		print("finished spawning")
-		transitioned.emit(self, "BossDash")
+		transitioned.emit(self, "BossFollow")
 	

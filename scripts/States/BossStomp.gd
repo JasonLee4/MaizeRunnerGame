@@ -11,7 +11,7 @@ var stomps : float
 var speed : float
 
 @export var enemy: enemy
-@export var totalWindupTime = 3
+@export var totalWindupTime := 3.0
 var windupTime : float
 
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +19,7 @@ func enter():
 	print("stomping")
 	windupTime = 0
 	speed = 0
+	stomps = 0
 
 func jumping(delta):
 	enemy.velocity = Vector2(0, -speed)
@@ -41,7 +42,7 @@ func stomp():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossDead")
+		transitioned.emit(self, "BossRunAway")
 	if windupTime < totalWindupTime:
 		enemy.get_node("AnimationPlayer").play("windup")
 		windupTime += delta
@@ -52,4 +53,4 @@ func update(delta):
 		jumping(delta)
 	else:
 		enemy.get_node("AnimationPlayer").stop()
-		transitioned.emit(self, "BossDash")
+		transitioned.emit(self, "BossSpawnMinions")
