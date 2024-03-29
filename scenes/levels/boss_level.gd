@@ -38,6 +38,7 @@ func _ready():
 	var boss = boss_enemy.instantiate()
 	$Boss.add_child(boss)
 	boss.position = $Boss/Marker2D.global_position
+	boss.scale = Vector2(2,2)
 	
 	ui.get_node("BossHealthbar").init_boss(boss)
 	
@@ -57,8 +58,8 @@ func _process(delta):
 func _on_timer_timeout():
 	var lr = laser_res.instantiate()
 
-	lr.global_position.x = randf_range(59, 480)
-	lr.global_position.y = randf_range(42, 296)
+	lr.global_position.x = randf_range($CoalSpawn/Marker2D.global_position.x, $CoalSpawn/Marker2D2.global_position.x)
+	lr.global_position.y = randf_range($CoalSpawn/Marker2D.global_position.y, $CoalSpawn/Marker2D2.global_position.y)
 	
 	add_child(lr)
 	print($Boss.get_child(1).health)

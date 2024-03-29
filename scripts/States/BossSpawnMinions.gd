@@ -20,6 +20,7 @@ func enter():
 	
 func spawn_minion():
 	var minion = minion_scene.instantiate()
+	minion.detection_radius = 500
 	enemy.get_parent().add_child(minion)
 	var position = enemy.global_position+Vector2(randf()*minionSpawnDistance, randf()*minionSpawnDistance)
 	minion.global_position = position
