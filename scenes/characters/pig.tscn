@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cj72oa0j0cfj6"]
+[gd_scene load_steps=50 format=3 uid="uid://cj72oa0j0cfj6"]
 
 [ext_resource type="Script" path="res://scenes/characters/pig.gd" id="1_hx4hr"]
 [ext_resource type="Texture2D" uid="uid://cax7np3goouwi" path="res://assets/spritesheets/newpigianajonesactions.png" id="2_spv1m"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/states/state_moving.gd" id="4_75rr4"]
 [ext_resource type="Script" path="res://scenes/states/state_rolling.gd" id="4_a3gfp"]
 [ext_resource type="Texture2D" uid="uid://dkj0nu7jyyh65" path="res://assets/spritesheets/torchhh1.png" id="5_e87gt"]
+[ext_resource type="Texture2D" uid="uid://c64m8bioy63m1" path="res://assets/spritesheets/apple.png" id="5_ur2mx"]
 [ext_resource type="Script" path="res://scenes/states/state_dead.gd" id="9_i7yt1"]
 [ext_resource type="Script" path="res://scenes/levels/Camera.gd" id="10_sbke0"]
 [ext_resource type="Script" path="res://scenes/states/state_idle.gd" id="10_w0bou"]
@@ -598,6 +599,11 @@ shadow_filter = 1
 shadow_filter_smooth = 3.0
 texture = SubResource("GradientTexture2D_w7koc")
 texture_scale = 5.0
+
+[node name="Apple" type="Sprite2D" parent="."]
+position = Vector2(16, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_ur2mx")
 
 [node name="Roll" type="Sprite2D" parent="."]
 visible = false

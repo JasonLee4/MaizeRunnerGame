@@ -71,11 +71,15 @@ func _physics_process(delta):
 			if lookright:
 				flashlight.position.x = abs(flashlight.position.x)
 				$Torch.position.x = abs($Torch.position.x)
+				$Apple.position.x = abs($Apple.position.x)
+				
 				$Sprite2D.flip_h = false
 				
 			else:
 				flashlight.position.x = -1 * abs(flashlight.position.x)
 				$Torch.position.x = -1 * abs($Torch.position.x)
+				$Apple.position.x = -1 * abs($Apple.position.x)
+				
 				$Sprite2D.flip_h = true
 		
 				
@@ -119,19 +123,22 @@ func _physics_process(delta):
 					if velocity.x < 0:
 						#pigfacing = false
 						$Torch.position.x = -1 * abs($Torch.position.x)
-						
+						$Apple.position.x = -1 * abs($Apple.position.x)
 						$Sprite2D.flip_h = true
 						$Roll.flip_h = true					
 						
 					elif velocity.x > 0:
 						#pigfacing = true
 						$Torch.position.x = abs($Torch.position.x)
+						$Apple.position.x = abs($Apple.position.x)
 						
 						$Sprite2D.flip_h = false
 						$Roll.flip_h = false	
 					if torch_equipped:
 						$AnimationPlayer.play("pigwalk_equip_right")
-						
+					elif consumable_equipped:
+						$AnimationPlayer.play("pigwalk_equip_right")
+							
 					else:
 						
 						$AnimationPlayer.play("pigwalk")
@@ -403,7 +410,7 @@ func change_tool(hb_num):
 	
 func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
-	
+	$Apple.visible = consumable_equipped
 	if torch_equipped or flashlight_equipped:	
 		if $Sprite2D.frame not in range(23,28):
 			$Sprite2D.frame = 23
