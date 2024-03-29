@@ -3,7 +3,7 @@ extends PlayerState
 
 @export var accspd = 1500
 var max_spd = Globals.pig_speed
-var can_roll = false
+var can_roll = true
 var move = Vector2.ZERO
 
 
@@ -48,18 +48,21 @@ func _transition_logic(existing_states):
 	if not Globals.pig.pig_alive:
 		machine.change_state("state_dead") 
 	
-	elif can_roll and Input.is_action_just_pressed("dash") and move.length() > 0:
+	elif can_roll and Input.is_action_just_pressed("dash"):
 		# transition to rolling
+		can_roll = false
+		$RollCooldown.start()
 		machine.change_state("state_rolling", [move], [])
-	elif move.length() == 0:
-		machine.change_state("state_idle")
+	#elif move.length() == 0:
+		#machine.change_state("state_idle")
 		
 
 
 func _enter(args := []):
 	# start the roll cooldown timer
-	can_roll = false
-	$RollCooldown.start()
+	#can_roll = true
+	#$RollCooldown.start()
+	pass
 
 
 func _on_roll_cooldown_timeout():
