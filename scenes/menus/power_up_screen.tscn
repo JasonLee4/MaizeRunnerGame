@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dnh2oqn26sp1s"]
+[gd_scene load_steps=16 format=3 uid="uid://dnh2oqn26sp1s"]
 
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_hv186"]
 [ext_resource type="Script" path="res://scenes/menus/power_up_screen.gd" id="1_k5xjp"]
 [ext_resource type="PackedScene" uid="uid://dpa5kvvtdlhnb" path="res://scenes/menus/hanging_sign.tscn" id="3_jsobi"]
 [ext_resource type="AudioStream" uid="uid://bpurer8vn83h7" path="res://assets/audio/sfx/finish.wav" id="4_dgvk6"]
 [ext_resource type="Texture2D" uid="uid://bn05a57ru8yvx" path="res://assets/menu_assets/levelupkernalsbig.png" id="4_jirmk"]
-[ext_resource type="PackedScene" uid="uid://dh26fh2f4pd2" path="res://scenes/lights/item_backlight.tscn" id="4_n86p1"]
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_ac7r1"]
 [ext_resource type="Texture2D" uid="uid://cax7np3goouwi" path="res://assets/spritesheets/newpigianajonesactions.png" id="6_5ocvn"]
 
@@ -93,6 +92,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 104.0
+offset_right = -3.0
+offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 100
@@ -105,6 +108,30 @@ theme_override_font_sizes/font_size = 50
 text = "CHOOSE YOUR UPGRADE"
 horizontal_alignment = 1
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+position = Vector2(317, -5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_jirmk")
+hframes = 6
+frame = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+position = Vector2(680, -8)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_jirmk")
+hframes = 6
+frame = 4
+
+[node name="Sprite2D3" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+position = Vector2(1017, -12)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_jirmk")
+hframes = 6
+frame = 5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -115,18 +142,6 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
-
-[node name="ItemBacklight" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_n86p1")]
-position = Vector2(145, 21)
-scale = Vector2(5, 5)
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-self_modulate = Color(2, 2, 2, 1)
-position = Vector2(145, 21)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_jirmk")
-hframes = 6
-frame = 3
 
 [node name="Label1" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 clip_contents = false
@@ -161,18 +176,6 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="ItemBacklight" parent="VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_n86p1")]
-position = Vector2(145, 21)
-scale = Vector2(5, 5)
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
-self_modulate = Color(2, 2, 2, 1)
-position = Vector2(129, 21)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_jirmk")
-hframes = 6
-frame = 4
-
 [node name="Label2" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
 layout_mode = 2
@@ -206,18 +209,6 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
-
-[node name="ItemBacklight" parent="VBoxContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("4_n86p1")]
-position = Vector2(145, 21)
-scale = Vector2(5, 5)
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
-self_modulate = Color(2, 2, 2, 1)
-position = Vector2(89, 21)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_jirmk")
-hframes = 6
-frame = 5
 
 [node name="Label3" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
 clip_contents = false
@@ -256,6 +247,7 @@ volume_db = -3.0
 stream = ExtResource("5_ac7r1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(656, 586)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_6ywrs")
