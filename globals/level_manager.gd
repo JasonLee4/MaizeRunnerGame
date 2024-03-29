@@ -41,13 +41,14 @@ func get_num_rooms():
 
 func get_loading_screen_text():
 	var texts = [
-		"Welcome to the maize", # for tutorial level
+		"Welcome to the maize, piggy.", # for tutorial level
 		"We smell fresh meat...",
 		"The rats are starving!",
 		"You can run all you want...",
 		"But you cannot escape.",
 		"The maize devours all.", 
-		"More rats. MORE. RATS.", # 6
+		"You've finally come to me.", #6
+		"More rats. MORE. RATS.",
 		"Fear the darkness...",
 		"Delicious ham, come to us!",
 		"The maize grows larger.",
