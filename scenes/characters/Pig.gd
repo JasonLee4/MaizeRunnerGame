@@ -77,7 +77,8 @@ func _physics_process(delta):
 				flashlight.position.x = -1 * abs(flashlight.position.x)
 				$Torch.position.x = -1 * abs($Torch.position.x)
 				$Sprite2D.flip_h = true
-			
+		
+				
 		if velocity != Vector2(0,0):
 			if state_machine.selected_state.name == "state_rolling":
 				$Sprite2D.visible = false
@@ -140,6 +141,17 @@ func _physics_process(delta):
 			
 		else:
 			$AnimationPlayer.stop(true)
+			
+			if state_machine.selected_state.name == "state_rolling":
+				$Sprite2D.visible = false
+				$Roll.visible = true
+				if(!$Dash.is_playing()):
+					$Dash.play()
+				
+				$AnimationPlayer.play("pigroll")
+				await get_tree().create_timer(0.3).timeout
+				$Roll.visible = false
+				$Sprite2D.visible = true
 			#if pigfacing:
 				#$Torch.position.x = abs($Torch.position.x)
 				#flashlight.position.x = abs(flashlight.position.x)
