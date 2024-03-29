@@ -43,6 +43,10 @@ func _ready():
 	
 	Globals.lvl_start.emit()
 	
+	await(get_tree().create_timer(2).timeout)
+	var mono = "Something feels a bit off here..."
+	Globals.monologue.emit(mono)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
