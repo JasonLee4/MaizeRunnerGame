@@ -3,7 +3,7 @@ class_name EnemyDead
 
 @export var enemy: enemy
 
-@export var despawn_timer : float
+@export var despawn_timer := 5.0
 var timer
 
 func _ready():
