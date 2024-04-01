@@ -19,7 +19,7 @@ func enter():
 	get_tree().paused = true
 	boss.get_node("CollisionShape2D").disabled = true
 	#fix camera to the boss instead of pig
-	boss.get_node("BossCam").make_current()
+	$CameraTransition.transition(pig.get_node("Camera2D"), boss.get_node("BossCam"))
 	#drop key
 	var drop = drop_scene.instantiate()
 	boss.get_parent().add_child(drop)
@@ -41,7 +41,8 @@ func update(delta):
 			boss.velocity = Vector2(Vector2(1,0) * speed)
 			boss.move_and_slide()
 		elif time >= cam_follow_time:
-			pig.get_node("Camera2D").make_current()
+			$CameraTransition.transition(boss.get_node("BossCam"), pig.get_node("Camera2D"))
+			await $CameraTransition.done
 			boss.queue_free()	
 			get_tree().paused = false
 	

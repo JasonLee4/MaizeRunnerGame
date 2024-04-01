@@ -4,6 +4,7 @@ var ui_scene = preload("res://scenes/ui/ui.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
 var boss_enemy = preload("res://scenes/bosses/boss.tscn")
 var laser_res = preload("res://scenes/items/laser_resource.tscn")
+var boss_healthbar = preload("res://scenes/items/laser_resource.tscn")
 
 var boss_spawned : bool
 
@@ -53,9 +54,10 @@ func _process(delta):
 		#spawns boss once pig enters the room
 		if (Globals.pig.global_position.x >= $CoalSpawn/Marker2D2.global_position.x+80):
 				var boss = boss_enemy.instantiate()
-				$Boss.add_child(boss)
 				boss.position = $Boss/Marker2D.global_position
 				boss.scale = Vector2(2,2)
+				$Boss.add_child(boss)
+				
 				ui.get_node("BossHealthbar").init_boss(boss)
 				boss_spawned = true
 
