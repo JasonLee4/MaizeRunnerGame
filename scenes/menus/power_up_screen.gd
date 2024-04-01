@@ -38,6 +38,15 @@ func _on_get_power_1_mouse_entered():
 func _on_get_power_1_mouse_exited():
 	$VBoxContainer/HBoxContainer/VBoxContainer/Label1.text = powerTextArr[0][0]
 
+func _on_icon_button_1_pressed():
+	_on_get_power_1_pressed()
+
+func _on_icon_button_1_mouse_entered():
+	_on_get_power_1_mouse_entered()
+	
+func _on_icon_button_1_mouse_exited():
+	_on_get_power_1_mouse_exited()
+	
 
 func _on_get_power_2_pressed():
 	$Button.play()
@@ -46,7 +55,6 @@ func _on_get_power_2_pressed():
 	Globals.increase_pig_speed(.1)
 	next_level()
 
-
 func _on_get_power_2_mouse_entered():
 	$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text+"[/shake]"
 
@@ -54,18 +62,42 @@ func _on_get_power_2_mouse_entered():
 func _on_get_power_2_mouse_exited():
 	$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text = powerTextArr[1][0]
 
+func _on_icon_button_2_pressed():
+	_on_get_power_2_pressed()
 
+func _on_icon_button_2_mouse_entered():
+	_on_get_power_2_mouse_entered()
+	
+func _on_icon_button_2_mouse_exited():
+	_on_get_power_2_mouse_exited()
+	
 func _on_get_power_3_pressed():
 	$Button.play()
 	await $Button.finished
 	Globals.inv.insert(item)
 	Globals.inv.insert(item)
 	next_level()
-
-
+	
 func _on_get_power_3_mouse_entered():
 	$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text+"[/shake]"
 
 
 func _on_get_power_3_mouse_exited():
 	$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text = powerTextArr[2][0]
+
+func _on_icon_button_3_pressed():
+	_on_get_power_3_pressed()
+
+func _on_icon_button_3_mouse_entered():
+	_on_get_power_3_mouse_entered()
+	
+func _on_icon_button_3_mouse_exited():
+	_on_get_power_3_mouse_exited()
+
+
+
+
+
+
+
+
