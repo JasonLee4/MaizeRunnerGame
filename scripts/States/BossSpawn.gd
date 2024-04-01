@@ -10,11 +10,13 @@ func enter():
 	boss.process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().paused = true
 	#fix camera to the boss instead of pig
-	boss.get_node("BossCam").make_current()
+	$CameraTransition.transition(pig.get_node("Camera2D"), boss.get_node("BossCam"))
+	await $CameraTransition.done
 	boss.get_node("spawn_roar").play()
 
 func _on_spawn_roar_finished():
-	pig.get_node("Camera2D").make_current()
+	$CameraTransition.transition(boss.get_node("BossCam"), pig.get_node("Camera2D"))
+	await $CameraTransition.done
 	get_tree().paused = false
 	boss.get_node("boss_music").play()
 	transitioned.emit(self, "BossDashAndStomp")

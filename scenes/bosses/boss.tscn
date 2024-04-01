@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cyjp1plfm3sc2"]
+[gd_scene load_steps=29 format=3 uid="uid://cyjp1plfm3sc2"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss.gd" id="1_0dwle"]
 [ext_resource type="Texture2D" uid="uid://bynvkabloqytl" path="res://assets/spritesheets/mediumRat-flippedSheet.png" id="2_x8sh3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cbv5dxydkhot" path="res://scenes/items/key.tscn" id="6_ae1vx"]
 [ext_resource type="Script" path="res://scripts/States/BossAttack.gd" id="7_6h417"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="7_qons8"]
+[ext_resource type="PackedScene" uid="uid://cv3e783ww76ao" path="res://scenes/ui/CameraTransition.tscn" id="8_2vdld"]
 [ext_resource type="Script" path="res://scripts/States/State Machine.gd" id="8_afv7l"]
 [ext_resource type="Script" path="res://scripts/States/BossSpawnMinions.gd" id="9_t82vn"]
 [ext_resource type="Script" path="res://scripts/States/BossFollow.gd" id="11_u0yoo"]
@@ -202,6 +203,7 @@ shape = SubResource("RectangleShape2D_ls7dl")
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
 
 [node name="Healthbar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -13.0
 offset_top = -20.0
 offset_right = 16.0
@@ -220,9 +222,11 @@ initial_state = NodePath("BossSpawn")
 script = ExtResource("5_2xs1h")
 boss = NodePath("../..")
 speed = 300.0
-cam_follow_time = 3.0
+cam_follow_time = 1.5
 windup_time = 1.5
 drop_scene = ExtResource("6_ae1vx")
+
+[node name="CameraTransition" parent="State Machine/BossRunAway" instance=ExtResource("8_2vdld")]
 
 [node name="BossSpawnMinions" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("9_t82vn")
@@ -249,6 +253,8 @@ stompRadius = 125
 [node name="BossSpawn" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
 script = ExtResource("13_bw6as")
 boss = NodePath("../..")
+
+[node name="CameraTransition" parent="State Machine/BossSpawn" instance=ExtResource("8_2vdld")]
 
 [node name="growl" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("12_ysuue")
