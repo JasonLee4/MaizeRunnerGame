@@ -1,12 +1,31 @@
-[gd_scene load_steps=16 format=3 uid="uid://dnh2oqn26sp1s"]
+[gd_scene load_steps=20 format=3 uid="uid://dnh2oqn26sp1s"]
 
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_hv186"]
 [ext_resource type="Script" path="res://scenes/menus/power_up_screen.gd" id="1_k5xjp"]
 [ext_resource type="PackedScene" uid="uid://dpa5kvvtdlhnb" path="res://scenes/menus/hanging_sign.tscn" id="3_jsobi"]
 [ext_resource type="AudioStream" uid="uid://bpurer8vn83h7" path="res://assets/audio/sfx/finish.wav" id="4_dgvk6"]
 [ext_resource type="Texture2D" uid="uid://bn05a57ru8yvx" path="res://assets/menu_assets/levelupkernalsbig.png" id="4_jirmk"]
+[ext_resource type="Shader" path="res://scenes/menus/power_up_screen.gdshader" id="4_oiof0"]
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_ac7r1"]
 [ext_resource type="Texture2D" uid="uid://cax7np3goouwi" path="res://assets/spritesheets/newpigianajonesactions.png" id="6_5ocvn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xlw8e"]
+shader = ExtResource("4_oiof0")
+shader_parameter/shine_color = Color(1, 1, 1, 0.501961)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_size = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phfix"]
+shader = ExtResource("4_oiof0")
+shader_parameter/shine_color = Color(1, 1, 1, 0.5)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_size = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8nxn"]
+shader = ExtResource("4_oiof0")
+shader_parameter/shine_color = Color(1, 1, 1, 0.501961)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_size = 0.005
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4j2g"]
 atlas = ExtResource("6_5ocvn")
@@ -112,6 +131,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+material = SubResource("ShaderMaterial_xlw8e")
 position = Vector2(317, -5)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_jirmk")
@@ -123,10 +143,12 @@ offset_left = -93.0
 offset_top = -140.0
 offset_right = 103.0
 offset_bottom = 143.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 flat = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+material = SubResource("ShaderMaterial_phfix")
 position = Vector2(680, -8)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_jirmk")
@@ -138,10 +160,12 @@ offset_left = -93.0
 offset_top = -140.0
 offset_right = 103.0
 offset_bottom = 143.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 flat = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+material = SubResource("ShaderMaterial_k8nxn")
 position = Vector2(1017, -12)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_jirmk")
@@ -153,6 +177,7 @@ offset_left = -93.0
 offset_top = -140.0
 offset_right = 103.0
 offset_bottom = 143.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 flat = true
 
