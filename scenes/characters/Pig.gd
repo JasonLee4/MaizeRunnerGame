@@ -411,7 +411,7 @@ func change_tool(hb_num):
 func toggle_tool_sprites():
 	$Torch.visible = torch_equipped
 	$Apple.visible = consumable_equipped
-	if torch_equipped or flashlight_equipped:	
+	if torch_equipped or flashlight_equipped or consumable_equipped:	
 		if $Sprite2D.frame not in range(23,28):
 			$Sprite2D.frame = 23
 	else:
