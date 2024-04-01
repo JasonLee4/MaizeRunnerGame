@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cfnha2uh4r7lt"]
+[gd_scene load_steps=45 format=3 uid="uid://cfnha2uh4r7lt"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_r22ps"]
 [ext_resource type="Texture2D" uid="uid://bo7xwuvdfc2ng" path="res://assets/spritesheets/slidepicdarkSkyMoon.png" id="2_cyjrx"]
@@ -159,6 +159,16 @@ region = Rect2(32.0576, 29.576, 256.722, 78.958)
 atlas = ExtResource("6_w8lr5")
 region = Rect2(33.1916, 28.9329, 255.256, 80.2371)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w3lh5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aj08o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lsmbq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wmrjr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t414q"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_c8rdd"]
 atlas = ExtResource("7_2mj4c")
 region = Rect2(96, 0, 96, 96)
@@ -313,16 +323,44 @@ text = "Quit"
 fit_content = true
 autowrap_mode = 0
 
-[node name="debug_screen_change" type="CheckButton" parent="."]
+[node name="FullScreenSwitch" type="CheckButton" parent="."]
 layout_mode = 0
-offset_left = 945.0
-offset_top = 486.0
-offset_right = 989.0
-offset_bottom = 510.0
+offset_left = 947.0
+offset_top = 490.0
+offset_right = 991.0
+offset_bottom = 514.0
 scale = Vector2(1.13225, 3.0839)
 focus_mode = 0
 mouse_default_cursor_shape = 2
 flat = true
+
+[node name="SkipToBossButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1113.0
+offset_top = 105.0
+offset_right = 1218.0
+offset_bottom = 213.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w3lh5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_aj08o")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lsmbq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wmrjr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t414q")
+icon_alignment = 1
+expand_icon = true
+
+[node name="SkipToFinalBossButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1133.0
+offset_top = 486.0
+offset_right = 1164.0
+offset_bottom = 538.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w3lh5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_aj08o")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lsmbq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wmrjr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t414q")
+icon_alignment = 1
+expand_icon = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(971, 520)
@@ -367,5 +405,7 @@ autoplay = true
 [connection signal="pressed" from="Buttons/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="toggled" from="debug_screen_change" to="." method="_on_debug_screen_change_toggled"]
+[connection signal="toggled" from="FullScreenSwitch" to="." method="_on_debug_screen_change_toggled"]
+[connection signal="pressed" from="SkipToBossButton" to="." method="_on_skip_to_boss_button_pressed"]
+[connection signal="pressed" from="SkipToFinalBossButton" to="." method="_on_skip_to_final_boss_button_pressed"]
 [connection signal="timeout" from="RichTextLabel/Timer" to="." method="_on_timer_timeout"]

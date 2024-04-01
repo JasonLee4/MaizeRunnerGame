@@ -4,7 +4,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Buttons/VBoxContainer/StartButton.grab_focus()
-	$debug_screen_change.button_pressed = false
+	$FullScreenSwitch.button_pressed = false
 	$AnimatedSprite2D.flip_h = true
 	$AnimatedSprite2D.play("idle")
 
@@ -40,7 +40,7 @@ func _on_options_button_pressed():
 
 func _on_debug_screen_change_toggled(toggled_on):
 	
-	if $debug_screen_change.button_pressed:
+	if $FullScreenSwitch.button_pressed:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -49,3 +49,15 @@ func _on_debug_screen_change_toggled(toggled_on):
 
 func _on_timer_timeout():
 	$RichTextLabel.visible = !$RichTextLabel.visible
+
+func _on_skip_to_boss_button_pressed():
+	Globals.new_game = true
+	Globals.restart_game()
+	Globals.cur_lvl = 5
+	get_tree().change_scene_to_file("res://scenes/levels/boss_level.tscn")
+
+func _on_skip_to_final_boss_button_pressed():
+	Globals.new_game = true
+	Globals.restart_game()
+	Globals.cur_lvl = 10
+	get_tree().change_scene_to_file("res://scenes/levels/boss_level.tscn")
