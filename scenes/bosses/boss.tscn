@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cyjp1plfm3sc2"]
+[gd_scene load_steps=28 format=3 uid="uid://cyjp1plfm3sc2"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss.gd" id="1_0dwle"]
 [ext_resource type="Texture2D" uid="uid://bynvkabloqytl" path="res://assets/spritesheets/mediumRat-flippedSheet.png" id="2_x8sh3"]
@@ -13,9 +13,12 @@
 [ext_resource type="Script" path="res://scripts/States/BossFollow.gd" id="11_u0yoo"]
 [ext_resource type="Script" path="res://scripts/RandLoopAudio2D.gd" id="12_ysuue"]
 [ext_resource type="AudioStream" uid="uid://d8y3cws7apc4" path="res://assets/audio/sfx/boss_growl_1.wav" id="13_54ihf"]
+[ext_resource type="Script" path="res://scripts/States/BossSpawn.gd" id="13_bw6as"]
 [ext_resource type="Script" path="res://scripts/States/BossDashAndStomp.gd" id="13_p6xlw"]
 [ext_resource type="AudioStream" uid="uid://hq75lvij8vul" path="res://assets/audio/sfx/boss_growl_2.wav" id="14_uvuws"]
 [ext_resource type="AudioStream" uid="uid://bj1u85oc8mxig" path="res://assets/audio/sfx/boss_growl_3.wav" id="15_cw37h"]
+[ext_resource type="AudioStream" uid="uid://bxrnwex72pwuy" path="res://assets/audio/sfx/boss_roar.wav" id="18_2tm33"]
+[ext_resource type="AudioStream" uid="uid://bv45pfo745lcp" path="res://assets/audio/sfx/boss_music.wav" id="19_41fq3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_35m1t"]
 blend_mode = 1
@@ -211,20 +214,22 @@ script = ExtResource("7_qons8")
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_afv7l")
-initial_state = NodePath("BossDashAndStomp")
+initial_state = NodePath("BossSpawn")
 
 [node name="BossRunAway" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
 script = ExtResource("5_2xs1h")
 boss = NodePath("../..")
 speed = 300.0
-cam_follow_time = 1.5
+cam_follow_time = 3.0
+windup_time = 1.5
 drop_scene = ExtResource("6_ae1vx")
 
 [node name="BossSpawnMinions" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("9_t82vn")
 totalMinions = 10
-spawnTime = 1.0
+spawnTime = 1.5
 enemy = NodePath("../..")
+minionSpawnDistance = 100
 minion_scene = ExtResource("5_h1dg5")
 
 [node name="BossFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
@@ -239,14 +244,27 @@ enemy = NodePath("../..")
 [node name="BossDashAndStomp" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("13_p6xlw")
 enemy = NodePath("../..")
+stompRadius = 125
+
+[node name="BossSpawn" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
+script = ExtResource("13_bw6as")
+boss = NodePath("../..")
 
 [node name="growl" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("12_ysuue")
 max_wait_time = 7
 sounds = Array[Resource]([ExtResource("13_54ihf"), ExtResource("14_uvuws"), ExtResource("15_cw37h")])
 
-[node name="RunAwayCam" type="Camera2D" parent="."]
+[node name="BossCam" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="spawn_roar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_2tm33")
+
+[node name="boss_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_41fq3")
+volume_db = -3.0
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="finished" from="spawn_roar" to="State Machine/BossSpawn" method="_on_spawn_roar_finished"]
