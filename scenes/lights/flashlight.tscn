@@ -119,7 +119,6 @@ lifetime = 0.5
 explosiveness = 1.0
 
 [node name="laser_duration_timer" type="Timer" parent="."]
-wait_time = 5.0
 
 [connection signal="body_exited" from="FlashlightArea" to="." method="_on_flashlight_area_body_exited"]
 [connection signal="body_entered" from="laser_area" to="." method="_on_laser_area_body_entered"]

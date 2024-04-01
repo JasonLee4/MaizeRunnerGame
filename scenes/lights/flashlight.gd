@@ -100,7 +100,7 @@ func _on_laser_glow_timer_timeout():
 
 
 func _on_laser_duration_timer_timeout():
-	Globals.laser_energy -= 20
+	Globals.laser_energy -= 1
 	if Globals.laser_energy <= 0:
 		laser_on = false
 		$laser_duration_timer.stop()
