@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://iiun1hbu8fki"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_fc1jh"]
+
+[resource]
+script = ExtResource("1_fc1jh")
+name = "Light Hooves"
+desc = "+10% Speed"
+effectScript = "res://scenes/menus/power_ups/scripts/speed_boost.gd"
+frameIdx = 4
