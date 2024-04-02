@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://c1giputk0c8wc"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_s7j5j"]
+
+[resource]
+script = ExtResource("1_s7j5j")
+name = "Extra Hungry"
+desc = "+1 Max HP"
+effectScript = "res://scenes/menus/power_ups/scripts/health_boost.gd"
+frameIdx = 3

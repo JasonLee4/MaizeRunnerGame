@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://dj6fepylpjaq8"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_gvlm2"]
+
+[resource]
+script = ExtResource("1_gvlm2")
+name = "Scavenge"
+desc = "+2 Items"
+effectScript = "res://scenes/menus/power_ups/scripts/item_drop.gd"
+frameIdx = 5
