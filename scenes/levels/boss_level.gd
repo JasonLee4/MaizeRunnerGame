@@ -6,6 +6,7 @@ var boss_enemy = preload("res://scenes/bosses/boss.tscn")
 var laser_res = preload("res://scenes/items/laser_resource.tscn")
 var boss_healthbar = preload("res://scenes/items/laser_resource.tscn")
 
+var curr_boss : boss
 var boss_spawned : bool
 
 var ui
@@ -50,20 +51,20 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(Globals.pig and !boss_spawned):
+	if(is_instance_valid(Globals.pig) and !boss_spawned):
 		#spawns boss once pig enters the room
 		if (Globals.pig.global_position.x >= $CoalSpawn/Marker2D2.global_position.x+80):
-				var boss = boss_enemy.instantiate()
-				boss.position = $Boss/Marker2D.global_position
-				boss.scale = Vector2(2,2)
-				$Boss.add_child(boss)
+				curr_boss = boss_enemy.instantiate()
+				curr_boss.position = $Boss/Marker2D.global_position
+				curr_boss.scale = Vector2(2,2)
+				$Boss.add_child(curr_boss)
 				
-				ui.get_node("BossHealthbar").init_boss(boss)
+				ui.get_node("BossHealthbar").init_boss(curr_boss)
 				boss_spawned = true
 
 
 func _on_timer_timeout():
-	if(boss_spawned):
+	if(is_instance_valid(curr_boss)):
 		var lr = laser_res.instantiate()
 
 		lr.global_position.x = randf_range($CoalSpawn/Marker2D.global_position.x, $CoalSpawn/Marker2D2.global_position.x)

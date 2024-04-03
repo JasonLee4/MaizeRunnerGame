@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/levels/boss_level.gd" id="1_wwei5"]
 [ext_resource type="TileSet" uid="uid://vii48tc24ua7" path="res://assets/tilesets/corn_ground_tileset.tres" id="2_xh50h"]
 [ext_resource type="PackedScene" uid="uid://dxupn6aqwql0e" path="res://scenes/objects/exit.tscn" id="4_7anwo"]
-[ext_resource type="PackedScene" uid="uid://dgju2mt1en6k0" path="res://scenes/items/Flashlight_item.tscn" id="5_cnqn1"]
+[ext_resource type="PackedScene" path="res://scenes/items/Flashlight_item.tscn" id="5_cnqn1"]
 [ext_resource type="PackedScene" uid="uid://l5fgvvplufog" path="res://scenes/ui/loading_screen.tscn" id="6_4fsx6"]
 
 [node name="BossLevel" type="Node2D"]
