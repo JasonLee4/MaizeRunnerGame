@@ -20,9 +20,9 @@ func _ready():
 	
 	
 	$AnimatedSprite2D.play()
-	$VBoxContainer/HBoxContainer2/Sprite2D.material.set_shader_parameter("shine_speed", 0)
-	$VBoxContainer/HBoxContainer2/Sprite2D2.material.set_shader_parameter("shine_speed", 0)
-	$VBoxContainer/HBoxContainer2/Sprite2D3.material.set_shader_parameter("shine_speed", 0)
+	$VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D.material.set_shader_parameter("shine_speed", 0)
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Control/Sprite2D2.material.set_shader_parameter("shine_speed", 0)
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Control/Sprite2D3.material.set_shader_parameter("shine_speed", 0)
 	
 func randomize_powerups():
 	print(powerUpArr.size())	
@@ -45,9 +45,10 @@ func randomize_powerups():
 	print(powerUpArr.size())
 
 func set_icons():
-	$VBoxContainer/HBoxContainer2/Sprite2D.frame = powerUp1.frameIdx
-	$VBoxContainer/HBoxContainer2/Sprite2D2.frame = powerUp2.frameIdx
-	$VBoxContainer/HBoxContainer2/Sprite2D3.frame = powerUp3.frameIdx
+	$VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D.frame = powerUp1.frameIdx
+	
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Control/Sprite2D2.frame = powerUp2.frameIdx
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Control/Sprite2D3.frame = powerUp3.frameIdx
 	
 	
 	pass
@@ -100,11 +101,11 @@ func _on_get_power_1_pressed():
 
 func _on_get_power_1_mouse_entered():
 	$VBoxContainer/HBoxContainer/VBoxContainer/Label1.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer/Label1.text+"[/shake]"
-	$VBoxContainer/HBoxContainer2/Sprite2D.material.set_shader_parameter("shine_speed", 1.5)
+	$VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D.material.set_shader_parameter("shine_speed", 1.5)
 	
 func _on_get_power_1_mouse_exited():
 	$VBoxContainer/HBoxContainer/VBoxContainer/Label1.text = powerUp1.name
-	$VBoxContainer/HBoxContainer2/Sprite2D.material.set_shader_parameter("shine_speed", 0)
+	$VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D.material.set_shader_parameter("shine_speed", 0)
 	
 func _on_icon_button_1_pressed():
 	_on_get_power_1_pressed()
@@ -129,11 +130,11 @@ func _on_get_power_2_pressed():
 
 func _on_get_power_2_mouse_entered():
 	$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text+"[/shake]"
-	$VBoxContainer/HBoxContainer2/Sprite2D2.material.set_shader_parameter("shine_speed", 1.5)
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Control/Sprite2D2.material.set_shader_parameter("shine_speed", 1.5)
 
 func _on_get_power_2_mouse_exited():
 	$VBoxContainer/HBoxContainer/VBoxContainer2/Label2.text = powerUp2.name
-	$VBoxContainer/HBoxContainer2/Sprite2D2.material.set_shader_parameter("shine_speed", 0)
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Control/Sprite2D2.material.set_shader_parameter("shine_speed", 0)
 	
 func _on_icon_button_2_pressed():
 	_on_get_power_2_pressed()
@@ -158,12 +159,12 @@ func _on_get_power_3_pressed():
 	
 func _on_get_power_3_mouse_entered():
 	$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text = "[shake rate=15 level=15]"+$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text+"[/shake]"
-	$VBoxContainer/HBoxContainer2/Sprite2D3.material.set_shader_parameter("shine_speed", 1.5)
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Control/Sprite2D3.material.set_shader_parameter("shine_speed", 1.5)
 	
 
 func _on_get_power_3_mouse_exited():
 	$VBoxContainer/HBoxContainer/VBoxContainer3/Label3.text = powerUp3.name
-	$VBoxContainer/HBoxContainer2/Sprite2D3.material.set_shader_parameter("shine_speed", 0)
+	$VBoxContainer/HBoxContainer/VBoxContainer3/Control/Sprite2D3.material.set_shader_parameter("shine_speed", 0)
 	
 func _on_icon_button_3_pressed():
 	_on_get_power_3_pressed()
