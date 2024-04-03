@@ -341,34 +341,7 @@ func toggle_flashlight(delta):
 			#print("light on")
 			#print(flashlight.light_on)
 		
-		#elif Input.is_action_pressed("secondary_action"):
-			#if temp_speed < flashlight_instance.speed:
-				#temp_speed += 5
-				#traj_line.show()
-				#update_trajectory(temp_speed)
-			#hold_time += delta
-		#elif Input.is_action_just_released("secondary_action"):
-			#
-			#flashlight.equipped = false
-			#
-			#traj_line.hide()
-			#traj_line.clear_points()		
-			#Globals.inv.remove_item(current_tool.item, 1)
-			#
-			#$LightThrow.play()
-			#
-			#flashlight_equipped = false
-			#hold_time = 0.0
-			#
-			#flashlight_instance.global_position = $Marker2D2.global_position
-			#var dir = (get_global_mouse_position() - flashlight_instance.global_position).normalized()
-			#flashlight_instance.linear_velocity.x = dir.x*temp_speed
-			#flashlight_instance.linear_velocity.y = dir.y*temp_speed
-			#flashlight_instance.angular_velocity = 10
-			#flashlight_instance.pickup = false
-			#
-			#Globals.pig.get_tree().current_scene.add_child(flashlight_instance)
-			#temp_speed = 0
+		
 		
 		elif Input.is_action_just_released("secondary_action") and Globals.laser_energy > 0:
 			flashlight.light_on = false
@@ -454,6 +427,7 @@ func consumable_use(delta):
 		temp_speed = 0
 	if current_tool.amount == 0:		
 		consumable_equipped = false
+		$Apple.visible = false
 		current_tool = Inventory_Slot.new()
 
 
