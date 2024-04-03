@@ -8,6 +8,7 @@ class_name BossRunAway
 @export var cam_follow_time : float
 @export var windup_time : float
 @onready var running = false
+@onready var finishing = false
 var time : float
 
 @export var drop_scene : Resource
@@ -40,10 +41,12 @@ func update(delta):
 			time += delta
 			boss.velocity = Vector2(Vector2(1,0) * speed)
 			boss.move_and_slide()
-		elif time >= cam_follow_time:
-			$CameraTransition.transition(boss.get_node("BossCam"), pig.get_node("Camera2D"))
+		elif time >= cam_follow_time and !finishing:
+			finishing = true
+			boss.velocity = Vector2(Vector2(1,0) * speed)
+			boss.move_and_slide()
+			$CameraTransition.transition(boss.get_node("BossCam"), pig.get_node("Camera2D"), 0.5)
 			await $CameraTransition.done
-			boss.queue_free()	
 			get_tree().paused = false
 	
 	

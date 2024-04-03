@@ -15,9 +15,10 @@ func enter():
 	boss.get_node("spawn_roar").play()
 
 func _on_spawn_roar_finished():
-	$CameraTransition.transition(boss.get_node("BossCam"), pig.get_node("Camera2D"))
+	$CameraTransition.transition(boss.get_node("BossCam"), pig.get_node("Camera2D"), 0.5)
 	await $CameraTransition.done
 	get_tree().paused = false
 	boss.get_node("boss_music").play()
 	transitioned.emit(self, "BossDashAndStomp")
 	boss.process_mode = Node.PROCESS_MODE_INHERIT
+	boss.get_node("growl").play_rand_sound()
