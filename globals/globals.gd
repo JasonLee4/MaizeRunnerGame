@@ -41,6 +41,11 @@ var laser_energy = 100:
 			laser_energy = value
 		laser_energy_change.emit()
 
+###POWER UP STATS
+var apple_damage = 0
+var apple_heal_amount = 1
+var apple_poison = false
+
 ### Dungeon ###
 signal dungeon_created
 
@@ -103,6 +108,9 @@ func restart_game():
 	laser_energy = 0
 	lvl_start_time = null
 	lvl_end_time = null
+	
+	reset_power_ups()
+	
 	#cur_lvl = 1
 	if Globals.new_game:
 		cur_lvl = 1
@@ -115,7 +123,10 @@ func restart_game():
 		for _i in range(5):
 			inv.insert(apple_item)
 	
-	
+func reset_power_ups():
+	apple_damage = 0
+	apple_heal_amount = 1
+	apple_poison = false
 	
 
 ### Helper functions ###

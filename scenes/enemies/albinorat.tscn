@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://uqahyjnd7nah"]
+[gd_scene load_steps=30 format=3 uid="uid://uqahyjnd7nah"]
 
 [ext_resource type="Script" path="res://scenes/enemies/albinorat.gd" id="1_7i3q6"]
 [ext_resource type="Texture2D" uid="uid://cx451xt6iqaqr" path="res://assets/spritesheets/smallRatredeyesalbino-Sheet-export.png" id="2_maegl"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/States/EnemyDead.gd" id="9_weews"]
 [ext_resource type="AudioStream" uid="uid://q6x1f5elybn0" path="res://assets/audio/sfx/rat_death.wav" id="11_fte4x"]
 [ext_resource type="PackedScene" uid="uid://d04mvc8svbufw" path="res://scenes/lights/FireParticles.tscn" id="12_edqr2"]
+[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="13_p53f5"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -326,6 +327,23 @@ size = Vector2(60.125, 26.5)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2mqo0"]
 polygon = PackedVector2Array(-8, 7, 4, 7, 3, -1, -7, -1)
 
+[sub_resource type="Curve" id="Curve_3x05n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.175824), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2ioqx"]
+curve = SubResource("Curve_3x05n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_evq02"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_2ioqx")
+
 [node name="Albino_Rat" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 15
@@ -431,6 +449,23 @@ position = Vector2(1, 4)
 
 [node name="FireParticles3" parent="Burning" instance=ExtResource("12_edqr2")]
 position = Vector2(-8, 7)
+
+[node name="Poison" type="Node2D" parent="."]
+
+[node name="poison_particles" type="GPUParticles2D" parent="Poison"]
+visible = false
+modulate = Color(0.235294, 0.596078, 0.207843, 1)
+position = Vector2(3.91928, -4.80862)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_evq02")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Poison/poison_particles"]
+energy = 0.25
+texture = ExtResource("13_p53f5")
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dnh2oqn26sp1s"]
+[gd_scene load_steps=25 format=3 uid="uid://dnh2oqn26sp1s"]
 
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_hv186"]
 [ext_resource type="Script" path="res://scenes/menus/power_up_screen.gd" id="1_k5xjp"]
@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_ac7r1"]
 [ext_resource type="Resource" uid="uid://dj6fepylpjaq8" path="res://scenes/menus/power_ups/resources/item_drop.tres" id="5_er3de"]
 [ext_resource type="Texture2D" uid="uid://cax7np3goouwi" path="res://assets/spritesheets/newpigianajonesactions.png" id="6_5ocvn"]
+[ext_resource type="Resource" uid="uid://b4n4hb3fnh2eb" path="res://scenes/menus/power_ups/resources/apple_damage.tres" id="6_k0xe2"]
+[ext_resource type="Resource" uid="uid://ba65htj2jkc55" path="res://scenes/menus/power_ups/resources/poison_apple.tres" id="7_5nfhx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xlw8e"]
 shader = ExtResource("4_oiof0")
@@ -96,7 +98,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hv186")
 script = ExtResource("1_k5xjp")
-powerUpArr = Array[Resource]([ExtResource("4_jyfuh"), ExtResource("3_mj8up"), ExtResource("5_er3de")])
+powerUpArr = Array[Resource]([ExtResource("4_jyfuh"), ExtResource("3_mj8up"), ExtResource("5_er3de"), ExtResource("6_k0xe2"), ExtResource("7_5nfhx")])
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
