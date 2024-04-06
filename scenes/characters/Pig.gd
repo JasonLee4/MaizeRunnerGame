@@ -422,6 +422,7 @@ func consumable_use(delta):
 		cons.linear_velocity.y = dir.y*temp_speed
 		cons.angular_velocity = 20
 		cons.pickup = false
+		cons.thrown = true
 		
 		Globals.pig.get_tree().current_scene.add_child(cons)
 		temp_speed = 0

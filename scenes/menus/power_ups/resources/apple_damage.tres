@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://b4n4hb3fnh2eb"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_43cl5"]
+
+[resource]
+script = ExtResource("1_43cl5")
+name = "Candy Apples"
+desc = "Apple DMG +"
+effectScript = "res://scenes/menus/power_ups/scripts/apple_damage.gd"
+frameIdx = 5

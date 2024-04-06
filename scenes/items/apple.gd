@@ -3,6 +3,7 @@ extends RigidBody2D
 
 @export var item: Inv_Item
 @export var speed = 70
+@export var thrown = false
 var pickup = true
 
 func _ready():
@@ -13,11 +14,11 @@ func _ready():
 func effect(delta):
 	if Input.is_action_just_pressed("primary_action"):
 		
-		if Globals.health < Globals.max_health:
+		if Globals.health > 0  and Globals.health < Globals.max_health:
 			Globals.pig.get_node("Eat").play()
 			Globals.inv.remove_item(item, 1)
 			
-			Globals.health += 1
+			Globals.health += Globals.apple_heal_amount
 
 	
 	
@@ -50,5 +51,8 @@ func _on_area_2d_body_entered(body):
 		visible = false
 		await $Pickup.finished
 		queue_free()
-	elif body.has_method("enemy"):
-		body.take_damage(0)
+	elif body.has_method("enemy") and thrown:
+		body.take_damage(Globals.apple_damage)
+		if Globals.apple_poison:
+			print("enemy taking poison")
+			body.take_poison()

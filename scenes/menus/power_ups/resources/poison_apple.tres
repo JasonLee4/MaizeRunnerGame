@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://ba65htj2jkc55"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_irfdy"]
+
+[resource]
+script = ExtResource("1_irfdy")
+name = "Poison Apples"
+desc = "Apples Poison"
+effectScript = "res://scenes/menus/power_ups/scripts/poison_apple.gd"
+frameIdx = 5

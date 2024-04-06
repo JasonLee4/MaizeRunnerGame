@@ -14,6 +14,8 @@ var can_attack_player = false
 
 var invulnerable = false
 
+var poison_duration = 5
+
 func _physics_process(delta):
 	process_sound()
 	choose_animation()
@@ -82,6 +84,7 @@ func take_damage(damage_value):
 	#if health <= 0:
 		#self.queue_free() 
 
+
 func _on_attack_cooldown_timeout():
 	can_attack = true
 
@@ -92,3 +95,23 @@ func _on_enemy_hitbox_area_entered(area):
 	if area.has_method("pigbullet"):
 		take_damage(area.damage)
 		area.queue_free()
+		
+func take_poison():
+	print("TAKING POISON IN ENEMY")
+	
+	while (poison_duration > 0):	
+		print("Taking POISON OWWWWW")
+		poison_duration -= 1
+		take_damage(20)
+		$Poison/poison_particles.visible = true
+		$Poison/poison_particles.emitting = true
+			
+		await get_tree().create_timer(1.0).timeout
+		$Poison/poison_particles.visible = false
+		
+	if poison_duration == 0:
+		poison_duration = 5
+
+
+
+

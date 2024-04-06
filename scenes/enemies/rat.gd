@@ -66,5 +66,7 @@ func _on_squeak_cooldown_timeout():
 func _on_audio_stream_player_2d_finished():
 	$squeak_cooldown.start(randf_range(1, 5))
 	
+
+	
 func rat():
 	pass
