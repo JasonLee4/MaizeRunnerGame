@@ -3,6 +3,7 @@ extends Node2D
 var ui_scene = preload("res://scenes/ui/ui.tscn")
 var player_scene = preload("res://scenes/characters/pig.tscn")
 var rat_enemy = preload("res://scenes/enemies/rat.tscn")
+var white_rat_enemy = preload("res://scenes/enemies/albinorat.tscn")
 var ui
 @onready var key_item : Inv_Item = preload("res://scenes/items/inventory/inv_items/key.tres")
 
@@ -21,10 +22,14 @@ func _ready():
 	player.position = $Player/Marker2D.global_position
 	
 	# spawn rats
-	for rat_pos in $Enemies.get_children():
-		var rat = rat_enemy.instantiate()
-		rat.global_position = rat_pos.global_position
-		$Enemies.add_child(rat)
+	var rat = rat_enemy.instantiate()
+	rat.global_position = $Enemies/RatSpawn.global_position
+	$Enemies.add_child(rat)
+	
+	var white_rat = white_rat_enemy.instantiate()
+	white_rat.global_position = $Enemies/WhiteRatSpawn.global_position
+	$Enemies.add_child(white_rat)
+	
 	
 	$Objects/FirePlace.set_key_guide($Items/Key.global_position)
 	$Objects/FirePlace.set_exit_guide($Objects/Exit.global_position)

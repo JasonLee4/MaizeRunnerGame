@@ -46,8 +46,8 @@ func get_loading_screen_text():
 		"The rats are starving!",
 		"You can run all you want...",
 		"But you cannot escape.",
-		"The maize devours all.", 
-		"You've finally come to me.", #6
+		"You've finally come to me.",
+		"The maize devours all.",  #6
 		"More rats. MORE. RATS.",
 		"Fear the darkness...",
 		"Delicious ham, come to us!",
