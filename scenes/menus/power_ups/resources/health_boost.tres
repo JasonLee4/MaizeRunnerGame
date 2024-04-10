@@ -5,6 +5,8 @@
 [resource]
 script = ExtResource("1_s7j5j")
 name = "Extra Hungry"
+fname = "health_boost.tres"
 desc = "+1 Max HP"
 effectScript = "res://scenes/menus/power_ups/scripts/health_boost.gd"
 frameIdx = 3
+onetime = false

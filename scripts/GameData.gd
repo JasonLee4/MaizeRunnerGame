@@ -12,6 +12,7 @@ class_name GameData
 @export var dungeonSeed : String
 @export var playerInventory : Inventory
 @export var elapsedTime: int
+@export var onetimePower: Array
 
 func update_playerHealth(value):
 	playerHealth = value
@@ -39,3 +40,6 @@ func update_playerInventory(inv):
 
 func update_elapsedTime(time):
 	elapsedTime = time
+
+func update_onetimePower(arr):
+	onetimePower = arr

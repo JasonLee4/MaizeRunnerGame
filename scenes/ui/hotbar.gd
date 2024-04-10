@@ -37,10 +37,10 @@ func _process(delta):
 			hotbar_select.emit(curr_idx)
 	
 	if Input.is_action_just_pressed("scroll_down"):
-		curr_idx -= 1
+		curr_idx += 1
 		hotbar_select.emit(curr_idx)
 	if Input.is_action_just_pressed("scroll_up"):
-		curr_idx += 1
+		curr_idx -= 1
 		hotbar_select.emit(curr_idx)
 	pass
 

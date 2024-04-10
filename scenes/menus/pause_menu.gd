@@ -49,6 +49,8 @@ func save_data():
 	gameData.update_playerInventory(Globals.inv)
 	gameData.update_elapsedTime(Time.get_ticks_msec())
 	
+	gameData.update_onetimePower(Globals.onetime_power)
+	
 	ResourceSaver.save(gameData, Globals.save_file_path + Globals.save_file_name)
 	#$SaveButton/RichTextLabel.text = "Saved!"
 	#$SaveButton.size = Vector2(120, 40)

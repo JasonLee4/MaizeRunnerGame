@@ -5,6 +5,8 @@
 [resource]
 script = ExtResource("1_gvlm2")
 name = "Scavenge"
+fname = "item_drop.tres"
 desc = "+2 Items"
 effectScript = "res://scenes/menus/power_ups/scripts/item_drop.gd"
 frameIdx = 5
+onetime = false
