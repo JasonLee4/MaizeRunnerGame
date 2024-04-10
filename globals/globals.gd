@@ -43,8 +43,8 @@ var laser_energy = 100:
 
 ###POWER UP STATS
 var apple_damage = 0
-var apple_heal_amount = 1
 var apple_poison = false
+var onetime_power = []
 
 ### Dungeon ###
 signal dungeon_created
@@ -109,11 +109,12 @@ func restart_game():
 	lvl_start_time = null
 	lvl_end_time = null
 	
-	reset_power_ups()
+	
 	
 	#cur_lvl = 1
 	if Globals.new_game:
 		cur_lvl = 1
+		reset_power_ups()
 	# give player 10 torches and 5 apples to start
 	inv = Inventory.new()
 	if new_game:
@@ -124,10 +125,10 @@ func restart_game():
 			inv.insert(apple_item)
 	
 func reset_power_ups():
-	apple_damage = 0
-	apple_heal_amount = 1
-	apple_poison = false
 	
+	apple_damage = 0
+	apple_poison = false
+	onetime_power = []
 
 ### Helper functions ###
 func format_ts_to_str(timestamp):
@@ -160,6 +161,7 @@ func load_data():
 	Globals.max_health = gameData.playerMaxHealth
 	Globals.health = gameData.playerHealth
 	Globals.laser_energy = gameData.laserEnergy
+	Globals.onetime_power = gameData.onetimePower
 	#pig.position = Vector2(0,0)
 	Globals.cur_lvl = gameData.currentLevel
 	Globals.pig_speed = gameData.playerSpeed
@@ -168,3 +170,7 @@ func load_data():
 	print("Loaded new inventory size: ", Globals.inv.size())
 
 	Globals.game_start_time = gameData.elapsedTime
+	
+	
+	
+	

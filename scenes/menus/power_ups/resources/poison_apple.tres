@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_irfdy")
-name = "Poison Apples"
+name = "[color=gold]Poison Apples[/color]"
+fname = "poison_apple.tres"
 desc = "Apples Poison"
 effectScript = "res://scenes/menus/power_ups/scripts/poison_apple.gd"
 frameIdx = 5
+onetime = true

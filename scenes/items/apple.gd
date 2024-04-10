@@ -18,7 +18,7 @@ func effect(delta):
 			Globals.pig.get_node("Eat").play()
 			Globals.inv.remove_item(item, 1)
 			
-			Globals.health += Globals.apple_heal_amount
+			Globals.health += 1
 
 	
 	

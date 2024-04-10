@@ -12,6 +12,7 @@ func _ready():
 	$Sign.text = "Level " + str(Globals.cur_lvl) + " Complete"
 	$VBoxContainer/HBoxContainer/VBoxContainer/Power1.grab_focus()
 	
+	init_power_arr()
 	randomize_powerups()
 	set_icons()
 	set_power_text()
@@ -24,25 +25,44 @@ func _ready():
 	$VBoxContainer/HBoxContainer/VBoxContainer2/Control/Sprite2D2.material.set_shader_parameter("shine_speed", 0)
 	$VBoxContainer/HBoxContainer/VBoxContainer3/Control/Sprite2D3.material.set_shader_parameter("shine_speed", 0)
 	
+	
+func init_power_arr():
+	var path = "res://scenes/menus/power_ups/resources/"
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir() and !file_name.contains("test"):
+				#print("Found file: " + file_name)
+				#####
+				if !Globals.onetime_power.has(file_name):
+					powerUpArr.append(ResourceLoader.load(path + file_name))
+				
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	pass
+	
 func randomize_powerups():
-	print(powerUpArr.size())	
+	#print(powerUpArr.size())	
 	var power_idx1 = randi_range(0, powerUpArr.size()-1)
-	print(power_idx1)
+	#print(power_idx1)
 	powerUp1 = powerUpArr[power_idx1]
 	powerUpArr.remove_at(power_idx1)
-	print(powerUpArr.size())
+	#print(powerUpArr.size())
 	
 	var power_idx2 = randi_range(0, powerUpArr.size()-1)
-	print(power_idx2)	
+	#print(power_idx2)	
 	powerUp2 = powerUpArr[power_idx2]
 	powerUpArr.remove_at(power_idx2)
-	print(powerUpArr.size())
+	#print(powerUpArr.size())
 	
 	var power_idx3 = randi_range(0, powerUpArr.size()-1)
-	print(power_idx3)
+	#print(power_idx3)
 	powerUp3 = powerUpArr[power_idx3]
 	powerUpArr.remove_at(power_idx3)
-	print(powerUpArr.size())
+	#print(powerUpArr.size())
 
 func set_icons():
 	$VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D.frame = powerUp1.frameIdx
@@ -96,7 +116,8 @@ func _on_get_power_1_pressed():
 	var power1_script = load(powerUp1.effectScript)
 	var power1 = power1_script.new()
 	power1.power_up()	
-	
+	if powerUp1.onetime and !Globals.onetime_power.has(powerUp1.fname):
+		Globals.onetime_power.append(powerUp1.fname)
 	next_level()
 
 func _on_get_power_1_mouse_entered():
@@ -126,6 +147,8 @@ func _on_get_power_2_pressed():
 	var power2_script = load(powerUp2.effectScript)
 	var power2 = power2_script.new()
 	power2.power_up()	
+	if powerUp2.onetime and !Globals.onetime_power.has(powerUp2.fname):
+		Globals.onetime_power.append(powerUp2.fname)
 	next_level()
 
 func _on_get_power_2_mouse_entered():
@@ -155,6 +178,8 @@ func _on_get_power_3_pressed():
 	var power3_script = load(powerUp3.effectScript)
 	var power3 = power3_script.new()
 	power3.power_up()	
+	if powerUp3.onetime and !Globals.onetime_power.has(powerUp3.fname):
+		Globals.onetime_power.append(powerUp3.fname)
 	next_level()
 	
 func _on_get_power_3_mouse_entered():
