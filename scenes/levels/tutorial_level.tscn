@@ -229,7 +229,7 @@ position = Vector2(2480, 866)
 [node name="Torches" type="Node2D" parent="Objects"]
 
 [node name="Torch" parent="Objects/Torches" instance=ExtResource("7_yx0m6")]
-position = Vector2(476, 351)
+position = Vector2(533, 428)
 rotation = -0.785398
 
 [node name="Torch2" parent="Objects/Torches" instance=ExtResource("7_yx0m6")]
@@ -277,7 +277,7 @@ position = Vector2(1882, 368)
 position = Vector2(1911, 793)
 
 [node name="Cow" parent="." instance=ExtResource("3_f31xy")]
-position = Vector2(544, 403)
+position = Vector2(552, 479)
 
 [node name="Player" type="Node2D" parent="."]
 
