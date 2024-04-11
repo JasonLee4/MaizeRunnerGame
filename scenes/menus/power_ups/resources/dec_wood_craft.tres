@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://bcekuum0efwd3"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_rn7gr"]
+
+[resource]
+script = ExtResource("1_rn7gr")
+name = "[color=gold]Efficiency[/color]"
+fname = "dec_wood_craft.tres"
+desc = "Craft Torch :
+
+
+
+1 Wood"
+effectScript = "res://scenes/menus/power_ups/scripts/dec_wood_craft.gd"
+frameIdx = 5
+onetime = true

@@ -31,12 +31,12 @@ func _physics_process(delta):
 		# get crafting ready
 		#craft_torch.emit()
 		if Globals.inv.contains(req_resource):
-			if Globals.inv.get_amount(req_resource) >= 2:	
-				Globals.inv.remove_item(req_resource, 2)
+			if Globals.inv.get_amount(req_resource) >= Globals.wood_craft:	
+				Globals.inv.remove_item(req_resource, Globals.wood_craft)
 				print("crafting... ", torch_item.name)	
 				Globals.inv.insert(Globals.torch_item)
 				$Craft.play()
-				if Globals.inv.get_amount(req_resource) < 2:	
+				if Globals.inv.get_amount(req_resource) < Globals.wood_craft:	
 					Globals.tooltip_update.emit("I need more wood...", true)
 		
 		await get_tree().create_timer(1).timeout
@@ -45,7 +45,7 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	if body.has_method("player"):
 		crafting_available = true
-		if Globals.inv.contains(req_resource) and Globals.inv.get_amount(req_resource) >= 2:
+		if Globals.inv.contains(req_resource) and Globals.inv.get_amount(req_resource) >= Globals.wood_craft:
 			Globals.tooltip_update.emit(tooltip_message, true)
 		
 		

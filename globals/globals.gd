@@ -44,6 +44,7 @@ var laser_energy = 100:
 ###POWER UP STATS
 var apple_damage = 0
 var apple_poison = false
+var wood_craft = 2
 var onetime_power = []
 
 ### Dungeon ###
@@ -128,6 +129,7 @@ func reset_power_ups():
 	
 	apple_damage = 0
 	apple_poison = false
+	wood_craft = 2
 	onetime_power = []
 
 ### Helper functions ###
