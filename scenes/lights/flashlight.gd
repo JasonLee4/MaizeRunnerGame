@@ -10,6 +10,13 @@ const max_brightness = .7
 const min_brightness = .4
 var glow = 1
 
+func _ready():
+	var flashlight_range = Vector2(Globals.flash_range, Globals.flash_range)
+	$FlashlightLight.scale = flashlight_range
+	$FlashlightLightShadows.scale = flashlight_range
+	$FlashlightArea/CollisionPolygon2D.polygon = Globals.flash_area
+	
+
 func _physics_process(_delta):
 	flash()
 

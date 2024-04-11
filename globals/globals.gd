@@ -44,6 +44,9 @@ var laser_energy = 100:
 ###POWER UP STATS
 var apple_damage = 0
 var apple_poison = false
+var wood_craft = 2
+var flash_range = 4
+var flash_area = PackedVector2Array([Vector2(196, -38), Vector2(113, 3), Vector2(196, 41)])
 var onetime_power = []
 
 ### Dungeon ###
@@ -123,11 +126,15 @@ func restart_game():
 			inv.insert(torch_item)
 		for _i in range(5):
 			inv.insert(apple_item)
-	
+		
 func reset_power_ups():
 	
 	apple_damage = 0
 	apple_poison = false
+	wood_craft = 2
+	flash_range = 4
+	flash_area = PackedVector2Array([Vector2(196, -38), Vector2(113, 3), Vector2(196, 41)])
+	
 	onetime_power = []
 
 ### Helper functions ###
