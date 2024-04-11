@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://cgoeurxceh7g0"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_a8ad7"]
+
+[resource]
+script = ExtResource("1_a8ad7")
+name = "[color=gold]Extended Beam[/color]"
+fname = "extended_beam.tres"
+desc = "Flashlight Range +"
+effectScript = "res://scenes/menus/power_ups/scripts/increase_flash_range.gd"
+frameIdx = 5
+onetime = true
