@@ -1,4 +1,4 @@
-extends ProgressBar
+extends TextureProgressBar
 
 var curr_boss : boss
 var finished : bool

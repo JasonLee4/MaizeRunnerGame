@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://5qlsjht7ufmu"]
+[gd_scene load_steps=3 format=3 uid="uid://dboveh8m1l5jo"]
+
+[ext_resource type="Texture2D" uid="uid://cy8re4sbfwgo2" path="res://assets/ui/progress-under.png" id="1_3xaky"]
+[ext_resource type="Texture2D" uid="uid://bnybp8qotgxm4" path="res://assets/ui/progress-blue.png" id="2_35hk6"]
 
 [node name="LightEnergyBar" type="Control"]
 layout_mode = 3
@@ -11,12 +14,15 @@ offset_right = 40.0
 offset_bottom = 40.0
 rounded = true
 nine_patch_stretch = true
+texture_under = ExtResource("1_3xaky")
+texture_progress = ExtResource("2_35hk6")
 
-[node name="Energy" type="ProgressBar" parent="."]
-modulate = Color(0, 1, 0.882353, 1)
+[node name="Energy" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_right = 133.0
-offset_bottom = 27.0
-step = 1.0
+offset_left = -11.0
+offset_top = -75.0
+offset_right = 229.0
+offset_bottom = 165.0
 rounded = true
-show_percentage = false
+texture_under = ExtResource("1_3xaky")
+texture_progress = ExtResource("2_35hk6")
