@@ -50,6 +50,8 @@ func _on_torch_light_area_body_exited(body):
 
 func _on_torch_hitbox_body_entered(body):
 	if body.has_method("enemy") and !placed:
+		if body.has_method("on_fire"):
+			body.on_fire()
 		body.take_damage(100)
 		$GPUParticles2D.global_position = body.global_position
 		$GPUParticles2D.emitting = true

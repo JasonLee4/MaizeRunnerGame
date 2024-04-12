@@ -113,6 +113,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_wy07n"]
 resource_name = "grow_rat"
 length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -258,7 +259,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eo23n"]
-radius = 30.0167
+radius = 32.0156
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ls7dl"]
 size = Vector2(99, 94)
@@ -283,11 +284,12 @@ scale_curve = SubResource("CurveTexture_cw18q")
 [node name="Boss" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 13
+motion_mode = 1
 script = ExtResource("1_0dwle")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-0.499999, -6.5)
-scale = Vector2(1.51562, 1.51562)
+position = Vector2(-8.5, -9)
+scale = Vector2(2.10938, 1.875)
 energy = 0.2
 texture = ExtResource("21_gk5s7")
 
@@ -314,12 +316,13 @@ libraries = {
 autoplay = "RESET"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_b3y7r")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 5)
+position = Vector2(14, -1)
 shape = SubResource("CircleShape2D_eo23n")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
@@ -331,7 +334,7 @@ collision_layer = 2
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
-position = Vector2(31.5, 18)
+position = Vector2(43.5, 18)
 shape = SubResource("RectangleShape2D_ls7dl")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
@@ -373,7 +376,7 @@ minion_scene = ExtResource("5_h1dg5")
 
 [node name="BossFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("11_u0yoo")
-totalTime = 10
+totalTime = 20
 enemy = NodePath("../..")
 move_speed = 50
 
@@ -391,7 +394,7 @@ stompRadius = 125
 [node name="BossSpawn" type="Node" parent="State Machine" node_paths=PackedStringArray("boss", "start_phase")]
 script = ExtResource("13_bw6as")
 boss = NodePath("../..")
-start_phase = NodePath("../BossSpawnMinions")
+start_phase = NodePath("../BossFollow")
 
 [node name="CameraTransition" parent="State Machine/BossSpawn" instance=ExtResource("8_2vdld")]
 
@@ -428,6 +431,7 @@ position = Vector2(1, 10)
 
 [node name="Poison" type="Node2D" parent="."]
 visible = false
+position = Vector2(-1, 0)
 
 [node name="poison_particles" type="GPUParticles2D" parent="Poison"]
 visible = false
