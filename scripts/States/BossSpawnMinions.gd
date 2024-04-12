@@ -4,6 +4,10 @@ class_name BossSpawnMinions
 @export var totalMinions = 3
 @export var spawnTime = 0.5
 
+@export var acceleration = 50
+@export var min_minion_speed = 100
+@export var max_minion_speed = 150
+
 var spawnCooldown : float
 var minionsSpawned : int
 
@@ -16,14 +20,21 @@ func enter():
 	print("spawning minions")
 	spawnCooldown = spawnTime
 	minionsSpawned = 0
+	enemy.get_node("AnimationPlayer").play("swing_rat_fast")
 	spawn_minion()
 	
 func spawn_minion():
 	var minion = minion_scene.instantiate()
-	minion.detection_radius = 500
 	enemy.get_parent().add_child(minion)
-	var position = enemy.global_position+Vector2(randf()*minionSpawnDistance, randf()*minionSpawnDistance)
-	minion.global_position = position
+	
+	var speed = randf_range(min_minion_speed, max_minion_speed)
+	var spawn_direction = Vector2(randf_range(-1, 1),randf_range(-1, 0))
+	
+	minion.get_node("State Machine/EnemyTossed").set_values(speed, acceleration, spawn_direction)
+	minion.get_node("State Machine").set_current_state("EnemyTossed")
+	
+	minion.detection_radius = 500
+	minion.global_position = enemy.global_position+Vector2(0, -100)
 	minionsSpawned += 1
 	
 func update(delta: float):

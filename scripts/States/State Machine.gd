@@ -26,6 +26,9 @@ func _physics_process(delta):
 func get_current_state():
 	return current_state
 
+func set_current_state(new_state):
+	on_child_transition(current_state, new_state)
+
 func on_child_transition(state, new_state_name):
 	if state != current_state:
 		return

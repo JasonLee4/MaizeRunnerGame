@@ -1,4 +1,5 @@
 extends enemy
+class_name rat
 
 @onready var state_machine = get_node("State Machine")
 
@@ -7,17 +8,10 @@ extends enemy
 func _ready():
 	$squeak_cooldown.start(randf_range(1, 5))
 
-func choose_animation():
-	#Movement animation
-	super.choose_animation()
-	
+func special_animation():
 	if health <=0 :
 		$Burning.visible = true
 		return 0
-	
-	if velocity.x == 0 and velocity.y == 0:
-		#$AnimatedSprite2D.play("tail_wag")
-		$AnimationPlayer.play("tail_wag")
 		
 	#Eye animation flipping
 	if $Base.flip_h == true:
@@ -65,8 +59,6 @@ func _on_squeak_cooldown_timeout():
 
 func _on_audio_stream_player_2d_finished():
 	$squeak_cooldown.start(randf_range(1, 5))
-	
-
 	
 func rat():
 	pass

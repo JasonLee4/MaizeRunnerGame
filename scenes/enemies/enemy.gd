@@ -17,47 +17,21 @@ var invulnerable = false
 var poison_duration = 5
 
 func _physics_process(delta):
+	special_animation()
 	process_sound()
-	choose_animation()
+
+func special_animation():
+	pass
 
 func process_sound():
 	pass
 
-func choose_animation():
-	#var animationNames = $AnimatedSprite2D.sprite_frames.get_animation_names()
-	var walk_ratio = abs(velocity.x/velocity.y)
-	if walk_ratio >= 1 and $AnimationPlayer.get_animation("walk_side") != null:
-		if velocity.x > 0 :
-			#$AnimatedSprite2D.flip_h = false
-			$Base.flip_h = false
-		else:
-			#$AnimatedSprite2D.flip_h = true
-			$Base.flip_h = true
-		#print("playing walk side")
-		$AnimationPlayer.play("walk_side")
-		#$AnimatedSprite2D.play("walk_side")
-	elif 0 < walk_ratio and walk_ratio < 1:	
-		if velocity.y > 0 and $AnimationPlayer.get_animation("walk_down") != null:
-			$AnimationPlayer.play("walk_down")
-			#$AnimatedSprite2D.play("walk_down")
-		elif velocity.y < 0 and $AnimationPlayer.get_animation("walk_up") != null:
-			#print("up")
-			$AnimationPlayer.play("walk_up")
-			#$AnimatedSprite2D.play("walk_up")
-
 func set_health():
 	$Healthbar.max_value = MAX_HEALTH	
 	$Healthbar.value = health
-
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-	#pass
 	
 func enemy():
 	pass
- 
-#func move():
-	#pass
 
 func deal_damage():
 	#if can_attack_player and can_attack:
@@ -65,25 +39,15 @@ func deal_damage():
 		$attack_cooldown.start()
 		if not ranged and player:
 			#print(damage)
-			player.receive_damage(damage)
-	
+			player.receive_damage(damage)	
 
 func take_damage(damage_value):
-	#print("damaged hit")
-	#if not invulnerable:
 	$Base.modulate = Color(2,2,2,2)
 	await get_tree().create_timer(0.1).timeout
 	$Base.modulate = Color.WHITE
 	
 	health = health - damage_value
 	set_health()
-		#invulnerable = true
-		#$dmg_iframe_cooldown.start()
-	#print("Slime health = ", health)
-	
-	#if health <= 0:
-		#self.queue_free() 
-
 
 func _on_attack_cooldown_timeout():
 	can_attack = true

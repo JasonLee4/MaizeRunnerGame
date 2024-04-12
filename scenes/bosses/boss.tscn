@@ -1,8 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://cyjp1plfm3sc2"]
+[gd_scene load_steps=39 format=3 uid="uid://cyjp1plfm3sc2"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss.gd" id="1_0dwle"]
-[ext_resource type="Texture2D" uid="uid://bynvkabloqytl" path="res://assets/spritesheets/mediumRat-flippedSheet.png" id="2_x8sh3"]
 [ext_resource type="Texture2D" uid="uid://byigmwn57jxr3" path="res://assets/spritesheets/smallRatEyesSheet.png" id="3_0qi4k"]
+[ext_resource type="Texture2D" uid="uid://bisdt42oqi7bg" path="res://assets/spritesheets/bossRat-Sheet.png" id="3_t31sq"]
 [ext_resource type="Script" path="res://scripts/States/BossRunAway.gd" id="5_2xs1h"]
 [ext_resource type="PackedScene" uid="uid://f8a7c50dvi25" path="res://scenes/enemies/rat.tscn" id="5_h1dg5"]
 [ext_resource type="PackedScene" uid="uid://cbv5dxydkhot" path="res://scenes/items/key.tscn" id="6_ae1vx"]
@@ -38,63 +38,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Base:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RedEyes:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-13, -15)]
-}
-
-[sub_resource type="Animation" id="Animation_sude8"]
-resource_name = "death"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Base:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
-}
-
-[sub_resource type="Animation" id="Animation_tbhcy"]
-resource_name = "windup"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Base:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(-2, 0), Vector2(-3, 0)]
+"values": [Vector2(-30, -24)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -103,17 +47,177 @@ tracks/1/path = NodePath("RedEyes:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-13, -15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Base:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Base:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_58bcy"]
+resource_name = "attack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-13, -15), Vector2(-15, -15), Vector2(-13, -15), Vector2(-14, -15), Vector2(-15, -15), Vector2(-16, -15)]
+"values": [40, 41, 42, 43, 44, 45]
+}
+
+[sub_resource type="Animation" id="Animation_d7hgx"]
+resource_name = "death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 24, 25]
+}
+
+[sub_resource type="Animation" id="Animation_wy07n"]
+resource_name = "grow_rat"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
+}
+
+[sub_resource type="Animation" id="Animation_u6cq3"]
+resource_name = "stomp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_6gd21"]
+resource_name = "swing_rat"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [100, 101, 102, 103]
+}
+
+[sub_resource type="Animation" id="Animation_ogu70"]
+resource_name = "swing_rat_fast"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [120, 121, 122, 123]
+}
+
+[sub_resource type="Animation" id="Animation_020cp"]
+resource_name = "walk_side"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [80, 81, 82, 83]
+}
+
+[sub_resource type="Animation" id="Animation_7lu8n"]
+resource_name = "windup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(3, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(2, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(3, 0), Vector2(1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8s4tk"]
 _data = {
 "RESET": SubResource("Animation_o62dk"),
-"death": SubResource("Animation_sude8"),
-"windup": SubResource("Animation_tbhcy")
+"attack": SubResource("Animation_58bcy"),
+"death": SubResource("Animation_d7hgx"),
+"grow_rat": SubResource("Animation_wy07n"),
+"stomp": SubResource("Animation_u6cq3"),
+"swing_rat": SubResource("Animation_6gd21"),
+"swing_rat_fast": SubResource("Animation_ogu70"),
+"walk_side": SubResource("Animation_020cp"),
+"windup": SubResource("Animation_7lu8n")
 }
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b3y7r"]
@@ -153,9 +257,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eo23n"]
+radius = 30.0167
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ls7dl"]
-size = Vector2(40, 29)
+size = Vector2(99, 94)
 
 [sub_resource type="Curve" id="Curve_ip275"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.175824), 0.0, 0.0, 0, 0]
@@ -179,17 +284,23 @@ collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_0dwle")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-0.499999, -6.5)
+scale = Vector2(1.51562, 1.51562)
+energy = 0.2
+texture = ExtResource("21_gk5s7")
+
 [node name="Base" type="Sprite2D" parent="."]
-position = Vector2(2, 0)
-texture = ExtResource("2_x8sh3")
-hframes = 6
-vframes = 4
-frame = 18
+position = Vector2(-30, -24)
+texture = ExtResource("3_t31sq")
+hframes = 20
+vframes = 7
 
 [node name="RedEyes" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_35m1t")
 position = Vector2(-13, -15)
-scale = Vector2(2.025, 1.29688)
+scale = Vector2(4.9625, 2.26563)
 texture = ExtResource("3_0qi4k")
 hframes = 6
 vframes = 12
@@ -199,6 +310,7 @@ frame = 6
 libraries = {
 "": SubResource("AnimationLibrary_8s4tk")
 }
+autoplay = "RESET"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -206,16 +318,19 @@ sprite_frames = SubResource("SpriteFrames_b3y7r")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 5)
 shape = SubResource("CircleShape2D_eo23n")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 
 [node name="enemy_hitbox" type="Area2D" parent="."]
+position = Vector2(-32, -24)
 collision_layer = 2
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
-position = Vector2(0, -0.5)
+position = Vector2(31.5, 18)
 shape = SubResource("RectangleShape2D_ls7dl")
 
 [node name="dmg_iframe_cooldown" type="Timer" parent="."]
@@ -248,16 +363,18 @@ drop_scene = ExtResource("6_ae1vx")
 
 [node name="BossSpawnMinions" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("9_t82vn")
-totalMinions = 10
-spawnTime = 1.5
+totalMinions = 5
+spawnTime = 2.0
+acceleration = 1
 enemy = NodePath("../..")
 minionSpawnDistance = 100
 minion_scene = ExtResource("5_h1dg5")
 
 [node name="BossFollow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("11_u0yoo")
+totalTime = 10
 enemy = NodePath("../..")
-move_speed = 80
+move_speed = 50
 
 [node name="BossAttack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_6h417")
@@ -267,12 +384,13 @@ enemy = NodePath("../..")
 script = ExtResource("13_p6xlw")
 enemy = NodePath("../..")
 dash_windup = 0.75
-jump_windup = 0.2
+jump_windup = 0.5
 stompRadius = 125
 
-[node name="BossSpawn" type="Node" parent="State Machine" node_paths=PackedStringArray("boss")]
+[node name="BossSpawn" type="Node" parent="State Machine" node_paths=PackedStringArray("boss", "start_phase")]
 script = ExtResource("13_bw6as")
 boss = NodePath("../..")
+start_phase = NodePath("../BossSpawnMinions")
 
 [node name="CameraTransition" parent="State Machine/BossSpawn" instance=ExtResource("8_2vdld")]
 
