@@ -8,10 +8,10 @@ class_name rat
 func _ready():
 	$squeak_cooldown.start(randf_range(1, 5))
 
+func on_fire():
+	$Burning.visible = true
+
 func special_animation():
-	if health <=0 :
-		$Burning.visible = true
-		return 0
 		
 	#Eye animation flipping
 	if $Base.flip_h == true:

@@ -20,7 +20,7 @@ func enter():
 	print("spawning minions")
 	spawnCooldown = spawnTime
 	minionsSpawned = 0
-	enemy.get_node("AnimationPlayer").play("swing_rat_fast")
+	enemy.get_node("AnimationPlayer").play("swing_rat")
 	spawn_minion()
 	
 func spawn_minion():

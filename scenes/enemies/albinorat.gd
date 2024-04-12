@@ -3,10 +3,10 @@ class_name albinorat
 
 @onready var state_machine = get_node("State Machine")
 
+func on_fire():
+	$Burning.visible = true
+
 func special_animation():	
-	if health <=0 :
-		$Burning.visible = true
-		return 0
 		
 	#Eye animation flipping
 	if $Base.flip_h == true:
