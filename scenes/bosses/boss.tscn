@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cyjp1plfm3sc2"]
+[gd_scene load_steps=40 format=3 uid="uid://cyjp1plfm3sc2"]
 
 [ext_resource type="Script" path="res://scenes/bosses/boss.gd" id="1_0dwle"]
 [ext_resource type="Texture2D" uid="uid://byigmwn57jxr3" path="res://assets/spritesheets/smallRatEyesSheet.png" id="3_0qi4k"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://bxrnwex72pwuy" path="res://assets/audio/sfx/boss_roar.wav" id="18_2tm33"]
 [ext_resource type="AudioStream" uid="uid://bv45pfo745lcp" path="res://assets/audio/sfx/boss_music.wav" id="19_41fq3"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="21_gk5s7"]
+[ext_resource type="PackedScene" uid="uid://d04mvc8svbufw" path="res://scenes/lights/FireParticles.tscn" id="22_gwomu"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_35m1t"]
 blend_mode = 1
@@ -411,7 +412,22 @@ volume_db = -15.0
 stream = ExtResource("19_41fq3")
 volume_db = -15.0
 
+[node name="FireSpawn" type="Node2D" parent="."]
+
+[node name="Fire1" parent="FireSpawn" instance=ExtResource("22_gwomu")]
+visible = false
+position = Vector2(-6, -1)
+
+[node name="Fire2" parent="FireSpawn" instance=ExtResource("22_gwomu")]
+visible = false
+position = Vector2(12, -3)
+
+[node name="Fire3" parent="FireSpawn" instance=ExtResource("22_gwomu")]
+visible = false
+position = Vector2(1, 10)
+
 [node name="Poison" type="Node2D" parent="."]
+visible = false
 
 [node name="poison_particles" type="GPUParticles2D" parent="Poison"]
 visible = false
