@@ -4,6 +4,7 @@ class_name BossSpawn
 @onready var pig = Globals.pig
 
 @export var boss : boss
+@export var start_phase : State
 
 func enter():
 	#freeze everything but the boss
@@ -19,6 +20,6 @@ func _on_spawn_roar_finished():
 	await $CameraTransition.done
 	get_tree().paused = false
 	boss.get_node("boss_music").play()
-	transitioned.emit(self, "BossDashAndStomp")
+	transitioned.emit(self, start_phase.name)
 	boss.process_mode = Node.PROCESS_MODE_INHERIT
 	boss.get_node("growl").play_rand_sound()

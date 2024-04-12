@@ -56,7 +56,6 @@ func _process(delta):
 		if (Globals.pig.global_position.x >= $CoalSpawn/Marker2D2.global_position.x+80):
 				curr_boss = boss_enemy.instantiate()
 				curr_boss.position = $Boss/Marker2D.global_position
-				curr_boss.scale = Vector2(2,2)
 				$Boss.add_child(curr_boss)
 				
 				ui.get_node("BossHealthbar").init_boss(curr_boss)

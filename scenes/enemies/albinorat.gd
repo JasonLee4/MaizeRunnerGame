@@ -1,16 +1,12 @@
 extends enemy
+class_name albinorat
 
 @onready var state_machine = get_node("State Machine")
 
-func choose_animation():
-	#Movement animation
-	super.choose_animation()
+func special_animation():	
 	if health <=0 :
 		$Burning.visible = true
 		return 0
-	if velocity.x == 0 and velocity.y == 0:
-		#$AnimatedSprite2D.play("tail_wag")
-		$AnimationPlayer.play("tail_wag")
 		
 	#Eye animation flipping
 	if $Base.flip_h == true:
@@ -19,16 +15,6 @@ func choose_animation():
 	else:
 		$RedEyes.flip_h = false
 		#$YellowEyes.flip_h = false
-		
-	#Eye animation color
-	#if state_machine.get_current_state().name != "EnemyFollow" and state_machine.get_current_state().name != "EnemyAttack":
-		#$RedEyes.hide()
-		#$YellowEyes.show()
-		##$Eyes.play("yellow")
-	#else:
-		#$RedEyes.show()
-		#$YellowEyes.hide()
-		#$Eyes.play("red")
 		
 func process_sound():
 	if state_machine.get_current_state().name == "EnemyFollow" and !$run.playing:
@@ -48,3 +34,6 @@ func light_freeze():
 	var currentState = state_machine.get_current_state()
 	if(currentState.get_name() != "EnemyFollow" && currentState.get_name() != "EnemyAttack"):
 		currentState.transitioned.emit(currentState, "EnemyFollow")
+		
+func rat():
+	pass

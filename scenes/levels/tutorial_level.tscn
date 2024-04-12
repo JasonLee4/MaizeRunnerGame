@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/levels/tutorial_level.gd" id="1_50q23"]
 [ext_resource type="PackedScene" uid="uid://glrhtxg4gl54" path="res://scenes/characters/cow.tscn" id="3_f31xy"]
 [ext_resource type="PackedScene" uid="uid://bvxtel4kt8t1d" path="res://scenes/objects/FirePlace.tscn" id="4_q0vvk"]
-[ext_resource type="PackedScene" uid="uid://dgju2mt1en6k0" path="res://scenes/items/Flashlight_item.tscn" id="5_dp05o"]
+[ext_resource type="PackedScene" path="res://scenes/items/Flashlight_item.tscn" id="5_dp05o"]
 [ext_resource type="PackedScene" uid="uid://dxupn6aqwql0e" path="res://scenes/objects/exit.tscn" id="5_lgcfq"]
 [ext_resource type="PackedScene" uid="uid://ceek5f5hxvohe" path="res://scenes/items/wood.tscn" id="6_b6ld7"]
 [ext_resource type="PackedScene" uid="uid://efwdnoirj55t" path="res://scenes/items/torch.tscn" id="7_yx0m6"]
