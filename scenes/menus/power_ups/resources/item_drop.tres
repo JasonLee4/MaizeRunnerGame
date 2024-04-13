@@ -8,5 +8,5 @@ name = "Scavenge"
 fname = "item_drop.tres"
 desc = "+2 Items"
 effectScript = "res://scenes/menus/power_ups/scripts/item_drop.gd"
-frameIdx = 5
+frameIdx = 4
 onetime = false

@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://cg5mvn3tocowd"]
+
+[ext_resource type="Script" path="res://scenes/menus/acquire_laser_screen.gd" id="1_coky3"]
+[ext_resource type="PackedScene" uid="uid://dpa5kvvtdlhnb" path="res://scenes/menus/hanging_sign.tscn" id="1_l5x8s"]
+[ext_resource type="Shader" path="res://scenes/menus/power_up_screen.gdshader" id="2_rsl5u"]
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="3_jnreq"]
+[ext_resource type="Texture2D" uid="uid://bn05a57ru8yvx" path="res://assets/menu_assets/levelupkernalsbig.png" id="3_qej4t"]
+[ext_resource type="AudioStream" uid="uid://bpurer8vn83h7" path="res://assets/audio/sfx/finish.wav" id="4_wii4y"]
+[ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_fg1ht"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwbj3"]
+shader = ExtResource("2_rsl5u")
+shader_parameter/shine_color = Color(1, 1, 1, 0.501961)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_size = 0.01
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_coky3")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1270.0
+offset_bottom = 720.0
+color = Color(0.133333, 0.12549, 0.203922, 1)
+
+[node name="Sign" parent="." instance=ExtResource("1_l5x8s")]
+layout_mode = 1
+offset_left = 391.0
+offset_right = -627.0
+scale = Vector2(2, 2)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 104.0
+offset_right = -3.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_jnreq")
+theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
+theme_override_font_sizes/font_size = 50
+text = "CHOOSE YOUR UPGRADE"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(57, 81)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/Control"]
+material = SubResource("ShaderMaterial_lwbj3")
+position = Vector2(28.5, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_qej4t")
+hframes = 6
+frame = 5
+
+[node name="icon_button1" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D"]
+offset_left = -93.0
+offset_top = -140.0
+offset_right = 103.0
+offset_bottom = 143.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label1" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("3_jnreq")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="Get_Power1" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/Label1"]
+layout_mode = 2
+offset_top = -38.0
+offset_right = 311.0
+offset_bottom = -19.0
+scale = Vector2(1.02909, 7.49691)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_jnreq")
+flat = true
+
+[node name="Power1" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme = ExtResource("3_jnreq")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Yay" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wii4y")
+volume_db = -3.0
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fg1ht")
+
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D/icon_button1" to="." method="_on_icon_button_1_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D/icon_button1" to="." method="_on_icon_button_1_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D/icon_button1" to="." method="_on_icon_button_1_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/Label1/Get_Power1" to="." method="_on_get_power_1_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer/Label1/Get_Power1" to="." method="_on_get_power_1_mouse_exited"]

@@ -10,7 +10,10 @@ func _on_area_2d_body_entered(body):
 		Globals.inv.remove_item(key_item, 1)
 		# go to next level
 		Globals.lvl_end.emit()
-		get_tree().change_scene_to_file("res://scenes/menus/power_up_screen.tscn")
+		if Globals.cur_lvl == 4:
+			get_tree().change_scene_to_file("res://scenes/menus/acquire_laser_screen.tscn")		
+		else:
+			get_tree().change_scene_to_file("res://scenes/menus/power_up_screen.tscn")
 	else:
 		Globals.tooltip_update.emit("The chest is locked.", true)
 

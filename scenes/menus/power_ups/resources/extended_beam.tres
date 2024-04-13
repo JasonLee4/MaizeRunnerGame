@@ -8,5 +8,5 @@ name = "[color=gold]Extended Beam[/color]"
 fname = "extended_beam.tres"
 desc = "Flashlight Range +"
 effectScript = "res://scenes/menus/power_ups/scripts/increase_flash_range.gd"
-frameIdx = 5
+frameIdx = 0
 onetime = true

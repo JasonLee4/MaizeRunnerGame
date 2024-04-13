@@ -8,5 +8,5 @@ name = "Light Hooves"
 fname = "speed_boost.tres"
 desc = "+10% Speed"
 effectScript = "res://scenes/menus/power_ups/scripts/speed_boost.gd"
-frameIdx = 4
+frameIdx = 3
 onetime = false
