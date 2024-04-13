@@ -99,6 +99,8 @@ func update(delta):
 		if animation.current_animation != "stomp":
 			print("playing stomp")
 			animation.play("stomp")
+			
+			Globals.pig.ground_shake.emit()
 	
 	#End phase
 	if cycles == totalCycles:

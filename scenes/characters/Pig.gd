@@ -31,6 +31,7 @@ var consumable_equipped = false
 var temp_speed = 0
 var hold_time = 0.0
 signal camera_shake
+signal ground_shake
 
 # true = facing right, false = facing left
 var pigfacing = true

@@ -3,6 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.set_custom_mouse_cursor(load("res://assets/menu_assets/cursor.png"), Input.CURSOR_POINTING_HAND)
 	$Buttons/VBoxContainer/StartButton.grab_focus()
 	$FullScreenSwitch.button_pressed = false
 	$AnimatedSprite2D.flip_h = true
