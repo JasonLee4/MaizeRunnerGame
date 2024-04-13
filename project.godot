@@ -25,6 +25,7 @@ LevelManager="*res://globals/level_manager.gd"
 window/size/viewport_width=1270
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="res://assets/menu_assets/cursor.png"
 
 [dotnet]
 
