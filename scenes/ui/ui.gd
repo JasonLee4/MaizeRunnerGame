@@ -21,7 +21,7 @@ func _ready():
 	#tooltip display
 	Globals.connect("tooltip_update", update_tooltip)
 	Globals.connect("monologue", monologue)
-	
+	$LightEnergyBar.visible = Globals.cur_lvl > 4
 	Globals.connect("laser_energy_change", update_laser_energy)
 	update_laser_energy()
 	
