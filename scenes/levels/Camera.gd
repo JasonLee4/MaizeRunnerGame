@@ -33,6 +33,11 @@ func _process(delta):
 	if shake_strength > 0:
 		shake_strength = lerpf(shake_strength, 0, shakeFade * delta)
 		offset = randomOffset()
+	
+	if Globals.health <= 1:
+		$TextureRect.modulate = Color(0.388,0,0,0.588)
+	else:
+		$TextureRect.modulate = Color(0,0,0,0)
 
 func randomOffset():
 	if ground_shake:
