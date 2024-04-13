@@ -8,5 +8,5 @@ name = "Extra Hungry"
 fname = "health_boost.tres"
 desc = "+1 Max HP"
 effectScript = "res://scenes/menus/power_ups/scripts/health_boost.gd"
-frameIdx = 3
+frameIdx = 2
 onetime = false

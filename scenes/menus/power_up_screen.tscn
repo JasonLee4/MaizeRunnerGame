@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://scenes/menus/power_up_screen.gd" id="1_k5xjp"]
 [ext_resource type="PackedScene" uid="uid://dpa5kvvtdlhnb" path="res://scenes/menus/hanging_sign.tscn" id="3_jsobi"]
 [ext_resource type="AudioStream" uid="uid://bpurer8vn83h7" path="res://assets/audio/sfx/finish.wav" id="4_dgvk6"]
-[ext_resource type="Texture2D" uid="uid://bn05a57ru8yvx" path="res://assets/menu_assets/levelupkernalsbig.png" id="4_jirmk"]
 [ext_resource type="Shader" path="res://scenes/menus/power_up_screen.gdshader" id="4_oiof0"]
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_ac7r1"]
+[ext_resource type="Texture2D" uid="uid://dog0ssi2pc6sq" path="res://assets/menu_assets/cornlevelupkernals1.png" id="5_r4qxa"]
 [ext_resource type="Texture2D" uid="uid://cax7np3goouwi" path="res://assets/spritesheets/newpigianajonesactions.png" id="6_5ocvn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xlw8e"]
@@ -147,10 +147,10 @@ size_flags_vertical = 4
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/Control"]
 material = SubResource("ShaderMaterial_xlw8e")
 position = Vector2(28.5, 0)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_jirmk")
-hframes = 6
-frame = 3
+scale = Vector2(3, 3)
+texture = ExtResource("5_r4qxa")
+hframes = 5
+frame = 2
 
 [node name="icon_button1" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D"]
 offset_left = -93.0
@@ -202,10 +202,10 @@ size_flags_vertical = 4
 [node name="Sprite2D2" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer2/Control"]
 material = SubResource("ShaderMaterial_phfix")
 position = Vector2(28.5, 0)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_jirmk")
-hframes = 6
-frame = 4
+scale = Vector2(3, 3)
+texture = ExtResource("5_r4qxa")
+hframes = 5
+frame = 3
 
 [node name="icon_button2" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2/Control/Sprite2D2"]
 offset_left = -93.0
@@ -257,10 +257,10 @@ size_flags_vertical = 4
 [node name="Sprite2D3" type="Sprite2D" parent="VBoxContainer/HBoxContainer/VBoxContainer3/Control"]
 material = SubResource("ShaderMaterial_k8nxn")
 position = Vector2(28.5, 0)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_jirmk")
-hframes = 6
-frame = 5
+scale = Vector2(3, 3)
+texture = ExtResource("5_r4qxa")
+hframes = 5
+frame = 4
 
 [node name="icon_button3" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer3/Control/Sprite2D3"]
 offset_left = -93.0

@@ -12,5 +12,5 @@ desc = "Craft Torch :
 
 1 Wood"
 effectScript = "res://scenes/menus/power_ups/scripts/dec_wood_craft.gd"
-frameIdx = 5
+frameIdx = 0
 onetime = true

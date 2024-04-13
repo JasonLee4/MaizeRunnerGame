@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://0w5wrmb17yo3"]
+
+[ext_resource type="Script" path="res://scenes/menus/power_ups/scripts/power_up.gd" id="1_mexvn"]
+
+[resource]
+script = ExtResource("1_mexvn")
+name = "Laser Time"
+fname = "get_laser.tres"
+desc = "W/ Energy,
+
+
+
+Right-Click to use"
+effectScript = ""
+frameIdx = 0
+onetime = true

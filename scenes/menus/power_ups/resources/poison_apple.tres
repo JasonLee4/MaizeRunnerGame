@@ -8,5 +8,5 @@ name = "[color=gold]Poison Apples[/color]"
 fname = "poison_apple.tres"
 desc = "Apples Poison"
 effectScript = "res://scenes/menus/power_ups/scripts/poison_apple.gd"
-frameIdx = 5
+frameIdx = 0
 onetime = true

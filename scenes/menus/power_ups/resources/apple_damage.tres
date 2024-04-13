@@ -8,5 +8,5 @@ name = "[color=gold]Candy Apples[/color]"
 fname = "apple_damage.tres"
 desc = "Apple DMG +"
 effectScript = "res://scenes/menus/power_ups/scripts/apple_damage.gd"
-frameIdx = 5
+frameIdx = 0
 onetime = true
