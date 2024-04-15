@@ -1,6 +1,8 @@
 extends State
 class_name BossSpawnMinions
 
+@onready var pig = Globals.pig
+
 @export var totalMinions = 3
 @export var spawnTime = 0.5
 
@@ -29,13 +31,13 @@ func spawn_minion():
 	enemy.get_parent().add_child(minion)
 	
 	var speed = randf_range(min_minion_speed, max_minion_speed)
-	var spawn_direction = Vector2(randf_range(-1, 1),randf_range(-1, 0))
+	var spawn_direction = (pig.global_position-enemy.get_node("Spawn").global_position).normalized()
 	
 	minion.get_node("State Machine/EnemyTossed").set_values(speed, acceleration, spawn_direction)
 	minion.get_node("State Machine").set_current_state("EnemyTossed")
 	
 	minion.detection_radius = 500
-	minion.global_position = enemy.global_position+Vector2(0, -100)
+	minion.global_position = enemy.get_node("Spawn").global_position
 	minionsSpawned += 1
 	
 func update(delta: float):

@@ -22,14 +22,15 @@ func special_animation():
 		$YellowEyes.flip_h = false
 		
 	#Eye animation color
-	if state_machine.get_current_state().name != "EnemyFollow" and state_machine.get_current_state().name != "EnemyAttack":
+	if state_machine.get_current_state().name == "EnemyThrown":
+		$RedEyes.hide()
+		$YellowEyes.hide()
+	elif state_machine.get_current_state().name != "EnemyFollow" and state_machine.get_current_state().name != "EnemyAttack":
 		$RedEyes.hide()
 		$YellowEyes.show()
-		#$Eyes.play("yellow")
 	else:
 		$RedEyes.show()
 		$YellowEyes.hide()
-		#$Eyes.play("red")
 		
 func process_sound():
 	if state_machine.get_current_state().name == "EnemyFollow" and !$run.playing:
@@ -46,12 +47,14 @@ func deal_damage():
 func light_unfreeze():
 	#print("Rat can move")
 	var currentState = state_machine.get_current_state()
-	currentState.transitioned.emit(currentState, "EnemyIdle")
+	if currentState.name != "EnemyTossed":
+		currentState.transitioned.emit(currentState, "EnemyIdle")
 
 func light_freeze():
 	#print("Rat shined on")
 	var currentState = state_machine.get_current_state()
-	currentState.transitioned.emit(currentState, "EnemyFreeze")
+	if currentState.name != "EnemyTossed":
+		currentState.transitioned.emit(currentState, "EnemyFreeze")
 
 func _on_squeak_cooldown_timeout():
 	$squeak_cooldown.stop()
