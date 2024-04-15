@@ -10,6 +10,7 @@ var direction := Vector2(0,0)
 	
 func enter():
 	print(str(move_speed)+" "+str(acceleration))
+	enemy.get_node("thrown").play()
 	speed = move_speed
 	enemy.velocity = Vector2(direction.normalized() * speed)
 

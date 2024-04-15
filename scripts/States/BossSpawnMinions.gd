@@ -21,6 +21,7 @@ func enter():
 	spawnCooldown = spawnTime
 	minionsSpawned = 0
 	enemy.get_node("AnimationPlayer").play("swing_rat")
+	enemy.get_node("spin").play()
 	spawn_minion()
 	
 func spawn_minion():
@@ -47,5 +48,7 @@ func update(delta: float):
 		spawnCooldown = spawnTime
 	else:
 		print("finished spawning")
+		enemy.get_node("spin").stop()
+		enemy.get_node("roar").play_rand_sound()
 		transitioned.emit(self, "BossFollow")
 	

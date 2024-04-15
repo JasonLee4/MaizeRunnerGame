@@ -55,5 +55,5 @@ sounds = Array[Resource]([ExtResource("7_1l6ob"), ExtResource("8_vocet"), ExtRes
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_77wdm")
-volume_db = -10.0
+volume_db = -5.0
 autoplay = true

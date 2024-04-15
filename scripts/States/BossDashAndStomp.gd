@@ -50,6 +50,7 @@ func dash(delta):
 		dashes += 1
 	
 func stomp():
+	Globals.pig.ground_shake.emit()
 	if(abs((pig.global_position - enemy.global_position).length()) <= stompRadius):
 		enemy.deal_damage()
 	stomps += 1
@@ -75,13 +76,14 @@ func update(delta):
 		switch_dash_and_stomp()
 	if(stomps == total_stomps):
 		stomps = 0
-		print("Cycles: "+str(cycles))
+		#print("Cycles: "+str(cycles))
 		cycles += 1
 		switch_dash_and_stomp()
 	
 	if dashing:
 		#Windup
 		if windup_time < dash_windup:
+			enemy.get_node("growl").play_rand_sound()
 			play_windup(delta)
 		#Setup for dash
 		elif direction == Vector2(-1,-1):
@@ -97,12 +99,14 @@ func update(delta):
 			play_windup(delta)
 		#Setup animation for stomp
 		if animation.current_animation != "stomp":
-			print("playing stomp")
+			#print("playing stomp")
+			enemy.get_node("stomp").play_rand_sound()
 			animation.play("stomp")
 			
-			Globals.pig.ground_shake.emit()
+			
 	
 	#End phase
 	if cycles == totalCycles:
 		animation.stop()
+		enemy.get_node("roar").play_rand_sound()
 		transitioned.emit(self, "BossSpawnMinions")
