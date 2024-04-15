@@ -20,5 +20,6 @@ func update(delta: float):
 func flip(): 
 	if pig.global_position.x > enemy.global_position.x:
 		enemy.get_node("Base").flip_h = false
+		enemy.get_node("CollisionShape2D")
 	elif pig.global_position.x < enemy.global_position.x:
 		enemy.get_node("Base").flip_h = true

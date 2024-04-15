@@ -9,6 +9,13 @@ func _ready():
 	$Healthbar.max_value = MAX_HEALTH
 	set_health()
 
+func special_animation():
+#Eye animation flipping
+	if $Base.flip_h == true:
+		$RedEyes.flip_h = true
+	else:
+		$RedEyes.flip_h = false
+
 func _process(_delta):
 	if (health < MAX_HEALTH * .75):
 		$FireSpawn/Fire1.visible = true
