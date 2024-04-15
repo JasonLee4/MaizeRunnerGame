@@ -14,6 +14,7 @@ func update(delta: float):
 	elif time < totalTime:
 		time += delta
 	else:
+		enemy.get_node("roar").play_rand_sound()
 		transitioned.emit(self, "BossDashAndStomp")
 	
 	if enemy.can_attack and enemy.can_attack_player:

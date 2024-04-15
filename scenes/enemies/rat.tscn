@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://f8a7c50dvi25"]
+[gd_scene load_steps=39 format=3 uid="uid://f8a7c50dvi25"]
 
 [ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="2_m7wqm"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://q6x1f5elybn0" path="res://assets/audio/sfx/rat_death.wav" id="16_1o4at"]
 [ext_resource type="PackedScene" uid="uid://d04mvc8svbufw" path="res://scenes/lights/FireParticles.tscn" id="18_6rdy1"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="19_dfpub"]
+[ext_resource type="AudioStream" uid="uid://chfvn3kcjrkeo" path="res://assets/audio/sfx/Meeeeeeeeew.wav" id="21_531q1"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -305,12 +306,16 @@ tracks/2/keys = {
 "values": [36, 37, 38, 39, 40]
 }
 
+[sub_resource type="Animation" id="Animation_3ojip"]
+resource_name = "thrown"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qvukd"]
 _data = {
 "RESET": SubResource("Animation_4d42x"),
 "blink": SubResource("Animation_ici36"),
 "death": SubResource("Animation_yg1u3"),
 "tail_wag": SubResource("Animation_2rmd2"),
+"thrown": SubResource("Animation_3ojip"),
 "walk_down": SubResource("Animation_a6pj7"),
 "walk_side": SubResource("Animation_j5w75"),
 "walk_up": SubResource("Animation_4e0pn")
@@ -456,7 +461,6 @@ occluder = SubResource("OccluderPolygon2D_2mqo0")
 
 [node name="run" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_vb4oh")
-volume_db = 0.2
 pitch_scale = 1.7
 panning_strength = 10.0
 
@@ -499,6 +503,10 @@ energy = 0.25
 texture = ExtResource("19_dfpub")
 
 [node name="poison_timer" type="Timer" parent="Poison"]
+
+[node name="thrown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_531q1")
+volume_db = -3.0
 
 [connection signal="timeout" from="dmg_iframe_cooldown" to="." method="_on_dmg_iframe_cooldown_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
