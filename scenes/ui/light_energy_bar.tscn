@@ -1,28 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://dboveh8m1l5jo"]
 
-[ext_resource type="Texture2D" uid="uid://cy8re4sbfwgo2" path="res://assets/ui/progress-under.png" id="1_3xaky"]
-[ext_resource type="Texture2D" uid="uid://bnybp8qotgxm4" path="res://assets/ui/progress-blue.png" id="2_35hk6"]
+[ext_resource type="Texture2D" uid="uid://c3ejem4v4xaqx" path="res://assets/ui/under-grey-short-bar.png" id="3_6bqb6"]
+[ext_resource type="Texture2D" uid="uid://cs5g776anfqm2" path="res://assets/ui/progress-blue-short-bar.png" id="4_t086p"]
 
 [node name="LightEnergyBar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-rounded = true
-nine_patch_stretch = true
-texture_under = ExtResource("1_3xaky")
-texture_progress = ExtResource("2_35hk6")
-
 [node name="Energy" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_left = -11.0
-offset_top = -75.0
-offset_right = 229.0
-offset_bottom = 165.0
+offset_left = -12.0
+offset_top = -39.0
+offset_right = 228.0
+offset_bottom = 201.0
 rounded = true
-texture_under = ExtResource("1_3xaky")
-texture_progress = ExtResource("2_35hk6")
+texture_under = ExtResource("3_6bqb6")
+texture_progress = ExtResource("4_t086p")
