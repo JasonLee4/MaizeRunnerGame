@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cx0pvdscatwe5"]
+[gd_scene load_steps=16 format=3 uid="uid://cx0pvdscatwe5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_y4067"]
 [ext_resource type="PackedScene" uid="uid://bwmjw5fc844nv" path="res://scenes/ui/heart.tscn" id="2_vnf4r"]
@@ -11,9 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://buqcuuo15n8sg" path="res://scenes/menus/pause_menu.tscn" id="8_nvfsd"]
 [ext_resource type="PackedScene" uid="uid://wqx546fxgt0q" path="res://scenes/ui/tooltip.tscn" id="9_drrv1"]
 [ext_resource type="PackedScene" uid="uid://d2xb6apapstdw" path="res://scenes/ui/monologue.tscn" id="10_5i85d"]
-[ext_resource type="Texture2D" uid="uid://cy8re4sbfwgo2" path="res://assets/ui/progress-under.png" id="11_u4dub"]
-[ext_resource type="Texture2D" uid="uid://ddyyqbrpawn3x" path="res://assets/ui/progress-red.png" id="12_ts34s"]
-[ext_resource type="Script" path="res://scenes/ui/BossHealthbar.gd" id="12_udhc4"]
+[ext_resource type="PackedScene" uid="uid://dddxtpcei6up" path="res://scenes/ui/boss_healthbar.tscn" id="11_5bucg"]
 [ext_resource type="Script" path="res://scenes/characters/DashBar.gd" id="13_cce0d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exthu"]
@@ -171,14 +169,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 
-[node name="BossHealthbar" type="TextureProgressBar" parent="."]
-offset_left = 483.0
-offset_top = 589.0
-offset_right = 1143.0
-offset_bottom = 829.0
-texture_under = ExtResource("11_u4dub")
-texture_progress = ExtResource("12_ts34s")
-script = ExtResource("12_udhc4")
+[node name="BossHealthbar" parent="." instance=ExtResource("11_5bucg")]
 
 [node name="DashBar" type="ProgressBar" parent="."]
 offset_left = 575.0
