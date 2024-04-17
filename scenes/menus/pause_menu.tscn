@@ -58,7 +58,6 @@ offset_right = 664.0
 offset_bottom = 343.0
 scale = Vector2(1.664, 3.73453)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 25
 flat = true
 
@@ -85,7 +84,6 @@ offset_right = 590.0
 offset_bottom = 428.0
 scale = Vector2(1.29851, 4.53237)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="OptionButton"]
@@ -111,7 +109,6 @@ offset_right = 778.0
 offset_bottom = 427.0
 scale = Vector2(1, 4.67194)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SaveButton"]
@@ -136,7 +133,6 @@ offset_right = 682.0
 offset_bottom = 500.0
 scale = Vector2(0.670994, 4.57777)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ReturnButton"]
@@ -161,7 +157,6 @@ offset_right = 712.0
 offset_bottom = 500.0
 scale = Vector2(2.11166, 4.58961)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ExitButton"]
@@ -196,7 +191,99 @@ text = "Saved!"
 fit_content = true
 autowrap_mode = 0
 
+[node name="MenuConfirm" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.129412, 0.141176, 0.556863)
+
+[node name="TextureRect" type="TextureRect" parent="MenuConfirm"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = -181.0
+offset_right = 2480.0
+offset_bottom = 1819.0
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("5_3bi6u")
+
+[node name="ReturnToMenu" type="Label" parent="MenuConfirm"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 350.0
+offset_top = 456.0
+offset_right = 910.0
+offset_bottom = 465.0
+theme_override_font_sizes/font_size = 40
+text = "RETURN TO MENU?"
+horizontal_alignment = 1
+
+[node name="yes_sign" type="Sprite2D" parent="MenuConfirm"]
+position = Vector2(416, 701)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("6_3b4cn")
+
+[node name="ReturnToMenuButton" type="Button" parent="MenuConfirm"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 284.0
+offset_top = 575.0
+offset_right = 456.0
+offset_bottom = 589.0
+scale = Vector2(1.62773, 4.5817)
+focus_mode = 0
+theme_override_font_sizes/font_size = 25
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuConfirm/ReturnToMenuButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 62.0494
+offset_top = 7.63909
+offset_right = 166.049
+offset_bottom = 47.6391
+scale = Vector2(1, 0.429)
+mouse_filter = 2
+theme = ExtResource("1_wvldy")
+bbcode_enabled = true
+text = "Yes"
+fit_content = true
+autowrap_mode = 0
+
+[node name="nope_sign" type="Sprite2D" parent="MenuConfirm"]
+position = Vector2(845, 701)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("6_3b4cn")
+
+[node name="StayButton" type="Button" parent="MenuConfirm"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 712.0
+offset_top = 575.0
+offset_right = 884.0
+offset_bottom = 589.0
+scale = Vector2(1.64301, 4.51228)
+focus_mode = 0
+theme_override_font_sizes/font_size = 25
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuConfirm/StayButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 55.3862
+offset_top = 7.53499
+offset_right = 159.386
+offset_bottom = 47.535
+scale = Vector2(1.07568, 0.462235)
+mouse_filter = 2
+theme = ExtResource("1_wvldy")
+bbcode_enabled = true
+text = "Nope"
+fit_content = true
+autowrap_mode = 0
+
 [node name="ExitConfirm" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -237,7 +324,6 @@ offset_right = 456.0
 offset_bottom = 589.0
 scale = Vector2(1.62773, 4.5817)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 25
 flat = true
 
@@ -269,7 +355,6 @@ offset_right = 884.0
 offset_bottom = 589.0
 scale = Vector2(1.64301, 4.51228)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 25
 flat = true
 
@@ -295,5 +380,7 @@ stream = ExtResource("3_364sb")
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuConfirm/ReturnToMenuButton" to="." method="_on_return_to_menu_button_pressed"]
+[connection signal="pressed" from="MenuConfirm/StayButton" to="." method="_on_stay_button_pressed"]
 [connection signal="pressed" from="ExitConfirm/YesButton" to="." method="_on_yes_button_pressed"]
 [connection signal="pressed" from="ExitConfirm/NopeButton" to="." method="_on_nope_button_pressed"]

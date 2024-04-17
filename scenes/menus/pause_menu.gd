@@ -30,8 +30,7 @@ func _on_continue_button_pressed():
 func _on_return_button_pressed():
 	$Button.play()
 	await $Button.finished
-	unpause()
-	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
+	$MenuConfirm.visible = true
 
 
 func _on_save_button_pressed():
@@ -62,16 +61,34 @@ func save_data():
 
 func _on_exit_button_pressed():
 	#get_tree().quit()
+	$Button.play()
+	await $Button.finished
 	$ExitConfirm.visible = true
 
 
 
 
 func _on_yes_button_pressed():
+	$Button.play()	
+	await $Button.finished	
 	get_tree().quit()
 	
 
 
 func _on_nope_button_pressed():
+	$Button.play()	
+	await $Button.finished	
 	$ExitConfirm.visible = false
 	
+func _on_return_to_menu_button_pressed():
+	$Button.play()
+	await $Button.finished
+	unpause()
+	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
+
+func _on_stay_button_pressed():
+	$Button.play()	
+	await $Button.finished	
+	$MenuConfirm.visible = false
+
+
