@@ -4,13 +4,22 @@
 
 [resource]
 script = ExtResource("1_mexvn")
-name = "Laser Time"
+name = "Flashsaber"
 fname = "get_laser.tres"
-desc = "W/ Energy,
+desc = "Right Click 
 
 
 
-Right-Click to use"
+w/ Flashlight
+
+
+
+to Activate.
+
+
+
+
+Needs Blue Juice"
 effectScript = ""
 frameIdx = 0
 onetime = true
