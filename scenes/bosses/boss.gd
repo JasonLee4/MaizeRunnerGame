@@ -24,5 +24,9 @@ func _process(_delta):
 	if (health < MAX_HEALTH * .25):
 		$FireSpawn/Fire3.visible = true
 
+func stomp():
+	$StompParticles.emit_stomp()
+
 func boss():
 	pass
+

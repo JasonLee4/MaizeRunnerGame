@@ -60,6 +60,8 @@ func flash():
 					body.take_damage(1)
 				else:
 					body.take_damage(body.MAX_HEALTH)
+					if body.has_method("on_blue_fire"):
+						body.on_blue_fire()
 					
 				$GPUParticles2D.global_position = body.global_position
 				

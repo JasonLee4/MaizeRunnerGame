@@ -53,6 +53,7 @@ func stomp():
 	Globals.pig.ground_shake.emit()
 	if(abs((pig.global_position - enemy.global_position).length()) <= stompRadius):
 		enemy.deal_damage()
+	enemy.stomp()
 	stomps += 1
 	windup_time = 0
 	
