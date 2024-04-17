@@ -53,8 +53,8 @@ func _transition_logic(existing_states):
 		can_roll = false
 		$RollCooldown.start()
 		machine.change_state("state_rolling", [move], [])
-	#elif move.length() == 0:
-		#machine.change_state("state_idle")
+	elif move.length() == 0:
+		machine.change_state("state_idle")
 		
 
 

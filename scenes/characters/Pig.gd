@@ -88,6 +88,8 @@ func _physics_process(delta):
 			if state_machine.selected_state.name == "state_rolling":
 				$Sprite2D.visible = false
 				$Roll.visible = true
+				$Eating.visible = false
+				
 				if(!$Dash.is_playing()):
 					$Dash.play()
 				
@@ -95,6 +97,8 @@ func _physics_process(delta):
 			elif state_machine.selected_state.name == "state_moving":
 				$Sprite2D.visible = true
 				$Roll.visible = false
+				$Eating.visible = false
+				
 				#if velocity.x < 0:
 						#pigfacing = false
 						##$Sprite2D.flip_h = true
@@ -127,7 +131,7 @@ func _physics_process(delta):
 						$Apple.position.x = -1 * abs($Apple.position.x)
 						$Sprite2D.flip_h = true
 						$Roll.flip_h = true					
-						
+						$Eating.flip_h = true
 					elif velocity.x > 0:
 						#pigfacing = true
 						$Torch.position.x = abs($Torch.position.x)
@@ -135,6 +139,8 @@ func _physics_process(delta):
 						
 						$Sprite2D.flip_h = false
 						$Roll.flip_h = false	
+						$Eating.flip_h = false
+						
 					if torch_equipped:
 						$AnimationPlayer.play("pigwalk_equip_right")
 					elif consumable_equipped:
@@ -153,6 +159,8 @@ func _physics_process(delta):
 			if state_machine.selected_state.name == "state_rolling":
 				$Sprite2D.visible = false
 				$Roll.visible = true
+				$Eating.visible = false
+				
 				if(!$Dash.is_playing()):
 					$Dash.play()
 				
@@ -170,12 +178,19 @@ func _physics_process(delta):
 				
 				
 			if state_machine.selected_state.name == "state_idle":
-				$Sprite2D.visible = true
+				if consumable_equipped:
+					print("TRUE")
+					$Sprite2D.visible = !$Eating.visible						
+					$Apple.visible = !$Eating.visible
+				else:
+					$Sprite2D.visible = true
 				if flashlight_equipped:
 					$Sprite2D.flip_h = !lookright
 					
 				$Roll.visible = false
-					
+				
+		
+		
 				
 				
 		

@@ -15,10 +15,17 @@ func effect(delta):
 	if Input.is_action_just_pressed("primary_action"):
 		
 		if Globals.health > 0  and Globals.health < Globals.max_health:
-			Globals.pig.get_node("Eat").play()
+			
 			Globals.inv.remove_item(item, 1)
 			
 			Globals.health += 1
+			Globals.pig.get_node("Sprite2D").visible = false	
+			Globals.pig.get_node("Eating").visible = true
+			
+			Globals.pig.get_node("AnimationPlayer").play("eating_apple")
+			await Globals.pig.get_tree().create_timer(0.7).timeout
+			Globals.pig.get_node("Sprite2D").visible = true	
+			Globals.pig.get_node("Eating").visible = false
 
 	
 	
