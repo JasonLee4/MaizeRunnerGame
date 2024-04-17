@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dr5k5uf076s26"]
+
+[ext_resource type="Script" path="res://scenes/lights/FireParticles.gd" id="1_x5e48"]
+[ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="2_p2idb"]
+
+[sub_resource type="Gradient" id="Gradient_7yy7i"]
+offsets = PackedFloat32Array(0, 0.7125)
+colors = PackedColorArray(0.758172, 0.839176, 0.999998, 1, 0.144062, 0, 0.743994, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_seof1"]
+gradient = SubResource("Gradient_7yy7i")
+
+[sub_resource type="Curve" id="Curve_dkvti"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wdvdm"]
+curve = SubResource("Curve_dkvti")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vhtya"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -200, 0)
+scale_min = 3.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_wdvdm")
+color_ramp = SubResource("GradientTexture1D_seof1")
+turbulence_enabled = true
+turbulence_noise_strength = 8.19
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 1.71
+turbulence_influence_max = 0.394
+
+[node name="BlueFireParticles" type="GPUParticles2D"]
+process_material = SubResource("ParticleProcessMaterial_vhtya")
+script = ExtResource("1_x5e48")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.74667, 0.923426, 1, 1)
+energy = 0.5
+texture = ExtResource("2_p2idb")
