@@ -257,7 +257,6 @@ autoplay = "default"
 layout_mode = 2
 size_flags_horizontal = 4
 focus_neighbor_top = NodePath("../HBoxContainer/QuitButton")
-mouse_default_cursor_shape = 2
 texture_normal = SubResource("AtlasTexture_feeak")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Buttons/VBoxContainer/StartButton"]
@@ -284,7 +283,6 @@ alignment = 1
 [node name="OptionsButton" type="TextureButton" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-mouse_default_cursor_shape = 2
 texture_normal = SubResource("AtlasTexture_l2rkh")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Buttons/VBoxContainer/HBoxContainer/OptionsButton"]
@@ -305,7 +303,6 @@ autowrap_mode = 0
 [node name="QuitButton" type="TextureButton" parent="Buttons/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../../StartButton")
-mouse_default_cursor_shape = 2
 texture_normal = SubResource("AtlasTexture_m6i7y")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Buttons/VBoxContainer/HBoxContainer/QuitButton"]
@@ -331,7 +328,6 @@ offset_right = 991.0
 offset_bottom = 514.0
 scale = Vector2(1.13225, 3.0839)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="SkipToBossButton" type="Button" parent="."]

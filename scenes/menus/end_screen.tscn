@@ -118,7 +118,6 @@ offset_bottom = 281.0
 scale = Vector2(1.48828, 3.76391)
 focus_neighbor_top = NodePath("../QuitButton")
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="Restart_TextLabel" type="RichTextLabel" parent="."]
@@ -143,7 +142,6 @@ offset_right = 672.0
 offset_bottom = 337.0
 scale = Vector2(1.5169, 3.93466)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="Main_Menu_TextLabel" type="RichTextLabel" parent="."]
@@ -169,7 +167,6 @@ offset_bottom = 397.0
 scale = Vector2(1.60637, 4.23419)
 focus_neighbor_bottom = NodePath("../RestartButton")
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 
 [node name="Quit_TextLabel" type="RichTextLabel" parent="."]

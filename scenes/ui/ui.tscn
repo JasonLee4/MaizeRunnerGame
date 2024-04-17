@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://buqcuuo15n8sg" path="res://scenes/menus/pause_menu.tscn" id="8_nvfsd"]
 [ext_resource type="PackedScene" uid="uid://wqx546fxgt0q" path="res://scenes/ui/tooltip.tscn" id="9_drrv1"]
 [ext_resource type="PackedScene" uid="uid://d2xb6apapstdw" path="res://scenes/ui/monologue.tscn" id="10_5i85d"]
-[ext_resource type="PackedScene" uid="uid://dddxtpcei6up" path="res://scenes/ui/boss_healthbar.tscn" id="11_5bucg"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_healthbar.tscn" id="11_5bucg"]
 [ext_resource type="Script" path="res://scenes/characters/DashBar.gd" id="13_cce0d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exthu"]
@@ -170,6 +170,7 @@ grow_vertical = 0
 size_flags_horizontal = 4
 
 [node name="BossHealthbar" parent="." instance=ExtResource("11_5bucg")]
+visible = false
 
 [node name="DashBar" type="ProgressBar" parent="."]
 offset_left = 575.0

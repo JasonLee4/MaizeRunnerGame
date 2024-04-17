@@ -89,7 +89,6 @@ offset_top = -140.0
 offset_right = 103.0
 offset_bottom = 143.0
 focus_mode = 0
-mouse_default_cursor_shape = 2
 flat = true
 metadata/_edit_use_anchors_ = true
 
@@ -110,7 +109,6 @@ offset_right = 311.0
 offset_bottom = -19.0
 scale = Vector2(1.02909, 7.49691)
 focus_mode = 0
-mouse_default_cursor_shape = 2
 theme = ExtResource("3_jnreq")
 flat = true
 
