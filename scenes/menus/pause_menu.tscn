@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://buqcuuo15n8sg"]
+[gd_scene load_steps=8 format=3 uid="uid://buqcuuo15n8sg"]
 
 [ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="1_b7dga"]
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_wvldy"]
 [ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="3_364sb"]
 [ext_resource type="Texture2D" uid="uid://bta6mgpjurx0g" path="res://assets/menu_assets/pause_menu_signs.png" id="3_c1ylx"]
 [ext_resource type="Texture2D" uid="uid://djyvwnasfpk8k" path="res://assets/menu_assets/smallBoard.png" id="4_vyhng"]
+[ext_resource type="Texture2D" uid="uid://dc75two36vl0b" path="res://assets/menu_assets/ground_sign.png" id="5_3bi6u"]
+[ext_resource type="Texture2D" uid="uid://c08i76dpv807x" path="res://assets/menu_assets/hanging_sign.png" id="6_3b4cn"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -194,6 +196,98 @@ text = "Saved!"
 fit_content = true
 autowrap_mode = 0
 
+[node name="ExitConfirm" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.129412, 0.141176, 0.556863)
+
+[node name="TextureRect" type="TextureRect" parent="ExitConfirm"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = -181.0
+offset_right = 2480.0
+offset_bottom = 1819.0
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("5_3bi6u")
+
+[node name="CloseGame" type="Label" parent="ExitConfirm"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 364.0
+offset_top = 456.0
+offset_right = 924.0
+offset_bottom = 465.0
+theme_override_font_sizes/font_size = 40
+text = "CLOSE THE GAME?"
+horizontal_alignment = 1
+
+[node name="yes_sign" type="Sprite2D" parent="ExitConfirm"]
+position = Vector2(416, 701)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("6_3b4cn")
+
+[node name="YesButton" type="Button" parent="ExitConfirm"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 284.0
+offset_top = 575.0
+offset_right = 456.0
+offset_bottom = 589.0
+scale = Vector2(1.62773, 4.5817)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 25
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ExitConfirm/YesButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 62.0494
+offset_top = 7.63909
+offset_right = 166.049
+offset_bottom = 47.6391
+scale = Vector2(1, 0.429)
+mouse_filter = 2
+theme = ExtResource("1_wvldy")
+bbcode_enabled = true
+text = "Yes"
+fit_content = true
+autowrap_mode = 0
+
+[node name="nope_sign" type="Sprite2D" parent="ExitConfirm"]
+position = Vector2(845, 701)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("6_3b4cn")
+
+[node name="NopeButton" type="Button" parent="ExitConfirm"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = 712.0
+offset_top = 575.0
+offset_right = 884.0
+offset_bottom = 589.0
+scale = Vector2(1.64301, 4.51228)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 25
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ExitConfirm/NopeButton"]
+clip_contents = false
+layout_mode = 0
+offset_left = 55.3862
+offset_top = 7.53499
+offset_right = 159.386
+offset_bottom = 47.535
+scale = Vector2(1.07568, 0.462235)
+mouse_filter = 2
+theme = ExtResource("1_wvldy")
+bbcode_enabled = true
+text = "Nope"
+fit_content = true
+autowrap_mode = 0
+
 [node name="Button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_364sb")
 
@@ -201,3 +295,5 @@ stream = ExtResource("3_364sb")
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ExitConfirm/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="ExitConfirm/NopeButton" to="." method="_on_nope_button_pressed"]

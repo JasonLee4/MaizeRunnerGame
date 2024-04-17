@@ -61,4 +61,17 @@ func save_data():
 
 
 func _on_exit_button_pressed():
+	#get_tree().quit()
+	$ExitConfirm.visible = true
+
+
+
+
+func _on_yes_button_pressed():
 	get_tree().quit()
+	
+
+
+func _on_nope_button_pressed():
+	$ExitConfirm.visible = false
+	
