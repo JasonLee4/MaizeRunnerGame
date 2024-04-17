@@ -8,7 +8,10 @@ func enter():
 
 func update(delta: float):
 	if enemy.health <=0:
-		transitioned.emit(self, "BossDead")
+		if Globals.cur_lvl == 5:
+			transitioned.emit(self, "BossRunAway")
+		elif Globals.cur_lvl == 10:
+			transitioned.emit(self, "BossDead")
 	elif enemy.can_attack and enemy.can_attack_player:
 		flip()
 		enemy.deal_damage()

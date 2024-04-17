@@ -10,7 +10,10 @@ func enter():
 func update(delta: float):
 	#print(str(enemy.can_attack)+" "+str(enemy.can_attack_player))
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossRunAway")
+		if Globals.cur_lvl == 5:
+			transitioned.emit(self, "BossRunAway")
+		elif Globals.cur_lvl == 10:
+			transitioned.emit(self, "BossDead")
 	elif time < totalTime:
 		time += delta
 	else:
