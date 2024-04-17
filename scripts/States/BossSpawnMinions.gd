@@ -42,7 +42,10 @@ func spawn_minion():
 	
 func update(delta: float):
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossRunAway")
+		if Globals.cur_lvl == 5:
+			transitioned.emit(self, "BossRunAway")
+		elif Globals.cur_lvl == 10:
+			transitioned.emit(self, "BossDead")
 	elif spawnCooldown > 0:
 		spawnCooldown -= delta
 	elif minionsSpawned < totalMinions:

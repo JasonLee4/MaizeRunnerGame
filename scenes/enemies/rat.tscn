@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://f8a7c50dvi25"]
+[gd_scene load_steps=40 format=3 uid="uid://f8a7c50dvi25"]
 
 [ext_resource type="Script" path="res://scenes/enemies/rat.gd" id="1_tq7uu"]
 [ext_resource type="Script" path="res://scenes/enemies/Healthbar.gd" id="2_m7wqm"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://d04mvc8svbufw" path="res://scenes/lights/FireParticles.tscn" id="18_6rdy1"]
 [ext_resource type="Texture2D" uid="uid://fdgdapdyi6kd" path="res://assets/textures/fading_circle.tres" id="19_dfpub"]
 [ext_resource type="AudioStream" uid="uid://chfvn3kcjrkeo" path="res://assets/audio/sfx/Meeeeeeeeew.wav" id="21_531q1"]
+[ext_resource type="PackedScene" uid="uid://dr5k5uf076s26" path="res://scenes/lights/BlueFireParticles.tscn" id="21_ppnj6"]
 
 [sub_resource type="Animation" id="Animation_4d42x"]
 length = 0.001
@@ -64,14 +65,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Ball:frame")
+tracks/3/path = NodePath("Ball:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ici36"]
@@ -383,6 +384,7 @@ hframes = 6
 vframes = 6
 
 [node name="Ball" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_hqsmp")
 
 [node name="YellowEyes" type="Sprite2D" parent="."]
@@ -496,6 +498,18 @@ position = Vector2(1, 4)
 
 [node name="FireParticles3" parent="Burning" instance=ExtResource("18_6rdy1")]
 position = Vector2(-8, 7)
+
+[node name="BlueBurning" type="Node2D" parent="."]
+visible = false
+position = Vector2(12, 2)
+
+[node name="BlueFireParticles" parent="BlueBurning" instance=ExtResource("21_ppnj6")]
+
+[node name="BlueFireParticles2" parent="BlueBurning" instance=ExtResource("21_ppnj6")]
+position = Vector2(-9, 10)
+
+[node name="BlueFireParticles3" parent="BlueBurning" instance=ExtResource("21_ppnj6")]
+position = Vector2(-17, 1)
 
 [node name="Poison" type="Node2D" parent="."]
 

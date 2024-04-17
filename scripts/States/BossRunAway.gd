@@ -38,6 +38,7 @@ func update(delta):
 			running = true
 	else:
 		if time < cam_follow_time:
+			boss.get_node("AnimationPlayer").play("walk_side")
 			time += delta
 			boss.velocity = Vector2(Vector2(1,0) * speed)
 			boss.move_and_slide()
@@ -48,5 +49,6 @@ func update(delta):
 			$CameraTransition.transition(boss.get_node("BossCam"), pig.get_node("Camera2D"), 0.5)
 			await $CameraTransition.done
 			get_tree().paused = false
+			boss.queue_free()
 	
 	

@@ -42,7 +42,10 @@ func stomp():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossRunAway")
+		if Globals.cur_lvl == 5:
+			transitioned.emit(self, "BossRunAway")
+		elif Globals.cur_lvl == 10:
+			transitioned.emit(self, "BossDead")
 	if windupTime < totalWindupTime:
 		enemy.get_node("AnimationPlayer").play("windup")
 		windupTime += delta

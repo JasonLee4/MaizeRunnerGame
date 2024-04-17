@@ -10,6 +10,9 @@ func _ready():
 
 func on_fire():
 	$Burning.visible = true
+	
+func on_blue_fire():
+	$BlueBurning.visible = true
 
 func special_animation():
 		

@@ -3,7 +3,7 @@ class_name boss
 
 func _ready():
 	MAX_HEALTH = 1000
-	health = 1000
+	health = 10
 	damage = 1
 	
 	$Healthbar.max_value = MAX_HEALTH
@@ -24,5 +24,9 @@ func _process(_delta):
 	if (health < MAX_HEALTH * .25):
 		$FireSpawn/Fire3.visible = true
 
+func stomp():
+	$StompParticles.emit_stomp()
+
 func boss():
 	pass
+

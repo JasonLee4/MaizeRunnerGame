@@ -29,8 +29,13 @@ var stomping : bool
 
 func enter():
 	cycles = 0
+	dashes = 0
+	stomps = 0
+	windup_time = 0
 	dashing = true
 	stomping = false
+	
+	direction == Vector2(-1,-1)
 	
 	animation = enemy.get_node("AnimationPlayer")
 	animation.animation_finished.connect(animation_finished)
@@ -50,9 +55,11 @@ func dash(delta):
 		dashes += 1
 	
 func stomp():
+	enemy.get_node("stomp").play()
 	Globals.pig.ground_shake.emit()
 	if(abs((pig.global_position - enemy.global_position).length()) <= stompRadius):
 		enemy.deal_damage()
+	enemy.stomp()
 	stomps += 1
 	windup_time = 0
 	
@@ -66,7 +73,10 @@ func animation_finished(anim_name):
 	
 func update(delta):
 	if enemy.health <= 0:
-		transitioned.emit(self, "BossRunAway")
+		if Globals.cur_lvl == 5:
+			transitioned.emit(self, "BossRunAway")
+		elif Globals.cur_lvl == 10:
+			transitioned.emit(self, "BossDead")
 	
 	if enemy.can_attack and enemy.can_attack_player:
 		enemy.deal_damage()
@@ -100,7 +110,6 @@ func update(delta):
 		#Setup animation for stomp
 		if animation.current_animation != "stomp":
 			#print("playing stomp")
-			enemy.get_node("stomp").play_rand_sound()
 			animation.play("stomp")
 			
 			
