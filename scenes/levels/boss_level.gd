@@ -69,5 +69,5 @@ func _on_timer_timeout():
 		lr.global_position.x = randf_range($CoalSpawn/Marker2D.global_position.x, $CoalSpawn/Marker2D2.global_position.x)
 		lr.global_position.y = randf_range($CoalSpawn/Marker2D.global_position.y, $CoalSpawn/Marker2D2.global_position.y)
 		
-		add_child(lr)
+		$laserResource.add_child(lr)
 		#print($Boss.get_child(1).health)
