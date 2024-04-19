@@ -66,10 +66,11 @@ func _process(delta):
 
 func _on_timer_timeout():
 	if(is_instance_valid(curr_boss)):
-		var lr = laser_res.instantiate()
+		if(curr_boss.get_node("State Machine").get_current_state().name != "BossDead"):
+			var lr = laser_res.instantiate()
 
-		lr.global_position.x = randf_range($CoalSpawn/Marker2D.global_position.x, $CoalSpawn/Marker2D2.global_position.x)
-		lr.global_position.y = randf_range($CoalSpawn/Marker2D.global_position.y, $CoalSpawn/Marker2D2.global_position.y)
-		
-		$laserResource.add_child(lr)
+			lr.global_position.x = randf_range($CoalSpawn/Marker2D.global_position.x, $CoalSpawn/Marker2D2.global_position.x)
+			lr.global_position.y = randf_range($CoalSpawn/Marker2D.global_position.y, $CoalSpawn/Marker2D2.global_position.y)
+			
+			$laserResource.add_child(lr)
 		#print($Boss.get_child(1).health)
