@@ -26,8 +26,9 @@ func effect(delta):
 			
 			Globals.pig.get_node("AnimationPlayer").play("eating_apple")
 			await Globals.pig.get_tree().create_timer(0.7).timeout
-			Globals.pig.get_node("Sprite2D").visible = true	
-			Globals.pig.get_node("Eating").visible = false
+			if is_instance_valid(Globals.pig):
+				Globals.pig.get_node("Sprite2D").visible = true	
+				Globals.pig.get_node("Eating").visible = false
 
 	
 	
