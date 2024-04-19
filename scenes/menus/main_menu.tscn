@@ -346,10 +346,10 @@ expand_icon = true
 
 [node name="SkipToFinalBossButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1133.0
-offset_top = 486.0
-offset_right = 1164.0
-offset_bottom = 538.0
+offset_left = 947.0
+offset_top = 345.0
+offset_right = 1216.0
+offset_bottom = 397.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_w3lh5")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_aj08o")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_lsmbq")

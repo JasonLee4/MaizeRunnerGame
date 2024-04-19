@@ -54,7 +54,7 @@ func _on_timer_timeout():
 func _on_skip_to_boss_button_pressed():
 	Globals.new_game = true
 	Globals.restart_game()
-	Globals.cur_lvl = 10
+	Globals.cur_lvl = 5
 	get_tree().change_scene_to_file("res://scenes/levels/boss_level.tscn")
 
 func _on_skip_to_final_boss_button_pressed():
