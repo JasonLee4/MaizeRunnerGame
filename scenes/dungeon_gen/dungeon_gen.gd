@@ -35,7 +35,7 @@ var path # AStar pathfinder to hold MST
 var enemy_spawns = []
 
 func _ready():
-	seed("maizerunner".hash())
+	seed("abc".hash())
 	if !Globals.new_game:
 		Globals.load_data()
 	else:
