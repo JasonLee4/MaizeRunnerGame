@@ -43,6 +43,8 @@ func _ready():
 	
 	await(get_tree().create_timer(2).timeout)
 	var mono = "Something feels a bit off here..."
+	if Globals.cur_lvl != 5:
+		mono = "This again? Come back for more, I see."
 	Globals.monologue.emit(mono)
 	
 	boss_spawned = false
