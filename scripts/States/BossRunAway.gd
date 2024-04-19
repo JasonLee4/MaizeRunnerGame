@@ -14,6 +14,7 @@ var time : float
 @export var drop_scene : Resource
 
 func enter():
+	boss.get_node("Base").flip_h = false
 	#freeze everything but the boss
 	boss.get_node("boss_music").stop()
 	boss.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -50,5 +51,4 @@ func update(delta):
 			await $CameraTransition.done
 			get_tree().paused = false
 			boss.queue_free()
-	
 	
