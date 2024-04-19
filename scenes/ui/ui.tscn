@@ -126,6 +126,23 @@ text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Hideable" type="Node2D" parent="."]
+
+[node name="Monologue" parent="Hideable" instance=ExtResource("10_5i85d")]
+offset_left = 615.0
+offset_top = 340.0
+offset_right = 655.0
+offset_bottom = 380.0
+
+[node name="DashBar" type="ProgressBar" parent="Hideable"]
+offset_left = 575.0
+offset_top = 350.0
+offset_right = 585.0
+offset_bottom = 400.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("13_cce0d")
+
 [node name="backpack_menu" parent="." instance=ExtResource("7_4nqm3")]
 anchors_preset = 3
 anchor_left = 1.0
@@ -138,8 +155,6 @@ offset_right = -8.0
 offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
-
-[node name="Monologue" parent="." instance=ExtResource("10_5i85d")]
 
 [node name="Tooltip" type="Control" parent="."]
 layout_mode = 3
@@ -171,15 +186,6 @@ size_flags_horizontal = 4
 
 [node name="BossHealthbar" parent="." instance=ExtResource("11_5bucg")]
 visible = false
-
-[node name="DashBar" type="ProgressBar" parent="."]
-offset_left = 575.0
-offset_top = 350.0
-offset_right = 585.0
-offset_bottom = 400.0
-fill_mode = 3
-show_percentage = false
-script = ExtResource("13_cce0d")
 
 [node name="PauseMenu" parent="." instance=ExtResource("8_nvfsd")]
 visible = false

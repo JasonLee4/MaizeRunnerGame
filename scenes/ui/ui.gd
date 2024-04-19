@@ -64,7 +64,7 @@ func stop_timer():
 	Globals.lvl_end_time = Time.get_ticks_msec()
 
 func monologue(text):
-	$Monologue.display_text(text)
+	$Hideable/Monologue.display_text(text)
 
 func update_tooltip(text, display):
 	$Tooltip/Tooltip.apply_text(text, display)
