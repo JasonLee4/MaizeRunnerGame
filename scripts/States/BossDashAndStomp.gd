@@ -35,7 +35,7 @@ func enter():
 	dashing = true
 	stomping = false
 	
-	direction == Vector2(-1,-1)
+	direction = Vector2(-1,-1)
 	
 	animation = enemy.get_node("AnimationPlayer")
 	animation.animation_finished.connect(animation_finished)
@@ -97,6 +97,7 @@ func update(delta):
 			play_windup(delta)
 		#Setup for dash
 		elif direction == Vector2(-1,-1):
+				flip()
 				animation.stop()
 				direction = pig.global_position - enemy.global_position
 				speed = dash_speed
@@ -119,3 +120,9 @@ func update(delta):
 		animation.stop()
 		enemy.get_node("roar").play_rand_sound()
 		transitioned.emit(self, "BossSpawnMinions")
+
+func flip(): 
+	if pig.global_position.x > enemy.global_position.x:
+		enemy.get_node("Base").flip_h = false
+	elif pig.global_position.x < enemy.global_position.x:
+		enemy.get_node("Base").flip_h = true

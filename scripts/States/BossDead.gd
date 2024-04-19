@@ -50,3 +50,4 @@ func animation_finished(anim_name):
 func cam_trans_finished():
 	if dying:
 		get_tree().paused = false
+	

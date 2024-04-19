@@ -16,6 +16,8 @@ func effect(delta):
 		
 		if Globals.health > 0  and Globals.health < Globals.max_health:
 			
+			Globals.pig.get_node("Eat").play()
+			
 			Globals.inv.remove_item(item, 1)
 			
 			Globals.health += 1

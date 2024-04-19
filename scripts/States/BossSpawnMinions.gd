@@ -29,6 +29,7 @@ func enter():
 func spawn_minion():
 	var minion = minion_scene.instantiate()
 	enemy.get_parent().add_child(minion)
+	print(enemy.get_parent().get_children())
 	
 	var speed = randf_range(min_minion_speed, max_minion_speed)
 	var spawn_direction = (pig.global_position-enemy.get_node("Spawn").global_position).normalized()

@@ -34,7 +34,13 @@ func special_animation():
 	else:
 		$RedEyes.show()
 		$YellowEyes.hide()
-		
+
+func reset_animation():
+	$Base.visible = true
+	$Base.position = Vector2(0,0)
+	$Ball.visible = false
+	$YellowEyes.position = Vector2(0,0)
+	
 func process_sound():
 	if state_machine.get_current_state().name == "EnemyFollow" and !$run.playing:
 		#print("playing run")
