@@ -12,6 +12,7 @@ class_name BossRunAway
 var time : float
 
 @export var drop_scene : Resource
+@onready var apple_scene = preload("res://scenes/items/apple.tscn");
 
 func enter():
 	boss.get_node("Base").flip_h = false
@@ -26,6 +27,11 @@ func enter():
 	var drop = drop_scene.instantiate()
 	boss.get_parent().add_child(drop)
 	drop.global_position = boss.global_position
+	#drop apples
+	for i in Globals.max_health:
+		var apple = apple_scene.instantiate()
+		boss.get_parent().add_child(apple)
+		apple.global_position = boss.global_position
 	time = 0
 	
 func update(delta):
