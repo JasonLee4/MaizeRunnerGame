@@ -18,11 +18,14 @@ func enter():
 	boss.get_node("Base").flip_h = false
 	#freeze everything but the boss
 	boss.get_node("boss_music").stop()
+	boss.get_node("spin").stop()
 	boss.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().current_scene.get_node("UI/BossHealthbar").hide()
 	get_tree().paused = true
 	boss.get_node("CollisionShape2D").disabled = true
 	#fix camera to the boss instead of pig
 	$CameraTransition.transition(pig.get_node("Camera2D"), boss.get_node("BossCam"))
+	boss.get_node("roar").play_rand_sound()
 	#drop key
 	var drop = drop_scene.instantiate()
 	boss.get_parent().add_child(drop)
