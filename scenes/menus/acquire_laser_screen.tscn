@@ -132,3 +132,4 @@ stream = ExtResource("5_fg1ht")
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Control/Sprite2D/icon_button1" to="." method="_on_icon_button_1_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/VBoxContainer/Label1/Get_Power1" to="." method="_on_get_power_1_mouse_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer/Label1/Get_Power1" to="." method="_on_get_power_1_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Label1/Get_Power1" to="." method="_on_get_power_1_pressed"]
