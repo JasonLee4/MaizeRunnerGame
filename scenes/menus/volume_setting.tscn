@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://hwb0ueth6fpg"]
+
+[ext_resource type="Script" path="res://scenes/menus/volume_setting.gd" id="1_5rsxe"]
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="2_3k7f6"]
+
+[node name="volume_setting" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5rsxe")
+
+[node name="bus_name" type="Label" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_3k7f6")
+text = "
+
+Master"
+
+[node name="volume_slider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="volume_level" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_3k7f6")
+text = "
+
+0"
+
+[connection signal="value_changed" from="volume_slider" to="." method="_on_volume_slider_value_changed"]

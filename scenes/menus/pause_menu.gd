@@ -10,6 +10,9 @@ func _unhandled_input(event):
 func pause():
 	$Saved_Button_Sprite.visible = false	
 	visible = true
+	$OptionsScreen.visible = false
+	$MenuConfirm.visible = false
+	$ExitConfirm.visible = false
 	get_tree().paused = true
 	$SaveButton/RichTextLabel.text = "Save Game"
 	
@@ -92,3 +95,9 @@ func _on_stay_button_pressed():
 	$MenuConfirm.visible = false
 
 
+
+
+func _on_option_button_pressed():
+	$Button.play()
+	await $Button.finished
+	$OptionsScreen.visible = true

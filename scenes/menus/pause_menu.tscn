@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://buqcuuo15n8sg"]
+[gd_scene load_steps=9 format=3 uid="uid://buqcuuo15n8sg"]
 
 [ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="1_b7dga"]
 [ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="1_wvldy"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bta6mgpjurx0g" path="res://assets/menu_assets/pause_menu_signs.png" id="3_c1ylx"]
 [ext_resource type="Texture2D" uid="uid://djyvwnasfpk8k" path="res://assets/menu_assets/smallBoard.png" id="4_vyhng"]
 [ext_resource type="Texture2D" uid="uid://dc75two36vl0b" path="res://assets/menu_assets/ground_sign.png" id="5_3bi6u"]
+[ext_resource type="PackedScene" uid="uid://bvi056v5bxh5" path="res://scenes/menus/volume_menu.tscn" id="5_qoown"]
 [ext_resource type="Texture2D" uid="uid://c08i76dpv807x" path="res://assets/menu_assets/hanging_sign.png" id="6_3b4cn"]
 
 [node name="PauseMenu" type="Control"]
@@ -191,6 +192,23 @@ text = "Saved!"
 fit_content = true
 autowrap_mode = 0
 
+[node name="OptionsScreen" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.129412, 0.141176, 0.556863)
+
+[node name="volume_menu" parent="OptionsScreen" instance=ExtResource("5_qoown")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="MenuConfirm" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1
@@ -212,6 +230,7 @@ texture = ExtResource("5_3bi6u")
 
 [node name="ReturnToMenu" type="Label" parent="MenuConfirm"]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 350.0
 offset_top = 456.0
 offset_right = 910.0
@@ -227,6 +246,7 @@ texture = ExtResource("6_3b4cn")
 
 [node name="ReturnToMenuButton" type="Button" parent="MenuConfirm"]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 284.0
 offset_top = 575.0
 offset_right = 456.0
@@ -258,6 +278,7 @@ texture = ExtResource("6_3b4cn")
 
 [node name="StayButton" type="Button" parent="MenuConfirm"]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 712.0
 offset_top = 575.0
 offset_right = 884.0
@@ -303,6 +324,7 @@ texture = ExtResource("5_3bi6u")
 
 [node name="CloseGame" type="Label" parent="ExitConfirm"]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 364.0
 offset_top = 456.0
 offset_right = 924.0
@@ -318,6 +340,7 @@ texture = ExtResource("6_3b4cn")
 
 [node name="YesButton" type="Button" parent="ExitConfirm"]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 284.0
 offset_top = 575.0
 offset_right = 456.0
@@ -349,6 +372,7 @@ texture = ExtResource("6_3b4cn")
 
 [node name="NopeButton" type="Button" parent="ExitConfirm"]
 modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
 offset_left = 712.0
 offset_top = 575.0
 offset_right = 884.0
@@ -377,6 +401,7 @@ autowrap_mode = 0
 stream = ExtResource("3_364sb")
 
 [connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
