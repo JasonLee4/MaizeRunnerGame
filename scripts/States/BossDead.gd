@@ -18,7 +18,7 @@ func enter():
 	boss.get_node("boss_music").stop()
 	boss.get_node("spin").stop()
 	boss.process_mode = Node.PROCESS_MODE_ALWAYS
-	get_tree().current_scene.get_node("UI/BossHealthBar").hide()
+	get_tree().current_scene.get_node("UI/BossHealthbar").hide()
 	get_tree().paused = true
 	boss.get_node("CollisionShape2D").disabled = true
 	#fix camera to the boss instead of pig

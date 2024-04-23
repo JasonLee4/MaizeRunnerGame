@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvi056v5bxh5"]
+
+[ext_resource type="Script" path="res://scenes/menus/volume_menu.gd" id="1_5pooj"]
+[ext_resource type="Texture2D" uid="uid://c08i76dpv807x" path="res://assets/menu_assets/hanging_sign.png" id="1_hcp7t"]
+[ext_resource type="Theme" uid="uid://cvvg3yf2kj0gs" path="res://assets/menu_assets/PixelSleighTheme.tres" id="2_0tw8q"]
+[ext_resource type="PackedScene" uid="uid://hwb0ueth6fpg" path="res://scenes/menus/volume_setting.tscn" id="2_c0sat"]
+[ext_resource type="AudioStream" uid="uid://cxk51h4ndvcl0" path="res://assets/audio/sfx/button_plastic.wav" id="5_ca2th"]
+
+[node name="volume_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5pooj")
+
+[node name="title_sign" type="Sprite2D" parent="."]
+position = Vector2(634, 499)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hcp7t")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+layout_mode = 0
+offset_left = 412.0
+offset_top = 223.0
+offset_right = 604.0
+offset_bottom = 246.0
+scale = Vector2(2.5, 2.5)
+theme = ExtResource("2_0tw8q")
+text = "Volume Settings"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 317.0
+offset_right = 2554.0
+offset_bottom = 2317.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_hcp7t")
+
+[node name="volume_setting" parent="TextureRect" instance=ExtResource("2_c0sat")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 535.0
+offset_top = 405.0
+offset_right = 941.0
+offset_bottom = 428.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(3.5, 3.5)
+
+[node name="close_sign" type="Sprite2D" parent="."]
+position = Vector2(643, 771)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_hcp7t")
+
+[node name="Label" type="Label" parent="close_sign"]
+modulate = Color(0.317647, 0.160784, 0.160784, 1)
+offset_left = -205.0
+offset_top = -545.0
+offset_right = -143.0
+offset_bottom = -522.0
+scale = Vector2(7.59, 7.59)
+theme = ExtResource("2_0tw8q")
+text = "Close"
+
+[node name="close_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 619.0
+offset_right = 492.0
+offset_bottom = 627.0
+scale = Vector2(41.9094, 9.97196)
+focus_mode = 0
+flat = true
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ca2th")
+
+[connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]
