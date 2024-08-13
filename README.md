@@ -1,2 +1,2 @@
-# maizerunner
-First Maize Runner repo
+# Maize Runner
+A video game project collaboration.
